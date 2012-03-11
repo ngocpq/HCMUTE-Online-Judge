@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Memberships SYSTEM "Memberships.dtd"[]>
+<Memberships>
+  <Right>
+    <Controller>Home</Controller>
+    <Action>Index</Action>
+    <Function>Home Page</Function>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Students</Role>
+      <Role>Teachers</Role>
+    </Roles>
+  </Right>
+  <Right>
+    <Controller>Home</Controller>
+    <Action>About</Action>
+    <Function>Trang about</Function>
+    <Roles><Role>Students</Role></Roles>
+  </Right>
+
+  <Right>
+    <Controller>Manager</Controller>
+    <Action>Index</Action>
+    <Function>Trang chủ quản lý phân quyền</Function>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+  </Right>
+<Right><Controller>Exam</Controller><Action>Index</Action><Function></Function><Roles><Role>Admin</Role><Role>Teachers</Role></Roles></Right><Right><Controller>Exam</Controller><Action>ComposeByHand</Action><Function></Function><Roles><Role>Admin</Role><Role>Teachers</Role></Roles></Right><Right><Controller>ManageTest</Controller><Action>Index</Action><Function></Function><Roles><Role>Admin</Role><Role>Teachers</Role></Roles></Right><Right><Controller>ManageExam</Controller><Action>Index</Action><Function></Function><Roles><Role>Admin</Role><Role>Teachers</Role></Roles></Right><Right><Controller>ManageExam</Controller><Action>Edit</Action><Function></Function><Roles><Role>Admin</Role><Role>Teachers</Role></Roles></Right><Right><Controller>Manager</Controller><Action>ManageAuthorize</Action><Function></Function><Roles><Role>Admin</Role></Roles></Right><Right><Controller>Inspector</Controller><Action>Index</Action><Function>Phân quyền ra đề thi cuối kỳ và duyệt đề</Function><Roles><Role>Admin</Role><Role>Inspector</Role></Roles></Right></Memberships>

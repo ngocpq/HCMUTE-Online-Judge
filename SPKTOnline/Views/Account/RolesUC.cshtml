@@ -1,0 +1,26 @@
+﻿
+@model SPKTOnline.Models.Role
+
+
+<table>
+<tr>
+<td>
+Roles
+</td>
+</tr>
+<tr>
+<td>
+<% foreach (aspnet_Role role in ViewData["Roles"] as List<aspnet_Role>)
+   { %>
+    <%if (ViewData["_userRoles"] == "null")
+      {%>
+        <%=Html.CheckBox(role.RoleName)%> <%=role.RoleName%><br />
+    <%} %>
+    <%else
+    {%>
+        <%=Html.CheckBox(role.RoleName, Common.Test.TestStringContainner(role.RoleName, ViewData["_userRoles"] as List<string>))%> <%=role.RoleName%><br />
+    <%} %>
+<%} %>
+</td>
+</tr>
+</table>

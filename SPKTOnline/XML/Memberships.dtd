@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Memberships (Right*)>
+<!ELEMENT Right (Controller, Action, Function, Roles)>
+<!ELEMENT Controller (#PCDATA)>
+<!ELEMENT Action (#PCDATA)>
+<!ELEMENT Function (#PCDATA)>
+<!ELEMENT Roles (Role*)>
+<!ELEMENT Role (#PCDATA)>
+

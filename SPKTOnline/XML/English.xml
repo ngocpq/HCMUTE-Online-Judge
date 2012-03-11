@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Languages SYSTEM "Language.dtd"[]>
+<Languages>
+  <Keys>
+    <KeyWord>Home</KeyWord>
+    <KeyValue>Home</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Support</KeyWord>
+    <KeyValue>Support</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Regulations</KeyWord>
+    <KeyValue>Regulations</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AboutUs</KeyWord>
+    <KeyValue>About us</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ContactUs</KeyWord>
+    <KeyValue>Contact us</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Welcome</KeyWord>
+    <KeyValue>Welcome</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>LogOn</KeyWord>
+    <KeyValue>Log On</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>LogOff</KeyWord>
+    <KeyValue>Log Off</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Catalogue</KeyWord>
+    <KeyValue>Catalogue</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Link</KeyWord>
+    <KeyValue>Link</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestOnline</KeyWord>
+    <KeyValue>Test Online</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>PracticeTest</KeyWord>
+    <KeyValue>Practice Test</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ViewScore</KeyWord>
+    <KeyValue>View Test score</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgExam</KeyWord>
+    <KeyValue>Manage Exam Question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ComposeExam</KeyWord>
+    <KeyValue>Compose Exam Question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EditExam</KeyWord>
+    <KeyValue>Edit Exam Question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgOnlineTest</KeyWord>
+    <KeyValue>Manage Online Test</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ViewInform</KeyWord>
+    <KeyValue>View Information and Score-board</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgUser</KeyWord>
+    <KeyValue>Manage User</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgUserRight</KeyWord>
+    <KeyValue>Manage User Right</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgQuestion</KeyWord>
+    <KeyValue>Manage Question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AddQuestion</KeyWord>
+    <KeyValue>Add question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Edit</KeyWord>
+    <KeyValue>Edit</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Delete</KeyWord>
+    <KeyValue>Delete</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Subject</KeyWord>
+    <KeyValue>Subject</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>FormatTest</KeyWord>
+    <KeyValue>Format Test</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Date</KeyWord>
+    <KeyValue>Date</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ExamType</KeyWord>
+    <KeyValue>Exam Type</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ToeicType</KeyWord>
+    <KeyValue>Toeic Test Type</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ExamTime</KeyWord>
+    <KeyValue>Exam Time</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MoreInform</KeyWord>
+    <KeyValue>More information</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Create</KeyWord>
+    <KeyValue>Create</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Title</KeyWord>
+    <KeyValue>Title</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Group</KeyWord>
+    <KeyValue>Group</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Search</KeyWord>
+    <KeyValue>Search</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>All</KeyWord>
+    <KeyValue>All</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Midterm</KeyWord>
+    <KeyValue>Midterm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EndTerm</KeyWord>
+    <KeyValue>End of term</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Library</KeyWord>
+    <KeyValue>Library</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Edocument</KeyWord>
+    <KeyValue>Electronic Document</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>RegisterSub</KeyWord>
+    <KeyValue>Course Register System</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Default</KeyWord>
+    <KeyValue>Default</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Type</KeyWord>
+    <KeyValue>Type</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Introduction</KeyWord>
+    <KeyValue>Introduction</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestGuide</KeyWord>
+    <KeyValue>Test Guide</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>WebsiteName</KeyWord>
+    <KeyValue>Website Online English Test</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey1</KeyWord>
+    <KeyValue>Nowaday, the form of Objective Test has been widely applied in all countries where have the advanced education…</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>FunctionGuide</KeyWord>
+    <KeyValue>Main functions guide of the Website</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey2</KeyWord>
+    <KeyValue>For students using Website will be used the following main functions : Test Online, Practice Test, View Test Score…</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>CommentSupport</KeyWord>
+    <KeyValue>Questions - Comments of student to the Website</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey3</KeyWord>
+    <KeyValue>If you have questions or comments to our Website, please see informations and send comments here…</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ReadMore</KeyWord>
+    <KeyValue>Read more</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeTrain</KeyWord>
+    <KeyValue>Notice of Training Department</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeTest</KeyWord>
+    <KeyValue>Notice of Testing</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeReceive</KeyWord>
+    <KeyValue>Notice of receiving registration documents for the University Entrance Exam block of K in 2010</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeCancel</KeyWord>
+    <KeyValue>Notice of cancelling subject group in the first semester of school year 2010 - 2011</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeAdjust</KeyWord>
+    <KeyValue>Notice of adjusting registration subject online in the first semester of school year 2010 - 2011 (NEW)</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EduLearn</KeyWord>
+    <KeyValue>Education and Learning</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestYourEng</KeyWord>
+    <KeyValue>Test your English knowledge</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>OSFE</KeyWord>
+    <KeyValue>Objective - Safe - Fast - Effective</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>PracticeEngSkill</KeyWord>
+    <KeyValue>Practice English skills</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AutoAccurRan</KeyWord>
+    <KeyValue>Automatic - Accurate - Random</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Ques</KeyWord>
+    <KeyValue>Question</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Select</KeyWord>
+    <KeyValue>Select</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Show</KeyWord>
+    <KeyValue>Show</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>QuesContent</KeyWord>
+    <KeyValue>Question contents</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Change</KeyWord>
+    <KeyValue>Change</KeyValue>
+  </Keys>
+</Languages>

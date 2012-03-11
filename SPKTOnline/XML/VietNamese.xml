@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Languages SYSTEM "Language.dtd"[]>
+<Languages>
+  <Keys>
+    <KeyWord>Home</KeyWord>
+    <KeyValue>Trang Chủ</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Support</KeyWord>
+    <KeyValue>Trợ giúp</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Regulations</KeyWord>
+    <KeyValue>Quy định</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AboutUs</KeyWord>
+    <KeyValue>Thông Tin</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ContactUs</KeyWord>
+    <KeyValue>Liên hệ</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Welcome</KeyWord>
+    <KeyValue>Xin chào</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>LogOn</KeyWord>
+    <KeyValue>Đăng nhập</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>LogOff</KeyWord>
+    <KeyValue>Đăng xuất</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Catalogue</KeyWord>
+    <KeyValue>Danh mục</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Link</KeyWord>
+    <KeyValue>Liên kết</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestOnline</KeyWord>
+    <KeyValue>Thi Online</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>PracticeTest</KeyWord>
+    <KeyValue>Thi thử</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ViewScore</KeyWord>
+    <KeyValue>Xem điểm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgExam</KeyWord>
+    <KeyValue>Quản lý đề thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ComposeExam</KeyWord>
+    <KeyValue>Soạn đề thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EditExam</KeyWord>
+    <KeyValue>Chỉnh sửa đề thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgOnlineTest</KeyWord>
+    <KeyValue>Quản lý thi trực tuyến</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ViewInform</KeyWord>
+    <KeyValue>Xem thông tin thi và bảng điểm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgUser</KeyWord>
+    <KeyValue>Quản lý người dùng</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgUserRight</KeyWord>
+    <KeyValue>Quản lý phân quyền</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MgQuestion</KeyWord>
+    <KeyValue>Quản lý câu hỏi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AddQuestion</KeyWord>
+    <KeyValue>Thêm câu hỏi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Edit</KeyWord>
+    <KeyValue>Sửa</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Delete</KeyWord>
+    <KeyValue>Xóa</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Subject</KeyWord>
+    <KeyValue>Môn học</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>FormatTest</KeyWord>
+    <KeyValue>Định dạng đề thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Date</KeyWord>
+    <KeyValue>Ngày thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ExamType</KeyWord>
+    <KeyValue>Hình thức thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ToeicType</KeyWord>
+    <KeyValue>Hình thức thi Toeic</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ExamTime</KeyWord>
+    <KeyValue>Thời gian thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>MoreInform</KeyWord>
+    <KeyValue>Thêm thông tin</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Create</KeyWord>
+    <KeyValue>Tạo</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Title</KeyWord>
+    <KeyValue>Tiêu đề</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Group</KeyWord>
+    <KeyValue>Nhóm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Search</KeyWord>
+    <KeyValue>Tìm kiếm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>All</KeyWord>
+    <KeyValue>Tất cả</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Midterm</KeyWord>
+    <KeyValue>Giữa kỳ</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EndTerm</KeyWord>
+    <KeyValue>Cuối kỳ</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Library</KeyWord>
+    <KeyValue>Thư viện</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Edocument</KeyWord>
+    <KeyValue>Tài liệu điện tử</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>RegisterSub</KeyWord>
+    <KeyValue>Đăng ký môn học</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Default</KeyWord>
+    <KeyValue>Mặc định</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Type</KeyWord>
+    <KeyValue>Loại</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Introduction</KeyWord>
+    <KeyValue>Giới thiệu</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestGuide</KeyWord>
+    <KeyValue>Hướng dẫn thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>WebsiteName</KeyWord>
+    <KeyValue>Website thi trắc nghiệm trực tuyến môn tiếng Anh</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey1</KeyWord>
+    <KeyValue>Ngày nay hình thức thi trắc nghiệm khách quan (TNKQ) đã được áp dụng rộng rãi ở tất cả các quốc gia có nền giáo dục tiên tiến...</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>FunctionGuide</KeyWord>
+    <KeyValue>Hướng dẫn sử dụng các chức năng chính của Website </KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey2</KeyWord>
+    <KeyValue>Đối với sinh viên khi sử dụng website sẽ được sử dụng những chức năng chính như sau : Thi online, Thi thử, Xem điểm, ...</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>CommentSupport</KeyWord>
+    <KeyValue>Những thắc mắc - góp ý của sinh viên đối với website </KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>HomeKey3</KeyWord>
+    <KeyValue>Nếu có thắc mắc hay góp ý cho website thi trắc nghiệm các bạn xin vui lòng xem thông tin và gửi ý kiến tại đây ...</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>ReadMore</KeyWord>
+    <KeyValue>Xem thêm</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeTrain</KeyWord>
+    <KeyValue>Thông báo của Phòng Đào tạo</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeTest</KeyWord>
+    <KeyValue>Thông báo Thi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeReceive</KeyWord>
+    <KeyValue>Thông báo nhận hồ sơ đăng ký dự thi tuyển sinh đại học khối K năm 2010 </KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeCancel</KeyWord>
+    <KeyValue>Thông báo hủy nhóm môn học học kỳ 1 năm học 2010 -2011</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>NoticeAdjust</KeyWord>
+    <KeyValue>Thông báo điều chỉnh đăng kí môn học qua mạng HK1 2010 - 2011 (Mới)</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>EduLearn</KeyWord>
+    <KeyValue>Giáo dục và Học tập</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>TestYourEng</KeyWord>
+    <KeyValue>Kiểm tra kiến thức tiếng Anh của bạn</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>OSFE</KeyWord>
+    <KeyValue>Khách quan - An toàn - Nhanh chóng - Hiệu quả</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>PracticeEngSkill</KeyWord>
+    <KeyValue>Thực hành kỹ năng tiếng Anh</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>AutoAccurRan</KeyWord>
+    <KeyValue>Tự động - Chính xác - Ngẫu nhiên</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Ques</KeyWord>
+    <KeyValue>Câu hỏi</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Select</KeyWord>
+    <KeyValue>Chọn</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Show</KeyWord>
+    <KeyValue>Show</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>QuesContent</KeyWord>
+    <KeyValue>Nội dung</KeyValue>
+  </Keys>
+  <Keys>
+    <KeyWord>Change</KeyWord>
+    <KeyValue>Thay đổi</KeyValue>
+  </Keys>
+
+</Languages>

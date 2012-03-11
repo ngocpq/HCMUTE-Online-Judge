@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Menus (Menu1*)>
+<!ELEMENT Menu1 (Title,TitleEng,Link,Roles,Menu2*)>
+<!ELEMENT Menu2 (Title,TitleEng,Link)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT TitleEng (#PCDATA)>
+<!ELEMENT Link (#PCDATA)>
+<!ELEMENT Roles (Role*)>
+<!ELEMENT Role (#PCDATA)>

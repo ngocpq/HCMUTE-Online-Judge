@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Menus SYSTEM "menu.dtd">
+<Menus>
+  <Menu1>
+    <Title>Thi Online</Title>
+    <TitleEng>Test Online</TitleEng>
+    <Link>/test</Link>
+    <Roles>
+      <Role>Teachers</Role>
+      <Role>Students</Role>
+    </Roles>
+  </Menu1>
+  <Menu1>
+    <Title>Thi Thử</Title>
+    <TitleEng>Try Test</TitleEng>
+    <Link>/TryTest</Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Teachers</Role>
+      <Role>Students</Role>
+    </Roles>
+  </Menu1>
+  <Menu1>
+    <Title>Xem Điểm</Title>
+    <TitleEng>View Mark</TitleEng>
+    <Link>/Test</Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Teachers</Role>
+      <Role>Students</Role>
+    </Roles>
+  </Menu1>
+  <Menu1>
+    <Title>Quản Lý kiểm tra</Title>
+    <TitleEng>Manage Examination</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Teachers</Role>
+    </Roles>
+    <Menu2>
+      <Title>soạn đề kiểm tra</Title>
+      <TitleEng>Create Examination</TitleEng>
+      <Link>/Exam/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Quản lý đề kiểm tra</Title>
+      <TitleEng>Manage Examination</TitleEng>
+      <Link>/ManageExam/Index</Link>
+    </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Ngân Hàng Đề Thi</Title>
+    <TitleEng>Examination Bank</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Teachers</Role>
+    </Roles>
+    <Menu2>
+      <Title>soạn đề thi</Title>
+      <TitleEng>Create Examination Bank</TitleEng>
+      <Link>/ExamBank/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Quản lý đề thi</Title>
+      <TitleEng>Manage Examination Bank</TitleEng>
+      <Link>/ExamBank/Index</Link>
+    </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Quản Lý Thi Trực Tuyến</Title>
+    <TitleEng>Manage Test Online</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Teachers</Role>
+    </Roles>
+    <Menu2>
+      <Title>Xem Thông Tin Thi Và Bảng Điểm</Title>
+      <TitleEng>View Test Infomation</TitleEng>
+      <Link>/ManageTest</Link>
+    </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Quản lý người Dùng</Title>
+    <TitleEng>Manage Users</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+    <Menu2>
+      <Title>Quản lý Roles</Title>
+      <TitleEng>Manage Roles</TitleEng>
+      <Link>/User/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Quản lý User</Title>
+      <TitleEng>Manage Users</TitleEng>
+      <Link>/User/Index</Link>
+    </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Quản lý phân quyền</Title>
+    <TitleEng>Permission</TitleEng>
+    <Link>/Manager/Index</Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+  </Menu1>
+  <Menu1>
+    <Title>Quản lý câu hỏi</Title>
+    <TitleEng>Manage Question</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+    <Menu2>
+      <Title>Them cau hoi</Title>
+      <TitleEng>Add Question</TitleEng>
+      <Link>/ManageQuestion/InputQuestions</Link>
+    </Menu2>
+
+    <Menu2>
+      <Title>Cap nhat muc do kho</Title>
+      <TitleEng>Update Difficult Question Level</TitleEng>
+      <Link>/ManageQuestion/UpdateQuesLevel</Link>
+    </Menu2>
+
+  </Menu1>
+
+  <Menu1>
+    <Title>Duyệt đề</Title>
+    <TitleEng>Inspector</TitleEng>
+    <Link>/Inspector/Index</Link>
+    <Roles>
+      <Role>Admin</Role>
+      <Role>Inspector</Role>
+    </Roles>
+  </Menu1>
+</Menus>

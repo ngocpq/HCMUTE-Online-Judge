@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ToeicScore (Score*)>
+<!ELEMENT Score (CorrectNumber, ListeningScore, ReadingScore)>
+<!ELEMENT CorrectNumber (#PCDATA)>
+<!ELEMENT ListeningScore (#PCDATA)>
+<!ELEMENT ReadingScore (#PCDATA)>

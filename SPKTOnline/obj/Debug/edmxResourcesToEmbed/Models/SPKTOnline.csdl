@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineSPKTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="OnlineSPKTEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comparers" EntityType="OnlineSPKTModel.Comparer" />
+    <EntitySet Name="Contest_Student" EntityType="OnlineSPKTModel.Contest_Student" />
+    <EntitySet Name="Contests" EntityType="OnlineSPKTModel.Contest" />
+    <EntitySet Name="Lecturer_Subject" EntityType="OnlineSPKTModel.Lecturer_Subject" />
+    <EntitySet Name="Lecturers" EntityType="OnlineSPKTModel.Lecturer" />
+    <EntitySet Name="Problem_Subject" EntityType="OnlineSPKTModel.Problem_Subject" />
+    <EntitySet Name="Problems" EntityType="OnlineSPKTModel.Problem" />
+    <EntitySet Name="Roles" EntityType="OnlineSPKTModel.Role" />
+    <EntitySet Name="Student_Summit" EntityType="OnlineSPKTModel.Student_Summit" />
+    <EntitySet Name="Students" EntityType="OnlineSPKTModel.Student" />
+    <EntitySet Name="Subjects" EntityType="OnlineSPKTModel.Subject" />
+    <EntitySet Name="sysdiagrams" EntityType="OnlineSPKTModel.sysdiagram" />
+    <EntitySet Name="TestCaseResults" EntityType="OnlineSPKTModel.TestCaseResult" />
+    <EntitySet Name="TestCases" EntityType="OnlineSPKTModel.TestCas" />
+    <EntitySet Name="Users" EntityType="OnlineSPKTModel.User" />
+    <AssociationSet Name="FK_Problems_Comparers" Association="OnlineSPKTModel.FK_Problems_Comparers">
+      <End Role="Comparers" EntitySet="Comparers" />
+      <End Role="Problems" EntitySet="Problems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contest_Student_Contests" Association="OnlineSPKTModel.FK_Contest_Student_Contests">
+      <End Role="Contests" EntitySet="Contests" />
+      <End Role="Contest_Student" EntitySet="Contest_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contest_Student_Students" Association="OnlineSPKTModel.FK_Contest_Student_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Contest_Student" EntitySet="Contest_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Summit_Contests" Association="OnlineSPKTModel.FK_Student_Summit_Contests">
+      <End Role="Contests" EntitySet="Contests" />
+      <End Role="Student_Summit" EntitySet="Student_Summit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lecturer_Subject_Lecturers" Association="OnlineSPKTModel.FK_Lecturer_Subject_Lecturers">
+      <End Role="Lecturers" EntitySet="Lecturers" />
+      <End Role="Lecturer_Subject" EntitySet="Lecturer_Subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lecturer_Subject_Subjects" Association="OnlineSPKTModel.FK_Lecturer_Subject_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Lecturer_Subject" EntitySet="Lecturer_Subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Problem_Subject_Problems" Association="OnlineSPKTModel.FK_Problem_Subject_Problems">
+      <End Role="Problems" EntitySet="Problems" />
+      <End Role="Problem_Subject" EntitySet="Problem_Subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Problem_Subject_Subjects" Association="OnlineSPKTModel.FK_Problem_Subject_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Problem_Subject" EntitySet="Problem_Subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Summit_Problems" Association="OnlineSPKTModel.FK_Student_Summit_Problems">
+      <End Role="Problems" EntitySet="Problems" />
+      <End Role="Student_Summit" EntitySet="Student_Summit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Summit_Students" Association="OnlineSPKTModel.FK_Student_Summit_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Student_Summit" EntitySet="Student_Summit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestCaseResult_Student_Summit" Association="OnlineSPKTModel.FK_TestCaseResult_Student_Summit">
+      <End Role="Student_Summit" EntitySet="Student_Summit" />
+      <End Role="TestCaseResult" EntitySet="TestCaseResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestCaseResult_TestCases" Association="OnlineSPKTModel.FK_TestCaseResult_TestCases">
+      <End Role="TestCases" EntitySet="TestCases" />
+      <End Role="TestCaseResult" EntitySet="TestCaseResults" />
+    </AssociationSet>
+    <AssociationSet Name="User_Role" Association="OnlineSPKTModel.User_Role">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comparer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Descripsion" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ClassName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Parameter" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_Comparers" FromRole="Comparers" ToRole="Problems" />
+  </EntityType>
+  <EntityType Name="Contest_Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="ContestID" />
+    </Key>
+    <Property Name="StudentID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ContestID" Type="Int32" Nullable="false" />
+    <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Contest" Relationship="OnlineSPKTModel.FK_Contest_Student_Contests" FromRole="Contest_Student" ToRole="Contests" />
+    <NavigationProperty Name="Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Students" FromRole="Contest_Student" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Contest">
+    <Key>
+      <PropertyRef Name="MaDT" />
+    </Key>
+    <Property Name="MaDT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" />
+    <Property Name="TongDiem" Type="Int32" Nullable="false" />
+    <Property Name="IsOpen" Type="Boolean" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Contest_Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Contests" FromRole="Contests" ToRole="Contest_Student" />
+    <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Contests" FromRole="Contests" ToRole="Student_Summit" />
+  </EntityType>
+  <EntityType Name="Lecturer_Subject">
+    <Key>
+      <PropertyRef Name="MaGV" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaGV" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Lecturer" Relationship="OnlineSPKTModel.FK_Lecturer_Subject_Lecturers" FromRole="Lecturer_Subject" ToRole="Lecturers" />
+    <NavigationProperty Name="Subject" Relationship="OnlineSPKTModel.FK_Lecturer_Subject_Subjects" FromRole="Lecturer_Subject" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Lecturer">
+    <Key>
+      <PropertyRef Name="LecturerID" />
+    </Key>
+    <Property Name="LecturerID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="BoMon" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Lecturer_Subject" Relationship="OnlineSPKTModel.FK_Lecturer_Subject_Lecturers" FromRole="Lecturers" ToRole="Lecturer_Subject" />
+  </EntityType>
+  <EntityType Name="Problem_Subject">
+    <Key>
+      <PropertyRef Name="ProblemID" />
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="ProblemID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DificultLevel" Type="Int32" Nullable="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Problem" Relationship="OnlineSPKTModel.FK_Problem_Subject_Problems" FromRole="Problem_Subject" ToRole="Problems" />
+    <NavigationProperty Name="Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Subjects" FromRole="Problem_Subject" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Problem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LecturerID" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="MemoryLimit" Type="Int32" Nullable="false" />
+    <Property Name="TimeLimit" Type="Int32" Nullable="false" />
+    <Property Name="ComparerID" Type="Int32" Nullable="false" />
+    <Property Name="DoKho" Type="Int32" Nullable="false" />
+    <Property Name="IsHiden" Type="Boolean" />
+    <Property Name="AvailableTime" Type="DateTime" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Comparer" Relationship="OnlineSPKTModel.FK_Problems_Comparers" FromRole="Problems" ToRole="Comparers" />
+    <NavigationProperty Name="Problem_Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Problems" FromRole="Problems" ToRole="Problem_Subject" />
+    <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Problems" FromRole="Problems" ToRole="Student_Summit" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Descripsion" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="OnlineSPKTModel.User_Role" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Student_Summit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProblemID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ContestID" Type="Int32" />
+    <Property Name="SourceCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="TrangThaiBienDich" Type="Int32" Nullable="false" />
+    <Property Name="TrangThaiCham" Type="Int32" Nullable="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Contest" Relationship="OnlineSPKTModel.FK_Student_Summit_Contests" FromRole="Student_Summit" ToRole="Contests" />
+    <NavigationProperty Name="Problem" Relationship="OnlineSPKTModel.FK_Student_Summit_Problems" FromRole="Student_Summit" ToRole="Problems" />
+    <NavigationProperty Name="Student" Relationship="OnlineSPKTModel.FK_Student_Summit_Students" FromRole="Student_Summit" ToRole="Students" />
+    <NavigationProperty Name="TestCaseResults" Relationship="OnlineSPKTModel.FK_TestCaseResult_Student_Summit" FromRole="Student_Summit" ToRole="TestCaseResult" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="MSSV" />
+    </Key>
+    <Property Name="MSSV" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Ho" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Ten" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="MaLop" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="MaNganh" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Contest_Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Students" FromRole="Students" ToRole="Contest_Student" />
+    <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Students" FromRole="Students" ToRole="Student_Summit" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="TenMH" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Lecturer_Subject" Relationship="OnlineSPKTModel.FK_Lecturer_Subject_Subjects" FromRole="Subjects" ToRole="Lecturer_Subject" />
+    <NavigationProperty Name="Problem_Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Subjects" FromRole="Subjects" ToRole="Problem_Subject" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TestCaseResult">
+    <Key>
+      <PropertyRef Name="StudentSubmitID" />
+      <PropertyRef Name="TestCaseID" />
+    </Key>
+    <Property Name="StudentSubmitID" Type="Int32" Nullable="false" />
+    <Property Name="TestCaseID" Type="Int32" Nullable="false" />
+    <Property Name="ExecutionTime" Type="Int32" />
+    <Property Name="ExecutionMemory" Type="Int32" />
+    <Property Name="Score" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_TestCaseResult_Student_Summit" FromRole="TestCaseResult" ToRole="Student_Summit" />
+    <NavigationProperty Name="TestCas" Relationship="OnlineSPKTModel.FK_TestCaseResult_TestCases" FromRole="TestCaseResult" ToRole="TestCases" />
+  </EntityType>
+  <EntityType Name="TestCas">
+    <Key>
+      <PropertyRef Name="MaTestCase" />
+    </Key>
+    <Property Name="MaTestCase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaDB" Type="Int32" Nullable="false" />
+    <Property Name="Input" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Output" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="MoTa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Diem" Type="Int32" Nullable="false" />
+    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="TestCaseResults" Relationship="OnlineSPKTModel.FK_TestCaseResult_TestCases" FromRole="TestCases" ToRole="TestCaseResult" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="IsActived" Type="Boolean" />
+    <Property Name="IsLocked" Type="Boolean" />
+    <Property Name="LastLoginTime" Type="DateTime" />
+    <Property Name="PasswordInvalidCount" Type="Int32" />
+    <Property Name="SecurityCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="SecurityCodeEndTime" Type="DateTime" />
+    <NavigationProperty Name="Roles" Relationship="OnlineSPKTModel.User_Role" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_Problems_Comparers">
+    <End Role="Comparers" Type="OnlineSPKTModel.Comparer" Multiplicity="1" />
+    <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comparers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Problems">
+        <PropertyRef Name="ComparerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contest_Student_Contests">
+    <End Role="Contests" Type="OnlineSPKTModel.Contest" Multiplicity="1" />
+    <End Role="Contest_Student" Type="OnlineSPKTModel.Contest_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contests">
+        <PropertyRef Name="MaDT" />
+      </Principal>
+      <Dependent Role="Contest_Student">
+        <PropertyRef Name="ContestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contest_Student_Students">
+    <End Role="Students" Type="OnlineSPKTModel.Student" Multiplicity="1" />
+    <End Role="Contest_Student" Type="OnlineSPKTModel.Contest_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="MSSV" />
+      </Principal>
+      <Dependent Role="Contest_Student">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Summit_Contests">
+    <End Role="Contests" Type="OnlineSPKTModel.Contest" Multiplicity="0..1" />
+    <End Role="Student_Summit" Type="OnlineSPKTModel.Student_Summit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contests">
+        <PropertyRef Name="MaDT" />
+      </Principal>
+      <Dependent Role="Student_Summit">
+        <PropertyRef Name="ContestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lecturer_Subject_Lecturers">
+    <End Role="Lecturers" Type="OnlineSPKTModel.Lecturer" Multiplicity="1" />
+    <End Role="Lecturer_Subject" Type="OnlineSPKTModel.Lecturer_Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecturers">
+        <PropertyRef Name="LecturerID" />
+      </Principal>
+      <Dependent Role="Lecturer_Subject">
+        <PropertyRef Name="MaGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lecturer_Subject_Subjects">
+    <End Role="Subjects" Type="OnlineSPKTModel.Subject" Multiplicity="1" />
+    <End Role="Lecturer_Subject" Type="OnlineSPKTModel.Lecturer_Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="Lecturer_Subject">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Problem_Subject_Problems">
+    <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="1" />
+    <End Role="Problem_Subject" Type="OnlineSPKTModel.Problem_Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Problem_Subject">
+        <PropertyRef Name="ProblemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Problem_Subject_Subjects">
+    <End Role="Subjects" Type="OnlineSPKTModel.Subject" Multiplicity="1" />
+    <End Role="Problem_Subject" Type="OnlineSPKTModel.Problem_Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="Problem_Subject">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Summit_Problems">
+    <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="1" />
+    <End Role="Student_Summit" Type="OnlineSPKTModel.Student_Summit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student_Summit">
+        <PropertyRef Name="ProblemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Summit_Students">
+    <End Role="Students" Type="OnlineSPKTModel.Student" Multiplicity="1" />
+    <End Role="Student_Summit" Type="OnlineSPKTModel.Student_Summit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="MSSV" />
+      </Principal>
+      <Dependent Role="Student_Summit">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestCaseResult_Student_Summit">
+    <End Role="Student_Summit" Type="OnlineSPKTModel.Student_Summit" Multiplicity="1" />
+    <End Role="TestCaseResult" Type="OnlineSPKTModel.TestCaseResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student_Summit">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCaseResult">
+        <PropertyRef Name="StudentSubmitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestCaseResult_TestCases">
+    <End Role="TestCases" Type="OnlineSPKTModel.TestCas" Multiplicity="1" />
+    <End Role="TestCaseResult" Type="OnlineSPKTModel.TestCaseResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestCases">
+        <PropertyRef Name="MaTestCase" />
+      </Principal>
+      <Dependent Role="TestCaseResult">
+        <PropertyRef Name="TestCaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="User_Role">
+    <End Role="Roles" Type="OnlineSPKTModel.Role" Multiplicity="*" />
+    <End Role="Users" Type="OnlineSPKTModel.User" Multiplicity="*" />
+  </Association>
+</Schema>

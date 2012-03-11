@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+   
+    @{ //SPKTOnline.Management.MultiLanguage.ILanguage Lang = SPKTOnline.MvcApplication.Language[User.Identity.Name];
+        SPKTOnline.Management.MultiLanguage.ILanguage Lang = new SPKTOnline.Management.MultiLanguage.VietNamese();
+       }
+
+
+     @{
+         Lang.Language = new Dictionary<string, string>();
+         Lang.Language.Add("WebsiteName", "Thi Lập trình online");
+         Lang.Language.Add("HomeKey1", "Home key");
+         Lang.Language.Add("ReadMore", "Readmode");
+         Lang.Language.Add("FunctionGuide", "Thi Lập trình online");
+         Lang.Language.Add("HomeKey2", "Thi Lập trình online");
+         Lang.Language.Add("CommentSupport", "Thi Lập trình online");
+         Lang.Language.Add("HomeKey3", "Thi Lập trình online");
+         Lang.Language.Add("NoticeReceive", "Thi Lập trình online");
+         Lang.Language.Add("NoticeCancel", "Thi Lập trình online");
+         Lang.Language.Add("NoticeAdjust", "Thi Lập trình online");
+
+         }  
+    @Html.ActionLink("CreateUser", "CreateUser", "Account")
+    <div class="marginchange">
+        <embed type="application/x-shockwave-flash" src="../../Content/Images/header_v8.swf"
+            fullscreen="no" style="height: 300px; width: 690px"></embed>
+    </div>
+    <div id="helpinfor">
+        <div class="helpinforlever1">
+            <div class="topdivinfor">
+@*                <%if (Lang.Lang == LanguageEnum.English)
+                  { %>
+                <img alt="Wellcome" src="../../Content/Images/wellcomeEng.png" />
+                <%} %>
+                <%else
+                    { %>*@
+                <img alt="Wellcome" src="../../Content/Images/wellcome.png" />
+               @* <%} %>*@
+            </div>
+            <div class="buttondivinfor">
+                <div class="helpinfortitle">
+                    @Lang.Language["WebsiteName"]
+                </div>
+                <br />
+                <div id="helpinforcontent">
+                    @Lang.Language["HomeKey1"]</div>
+                <br />
+                <div class="divreadmore">
+                    <a class="areadmore" href="">
+                        @Lang.Language["ReadMore"]...</a></div>
+            </div>
+        </div>
+        <div class="helpinforlever2">
+            <div class="topdivinfor">
+@*                <%if (Lang.Lang == LanguageEnum.English)
+                  { %>
+                <img alt="Wellcome" src="../../Content/Images/guideEng.png" />
+                <%} %>
+                <%else
+                    { %>*@
+                <img alt="Wellcome" src="../../Content/Images/guide.png" />
+               @* <%} %>*@
+            </div>
+            <div class="buttondivinfor">
+                <div class="helpinfortitle">
+                    @Lang.Language["FunctionGuide"]
+                </div>
+                <br />
+                <div id="Div1">
+                    @Lang.Language["HomeKey2"]</div>
+                <br />
+                <div class="divreadmore">
+                    <a class="areadmore" href="">
+                        @Lang.Language["ReadMore"]...</a></div>
+            </div>
+        </div>
+        <div class="helpinforlever3">
+            <div class="topdivinfor">
+@*                <%if (Lang.Lang == LanguageEnum.English)
+                  { %>
+                <img alt="Wellcome" src="../../Content/Images/helpEng.png" />
+                <%} %>
+                <%else
+                    { %>*@
+                <img alt="Wellcome" src="../../Content/Images/help.png" />
+              @*  <%} %>*@
+            </div>
+            <div class="buttondivinfor">
+                <div class="helpinfortitle">
+                    @Lang.Language["CommentSupport"]
+                </div>
+                <br />
+                <div id="Div2">
+                    @Lang.Language["HomeKey3"]</div>
+                <br />
+                <div class="divreadmore">
+                    <a class="areadmore" href="">
+                        @Lang.Language["ReadMore"]...</a></div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;">
+    </div>
+    <div>
+        <div class="newtitle">
+@*            <%if (Lang.Lang == LanguageEnum.English)
+              { %>
+            <div class="titlePDTEng">
+            </div>
+            <%} %>
+            <%else
+                { %>*@
+            <div class="titlePDT">
+            </div>
+         @*   <%} %>*@
+            <ul>
+                <li><a href="">
+                    @Lang.Language["NoticeReceive"]
+                </a></li>
+                <li><a href="">
+                    @Lang.Language["NoticeCancel"]</a></li>
+                <li><a href="">
+                    @Lang.Language["NoticeAdjust"]</a></li>
+            </ul>
+            <div class="divreadmore">
+                <a class="areadmore" href="">
+                    @Lang.Language["ReadMore"]...</a></div>
+        </div>
+        <div class="newtitle">
+@*             <%if (Lang.Lang == LanguageEnum.English)
+              { %>
+            <div class="titleExamEng">
+            </div>
+            <%} %>
+            <%else
+                { %>*@
+            <div class="titleExam">
+            </div>
+       @*     <%} %>*@
+            <ul>
+                <li><a href="">
+                    @Lang.Language["NoticeReceive"]
+                </a></li>
+                <li><a href="">
+                    @Lang.Language["NoticeCancel"]</a></li>
+                <li><a href="">
+                    @Lang.Language["NoticeAdjust"]</a></li>
+            </ul>
+            <div class="divreadmore">
+                <a class="areadmore" href="">
+                    @Lang.Language["ReadMore"]...</a></div>
+        </div>
+    </div>

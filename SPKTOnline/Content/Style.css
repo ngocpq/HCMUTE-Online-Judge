@@ -1,0 +1,748 @@
+﻿#headertop
+{
+    background-image: url('../../Content/Images/top.png'); 
+    background-repeat: no-repeat;
+    height: 7px;
+}
+#headerleft
+{
+    background-image: url('../../Content/Images/left.png'); 
+    height: 84px;
+     width: 2px;
+    float: left;
+}
+#headercenter
+{
+    background-image: url('../../Content/Images/banner_center.png'); 
+    background-repeat: repeat;
+    height: 84px; 
+    width:976px;
+    float: left; 
+}
+#headerright
+{
+    background-image: url('../../Content/Images/right2.png'); 
+    height: 84px;
+    float: left; width: 2px;
+}
+#headbutton
+{
+    background-image: url('../../Content/Images/banner_button2.png'); 
+    height: 10px;
+}
+#nav
+{
+    background-image: url('../../Content/Images/banner_button4.png');
+    width:980px;
+    height:52px;
+}
+#nav ul
+{
+    font-size : 15px;
+    height:40px;
+    padding:7px 0 0 40px;
+    margin:0;
+    list-style:none outside none;
+    float:left;
+}
+
+.linav
+{
+    float:left;
+    display:inline;
+    height:16px;
+    margin:0px 10px;
+    padding: 10px;
+}
+
+.linav:hover
+{
+    color:#c23d27;
+    -moz-border-radius : 12px;
+    background : #ffffff;
+    
+}
+
+.anav
+{
+    color:White;
+    text-decoration :none;
+}
+
+.anav:hover
+{
+    color:#c23d27;
+}
+#maincontain
+{
+    float:left;
+    width: 940px;
+    padding-left : 10px;
+}
+
+#MainContainPlaceHolder
+{
+    float:left; width:680px;
+    padding-top : 8px;
+}
+
+#menuleft
+{
+    margin-left : 15px;
+    float:left;
+    width : 240px;
+}
+
+#buttonmenuleft
+{
+    margin-top : 25px;
+}
+
+#topmenuleft
+{
+    width : 51px;
+    height:51px;
+    float:left;
+    background-image : url('../../Content/Images/book.png');
+}
+
+#topmenuleftbutton
+{
+    width : 52px;
+    height:51px;
+    float:left;
+    /*background-image : url('../../Content/Images/globe Internet_2.png');*/
+}
+
+#Catalogues
+{
+    background-image : url('../../Content/Images/catalogue.png');
+    width : 169px;
+    height : 51px;
+    float:left;
+}
+
+#linkto
+{
+    background-image : url('../../Content/Images/links.png');
+    width : 143px;
+    height : 51px;
+    float:left;
+}
+
+#topcatalogue
+{
+    width : 220px;
+    float : left;
+    height : 51px;
+    margin-top : 10px;
+    margin-left : 10px;
+}
+
+#toplinkto
+{
+    width : 207px;
+    float : left;
+    height : 51px;
+    margin-left : 25px;
+}
+
+#menuleftcenter
+{
+    padding-top : 60px;
+}
+
+#menuleftcenter ul
+{
+    list-style-type : none;
+    font-size : 12px;
+    color : #C33C26;
+    padding-left : 15px;
+}
+
+#menuleftcenter ul li
+{
+    padding-bottom : 2px;
+    border-bottom : 1px solid #e5e1de;
+}
+
+#menuleftcenter ul li a
+{
+   color : #C33C26;
+   text-decoration : none;
+   background-image : url('../../Content/Images/arrow_left.gif');
+   background-repeat :no-repeat;
+   background-position :left;
+
+   display: block;
+   padding-left : 19px;
+   margin-left : 10px;
+   text-transform:uppercase;
+   padding-top:10px;
+   padding-bottom:10px;  
+}
+
+#menuleftcenter ul a:hover
+{
+    color : #295ccf;
+    
+}
+
+#search
+{
+    float:left;
+    width : 297px;
+    padding-left: 280px;
+    padding-top : 20px;
+}
+
+#txtsearch
+{
+    -moz-border-radius : 5px;
+}
+
+#centerlinkto
+{
+    padding-top : 0px;
+}
+
+#centerlinkto ul
+{
+    list-style-type : none;
+    padding-left : 15px;
+    font-size : 12px;
+    padding-top : 60px;
+    margin-left : 10px;
+}
+
+#centerlinkto ul li
+{
+    padding-bottom : 2px;
+}
+
+#centerlinkto ul a
+{
+    color : #C33C26;
+   text-decoration : none;
+   background-repeat :no-repeat;
+   background-position :left;
+
+   display: block;
+   padding-left : 49px;
+   text-transform:uppercase;
+   padding-top:12px;
+   padding-bottom:12px;
+}
+
+#centerlinkto ul a:hover
+{
+    color : #295ccf;
+}
+
+#linka1
+{
+   background-image : url('../../Content/Images/Evernote_small.png');
+ }
+
+#linka2
+{
+   background-image : url('../../Content/Images/Mail_small.png');
+}
+
+#linka3
+{
+   background-image : url('../../Content/Images/Ebook-Icon.png');
+}
+
+#linka4
+{
+   background-image : url('../../Content/Images/Notes_small.png');
+}
+
+#linka5
+{
+   background-image : url('../../Content/Images/E-Learning.png');
+}
+
+#topfooter
+{
+    background-color : #EFEEE9;
+    border-top: 2px solid #E2DFD5;
+    width : 980px;
+    height : 120px;
+    margin :20px -12px 0px -12px;
+}
+
+#buttonfooter
+{
+    background-color : #BBB39E;
+    width : 980px;
+    height : 50px;
+    margin :0px -12px 0px -12px;
+    -moz-border-radius : 0px 0px 5px 5px;
+    float :left;
+}
+
+#footertext
+{
+    background-image : url('../../Content/Images/E_L.png');
+    width : 500px;
+    height:40px;
+}
+
+.divfooter
+{
+    float:left; width:215px; 
+height:60px;
+    padding-left : 30px;
+}
+
+#footerextern
+{
+    float:right; width:250px; 
+    height:80px;
+    padding-left : 20px;
+    border-left : 1px solid #DAD6CB;
+    margin-top : -20px;
+}
+
+.ulcss
+{
+    list-style-type : none;
+    font-size : 12px;
+    color : #C33C26;
+    padding-left : 15px;
+}
+
+.licss
+{
+    padding-bottom : 2px;
+}
+
+.acss
+{
+   color : #67605D;
+   text-align :left;
+   text-decoration : underline;
+   background-image : url('../../Content/Images/arrow_left.gif');
+   background-repeat :no-repeat;
+   background-position :left;
+
+   display: block;
+   padding-left : 18px;
+   padding-top:3px;
+   padding-bottom:3px;
+    width: 203px;
+}
+
+.acss:hover
+{
+    color : #295ccf;
+}
+
+#copyright
+{
+    float: left; width: 70%; height: 100%; text-align: left; color: White; padding-left : 20px; padding-top : 8px;
+}
+
+#version
+{
+    float: left; width: 26%; height: 100%;color : White; text-align:right;padding-top : 8px;
+}
+
+#footerextern ul
+{
+    list-style-type : none;
+    padding-left : 5px;
+    font-size : 12px;
+    padding-top : 0px;
+    margin-top : 4px;
+}
+
+#footerextern ul li
+{
+    padding-bottom : 2px;
+}
+
+#footerextern ul li a
+{
+   color : #67605D;
+   text-decoration : none;
+   background-repeat :no-repeat;
+   background-position :left;
+   text-align : left;
+
+   display: block;
+   padding-left : 29px;
+   padding-top:4px;
+   padding-bottom:4px;
+}
+
+#footerextern ul li a:hover
+{
+    color : #295ccf;
+}
+
+#linka6
+{
+    background-image : url('../../Content/Images/Feed_24x24.png');
+}
+
+#linka7
+{
+    background-image : url('../../Content/Images/FaceBook_24x24.png');
+}
+
+#linka8
+{
+    background-image : url('../../Content/Images/Twitter_24x24.png');
+}
+
+.marginchange
+{
+    margin-left : -10px;
+    margin-top : -8px;
+}
+
+.newtitle
+{
+    background-image : url('../../Content/Images/advertisment-48.png');
+    background-repeat : no-repeat;
+    background-position :top left;
+    padding-left : 50px;
+    padding-top : 10px;    
+    width : 95%;
+}
+
+.newtitle ul
+{
+    padding : 5px 0px 0px 5px;
+    list-style-type : none;
+}
+
+.newtitle ul li
+{
+    background-image : url('../../Content/Images/check.jpg');
+    background-repeat : no-repeat;
+    background-position : left;
+    background-attachment : scroll;
+    padding-bottom : 7px;
+}
+
+.newtitle ul li a
+{
+   color : #67605D;
+   text-align :left;
+   text-decoration : none;
+   padding-left : 25px;
+   text-transform : capitalize;
+}
+
+.newtitle ul li a:hover
+{
+     color : #295ccf;
+}
+
+.titlePDT
+{
+    background-image : url('../../Content/Images/noticePDT2.png');
+    background-repeat : no-repeat;
+    background-position :left;
+    height : 24px;
+    margin-top: 0px;
+    border-bottom : 1px dashed black;
+    padding-bottom : 7px; 
+    margin-left : 10px;
+    width : 96%;
+}
+
+.titlePDTEng
+{
+    background-image : url('../../Content/Images/noticePDTEng.png');
+    background-repeat : no-repeat;
+    background-position :left;
+    height : 24px;
+    margin-top: 0px;
+    border-bottom : 1px dashed black;
+    padding-bottom : 7px; 
+    margin-left : 10px;
+    width : 96%;
+}
+
+.titleExam
+{
+    background-image : url('../../Content/Images/noticeExam.png');
+    background-repeat : no-repeat;
+    background-position :left;
+    height : 24px;
+    margin-top: 0px;
+    border-bottom : 1px dashed black;
+    padding-bottom : 7px; 
+    margin-left : 10px;
+    width : 96%;
+}
+
+.titleExamEng
+{
+    background-image : url('../../Content/Images/noticeexamEng.png');
+    background-repeat : no-repeat;
+    background-position :left;
+    height : 24px;
+    margin-top: 0px;
+    border-bottom : 1px dashed black;
+    padding-bottom : 7px; 
+    margin-left : 10px;
+    width : 96%;
+}
+
+.areadmore
+{
+    color : #295ccf;
+    text-decoration : none;
+}
+
+.areadmore:hover
+{
+    text-decoration : underline;
+}
+.divreadmore
+{
+    width : 85%; text-align :right;
+}
+
+#helpinfor
+{
+    float : left;
+    width : 100%;
+}
+
+.helpinforlever1
+{
+    float: left; width : 222px; margin-right : 10px; margin-left : -8px;
+}
+
+.helpinforlever2
+{
+    float: left; width : 222px; margin-right : 10px;
+}
+
+.helpinforlever3
+{
+    float: left; width : 222px; margin-right : 0px;
+}
+
+.topdivinfor
+{
+    border : 1px solid #ECEBE8;
+    -moz-border-radius : 5px 5px 0px 0px;
+    width:100%;
+    height : 40px;
+    margin-top : 20px;
+    background-color : #F4F3EF;
+}
+
+.buttondivinfor
+{
+    border : 1px solid #ECEBE8;
+    width:182px;
+    padding : 20px;
+    height : 160px;
+    margin-bottom : 30px;
+    background-color : #F4F3EF;
+    color : #67605D;
+}
+
+.helpinfortitle
+{
+    color :#5F5853;
+    font-weight : bold;
+    font-size : 12px;
+}
+
+.helpinforcontent
+{
+    color : #88817C;
+    font-size : 12px;
+}
+
+.webtitle
+{
+    border-bottom:1px dotted #565919;
+    color:#F14609;
+    display:block;
+    font:italic 1.8em/1.1 Georgia,"Times New Roman",Times,serif;
+    margin-bottom:15px;
+    padding:15px 0 5px;
+}
+
+.smalltitle
+{
+	color:#624631;
+    display:block;
+    font:italic 1.3em/0.8 Georgia,"Times New Roman",Times,serif;
+    margin-bottom:15px;
+    padding:10px 0 5px;
+}
+
+.fildsettitle
+{
+	color:#624631;
+    display:block;
+    font:italic 1.3em/0.8 Georgia,"Times New Roman",Times,serif;
+    margin-bottom:5px;
+    padding:0;
+}
+
+.questitle
+{
+	color:#624631;
+    font:italic 1.0em/0.7 Georgia,"Times New Roman",Times,serif;
+}
+
+.inputfield
+{
+    float : left;
+    margin-bottom : 8px;
+}
+
+.inputfield div
+{
+    float : left;
+    width : 150px;
+}
+
+.createstyle
+{
+    margin-left : 250px;
+}
+
+#menu
+{
+    padding-top : 60px;
+    margin-bottom : 40px;
+    list-style-type : none;
+    font-size : 12px;
+    color : #C33C26;
+    padding-left : 15px;
+}
+
+#menu li
+{
+    padding-bottom : 2px;
+    border-bottom : 1px solid #e5e1de;
+}
+
+#menu li a
+{
+   color : #C33C26;
+   text-decoration : none;
+   background-image : url('../../Content/Images/arrow_left.gif');
+   background-repeat :no-repeat;
+   background-position :left;
+
+   display: block;
+   padding-left : 19px;
+   margin-left : 10px;
+   text-transform:uppercase;
+   padding-top:10px;
+   padding-bottom:10px;  
+}
+
+#menu ul li a 
+{
+   color : #295ccf;  
+   background-image : none;
+   background-repeat :no-repeat;
+   background-position :left;
+   text-decoration : none;
+   display: block;
+   padding-left : 19px;
+   margin-left : 10px;
+   text-transform:uppercase;
+   padding-top:10px;
+   padding-bottom:10px;  
+}
+
+#menu ul li a:hover
+{
+   color : #C33C26;
+}
+
+#menu li a:hover
+{
+    color : #295ccf;  
+}
+
+.divparagraph
+{
+	height : 20px;
+	margin-bottom : 7px;
+}
+
+.queswidth
+{
+	width : 136px;
+}
+
+#fieldwidth
+{
+	width : 232px;
+}
+.txtincompleteques
+{
+	margin : 3px;
+}
+
+#studentexaminfo
+{
+	margin:15px 0;
+	color:#000000;	
+}
+
+.diveditor
+{
+    float:left;
+    width: 100%;
+    margin : 5px;
+}
+
+.diveditorlabel
+{
+    float:left;
+    width: 30%;
+}
+
+.diveditortextbox
+{
+    float:left;
+    width: 70%;
+}
+
+.divautoexam
+{
+     float:left;
+    width: 50%;
+}
+
+.CommandCss
+{
+    text-align:right;
+    margin: 5px;
+}
+
+#languagedisplay
+{
+    float:right;
+    margin-right: 15px;
+}
+
+#languagedisplay a
+{
+    text-decoration : none;
+    color : Blue;
+}
+
+#languagedisplay a:hover
+{
+    color : Black;
+}
