@@ -1,7 +1,23 @@
 ﻿<!DOCTYPE html>
 @using SPKTOnline.Management
 @using SPKTOnline.Models
+@functions{
+	
+	private List<Role> KiemTraQuyen(string user)
+	{
+		// TODO: Implement this method
+		OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+		List<Role> listRole=new List<Role>();
+		User nd = db.Users.FirstOrDefault(n => n.Username == user);
+        if (nd == null)
+            listRole = null;
+        else
+            var r=nd.Roles
+		return listRole;
+	}
+	
 
+}
 }
 <html>
 <head>
@@ -204,7 +220,7 @@
                     <%else
                         { %>*@
                     <ul>
-                        <li id="li6" class="linav"><a id="a1" class="anav" href="~/Home">Trang Chủ</a></li>
+                        <li id="li6" class="linav"><a id="a1" class="anav" href="">Trang Chủ</a></li>
                         <li id="li7" class="linav"><a id="a2" class="anav" href="/Home">Hỗ Trợ</a></li>
                         <li id="li8" class="linav"><a id="a3" class="anav" href="/Home">Quy Định</a></li>
                         <li id="li9" class="linav"><a id="a4" class="anav" href="/Home/About">Thông Tin</a></li>
