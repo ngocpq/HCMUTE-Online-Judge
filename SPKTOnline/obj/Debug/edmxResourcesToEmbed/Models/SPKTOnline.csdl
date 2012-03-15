@@ -68,6 +68,10 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestCases_Problems" Association="OnlineSPKTModel.FK_TestCases_Problems">
+      <End Role="Problem" EntitySet="Problems" />
+      <End Role="TestCas" EntitySet="TestCases" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Comparer">
     <Key>
@@ -157,6 +161,7 @@
     <NavigationProperty Name="Comparer" Relationship="OnlineSPKTModel.FK_Problems_Comparers" FromRole="Problems" ToRole="Comparers" />
     <NavigationProperty Name="Problem_Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Problems" FromRole="Problems" ToRole="Problem_Subject" />
     <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Problems" FromRole="Problems" ToRole="Student_Summit" />
+    <NavigationProperty Name="TestCases" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="Problem" ToRole="TestCas" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -243,6 +248,7 @@
     <Property Name="Diem" Type="Int32" Nullable="false" />
     <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="TestCaseResults" Relationship="OnlineSPKTModel.FK_TestCaseResult_TestCases" FromRole="TestCases" ToRole="TestCaseResult" />
+    <NavigationProperty Name="Problem" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="TestCas" ToRole="Problem" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -408,5 +414,17 @@
   <Association Name="User_Role">
     <End Role="Roles" Type="OnlineSPKTModel.Role" Multiplicity="*" />
     <End Role="Users" Type="OnlineSPKTModel.User" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_TestCases_Problems">
+    <End Type="OnlineSPKTModel.Problem" Role="Problem" Multiplicity="1" />
+    <End Type="OnlineSPKTModel.TestCas" Role="TestCas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCas">
+        <PropertyRef Name="MaDB" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

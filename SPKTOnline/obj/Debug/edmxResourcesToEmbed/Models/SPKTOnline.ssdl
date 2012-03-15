@@ -65,6 +65,10 @@
       <End Role="TestCases" EntitySet="TestCases" />
       <End Role="TestCaseResult" EntitySet="TestCaseResult" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestCases_Problems" Association="OnlineSPKTModel.Store.FK_TestCases_Problems">
+      <End Role="Problems" EntitySet="Problems" />
+      <End Role="TestCases" EntitySet="TestCases" />
+    </AssociationSet>
     <AssociationSet Name="FK_User_Role_Roles" Association="OnlineSPKTModel.Store.FK_User_Role_Roles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="User_Role" EntitySet="User_Role" />
@@ -389,6 +393,18 @@
       </Principal>
       <Dependent Role="TestCaseResult">
         <PropertyRef Name="TestCaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestCases_Problems">
+    <End Role="Problems" Type="OnlineSPKTModel.Store.Problems" Multiplicity="1" />
+    <End Role="TestCases" Type="OnlineSPKTModel.Store.TestCases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCases">
+        <PropertyRef Name="MaDB" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

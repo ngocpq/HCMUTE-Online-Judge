@@ -3,22 +3,31 @@
 @using SPKTOnline.Models
 @functions{
 	
-	private List<Role> KiemTraQuyen(string user)
+	private bool KiemTraQuyen(string user, string r)
 	{
 		// TODO: Implement this method
 		OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
-		List<Role> listRole=new List<Role>();
+		Object listRole=new List<Role>();
 		User nd = db.Users.FirstOrDefault(n => n.Username == user);
         if (nd == null)
-            listRole = null;
+        {
+            if (r == "Guest")
+                return true;
+            else
+            return false;
+        }
         else
-            var r=nd.Roles
-		return listRole;
+            foreach(Role rl in  nd.Roles)
+            {
+                if (rl.Name == r)
+                    return true;
+            }
+        return false;
 	}
 	
 
 }
-}
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -125,13 +134,17 @@
                 
                 foreach (var m in _menu.Children)
                 {
-                  //  foreach (var str in m.Roles)
-                 //   {
-                 //       if (HttpContext.Current.User.IsInRole(str))
-                 //       {
+                    foreach (var str in m.Roles)
+                    {
+                        if (KiemTraQuyen(@HttpContext.Current.User.Identity.Name, str))
+                        {
                             m.IsActive = true;
-                 //       }
-                 //   }
+                        }
+                        else
+                        {
+                            m.IsActive = false;
+                        }
+                    }
                 }
             }
             else
@@ -141,25 +154,26 @@
         }
 
     
-        if (HttpContext.Current.User.Identity.Name != string.Empty)
-        {
-            foreach (var m in _menu.Children)
-            {
-                m.IsActive = false;
-               // foreach (var str in m.Roles)
-               // {
-               //     if (HttpContext.Current.User.IsInRole(str))
-               //     {
-                        m.IsActive = true;
-                        break;
-               //     }
-              //  }
-            }
-        }
-        else
-        {
+        //if (HttpContext.Current.User.Identity.Name != string.Empty)
+        //{
+        //    foreach (var m in _menu.Children)
+        //    {
+        //        m.IsActive = false;
+        //       // foreach (var str in m.Roles)
+        //       // {
+        //       //     if (HttpContext.Current.User.IsInRole(str))
+        //       //     {
+        //                m.IsActive = true;
+        //                break;
+        //       //     }
+        //      //  }
+        //    }
+        //}
+        //else
+        //{
 
-        }}
+        //}
+        }
    
     <div class="page">
         <div id="header">

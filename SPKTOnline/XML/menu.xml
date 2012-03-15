@@ -6,8 +6,8 @@
     <TitleEng>Test Online</TitleEng>
     <Link>/test</Link>
     <Roles>
-      <Role>Teachers</Role>
-      <Role>Students</Role>
+      <Role>Lecturer</Role>
+      <Role>Student</Role>
     </Roles>
   </Menu1>
   <Menu1>
@@ -16,8 +16,8 @@
     <Link>/TryTest</Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Teachers</Role>
-      <Role>Students</Role>
+      <Role>Lecturer</Role>
+      <Role>Student</Role>
     </Roles>
   </Menu1>
   <Menu1>
@@ -26,8 +26,8 @@
     <Link>/Test</Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Teachers</Role>
-      <Role>Students</Role>
+      <Role>Lecturer</Role>
+      <Role>Student</Role>
     </Roles>
   </Menu1>
   <Menu1>
@@ -36,7 +36,7 @@
     <Link></Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Teachers</Role>
+      <Role>Lecturer</Role>
     </Roles>
     <Menu2>
       <Title>soạn đề kiểm tra</Title>
@@ -55,7 +55,7 @@
     <Link></Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Teachers</Role>
+      <Role>Lecturer</Role>
     </Roles>
     <Menu2>
       <Title>soạn đề thi</Title>
@@ -74,7 +74,7 @@
     <Link></Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Teachers</Role>
+      <Role>Lecturer</Role>
     </Roles>
     <Menu2>
       <Title>Xem Thông Tin Thi Và Bảng Điểm</Title>

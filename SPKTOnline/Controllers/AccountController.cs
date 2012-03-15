@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using SPKTOnline.Models;
 using System.Data.Entity;
+using SPKTOnline.Management;
+using System.Data;
 
 namespace SPKTOnline.Controllers
 {
@@ -14,12 +16,7 @@ namespace SPKTOnline.Controllers
         //
         // GET: /Account/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
-        AccountModels account = new AccountModels();
-        //public User IsUser(string username, string pass)
-        //{
-        //    var user = db.Users.FirstOrDefault(u => u.Username == username && u.Password == pass);
-        //    return user;
-        //}
+        CheckRoles checkRole = new CheckRoles();
         public ActionResult Index()
         {
             return View();
@@ -33,16 +30,20 @@ namespace SPKTOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (account.IsUser(model.UserName, model.Password)!=null)
+                User user = new User();
+                user = checkRole.IsUser(model.UserName, model.Password);
+                if (user!=null)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
+                        user.LastLoginTime = DateTime.Now;
                         return Redirect(returnUrl);
                     }
                     else
                     {
+                        user.LastLoginTime = DateTime.Now;
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -63,32 +64,81 @@ namespace SPKTOnline.Controllers
 
         public ActionResult CreateUser()
         {
-            ViewBag.ListRole = new MultiSelectList(db.ListRole, "ID", "Name");
-            List<bool> listIsLock = new List<bool>() { true, false };
-            ViewBag.ListLock = new MultiSelectList(listIsLock);
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
+                {
+                    ViewBag.ListRole = new MultiSelectList(db.Roles, "ID", "Name");
+                    return View();
+                }
+                else
+                    return RedirectToAction("Index", "Home");
+            }
+            else
+                return View("Logon");
         }
         
         //admin
         [Authorize]
         [HttpPost]
-        public ActionResult CreateUser(User user)
+        public ActionResult CreateUser(UserModels userModel)
         {
+            User user = new User();
+            Student st = new Student();
             if (Request.IsAuthenticated)
             {
-                if (ModelState.IsValid)
+                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
                 {
+                    user.Username = userModel.Username;
+                    user.Password = userModel.Password;
+                    user.LastName = userModel.LastName;
+                    user.FirstName = userModel.FirstName;
+                    user.IsLocked = userModel.IsLocked;
+                    user.Email = userModel.Email;
+                    user.Roles = userModel.MyRole;
+                    //ViewBag.Checks = MyCheckListRole;
                     db.Users.AddObject(user);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return View(userModel);
                 }
-
-                ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
-                return View(user);
+                else
+                    return RedirectToAction("Index", "Home");
+                //ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
+                //return View(userModel);
             }
             else
                 return View("Logon");
             
         }
+        public ActionResult EditUser()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditUser(User user)
+        {
+  
+            if (Request.IsAuthenticated)
+            {
+                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
+                {
+
+                    db.Users.Attach(user);
+                    db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
+                    db.SaveChanges();
+                    return View(user);
+                }
+                else
+                    return RedirectToAction("Index", "Home");
+                //ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
+                //return View(userModel);
+            }
+            else
+                return View("Logon");
+        }
+             
     }
 }
+
+

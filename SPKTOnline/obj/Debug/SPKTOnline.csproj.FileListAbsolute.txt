@@ -7,3 +7,12 @@ D:\HKII-2011-2012\KLTN\Example\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.dll
 D:\HKII-2011-2012\KLTN\Example\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.pdb
 D:\HKII-2011-2012\KLTN\Example\SPKTOnline\SPKTOnline\bin\MvcSiteMapProvider.dll
 D:\HKII-2011-2012\KLTN\Example\SPKTOnline\SPKTOnline\bin\MvcSiteMapProvider.xml
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\ResolveAssemblyReference.cache
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\SPKTOnline.dll
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\SPKTOnline.pdb
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\EntityFramework.dll
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\MvcSiteMapProvider.dll
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\EntityFramework.xml
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\MvcSiteMapProvider.xml
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.dll
+D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.pdb
