@@ -21,9 +21,23 @@ namespace SPKTOnline.Models
 
     public  class UserModels
     {
+    
+
         [Required]
         [DisplayName("User name")]
-        public string UserName { get; set; }
+        public string Username { get; set; }
+
+        [Required]
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [DisplayName("Is Lock")]
+        public string IsLocked { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -40,7 +54,7 @@ namespace SPKTOnline.Models
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
 
-
+        public List<Role> myRole { get; set; }
     }
     public class LogOnModel
     {

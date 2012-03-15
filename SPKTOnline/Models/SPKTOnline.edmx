@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="OnlineSPKTModelStoreContainer">
           <EntitySet Name="Comparers" EntityType="OnlineSPKTModel.Store.Comparers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Contest_Student" EntityType="OnlineSPKTModel.Store.Contest_Student" store:Type="Tables" Schema="dbo" />
@@ -452,8 +452,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineSPKTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -1025,7 +1024,7 @@
         <EntityTypeShape EntityType="OnlineSPKTModel.Lecturer" Width="1.5" PointX="5.75" PointY="13.25" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Problem_Subject" Width="1.5" PointX="11" PointY="9.25" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Problem" Width="1.5" PointX="3.75" PointY="8.125" Height="3.7109993489583317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Role" Width="1.5" PointX="10.75" PointY="3.625" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Role" Width="1.5" PointX="9.75" PointY="2.875" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Student_Summit" Width="1.5" PointX="6" PointY="4.375" Height="3.3263964843749996" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Student" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083353" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Subject" Width="1.5" PointX="5.75" PointY="10.375" Height="1.9802864583333353" IsExpanded="true" />
@@ -1087,12 +1086,12 @@
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_TestCaseResult_TestCases" ManuallyRouted="false">
           <ConnectorPoint PointX="7.5" PointY="2.0285953776041694" />
-          <ConnectorPoint PointX="9" PointY="2.0285953776041694" />
-          <ConnectorPoint PointX="9" PointY="4.75" />
+          <ConnectorPoint PointX="8.96875" PointY="2.0285953776041694" />
+          <ConnectorPoint PointX="8.96875" PointY="4.75" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.User_Role" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.25" PointY="4.5189925130208337" />
-          <ConnectorPoint PointX="13" PointY="4.5189925130208337" />
+          <ConnectorPoint PointX="11.25" PointY="3.7689925130208337" />
+          <ConnectorPoint PointX="13" PointY="3.7689925130208337" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

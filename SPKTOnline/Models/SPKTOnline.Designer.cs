@@ -79,18 +79,6 @@ namespace SPKTOnline.Models
         partial void OnContextCreated();
     
         #endregion
-        public ObjectSet<Role> ListRole
-        {
-            get
-            {
-                if ((_PhanQuyens == null))
-                {
-                    _PhanQuyens = base.CreateObjectSet<Role>("Roles");
-                }
-                return _PhanQuyens;
-            }
-        }
-        private ObjectSet<Role> _PhanQuyens;
     
         #region ObjectSet Properties
     

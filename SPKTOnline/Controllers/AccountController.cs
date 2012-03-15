@@ -64,6 +64,8 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateUser()
         {
             ViewBag.ListRole = new MultiSelectList(db.ListRole, "ID", "Name");
+            List<bool> listIsLock = new List<bool>() { true, false };
+            ViewBag.ListLock = new MultiSelectList(listIsLock);
             return View();
         }
         
@@ -72,15 +74,21 @@ namespace SPKTOnline.Controllers
         [HttpPost]
         public ActionResult CreateUser(User user)
         {
-            if (ModelState.IsValid)
+            if (Request.IsAuthenticated)
             {
-                db.Users.AddObject(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Users.AddObject(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
-            return View(user);
+                ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
+                return View(user);
+            }
+            else
+                return View("Logon");
+            
         }
     }
 }
