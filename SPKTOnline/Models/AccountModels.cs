@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using SPKTOnline.Management;
 using System.ComponentModel;
 using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 
 namespace SPKTOnline.Models
 {
@@ -21,8 +22,6 @@ namespace SPKTOnline.Models
 
     public  class UserModels
     {
-    
-
         [Required]
         [DisplayName("User name")]
         public string Username { get; set; }
@@ -37,7 +36,7 @@ namespace SPKTOnline.Models
 
         [Required]
         [DisplayName("Is Lock")]
-        public string IsLocked { get; set; }
+        public bool IsLocked { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -54,7 +53,7 @@ namespace SPKTOnline.Models
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
 
-        public List<Role> myRole { get; set; }
+        public EntityCollection<Role> MyRole { get; set; }
     }
     public class LogOnModel
     {

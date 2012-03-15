@@ -72,9 +72,11 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Management\CheckRoles.cs" />
     <Compile Include="Management\Menu\IMenu.cs" />
     <Compile Include="Management\Menu\MenuManager.cs" />
     <Compile Include="Management\MultiLanguage\English.cs" />
@@ -267,7 +269,8 @@
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
     <Content Include="Views\Account\CreateUser.cshtml" />
-    <Content Include="Views\Account\RolesUC.cshtml" />
+    <Content Include="Views\Account\EditUser.cshtml" />
+    <Content Include="Views\Problem\CreateProblem.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />

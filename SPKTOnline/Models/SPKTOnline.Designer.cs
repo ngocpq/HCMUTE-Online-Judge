@@ -14,6 +14,7 @@ using System.Data.EntityClient;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -31,6 +32,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Summit", "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Student_Summit), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_TestCases", "TestCases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.TestCas), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "User_Role", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Role), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCases_Problems", "Problem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "TestCas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCas), true)]
 
 #endregion
 
@@ -1832,6 +1834,28 @@ namespace SPKTOnline.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCases_Problems", "TestCas")]
+        public EntityCollection<TestCas> TestCases
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestCas>("OnlineSPKTModel.FK_TestCases_Problems", "TestCas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCas>("OnlineSPKTModel.FK_TestCases_Problems", "TestCas", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -3326,6 +3350,44 @@ namespace SPKTOnline.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCases_Problems", "Problem")]
+        public Problem Problem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_TestCases_Problems", "Problem").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_TestCases_Problems", "Problem").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Problem> ProblemReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_TestCases_Problems", "Problem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Problem>("OnlineSPKTModel.FK_TestCases_Problems", "Problem", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -3595,6 +3657,7 @@ namespace SPKTOnline.Models
     [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
+
     public partial class User : EntityObject
     {
         #region Factory Method
@@ -3626,6 +3689,8 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required]
+        [DisplayName("User name")]
         public global::System.String Username
         {
             get
@@ -3653,6 +3718,8 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required]
+        [DisplayName("Pass word")]
         public global::System.String Password
         {
             get
