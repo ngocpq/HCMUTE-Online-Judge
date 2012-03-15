@@ -460,7 +460,6 @@ namespace SPKTOnline.Models
         #endregion
     }
     
-
     #endregion
     
     #region Entities
