@@ -53,7 +53,9 @@ namespace SPKTOnline.Models
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
 
-        public EntityCollection<Role> MyRole { get; set; }
+        public String[] MyOption { get; set; }
+
+        public EntityCollection<Role> Roles { get; set; }
     }
     public class LogOnModel
     {

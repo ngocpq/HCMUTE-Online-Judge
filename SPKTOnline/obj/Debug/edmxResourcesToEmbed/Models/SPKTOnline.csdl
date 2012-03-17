@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OnlineSPKTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityContainer Name="OnlineSPKTEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="OnlineSPKTEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Comparers" EntityType="OnlineSPKTModel.Comparer" />
     <EntitySet Name="Contest_Student" EntityType="OnlineSPKTModel.Contest_Student" />
     <EntitySet Name="Contests" EntityType="OnlineSPKTModel.Contest" />
+    <EntitySet Name="Difficulties" EntityType="OnlineSPKTModel.Difficulty" />
     <EntitySet Name="Lecturer_Subject" EntityType="OnlineSPKTModel.Lecturer_Subject" />
     <EntitySet Name="Lecturers" EntityType="OnlineSPKTModel.Lecturer" />
     <EntitySet Name="Problem_Subject" EntityType="OnlineSPKTModel.Problem_Subject" />
@@ -32,6 +33,10 @@
       <End Role="Contests" EntitySet="Contests" />
       <End Role="Student_Summit" EntitySet="Student_Summit" />
     </AssociationSet>
+    <AssociationSet Name="FK_Problems_Difficulty" Association="OnlineSPKTModel.FK_Problems_Difficulty">
+      <End Role="Difficulties" EntitySet="Difficulties" />
+      <End Role="Problems" EntitySet="Problems" />
+    </AssociationSet>
     <AssociationSet Name="FK_Lecturer_Subject_Lecturers" Association="OnlineSPKTModel.FK_Lecturer_Subject_Lecturers">
       <End Role="Lecturers" EntitySet="Lecturers" />
       <End Role="Lecturer_Subject" EntitySet="Lecturer_Subject" />
@@ -52,6 +57,10 @@
       <End Role="Problems" EntitySet="Problems" />
       <End Role="Student_Summit" EntitySet="Student_Summit" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestCases_Problems" Association="OnlineSPKTModel.FK_TestCases_Problems">
+      <End Role="Problems" EntitySet="Problems" />
+      <End Role="TestCases" EntitySet="TestCases" />
+    </AssociationSet>
     <AssociationSet Name="FK_Student_Summit_Students" Association="OnlineSPKTModel.FK_Student_Summit_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="Student_Summit" EntitySet="Student_Summit" />
@@ -68,10 +77,6 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK_TestCases_Problems" Association="OnlineSPKTModel.FK_TestCases_Problems">
-      <End Role="Problem" EntitySet="Problems" />
-      <End Role="TestCas" EntitySet="TestCases" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Comparer">
     <Key>
@@ -81,7 +86,7 @@
     <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Descripsion" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
     <Property Name="ClassName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="Parameter" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="DllPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_Comparers" FromRole="Comparers" ToRole="Problems" />
   </EntityType>
   <EntityType Name="Contest_Student">
@@ -108,6 +113,15 @@
     <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="Contest_Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Contests" FromRole="Contests" ToRole="Contest_Student" />
     <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Contests" FromRole="Contests" ToRole="Student_Summit" />
+  </EntityType>
+  <EntityType Name="Difficulty">
+    <Key>
+      <PropertyRef Name="DifficultyID" />
+    </Key>
+    <Property Name="DifficultyID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="Description" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_Difficulty" FromRole="Difficulties" ToRole="Problems" />
   </EntityType>
   <EntityType Name="Lecturer_Subject">
     <Key>
@@ -151,17 +165,19 @@
     <Property Name="LecturerID" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
     <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="MemoryLimit" Type="Int32" Nullable="false" />
-    <Property Name="TimeLimit" Type="Int32" Nullable="false" />
-    <Property Name="ComparerID" Type="Int32" Nullable="false" />
-    <Property Name="DoKho" Type="Int32" Nullable="false" />
+    <Property Name="MemoryLimit" Type="Int32" />
+    <Property Name="TimeLimit" Type="Int32" />
+    <Property Name="ComparerID" Type="Int32" />
+    <Property Name="DiffcultyID" Type="Int32" />
     <Property Name="IsHiden" Type="Boolean" />
     <Property Name="AvailableTime" Type="DateTime" />
-    <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ComparerParameter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Comparer" Relationship="OnlineSPKTModel.FK_Problems_Comparers" FromRole="Problems" ToRole="Comparers" />
+    <NavigationProperty Name="Difficulty" Relationship="OnlineSPKTModel.FK_Problems_Difficulty" FromRole="Problems" ToRole="Difficulties" />
     <NavigationProperty Name="Problem_Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Problems" FromRole="Problems" ToRole="Problem_Subject" />
     <NavigationProperty Name="Student_Summit" Relationship="OnlineSPKTModel.FK_Student_Summit_Problems" FromRole="Problems" ToRole="Student_Summit" />
-    <NavigationProperty Name="TestCases" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="Problem" ToRole="TestCas" />
+    <NavigationProperty Name="TestCases" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="Problems" ToRole="TestCases" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -204,10 +220,10 @@
   </EntityType>
   <EntityType Name="Subject">
     <Key>
-      <PropertyRef Name="MaMH" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="TenMH" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="Lecturer_Subject" Relationship="OnlineSPKTModel.FK_Lecturer_Subject_Subjects" FromRole="Subjects" ToRole="Lecturer_Subject" />
     <NavigationProperty Name="Problem_Subject" Relationship="OnlineSPKTModel.FK_Problem_Subject_Subjects" FromRole="Subjects" ToRole="Problem_Subject" />
@@ -247,8 +263,8 @@
     <Property Name="MoTa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="Diem" Type="Int32" Nullable="false" />
     <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Problem" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="TestCases" ToRole="Problems" />
     <NavigationProperty Name="TestCaseResults" Relationship="OnlineSPKTModel.FK_TestCaseResult_TestCases" FromRole="TestCases" ToRole="TestCaseResult" />
-    <NavigationProperty Name="Problem" Relationship="OnlineSPKTModel.FK_TestCases_Problems" FromRole="TestCas" ToRole="Problem" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -268,7 +284,7 @@
     <NavigationProperty Name="Roles" Relationship="OnlineSPKTModel.User_Role" FromRole="Users" ToRole="Roles" />
   </EntityType>
   <Association Name="FK_Problems_Comparers">
-    <End Role="Comparers" Type="OnlineSPKTModel.Comparer" Multiplicity="1" />
+    <End Role="Comparers" Type="OnlineSPKTModel.Comparer" Multiplicity="0..1" />
     <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Comparers">
@@ -315,6 +331,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Problems_Difficulty">
+    <End Role="Difficulties" Type="OnlineSPKTModel.Difficulty" Multiplicity="0..1" />
+    <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Difficulties">
+        <PropertyRef Name="DifficultyID" />
+      </Principal>
+      <Dependent Role="Problems">
+        <PropertyRef Name="DiffcultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Lecturer_Subject_Lecturers">
     <End Role="Lecturers" Type="OnlineSPKTModel.Lecturer" Multiplicity="1" />
     <End Role="Lecturer_Subject" Type="OnlineSPKTModel.Lecturer_Subject" Multiplicity="*" />
@@ -332,7 +360,7 @@
     <End Role="Lecturer_Subject" Type="OnlineSPKTModel.Lecturer_Subject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
-        <PropertyRef Name="MaMH" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Lecturer_Subject">
         <PropertyRef Name="MaMH" />
@@ -356,7 +384,7 @@
     <End Role="Problem_Subject" Type="OnlineSPKTModel.Problem_Subject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
-        <PropertyRef Name="MaMH" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Problem_Subject">
         <PropertyRef Name="SubjectID" />
@@ -372,6 +400,18 @@
       </Principal>
       <Dependent Role="Student_Summit">
         <PropertyRef Name="ProblemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestCases_Problems">
+    <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="1" />
+    <End Role="TestCases" Type="OnlineSPKTModel.TestCas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCases">
+        <PropertyRef Name="MaDB" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -414,17 +454,5 @@
   <Association Name="User_Role">
     <End Role="Roles" Type="OnlineSPKTModel.Role" Multiplicity="*" />
     <End Role="Users" Type="OnlineSPKTModel.User" Multiplicity="*" />
-  </Association>
-  <Association Name="FK_TestCases_Problems">
-    <End Type="OnlineSPKTModel.Problem" Role="Problem" Multiplicity="1" />
-    <End Type="OnlineSPKTModel.TestCas" Role="TestCas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Problem">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TestCas">
-        <PropertyRef Name="MaDB" />
-      </Dependent>
-    </ReferentialConstraint>
   </Association>
 </Schema>

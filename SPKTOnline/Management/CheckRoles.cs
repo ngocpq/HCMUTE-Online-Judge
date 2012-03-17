@@ -12,7 +12,7 @@ namespace SPKTOnline.Management
         public bool IsAdmin(string userName)
         {
             // TODO: Implement this method
-            OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+          
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
             {
@@ -29,7 +29,7 @@ namespace SPKTOnline.Management
         public bool IsLecturer(string userName)
         {
             // TODO: Implement this method
-            OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+       
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
             {
@@ -46,7 +46,7 @@ namespace SPKTOnline.Management
         public bool IsStudent(string userName)
         {
             // TODO: Implement this method
-            OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
             {

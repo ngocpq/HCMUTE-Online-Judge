@@ -4,6 +4,7 @@
     <EntitySet Name="Comparers" EntityType="OnlineSPKTModel.Store.Comparers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Contest_Student" EntityType="OnlineSPKTModel.Store.Contest_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Contests" EntityType="OnlineSPKTModel.Store.Contests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Difficulties" EntityType="OnlineSPKTModel.Store.Difficulties" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lecturer_Subject" EntityType="OnlineSPKTModel.Store.Lecturer_Subject" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lecturers" EntityType="OnlineSPKTModel.Store.Lecturers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Problem_Subject" EntityType="OnlineSPKTModel.Store.Problem_Subject" store:Type="Tables" Schema="dbo" />
@@ -43,6 +44,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Problems_Comparers" Association="OnlineSPKTModel.Store.FK_Problems_Comparers">
       <End Role="Comparers" EntitySet="Comparers" />
+      <End Role="Problems" EntitySet="Problems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Problems_Difficulty" Association="OnlineSPKTModel.Store.FK_Problems_Difficulty">
+      <End Role="Difficulties" EntitySet="Difficulties" />
       <End Role="Problems" EntitySet="Problems" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_Summit_Contests" Association="OnlineSPKTModel.Store.FK_Student_Summit_Contests">
@@ -86,7 +91,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Descripsion" Type="nvarchar" MaxLength="255" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="255" />
-    <Property Name="Parameter" Type="varchar" MaxLength="255" />
+    <Property Name="DllPath" Type="ntext" />
   </EntityType>
   <EntityType Name="Contest_Student">
     <Key>
@@ -108,6 +113,14 @@
     <Property Name="TongDiem" Type="int" Nullable="false" />
     <Property Name="IsOpen" Type="bit" />
     <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Difficulties">
+    <Key>
+      <PropertyRef Name="DifficultyID" />
+    </Key>
+    <Property Name="DifficultyID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Lecturer_Subject">
     <Key>
@@ -146,13 +159,14 @@
     <Property Name="LecturerID" Type="varchar" MaxLength="10" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Content" Type="ntext" Nullable="false" />
-    <Property Name="MemoryLimit" Type="int" Nullable="false" />
-    <Property Name="TimeLimit" Type="int" Nullable="false" />
-    <Property Name="ComparerID" Type="int" Nullable="false" />
-    <Property Name="DoKho" Type="int" Nullable="false" />
+    <Property Name="MemoryLimit" Type="int" />
+    <Property Name="TimeLimit" Type="int" />
+    <Property Name="ComparerID" Type="int" />
+    <Property Name="DiffcultyID" Type="int" />
     <Property Name="IsHiden" Type="bit" />
     <Property Name="AvailableTime" Type="date" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="ComparerParameter" Type="ntext" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
@@ -188,10 +202,10 @@
   </EntityType>
   <EntityType Name="Subjects">
     <Key>
-      <PropertyRef Name="MaMH" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="MaMH" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="TenMH" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -293,7 +307,7 @@
     <End Role="Lecturer_Subject" Type="OnlineSPKTModel.Store.Lecturer_Subject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
-        <PropertyRef Name="MaMH" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Lecturer_Subject">
         <PropertyRef Name="MaMH" />
@@ -317,7 +331,7 @@
     <End Role="Problem_Subject" Type="OnlineSPKTModel.Store.Problem_Subject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
-        <PropertyRef Name="MaMH" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Problem_Subject">
         <PropertyRef Name="SubjectID" />
@@ -325,7 +339,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Problems_Comparers">
-    <End Role="Comparers" Type="OnlineSPKTModel.Store.Comparers" Multiplicity="1" />
+    <End Role="Comparers" Type="OnlineSPKTModel.Store.Comparers" Multiplicity="0..1" />
     <End Role="Problems" Type="OnlineSPKTModel.Store.Problems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Comparers">
@@ -333,6 +347,18 @@
       </Principal>
       <Dependent Role="Problems">
         <PropertyRef Name="ComparerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Problems_Difficulty">
+    <End Role="Difficulties" Type="OnlineSPKTModel.Store.Difficulties" Multiplicity="0..1" />
+    <End Role="Problems" Type="OnlineSPKTModel.Store.Problems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Difficulties">
+        <PropertyRef Name="DifficultyID" />
+      </Principal>
+      <Dependent Role="Problems">
+        <PropertyRef Name="DiffcultyID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

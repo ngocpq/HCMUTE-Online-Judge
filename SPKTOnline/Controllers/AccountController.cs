@@ -63,12 +63,18 @@ namespace SPKTOnline.Controllers
         }
 
         public ActionResult CreateUser()
-        {
+        {            
             if (Request.IsAuthenticated)
             {
                 if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
                 {
-                    ViewBag.ListRole = new MultiSelectList(db.Roles, "ID", "Name");
+                    ViewBag.Roles = new MultiSelectList(db.Roles, "ID", "Name");
+                    //ViewBag.Options = new MyClass[] { new MyClass{ Value = 1, Text = "Tèo" }
+                    //                        , new MyClass{ Value = 2, Text = "Tí" }
+                    //                        , new MyClass{ Value = 3, Text = "Tủn" }
+                    //                        , new MyClass{ Value = 4, Text = "Tom" }
+                    //                        , new MyClass{ Value = 5, Text = "Chụt" } };
+                    ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
                     return View();
                 }
                 else
@@ -82,26 +88,24 @@ namespace SPKTOnline.Controllers
         [Authorize]
         [HttpPost]
         public ActionResult CreateUser(UserModels userModel)
-        {                        
-            
+        {
             User user = new User();
             Student st = new Student();
             if (Request.IsAuthenticated)
             {
                 if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
                 {
+                    String[]  kq = userModel.MyOption;
                     user.Username = userModel.Username;
                     user.Password = userModel.Password;
                     user.LastName = userModel.LastName;
                     user.FirstName = userModel.FirstName;
                     user.IsLocked = userModel.IsLocked;
                     user.Email = userModel.Email;
-                    user.Roles = userModel.MyRole;
-
-                    //ViewBag.Checks = MyCheckListRole;
+                    //user.Roles = userModel.Roles;
                     db.Users.AddObject(user);
                     db.SaveChanges();
-                    return View(userModel);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                     return RedirectToAction("Index", "Home");

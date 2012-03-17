@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyClass.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -85,11 +86,12 @@
     <Compile Include="Management\MultiLanguage\VietNamese.cs" />
     <Compile Include="Management\MyEnum.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\SPKTOnline.Designer.cs">
+    <Compile Include="Models\OnlineSPKT.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SPKTOnline.edmx</DependentUpon>
+      <DependentUpon>OnlineSPKT.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProblemModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mvc.sitemap" />
-    <EntityDeploy Include="Models\SPKTOnline.edmx">
+    <EntityDeploy Include="Models\OnlineSPKT.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SPKTOnline.Designer.cs</LastGenOutput>
+      <LastGenOutput>OnlineSPKT.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>

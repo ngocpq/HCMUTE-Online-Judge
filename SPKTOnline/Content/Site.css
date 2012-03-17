@@ -265,10 +265,20 @@ div#title
 
 .text-box.multi-line
 {
-    height: 6.5em;
+    height: 100em;
+    width: 500em;
 }
-
+.
 .tri-state
 {
     width: 6em;
 }
+.TextBoxFor 
+{ 
+    height:30px; 
+    width:250px;  
+    font-family:@Batang;    
+    font-size:20px;  
+    font-weight: bold; 
+} 
+

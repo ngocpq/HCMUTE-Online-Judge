@@ -14,7 +14,7 @@
             if (r == "Guest")
                 return true;
             else
-            return false;
+                return false;
         }
         else
             foreach(Role rl in  nd.Roles)
@@ -221,8 +221,8 @@
                 <div id="headbutton">
                 </div>
                 <div id="nav">
-@*                    <%if (lang == Common.LanguageEnum.English)
-                      { %>
+                   @if (lang == LanguageEnum.English)
+                   {
                     <ul>
                         <li id="li1" class="linav"><a id="a1" class="anav" href="/Home">Home</a></li>
                         <li id="li2" class="linav"><a id="a2" class="anav" href="/Home">Suport</a></li>
@@ -230,9 +230,9 @@
                         <li id="li4" class="linav"><a id="a4" class="anav" href="/Home/About">About Us</a></li>
                         <li id="li5" class="linav"><a id="a5" class="anav" href="/Home">Contact Us</a></li>
                     </ul>
-                    <%} %>
-                    <%else
-                        { %>*@
+                   }
+                   else
+                   { 
                     <ul>
                         <li id="li6" class="linav"><a id="a1" class="anav" href="">Trang Chủ</a></li>
                         <li id="li7" class="linav"><a id="a2" class="anav" href="/Home">Hỗ Trợ</a></li>
@@ -240,7 +240,7 @@
                         <li id="li9" class="linav"><a id="a4" class="anav" href="/Home/About">Thông Tin</a></li>
                         <li id="li10" class="linav"><a id="a5" class="anav" href="/Home">Liên Hệ</a></li>
                     </ul>
-
+                   }
                 </div>
             </div>
         </div>
@@ -282,7 +282,7 @@
                                 if (m.Children.Count == 0)
                                 {
                                     string link = m.Link;
-                            <li><a href="<%=link %>">
+                            <li><a href="@link">
                                    @m.Title</a></li>
                                 }
                                 else
@@ -293,7 +293,7 @@
                                     @foreach (var m2 in m.Children)
                                     {
                                         string link2 = m2.Link; 
-                                    <li><a href="<%=link2 %>">
+                                    <li><a href="@link2">
                                         @m2.Title</a></li>
                                     } 
                                 </ul>
