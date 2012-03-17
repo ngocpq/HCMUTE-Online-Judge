@@ -8,15 +8,13 @@
 }
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-    <div class="webtitle">
-        Tạo User</div>
-
+<div class="webtitle">
+    Tạo User</div>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Tài khoản</legend>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Username, "Tên đăng nhập")
         </div>
@@ -24,7 +22,6 @@
             @Html.EditorFor(model => model.Username)
             @Html.ValidationMessageFor(model => model.Username)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Password, "Mật khẩu")
         </div>
@@ -40,7 +37,7 @@
             @Html.ValidationMessageFor(model => model.FirstName)
         </div>
         <div class="editor-label">
-         @Html.LabelFor(model => model.LastName, "Tên")
+            @Html.LabelFor(model => model.LastName, "Tên")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.LastName)
@@ -55,30 +52,40 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.IsLocked, "Bị khóa?")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("ListLock","Chọn")
+            @Html.EditorFor(model => model.IsLocked)
             @Html.ValidationMessageFor(model => model.IsLocked)
         </div>
-
-
     </fieldset>
     <fieldset>
-        <legend> Quyền </legend>
+        <legend>Chọn đi</legend>
         <div class="editor-field">
-        @foreach (var o in ViewBag.ListRole)
-        {
-           var optionValue = "MyRole_" + o.Value; 
-        <input type="checkbox"  
-         id="@optionValue" 
-         name="MyRole" 
-         value="@o.Value"/> 
-         <label for="@optionValue">@o.Text</label> 
+            @foreach (var o in ViewBag.Options) { 
+                 var optionValue = "MyOptions_" + o.Value; 
+                <input type="checkbox"  
+                     id="@optionValue" 
+                     name="MyOption" 
+                     value="@o.Value"/> 
+                <label for="@optionValue">@o.Text</label> 
+                <br /> 
+                }
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Quyền </legend>
+        <div class="editor-field">
+            @foreach (var o in ViewBag.Roles)
+            {
+                var optionValue2 = "MyRole_" + o.Value; 
+                <input type="checkbox"  
+                         id="@optionValue2" 
+                         name="Roles" 
+                         value="@o.Value"/> 
+                <label for="@optionValue2">@o.Text</label> 
 
-        <br/> 
+                <br /> 
           
-        } 
-@*        @{
+            }
+            @*        @{
             if(ViewBag.Checks!=null)
             {
                 foreach(var item in ViewBag.Checks)
@@ -89,12 +96,9 @@
             }
         @{ Html.RenderAction("Checks", new { values = new String[] { "Admin", "Lecturer", "Student" }, name = "MyCheckListRole" }); 
            }*@
-
-
         </div>
     </fieldset>
-        <p>
-            <input class="button" type="submit" value="Submit" />
-        </p>
+    <p>
+        <input class="button" type="submit" value="Submit" />
+    </p>
 }
-

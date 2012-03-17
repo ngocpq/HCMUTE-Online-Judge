@@ -95,9 +95,9 @@
       <Link>/User/Index</Link>
     </Menu2>
     <Menu2>
-      <Title>Quản lý User</Title>
-      <TitleEng>Manage Users</TitleEng>
-      <Link>/User/Index</Link>
+      <Title>Tạo User</Title>
+      <TitleEng>Create User</TitleEng>
+      <Link>/Account/CreateUser</Link>
     </Menu2>
   </Menu1>
   <Menu1>
@@ -116,13 +116,13 @@
       <Role>Admin</Role>
     </Roles>
     <Menu2>
-      <Title>Them cau hoi</Title>
+      <Title>Thêm câu hỏi</Title>
       <TitleEng>Add Question</TitleEng>
-      <Link>/ManageQuestion/InputQuestions</Link>
+      <Link>/Problem/CreateProblem</Link>
     </Menu2>
 
     <Menu2>
-      <Title>Cap nhat muc do kho</Title>
+      <Title>Cập nhật mức độ khó</Title>
       <TitleEng>Update Difficult Question Level</TitleEng>
       <Link>/ManageQuestion/UpdateQuesLevel</Link>
     </Menu2>
@@ -135,7 +135,7 @@
     <Link>/Inspector/Index</Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Inspector</Role>
+      <Role>Lecturer</Role>
     </Roles>
   </Menu1>
 </Menus>

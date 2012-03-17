@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="OnlineSPKTModelStoreContainer" CdmEntityContainer="OnlineSPKTEntities1">
+  <EntityContainerMapping StorageEntityContainer="OnlineSPKTModelStoreContainer" CdmEntityContainer="OnlineSPKTEntities2">
     <EntitySetMapping Name="Comparers">
       <EntityTypeMapping TypeName="OnlineSPKTModel.Comparer">
         <MappingFragment StoreEntitySet="Comparers">
@@ -8,7 +8,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Descripsion" ColumnName="Descripsion" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-          <ScalarProperty Name="Parameter" ColumnName="Parameter" />
+          <ScalarProperty Name="DllPath" ColumnName="DllPath" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -31,6 +31,15 @@
           <ScalarProperty Name="TongDiem" ColumnName="TongDiem" />
           <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
           <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Difficulties">
+      <EntityTypeMapping TypeName="OnlineSPKTModel.Difficulty">
+        <MappingFragment StoreEntitySet="Difficulties">
+          <ScalarProperty Name="DifficultyID" ColumnName="DifficultyID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -74,10 +83,11 @@
           <ScalarProperty Name="MemoryLimit" ColumnName="MemoryLimit" />
           <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
           <ScalarProperty Name="ComparerID" ColumnName="ComparerID" />
-          <ScalarProperty Name="DoKho" ColumnName="DoKho" />
+          <ScalarProperty Name="DiffcultyID" ColumnName="DiffcultyID" />
           <ScalarProperty Name="IsHiden" ColumnName="IsHiden" />
           <ScalarProperty Name="AvailableTime" ColumnName="AvailableTime" />
           <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="ComparerParameter" ColumnName="ComparerParameter" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,8 +129,8 @@
     <EntitySetMapping Name="Subjects">
       <EntityTypeMapping TypeName="OnlineSPKTModel.Subject">
         <MappingFragment StoreEntitySet="Subjects">
-          <ScalarProperty Name="MaMH" ColumnName="MaMH" />
-          <ScalarProperty Name="TenMH" ColumnName="TenMH" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
         </MappingFragment>
       </EntityTypeMapping>
