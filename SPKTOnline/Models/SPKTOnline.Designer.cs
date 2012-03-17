@@ -14,7 +14,6 @@ using System.Data.EntityClient;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -450,6 +449,7 @@ namespace SPKTOnline.Models
         #endregion
     }
     
+
     #endregion
     
     #region Entities
@@ -3657,7 +3657,6 @@ namespace SPKTOnline.Models
     [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-
     public partial class User : EntityObject
     {
         #region Factory Method
@@ -3689,8 +3688,6 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required]
-        [DisplayName("User name")]
         public global::System.String Username
         {
             get
@@ -3718,8 +3715,6 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required]
-        [DisplayName("Pass word")]
         public global::System.String Password
         {
             get

@@ -57,7 +57,7 @@
             @Html.LabelFor(model => model.IsLocked, "Bị khóa?")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ListLock","Chọn")
+            @Html.EditorFor(model => model.IsLocked)
             @Html.ValidationMessageFor(model => model.IsLocked)
         </div>
 
@@ -73,7 +73,7 @@
          id="@optionValue" 
          name="MyRole" 
          value="@o.Value"/> 
-         <label for="@optionValue">@o.Text</label> 
+            <label for="@optionValue">@o.Text</label> 
 
         <br/> 
           

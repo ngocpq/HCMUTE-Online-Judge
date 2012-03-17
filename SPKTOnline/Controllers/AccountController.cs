@@ -82,7 +82,8 @@ namespace SPKTOnline.Controllers
         [Authorize]
         [HttpPost]
         public ActionResult CreateUser(UserModels userModel)
-        {
+        {                        
+            
             User user = new User();
             Student st = new Student();
             if (Request.IsAuthenticated)
@@ -96,6 +97,7 @@ namespace SPKTOnline.Controllers
                     user.IsLocked = userModel.IsLocked;
                     user.Email = userModel.Email;
                     user.Roles = userModel.MyRole;
+
                     //ViewBag.Checks = MyCheckListRole;
                     db.Users.AddObject(user);
                     db.SaveChanges();
