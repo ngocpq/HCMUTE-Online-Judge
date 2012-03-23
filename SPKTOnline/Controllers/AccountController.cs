@@ -8,6 +8,7 @@ using SPKTOnline.Models;
 using System.Data.Entity;
 using SPKTOnline.Management;
 using System.Data;
+using System.Data.Objects.DataClasses;
 
 namespace SPKTOnline.Controllers
 {
@@ -75,6 +76,7 @@ namespace SPKTOnline.Controllers
                     //                        , new MyClass{ Value = 4, Text = "Tom" }
                     //                        , new MyClass{ Value = 5, Text = "Chụt" } };
                     ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
+                    ViewBag.Subjects = new MultiSelectList(db.Subjects, "ID", "Name");
                     return View();
                 }
                 else
@@ -90,7 +92,6 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateUser(UserModels userModel)
         {
             User user = new User();
-            Student st = new Student();
             if (Request.IsAuthenticated)
             {
                 if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
@@ -102,8 +103,35 @@ namespace SPKTOnline.Controllers
                     user.FirstName = userModel.FirstName;
                     user.IsLocked = userModel.IsLocked;
                     user.Email = userModel.Email;
-                    //user.Roles = userModel.Roles;
+                    foreach (String s in kq)
+                    {
+                        foreach (Role r in db.Roles)
+                        {
+                            if (r.ID.ToString() == s)
+                                user.Roles.Add(r);
+                        }
+                    }
                     db.Users.AddObject(user);
+
+                    //---------------
+                    foreach(Role r in user.Roles)
+                    {
+                        if(r.ID==2)
+                        {
+
+                            
+                        }
+
+                    }
+                    //String[] ls = userModel.OpntionSubject;
+                    //foreach (String s in ls)
+                    //{
+                    //    foreach (Subject r in db.Subjects)
+                    //    {
+                    //        if (r.ID == s)
+                               
+                    //    }
+                    //}
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
@@ -143,6 +171,7 @@ namespace SPKTOnline.Controllers
             else
                 return View("Logon");
         }
+     
              
     }
 }

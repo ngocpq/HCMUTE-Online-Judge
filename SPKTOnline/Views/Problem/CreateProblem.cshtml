@@ -1,4 +1,4 @@
-﻿@model SPKTOnline.Models.Problem
+﻿@model SPKTOnline.Models.AddProblemModels
 @{
     ViewBag.Title = "CreateProblem";
 }
@@ -55,13 +55,13 @@
                 @Html.TextAreaFor(model => model.Content, 20, 75, new { @style = "resize: none;" })
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
-            @*      <div class="editor-label">
-            @Html.Label("Môn học")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("MaMonHoc", "Môn học")
-            @Html.ValidationMessageFor(model => model.Problem_Subject)
-        </div>*@
+            <div class="editor-label">
+                @Html.Label("Môn học")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("SubjectID", "Môn học")
+                @Html.ValidationMessageFor(model => model.SubjectID)
+            </div>
             <div class="editor-label">
                 @Html.LabelFor(model => model.DifficultyID, "Độ khó")
             </div>

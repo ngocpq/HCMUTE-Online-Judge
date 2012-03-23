@@ -54,6 +54,7 @@ namespace SPKTOnline.Models
         public string ConfirmPassword { get; set; }
 
         public String[] MyOption { get; set; }
+        public String[] OpntionSubject { get; set; }
 
         public EntityCollection<Role> Roles { get; set; }
     }

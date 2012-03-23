@@ -22,6 +22,15 @@ namespace SPKTOnline.Models
         [DisplayName("Được công bố")]
         public bool IsHiden { get; set; }
 
+        [Required]
+        [DisplayName("Môn học")]
+        public string SubjectID { get; set; }
+
+        [Required]
+        [DisplayName("DoKho")]
+        public int DifficultyID { get; set; }
+
+
 
 
     }

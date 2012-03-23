@@ -273,6 +273,9 @@
     <Content Include="Views\Account\CreateUser.cshtml" />
     <Content Include="Views\Account\EditUser.cshtml" />
     <Content Include="Views\Problem\CreateProblem.cshtml" />
+    <Content Include="Views\Problem\Index.cshtml" />
+    <Content Include="Views\Problem\Browse.cshtml" />
+    <Content Include="Views\Account\AddLecture_Subject.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
