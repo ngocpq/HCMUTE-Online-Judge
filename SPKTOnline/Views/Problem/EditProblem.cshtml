@@ -1,41 +1,10 @@
 ﻿@model SPKTOnline.Models.AddProblemModels
 @{
-    ViewBag.Title = "CreateProblem";
+    ViewBag.Title = "EditProblem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#btnAddQuesCancel').click(function () {
-            $.unblockUI();
-        });
-
-        $('#ListQuestionType').change(function () {
-            var select = $('#ListQuestionType').val().toString();
-            if (select == '2') {
-                $('#questypedetails').show();
-            }
-            else {
-                $('#questypedetails').hide();
-            }
-        });
-
-        $('#btnAutoSearch').click(function () {
-            if ($('#questypedetails').css('display') == 'none') {
-                $('#DivAddQuesContent').load('/AutoExam/SearchQues', { ListQuestionType: $('#ListQuestionType').val(), ListQuestionSkill: $('#ListQuestionSkill').val(), ListDifficultLevel: $('#ListDifficultLevel').val() }, function () { }).slideDown("normal");
-            }
-            else {
-                $('#DivAddQuesContent').load('/AutoExam/SearchQues', { ListQuestionType: $('#ListQuestionType').val(), ListQuestionSkill: $('#ListQuestionSkill').val(), ListDifficultLevel: $('#ListDifficultLevel').val(), ListQuestionTypeDetail: $('#ListQuestionTypeDetail').val() }, function () { }).slideDown("normal");
-            }
-        });
-
-    });
-</script>
-<div>
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-    <div class="webtitle">
-        Tạo Câu Hỏi</div>
+<div class="webtitle">
+   Edit Problem</div>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
@@ -99,13 +68,14 @@
             @Html.DropDownList("ComparerID", "(Loại file so sánh)")
             @Html.ValidationMessageFor(model => model.ComparerID)
         </div>
-
-        </fieldset>
-            <p>
+        <div style="visibility:hidden">
+            @Html.TextBoxFor(model=>model.ID)
+        </div>
+        <p>
                 <input class="button" type="submit" value="Thêm" />
-            </p>
+        </p>
+        </fieldset>
+
     }
-</div>
-<hr />
-<div id="DivAddQuesContent">
-</div>
+
+

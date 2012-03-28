@@ -1,8 +1,6 @@
 ﻿@model SPKTOnline.Models.UserModels
 @{
     ViewBag.Title = "CreateUser";
-    SPKTOnline.Models.OnlineSPKTEntities1 db = new SPKTOnline.Models.OnlineSPKTEntities1();
-    ViewBag.ListRole = new MultiSelectList(db.Roles, "ID", "Name");
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -51,6 +49,13 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div class="editor-label">
+            @Html.LabelFor(model => model.FacultyID, "Khoa")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("FacultyID","Chọn khoa")
+            @Html.ValidationMessageFor(model => model.FacultyID)
+        </div>
+        <div class="editor-label">
             @Html.LabelFor(model => model.IsLocked, "Bị khóa?")
             @Html.EditorFor(model => model.IsLocked)
             @Html.ValidationMessageFor(model => model.IsLocked)
@@ -70,10 +75,15 @@
                 <br /> 
             }
         </div>
+        </fieldset>
+    <fieldset>
+        <legend>Phần dành cho user là sinh viên</legend>
+
+      
     </fieldset>
-        <fieldset>
-        <legend>Chọn môn học nếu User có quyền Lecture</legend>
-        <div class="editor-field">
+     <fieldset>
+        <legend>Phần dành cho user là giáo viên </legend>
+           <div class="editor-field">
             @foreach (var o in ViewBag.Subjects)
             {
                 var optionValueS = "MyOptions_" + o.Value; 
@@ -84,8 +94,8 @@
                 <label for="@optionValueS">@o.Text</label> 
                 <br /> 
             }
-        </div>
-    </fieldset>    
+            </div>
+    </fieldset>  
     <p>
         <input class="button" type="submit" value="Submit" />
     </p>

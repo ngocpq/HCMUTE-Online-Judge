@@ -77,6 +77,7 @@ namespace SPKTOnline.Controllers
                     //                        , new MyClass{ Value = 5, Text = "Chụt" } };
                     ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
                     ViewBag.Subjects = new MultiSelectList(db.Subjects, "ID", "Name");
+                    ViewBag.FacultyID = new SelectList(db.Faculties, "ID", "Name");
                     return View();
                 }
                 else
@@ -103,6 +104,7 @@ namespace SPKTOnline.Controllers
                     user.FirstName = userModel.FirstName;
                     user.IsLocked = userModel.IsLocked;
                     user.Email = userModel.Email;
+                    user.FacultyID = userModel.FacultyID;
                     foreach (String s in kq)
                     {
                         foreach (Role r in db.Roles)
@@ -117,21 +119,21 @@ namespace SPKTOnline.Controllers
                     foreach(Role r in user.Roles)
                     {
                         if(r.ID==2)
-                        {
-
+                        {  
+                            String[] ls = userModel.OpntionSubject;
+                            foreach (String str in ls)
+                            {
+                                foreach (Subject s in db.Subjects)
+                                {
+                                    if (s.ID == str)
+                                        user.Subjects.Add(s);
+                                }
+                            }
                             
                         }
 
                     }
-                    //String[] ls = userModel.OpntionSubject;
-                    //foreach (String s in ls)
-                    //{
-                    //    foreach (Subject r in db.Subjects)
-                    //    {
-                    //        if (r.ID == s)
-                               
-                    //    }
-                    //}
+
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }

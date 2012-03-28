@@ -55,7 +55,8 @@ namespace SPKTOnline.Models
 
         public String[] MyOption { get; set; }
         public String[] OpntionSubject { get; set; }
-
+        public string FacultyID { get; set; }
+        
         public EntityCollection<Role> Roles { get; set; }
     }
     public class LogOnModel

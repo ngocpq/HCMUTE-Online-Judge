@@ -9,7 +9,9 @@ namespace SPKTOnline.Models
 {
     public class AddProblemModels
     {
-
+        [Required]
+        [DisplayName("ID")]
+        public int ID { get; set; }
         [Required]
         [DisplayName("Tên câu hỏi")]
         public string Name { get; set; }
@@ -27,11 +29,19 @@ namespace SPKTOnline.Models
         public string SubjectID { get; set; }
 
         [Required]
-        [DisplayName("DoKho")]
+        [DisplayName("Độ khó")]
         public int DifficultyID { get; set; }
 
+        [Required]
+        [DisplayName("File so sánh")]
+        public int ComparerID { get; set; }
 
+        [Required]
+        [DisplayName("Giới hạn bộ nhớ")]
+        public int MemoryLimit { get; set; }
 
-
+        [Required]
+        [DisplayName("Giới hạn thời gian")]
+        public int TimeLimit { get; set; }
     }
 }
