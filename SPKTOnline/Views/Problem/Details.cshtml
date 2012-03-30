@@ -1,0 +1,9 @@
+﻿@model SPKTOnline.Models.Problem
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<fieldset>
+    <legend style="color:Gray">@Html.DisplayFor(model => model.Name)</legend>
+         @Html.DisplayFor(model => model.Content)
+</fieldset>

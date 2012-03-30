@@ -1,0 +1,50 @@
+﻿@model SPKTOnline.Models.TestCas
+@{
+    ViewBag.Title = "EditTestCase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="webtitle">
+   Edit TestCase</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Input, "Chuỗi đầu vào")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Input, 8, 75, new { @style = "resize: none;" })
+            @Html.ValidationMessageFor(model => model.Input)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Output, "Chuỗi đầu ra")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Output ,8, 75, new { @style = "resize: none;" })
+            @Html.ValidationMessageFor(model => model.Output)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Output, "Điểm")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Diem)
+            @Html.ValidationMessageFor(model => model.Diem)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.MoTa, "Mô tả")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.MoTa, 8, 75, new { @style = "resize: none;" })
+            @Html.ValidationMessageFor(model => model.MoTa)
+        </div>
+
+        <p>
+            <input class="button" type="submit" value="Thêm" />
+        </p>
+        <div style = "visibility:hidden" >
+         @Html.TextBoxFor(model => model.MaTestCase)
+         @Html.TextBoxFor(model => model.MaDB)
+        </div>
+  
+}

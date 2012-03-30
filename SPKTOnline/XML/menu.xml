@@ -92,7 +92,24 @@
       <Link>/Account/CreateUser</Link>
     </Menu2>
   </Menu1>
-  
+  <Menu1>
+    <Title>Quản lý môn học</Title>
+    <TitleEng>Manage subject</TitleEng>
+    <Link>/Subject/Index</Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+    <Menu2>
+      <Title>Danh sách môn học</Title>
+      <TitleEng>Subjects</TitleEng>
+      <Link>/Subject</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Thêm môn học</Title>
+      <TitleEng>Add Subject</TitleEng>
+      <Link>/Subject/AddSubject</Link>
+    </Menu2>
+  </Menu1>
   <Menu1>
     <Title>Quản lý câu hỏi</Title>
     <TitleEng>Manage Question</TitleEng>
@@ -100,17 +117,18 @@
     <Roles>
       <Role>Admin</Role>
     </Roles>
+
+    <Menu2>
+      <Title>Tất cả câu hỏi</Title>
+      <TitleEng>All Problems</TitleEng>
+      <Link>/Problem/AllProblemForUpDate</Link>
+    </Menu2>
     <Menu2>
       <Title>Thêm câu hỏi</Title>
       <TitleEng>Add Question</TitleEng>
       <Link>/Problem/CreateProblem</Link>
     </Menu2>
 
-    <Menu2>
-      <Title>Cập nhật mức độ khó</Title>
-      <TitleEng>Update Difficult Question Level</TitleEng>
-      <Link>/ManageQuestion/UpdateQuesLevel</Link>
-    </Menu2>
 
   </Menu1>
 
