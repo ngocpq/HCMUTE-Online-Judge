@@ -8,6 +8,9 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <div class="webtitle">
     Tạo User</div>
+    <p><b>@ViewBag.Message</b></p>
+    
+@Html.ValidationSummary(true, "Create User was unsuccessful. Please correct the errors and try again.")
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -26,6 +29,13 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
+        </div>
+       <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword, "Lặp lại Mật khẩu")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName, "Họ lót")
@@ -49,16 +59,14 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.FacultyID, "Khoa")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("FacultyID","Chọn khoa")
-            @Html.ValidationMessageFor(model => model.FacultyID)
-        </div>
-        <div class="editor-label">
             @Html.LabelFor(model => model.IsLocked, "Bị khóa?")
             @Html.EditorFor(model => model.IsLocked)
             @Html.ValidationMessageFor(model => model.IsLocked)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive, "Active?")
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
         </div>
     </fieldset>
     <fieldset>
@@ -76,13 +84,9 @@
             }
         </div>
         </fieldset>
-    <fieldset>
-        <legend>Phần dành cho user là sinh viên</legend>
-
-      
-    </fieldset>
      <fieldset>
         <legend>Phần dành cho user là giáo viên </legend>
+           Chọn môn học mà giáo viên đảm nhận
            <div class="editor-field">
             @foreach (var o in ViewBag.Subjects)
             {

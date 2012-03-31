@@ -7,6 +7,7 @@ using SPKTOnline.Management;
 using System.ComponentModel;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
+using System.Web.Mvc;
 
 namespace SPKTOnline.Models
 {
@@ -19,11 +20,22 @@ namespace SPKTOnline.Models
             return user;
         }
     }
-
-    public  class UserModels
+    public class ImportModels
     {
         [Required]
         [DisplayName("User name")]
+        public string Username { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [DisplayName("Password")]
+        public string Password { get; set; }
+    }
+    public class UserModels
+    {
+        [Required]
+        [DisplayName("User name")]
+       // [Remote("UserNameAvailable","Account", "Username",ErrorMessage="UserName already!")]
         public string Username { get; set; }
 
         [Required]
@@ -46,18 +58,31 @@ namespace SPKTOnline.Models
         [Required]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
+      
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [DisplayName("Quyền")]
         public String[] MyOption { get; set; }
-        public String[] OpntionSubject { get; set; }
-        public string FacultyID { get; set; }
-        
+       
+        [Required]
+        [DisplayName("Môn Học")]
+        public String[] OptionSubject { get; set; }
+
+
+        [Required]
+        [DisplayName("Quyền")]
         public EntityCollection<Role> Roles { get; set; }
+
+        [Required]
+        [DisplayName("Is Active")]
+        public bool IsActive { get; set; }
     }
     public class LogOnModel
     {

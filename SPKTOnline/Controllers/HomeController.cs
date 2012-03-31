@@ -11,8 +11,9 @@ namespace SPKTOnline.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string Message)
         {
+            ViewBag.Message = Message;
             return View();
         }
 

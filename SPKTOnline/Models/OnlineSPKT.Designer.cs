@@ -29,7 +29,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Exam), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Difficulty", "Difficulties", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Difficulty), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Users_Faculties", "Faculties", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Faculty), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Languages", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Language), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problem_Subject_Problems", "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "Problem_Subject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem_Subject), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problem_Subject_Subjects", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Subject), "Problem_Subject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem_Subject), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.User), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
@@ -40,6 +40,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_TestCases", "TestCases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.TestCas), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "Class_Student", "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Class), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "Lecturer_Subject", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Subject), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "Problem_Class", "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Class), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem))]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "User_Role", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Role), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
 
 #endregion
@@ -223,18 +224,34 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Faculty> Faculties
+        public ObjectSet<Facuty> Facuties
         {
             get
             {
-                if ((_Faculties == null))
+                if ((_Facuties == null))
                 {
-                    _Faculties = base.CreateObjectSet<Faculty>("Faculties");
+                    _Facuties = base.CreateObjectSet<Facuty>("Facuties");
                 }
-                return _Faculties;
+                return _Facuties;
             }
         }
-        private ObjectSet<Faculty> _Faculties;
+        private ObjectSet<Facuty> _Facuties;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Language> Languages
+        {
+            get
+            {
+                if ((_Languages == null))
+                {
+                    _Languages = base.CreateObjectSet<Language>("Languages");
+                }
+                return _Languages;
+            }
+        }
+        private ObjectSet<Language> _Languages;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -448,11 +465,19 @@ namespace SPKTOnline.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Faculties EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Facuties EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToFaculties(Faculty faculty)
+        public void AddToFacuties(Facuty facuty)
         {
-            base.AddObject("Faculties", faculty);
+            base.AddObject("Facuties", facuty);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Languages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLanguages(Language language)
+        {
+            base.AddObject("Languages", language);
         }
     
         /// <summary>
@@ -792,6 +817,28 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("OnlineSPKTModel.Class_Student", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "Problem_Class", "Problems")]
+        public EntityCollection<Problem> Problems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Problem>("OnlineSPKTModel.Problem_Class", "Problems");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Problem>("OnlineSPKTModel.Problem_Class", "Problems", value);
                 }
             }
         }
@@ -2080,24 +2127,24 @@ namespace SPKTOnline.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Faculty")]
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Facuty")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Faculty : EntityObject
+    public partial class Facuty : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Faculty object.
+        /// Create a new Facuty object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Faculty CreateFaculty(global::System.String id, global::System.String name)
+        public static Facuty CreateFacuty(global::System.String id, global::System.String name)
         {
-            Faculty faculty = new Faculty();
-            faculty.ID = id;
-            faculty.Name = name;
-            return faculty;
+            Facuty facuty = new Facuty();
+            facuty.ID = id;
+            facuty.Name = name;
+            return facuty;
         }
 
         #endregion
@@ -2156,6 +2203,109 @@ namespace SPKTOnline.Models
 
         #endregion
     
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Language")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Language : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Language object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static Language CreateLanguage(global::System.Int32 id)
+        {
+            Language language = new Language();
+            language.ID = id;
+            return language;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+
+        #endregion
+    
         #region Navigation Properties
     
         /// <summary>
@@ -2164,18 +2314,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Users_Faculties", "Users")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Student_Summit")]
+        public EntityCollection<Student_Summit> Student_Summit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("OnlineSPKTModel.FK_Users_Faculties", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Languages", "Student_Summit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("OnlineSPKTModel.FK_Users_Faculties", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Languages", "Student_Summit", value);
                 }
             }
         }
@@ -2682,6 +2832,28 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCas>("OnlineSPKTModel.FK_TestCases_Problems", "TestCases", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "Problem_Class", "Classes")]
+        public EntityCollection<Class> Classes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Class>("OnlineSPKTModel.Problem_Class", "Classes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Class>("OnlineSPKTModel.Problem_Class", "Classes", value);
                 }
             }
         }
@@ -3262,6 +3434,30 @@ namespace SPKTOnline.Models
         private global::System.Byte[] _TimeStamp;
         partial void OnTimeStampChanging(global::System.Byte[] value);
         partial void OnTimeStampChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LanguageID
+        {
+            get
+            {
+                return _LanguageID;
+            }
+            set
+            {
+                OnLanguageIDChanging(value);
+                ReportPropertyChanging("LanguageID");
+                _LanguageID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LanguageID");
+                OnLanguageIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LanguageID;
+        partial void OnLanguageIDChanging(Nullable<global::System.Int32> value);
+        partial void OnLanguageIDChanged();
 
         #endregion
     
@@ -3301,6 +3497,44 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Summit_Contests", "Contests", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Languages")]
+        public Language Language
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Language> LanguageReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages", value);
                 }
             }
         }
@@ -4284,15 +4518,13 @@ namespace SPKTOnline.Models
         /// Create a new User object.
         /// </summary>
         /// <param name="username">Initial value of the Username property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.String username, global::System.String password, global::System.String firstName, global::System.String lastName, global::System.String email)
+        public static User CreateUser(global::System.String username, global::System.String firstName, global::System.String lastName, global::System.String email)
         {
             User user = new User();
             user.Username = username;
-            user.Password = password;
             user.FirstName = firstName;
             user.LastName = lastName;
             user.Email = email;
@@ -4332,7 +4564,7 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Password
         {
@@ -4344,7 +4576,7 @@ namespace SPKTOnline.Models
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
+                _Password = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }
@@ -4568,78 +4800,6 @@ namespace SPKTOnline.Models
         private Nullable<global::System.DateTime> _SecurityCodeEndTime;
         partial void OnSecurityCodeEndTimeChanging(Nullable<global::System.DateTime> value);
         partial void OnSecurityCodeEndTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ClassID
-        {
-            get
-            {
-                return _ClassID;
-            }
-            set
-            {
-                OnClassIDChanging(value);
-                ReportPropertyChanging("ClassID");
-                _ClassID = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ClassID");
-                OnClassIDChanged();
-            }
-        }
-        private global::System.String _ClassID;
-        partial void OnClassIDChanging(global::System.String value);
-        partial void OnClassIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FacultyID
-        {
-            get
-            {
-                return _FacultyID;
-            }
-            set
-            {
-                OnFacultyIDChanging(value);
-                ReportPropertyChanging("FacultyID");
-                _FacultyID = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FacultyID");
-                OnFacultyIDChanged();
-            }
-        }
-        private global::System.String _FacultyID;
-        partial void OnFacultyIDChanging(global::System.String value);
-        partial void OnFacultyIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String SubjectsID
-        {
-            get
-            {
-                return _SubjectsID;
-            }
-            set
-            {
-                OnSubjectsIDChanging(value);
-                ReportPropertyChanging("SubjectsID");
-                _SubjectsID = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("SubjectsID");
-                OnSubjectsIDChanged();
-            }
-        }
-        private global::System.String _SubjectsID;
-        partial void OnSubjectsIDChanging(global::System.String value);
-        partial void OnSubjectsIDChanged();
 
         #endregion
     
@@ -4685,44 +4845,6 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Contest_Student>("OnlineSPKTModel.FK_Contest_Student_Users", "Contest_Student", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Users_Faculties", "Faculties")]
-        public Faculty Faculty
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Faculty>("OnlineSPKTModel.FK_Users_Faculties", "Faculties").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Faculty>("OnlineSPKTModel.FK_Users_Faculties", "Faculties").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Faculty> FacultyReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Faculty>("OnlineSPKTModel.FK_Users_Faculties", "Faculties");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Faculty>("OnlineSPKTModel.FK_Users_Faculties", "Faculties", value);
                 }
             }
         }

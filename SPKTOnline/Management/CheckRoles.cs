@@ -11,7 +11,7 @@ namespace SPKTOnline.Management
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         public bool IsAdmin(string userName)
         {
-            // TODO: Implement this method
+            
           
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
@@ -28,7 +28,7 @@ namespace SPKTOnline.Management
         }
         public bool IsLecturer(string userName)
         {
-            // TODO: Implement this method
+          
        
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
@@ -45,8 +45,7 @@ namespace SPKTOnline.Management
         }
         public bool IsStudent(string userName)
         {
-            // TODO: Implement this method
-        
+                
             User nd = db.Users.FirstOrDefault(n => n.Username == userName);
             if (nd == null)
             {
@@ -62,8 +61,21 @@ namespace SPKTOnline.Management
         }
         public User IsUser(string username, string pass)
         {
-            var user = db.Users.FirstOrDefault(u => u.Username == username && u.Password == pass);
-            return user;
+            var user = db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+                return null; 
+            if (EnCrypt.Cryptography.VerifyMD5Hash(pass, user.Password))
+                return user;
+            else
+                return null;
+        }
+
+        public bool UserNameExists(string username)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+                return false;
+            return true;
         }
     }
 }
