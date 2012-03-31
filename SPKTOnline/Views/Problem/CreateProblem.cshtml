@@ -84,13 +84,6 @@
                 @Html.DropDownList("DifficultyID", "(Độ khó)")
                 @Html.ValidationMessageFor(model => model.DifficultyID)
             </div>
-            <div class="editor-label">
-                @Html.Label("Môn học")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("SubjectID", "(Môn học)")
-                @Html.ValidationMessageFor(model => model.SubjectID)
-            </div>
 
         <div class="editor-label">
          @Html.Label("File so sánh")
@@ -99,7 +92,32 @@
             @Html.DropDownList("ComparerID", "(Loại file so sánh)")
             @Html.ValidationMessageFor(model => model.ComparerID)
         </div>
-
+        Chọn môn học:
+       <div class="editor-field">
+            @foreach (var o in ViewBag.SubjectID)
+            {
+                var optionValue = "MyOptions_" + o.Value; 
+                <input type="checkbox"  
+                     id="@optionValue" 
+                     name="SubjectID" 
+                     value="@o.Value"/> 
+                <label for="@optionValue">@o.Text</label> 
+                <br /> 
+            }
+            </div>
+         Chọn lớp học:
+       <div class="editor-field">
+            @foreach (var o in ViewBag.ClassID)
+            {
+                var optionValueS = "MyOptions_" + o.Value; 
+                <input type="checkbox"  
+                     id="@optionValueS" 
+                     name="ClassID" 
+                     value="@o.Value"/> 
+                <label for="@optionValueS">@o.Text</label> 
+                <br /> 
+            }
+            </div>
         </fieldset>
             <p>
                 <input class="button" type="submit" value="Thêm" />

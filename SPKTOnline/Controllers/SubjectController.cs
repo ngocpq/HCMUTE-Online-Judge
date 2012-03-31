@@ -23,7 +23,7 @@ namespace SPKTOnline.Controllers
         {
             db.Subjects.AddObject(subject);
             db.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index","Subject");
         }
         public ActionResult EditSubject(string subjectID)
         {

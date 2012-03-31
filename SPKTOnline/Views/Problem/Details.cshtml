@@ -7,3 +7,12 @@
     <legend style="color:Gray">@Html.DisplayFor(model => model.Name)</legend>
          @Html.DisplayFor(model => model.Content)
 </fieldset>
+@Html.BeginForm(){
+           <fieldset>
+           <legend>Bài làm của bạn</legend>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Content, 20, 75, new { @style = "resize: none;" })
+                    
+                </div>
+           </fieldset>
+}

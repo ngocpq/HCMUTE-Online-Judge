@@ -26,7 +26,11 @@ namespace SPKTOnline.Models
 
         [Required]
         [DisplayName("Môn học")]
-        public string SubjectID { get; set; }
+        public String[] SubjectID { get; set; }
+
+        [Required]
+        [DisplayName("Lớp học")]
+        public String[] ClassID { get; set; }
 
         [Required]
         [DisplayName("Độ khó")]

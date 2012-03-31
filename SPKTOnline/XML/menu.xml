@@ -2,36 +2,49 @@
 <!DOCTYPE Menus SYSTEM "menu.dtd">
 <Menus>
   <Menu1>
-    <Title>Thi Online</Title>
-    <TitleEng>Test Online</TitleEng>
-    <Link>/test</Link>
+    <Title>Lớp Học</Title>
+    <TitleEng>Class</TitleEng>
+    <Link>/Class</Link>
     <Roles>
       <Role>Lecturer</Role>
       <Role>Student</Role>
+      <Role>Admin</Role>
+      <Role>Guest</Role>
     </Roles>
+    <Menu2>
+      <Title>Tất cả lớp học</Title>
+      <TitleEng></TitleEng>
+      <Link>/Class/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Lớp học của bạn</Title>
+      <TitleEng></TitleEng>
+      <Link>/Class/My Class</Link>
+    </Menu2>
   </Menu1>
   <Menu1>
-    <Title>Thi Thử</Title>
-    <TitleEng>Try Test</TitleEng>
-    <Link>/TryTest</Link>
+    <Title>Kỳ Thi</Title>
+    <TitleEng>Contest</TitleEng>
+    <Link>/Contest</Link>
     <Roles>
       <Role>Admin</Role>
       <Role>Lecturer</Role>
       <Role>Student</Role>
+      <Role>Guest</Role>
     </Roles>
+    <Menu2>
+      <Title>Tất cả Kỳ Thi</Title>
+      <TitleEng></TitleEng>
+      <Link>/Contest/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Kỳ Thi Của Bạn</Title>
+      <TitleEng></TitleEng>
+      <Link>/Contest/My Class</Link>
+    </Menu2>
   </Menu1>
-  <Menu1>
-    <Title>Xem Điểm</Title>
-    <TitleEng>View Mark</TitleEng>
-    <Link>/Test</Link>
-    <Roles>
-      <Role>Admin</Role>
-      <Role>Lecturer</Role>
-      <Role>Student</Role>
-    </Roles>
-  </Menu1>
-  <Menu1>
-    <Title>Bài tập mẫu</Title>
+    <Menu1>
+    <Title>Đề mẫu tham khảo</Title>
     <TitleEng> Examination</TitleEng>
     <Link>/Problem</Link>
     <Roles>
@@ -42,36 +55,23 @@
     </Roles>
   </Menu1>
   <Menu1>
-    <Title>Ngân Hàng Đề Thi</Title>
-    <TitleEng>Examination Bank</TitleEng>
+    <Title>Kết Quả</Title>
+    <TitleEng>Results</TitleEng>
     <Link></Link>
     <Roles>
       <Role>Admin</Role>
       <Role>Lecturer</Role>
+      <Role>Student</Role>
     </Roles>
     <Menu2>
-      <Title>soạn đề thi</Title>
-      <TitleEng>Create Examination Bank</TitleEng>
-      <Link>/ExamBank/Index</Link>
+      <Title>Kết quả thi thử</Title>
+      <TitleEng></TitleEng>
+      <Link>/Result/TryTest</Link>
     </Menu2>
     <Menu2>
-      <Title>Quản lý đề thi</Title>
-      <TitleEng>Manage Examination Bank</TitleEng>
-      <Link>/ExamBank/Index</Link>
-    </Menu2>
-  </Menu1>
-  <Menu1>
-    <Title>Quản Lý Thi Trực Tuyến</Title>
-    <TitleEng>Manage Test Online</TitleEng>
-    <Link></Link>
-    <Roles>
-      <Role>Admin</Role>
-      <Role>Lecturer</Role>
-    </Roles>
-    <Menu2>
-      <Title>Xem Thông Tin Thi Và Bảng Điểm</Title>
-      <TitleEng>View Test Infomation</TitleEng>
-      <Link>/ManageTest</Link>
+      <Title>Kết quả kỳ thi</Title>
+      <TitleEng></TitleEng>
+      <Link>/Result/Contest</Link>
     </Menu2>
   </Menu1>
   <Menu1>
@@ -115,9 +115,8 @@
     <TitleEng>Manage Question</TitleEng>
     <Link></Link>
     <Roles>
-      <Role>Admin</Role>
+      <Role>Lecturer</Role>
     </Roles>
-
     <Menu2>
       <Title>Tất cả câu hỏi</Title>
       <TitleEng>All Problems</TitleEng>
@@ -128,16 +127,20 @@
       <TitleEng>Add Question</TitleEng>
       <Link>/Problem/CreateProblem</Link>
     </Menu2>
-
-
   </Menu1>
-
   <Menu1>
-    <Title>Duyệt đề</Title>
-    <TitleEng>Inspector</TitleEng>
-    <Link>/Inspector/Index</Link>
+    <Title>Quản Lý Đề Thi</Title>
+    <TitleEng></TitleEng>
+    <Link>/Exam/Index</Link>
     <Roles>
-      <Role>Admin</Role>
+      <Role>Lecturer</Role>
+    </Roles>
+  </Menu1>
+  <Menu1>
+    <Title>Quản Lý Kỳ Thi</Title>
+    <TitleEng></TitleEng>
+    <Link>/Contest/Index</Link>
+    <Roles>
       <Role>Lecturer</Role>
     </Roles>
   </Menu1>

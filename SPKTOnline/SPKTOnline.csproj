@@ -46,6 +46,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -81,6 +82,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Management\CheckRoles.cs" />
+    <Compile Include="Management\FileComparerFactory.cs" />
+    <Compile Include="Management\EnCrypt\Cryptography.cs" />
     <Compile Include="Management\Menu\IMenu.cs" />
     <Compile Include="Management\Menu\MenuManager.cs" />
     <Compile Include="Management\MultiLanguage\English.cs" />
@@ -95,8 +98,18 @@
       <DependentUpon>OnlineSPKT.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProblemModels.cs" />
+    <Compile Include="Models\TestCas.cs" />
     <Compile Include="Models\TestCaseModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\DKMHServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceChamBai.asmx.cs">
+      <DependentUpon>ServiceChamBai.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\1.png" />
@@ -221,6 +234,27 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <EntityDeploy Include="Models\OnlineSPKT.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OnlineSPKT.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Service References\DKMHServices\SPKTOnline.DKMHServices.profiles.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DKMHServices\SPKTOnline.DKMHServices.sinhvien.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DKMHServices\SPKTOnline.DKMHServices.users.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DKMHServices\UsrSer.disco" />
+    <None Include="Service References\DKMHServices\configuration91.svcinfo" />
+    <None Include="Service References\DKMHServices\configuration.svcinfo" />
+    <None Include="Service References\DKMHServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceChamBai.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -247,7 +281,6 @@
     <Content Include="XML\English.xml" />
     <Content Include="XML\Memberships.xml" />
     <Content Include="XML\menu.xml" />
-    <Content Include="XML\ToeicScore.xml" />
     <Content Include="XML\VietNamese.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -261,10 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mvc.sitemap" />
-    <EntityDeploy Include="Models\OnlineSPKT.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineSPKT.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -288,16 +317,30 @@
     <Content Include="Views\TestCase\EditTestCase.cshtml" />
     <Content Include="Views\Problem\AllProblemForUpDate.cshtml" />
     <Content Include="Views\Problem\EditProblem.cshtml" />
+    <Content Include="Views\Account\Import.cshtml" />
+    <None Include="Service References\DKMHServices\UsrSer.wsdl" />
+    <Content Include="Views\Account\SetPassword.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
-    <None Include="XML\ToeicScore.dtd" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Class\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DKMHServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChamDiem\ChamDiem.csproj">
+      <Project>{43FD0699-8D82-4BCD-9D92-97E997802BFC}</Project>
+      <Name>ChamDiem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

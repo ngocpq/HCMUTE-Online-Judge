@@ -9,6 +9,8 @@ using System.Data.Entity;
 using SPKTOnline.Management;
 using System.Data;
 using System.Data.Objects.DataClasses;
+using SPKTOnline.DKMHServices;
+using SPKTOnline.Management.EnCrypt;
 
 namespace SPKTOnline.Controllers
 {
@@ -18,12 +20,22 @@ namespace SPKTOnline.Controllers
         // GET: /Account/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
+        string Message;
+        public bool UserNameAvailable(string username)
+        {
+            if (checkRole.UserNameExists(username))
+            {
+                return false;
+            } 
+            return true; 
+        }
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Logon()
+        public ActionResult Logon(string message)
         {
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
@@ -63,7 +75,7 @@ namespace SPKTOnline.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult CreateUser()
+        public ActionResult CreateUser(string Message)
         {            
             if (Request.IsAuthenticated)
             {
@@ -77,7 +89,7 @@ namespace SPKTOnline.Controllers
                     //                        , new MyClass{ Value = 5, Text = "Chụt" } };
                     ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
                     ViewBag.Subjects = new MultiSelectList(db.Subjects, "ID", "Name");
-                    ViewBag.FacultyID = new SelectList(db.Faculties, "ID", "Name");
+                    ViewBag.Message = Message;
                     return View();
                 }
                 else
@@ -97,45 +109,59 @@ namespace SPKTOnline.Controllers
             {
                 if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
                 {
-                    String[]  kq = userModel.MyOption;
-                    user.Username = userModel.Username;
-                    user.Password = userModel.Password;
-                    user.LastName = userModel.LastName;
-                    user.FirstName = userModel.FirstName;
-                    user.IsLocked = userModel.IsLocked;
-                    user.Email = userModel.Email;
-                    user.FacultyID = userModel.FacultyID;
-                    foreach (String s in kq)
+                    if (checkRole.UserNameExists(userModel.Username) == false)
                     {
-                        foreach (Role r in db.Roles)
+                        String[] kq = userModel.MyOption;
+                        user.Username = userModel.Username;
+                        user.Password = Cryptography.CreateMD5Hash(userModel.Password);
+                        user.LastName = userModel.LastName;
+                        user.FirstName = userModel.FirstName;
+                        user.IsLocked = userModel.IsLocked;
+                        user.Email = userModel.Email;
+                        if (kq.Count() != 0)
                         {
-                            if (r.ID.ToString() == s)
-                                user.Roles.Add(r);
-                        }
-                    }
-                    db.Users.AddObject(user);
-
-                    //---------------
-                    foreach(Role r in user.Roles)
-                    {
-                        if(r.ID==2)
-                        {  
-                            String[] ls = userModel.OpntionSubject;
-                            foreach (String str in ls)
+                            foreach (String s in kq)
                             {
-                                foreach (Subject s in db.Subjects)
+                                foreach (Role r in db.Roles)
                                 {
-                                    if (s.ID == str)
-                                        user.Subjects.Add(s);
+                                    if (r.ID.ToString() == s)
+                                        user.Roles.Add(r);
                                 }
                             }
-                            
+                        }
+                        db.Users.AddObject(user);
+
+                        //---------------
+                        foreach (Role r in user.Roles)
+                        {
+                            if (r.ID == 2)
+                            {
+                                String[] ls = userModel.OptionSubject;
+                                if (userModel.OptionSubject.Count() != 0)
+                                {
+                                    foreach (String str in ls)
+                                    {
+                                        foreach (Subject s in db.Subjects)
+                                        {
+                                            if (s.ID == str)
+                                                user.Subjects.Add(s);
+                                        }
+                                    }
+                                }
+
+                            }
+
                         }
 
+                        db.SaveChanges();
+                        string Message = "Đã tạo User có tên đăng nhập là: " + user.Username + " thành công";
+                        return RedirectToAction("CreateUser", "Account", new { Message = Message });
                     }
-
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        Message = "Username đã tồn tại. Vui lòng nhập lại!";
+                        return RedirectToAction("CreateUser", "Account", new { Message = Message }); //TODO: báo ra username đã tồn tại. 
+                    }
                 }
                 else
                     return RedirectToAction("Index", "Home");
@@ -173,7 +199,78 @@ namespace SPKTOnline.Controllers
             else
                 return View("Logon");
         }
-     
+
+        public ActionResult Import(string message)
+        {
+
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Import(ImportModels import)
+        {
+            if (db.Users.FirstOrDefault(m => m.Username == import.Username) == null)
+            {
+                DKMHServices.UsrSerSoapClient service = new UsrSerSoapClient();
+                if (service.ValidateUser(import.Username, import.Password))
+                {
+                    if (!service.IsStudent(import.Username))
+                    {
+                        ViewBag.Warning = "Khong phai tai khoan sinh vien";
+                        return View("Import");//TODO: bao ra
+                    }
+                    sinhvien s = service.GetStudentByUserName(import.Username);
+                    users u = service.GetUserByUserName(import.Username);
+                    //import user
+                    SPKTOnline.Models.User user = new Models.User();
+                    user.Username = import.Username;
+                    user.Password = Cryptography.CreateMD5Hash(import.Password);
+                    user.LastName = s.Ho;
+                    user.FirstName = s.Ten;
+                    if (u.Email != null)
+                    {
+                        user.Email = u.Email;
+                    }
+                    else
+                        user.Email = user.Username + "@student.hcmute.edu.vn";
+                    user.IsActived = true;
+                    user.IsLocked = false;
+                    db.Users.AddObject(user);
+                    user.Roles.Add(db.Roles.FirstOrDefault(m => m.ID == 3));//3=role: student
+                    db.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(user.Username, false);
+                    user.LastLoginTime = DateTime.Now;
+                    string message = "Bạn đã kích hoạt thành công tài khoản. Chào mừng bạn là thành viên của Thi Lập Trình Online!";
+                    return RedirectToAction("Index", "Home", new { Message = message });
+                }
+                else
+                {
+                    string message = "Bạn đã nhập sai tên đăng nhập hoặc mật khẩu không đúng! Hảy kiểm tra lại ở trang Đăng ký môn học.";
+                    return RedirectToAction("Import", "Account", new { Message = message });//TODO: bao sai
+                }
+            }
+            else
+            {
+                string Message = "Bạn đã kích hoạt tài khoản trong trang này. Hảy đăng nhập bằng tài khoản bạn đã kích hoạt ở đây!";
+                return RedirectToAction("Logon", "Account", new { Message = Message });//TODO: đã kích hoạt tài khoản.
+
+            }
+                    
+            
+        }
+        public ActionResult SetPassword(string username)
+        {
+            User u = db.Users.FirstOrDefault(m => m.Username == username);
+            return View(u);
+        }
+        [HttpPost]
+        public ActionResult SetPassword(User user)
+        {
+            db.Users.Attach(user);
+
+            return View();
+        }
              
     }
 }
