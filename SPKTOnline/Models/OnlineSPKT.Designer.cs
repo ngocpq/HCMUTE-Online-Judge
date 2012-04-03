@@ -3224,7 +3224,8 @@ namespace SPKTOnline.Models
         /// <param name="trangThaiBienDich">Initial value of the TrangThaiBienDich property.</param>
         /// <param name="trangThaiCham">Initial value of the TrangThaiCham property.</param>
         /// <param name="timeStamp">Initial value of the TimeStamp property.</param>
-        public static Student_Summit CreateStudent_Summit(global::System.Int32 id, global::System.Int32 problemID, global::System.String studentID, global::System.String sourceCode, global::System.Int32 trangThaiBienDich, global::System.Int32 trangThaiCham, global::System.Byte[] timeStamp)
+        /// <param name="submitTime">Initial value of the SubmitTime property.</param>
+        public static Student_Summit CreateStudent_Summit(global::System.Int32 id, global::System.Int32 problemID, global::System.String studentID, global::System.String sourceCode, global::System.Int32 trangThaiBienDich, global::System.Int32 trangThaiCham, global::System.Byte[] timeStamp, global::System.DateTime submitTime)
         {
             Student_Summit student_Summit = new Student_Summit();
             student_Summit.ID = id;
@@ -3234,6 +3235,7 @@ namespace SPKTOnline.Models
             student_Summit.TrangThaiBienDich = trangThaiBienDich;
             student_Summit.TrangThaiCham = trangThaiCham;
             student_Summit.TimeStamp = timeStamp;
+            student_Summit.SubmitTime = submitTime;
             return student_Summit;
         }
 
@@ -3458,6 +3460,30 @@ namespace SPKTOnline.Models
         private Nullable<global::System.Int32> _LanguageID;
         partial void OnLanguageIDChanging(Nullable<global::System.Int32> value);
         partial void OnLanguageIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime SubmitTime
+        {
+            get
+            {
+                return _SubmitTime;
+            }
+            set
+            {
+                OnSubmitTimeChanging(value);
+                ReportPropertyChanging("SubmitTime");
+                _SubmitTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SubmitTime");
+                OnSubmitTimeChanged();
+            }
+        }
+        private global::System.DateTime _SubmitTime;
+        partial void OnSubmitTimeChanging(global::System.DateTime value);
+        partial void OnSubmitTimeChanged();
 
         #endregion
     
@@ -3988,17 +4014,15 @@ namespace SPKTOnline.Models
         /// <param name="maDB">Initial value of the MaDB property.</param>
         /// <param name="input">Initial value of the Input property.</param>
         /// <param name="output">Initial value of the Output property.</param>
-        /// <param name="moTa">Initial value of the MoTa property.</param>
         /// <param name="diem">Initial value of the Diem property.</param>
         /// <param name="timeStamp">Initial value of the TimeStamp property.</param>
-        public static TestCas CreateTestCas(global::System.Int32 maTestCase, global::System.Int32 maDB, global::System.String input, global::System.String output, global::System.String moTa, global::System.Int32 diem, global::System.Byte[] timeStamp)
+        public static TestCas CreateTestCas(global::System.Int32 maTestCase, global::System.Int32 maDB, global::System.String input, global::System.String output, global::System.Int32 diem, global::System.Byte[] timeStamp)
         {
             TestCas testCas = new TestCas();
             testCas.MaTestCase = maTestCase;
             testCas.MaDB = maDB;
             testCas.Input = input;
             testCas.Output = output;
-            testCas.MoTa = moTa;
             testCas.Diem = diem;
             testCas.TimeStamp = timeStamp;
             return testCas;
@@ -4109,7 +4133,7 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String MoTa
         {
@@ -4121,7 +4145,7 @@ namespace SPKTOnline.Models
             {
                 OnMoTaChanging(value);
                 ReportPropertyChanging("MoTa");
-                _MoTa = StructuralObject.SetValidValue(value, false);
+                _MoTa = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MoTa");
                 OnMoTaChanged();
             }
