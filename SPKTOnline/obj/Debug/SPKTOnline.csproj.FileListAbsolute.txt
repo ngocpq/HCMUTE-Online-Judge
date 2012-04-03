@@ -27,3 +27,16 @@ D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.dll
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.pdb
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\ChamDiem.dll
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\ChamDiem.pdb
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\ChamDiem.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Abstractions.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Extensions.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Helpers.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Mvc.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Routing.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Services.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.WebPages.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\ChamDiem.pdb
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Mvc.xml
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.WebPages.xml
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\System.Web.Helpers.xml

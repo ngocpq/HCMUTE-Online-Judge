@@ -34,7 +34,6 @@ namespace SPKTOnline
             //TODO: lay ten file
             string ExeDir = "Compile";
 
-
             DateTime now = DateTime.Now;
             string fileName = MaBai.ToString() + now.ToString("yyMMddHHmmss") + now.Millisecond.ToString() + ".exe";
             String exeFilePath = System.IO.Path.Combine(Server.MapPath(ExeDir), fileName);

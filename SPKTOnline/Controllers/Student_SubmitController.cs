@@ -18,6 +18,7 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
+
         public ActionResult TryTest(int ID)
         {
             if (User.Identity.IsAuthenticated == true)
@@ -33,6 +34,7 @@ namespace SPKTOnline.Controllers
             return RedirectToAction("Logon", "Home");
         }
 
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult TryTest(Student_Summit st)
         {
