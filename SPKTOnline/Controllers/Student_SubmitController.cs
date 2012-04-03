@@ -36,6 +36,7 @@ namespace SPKTOnline.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult TryTest(Student_Summit st)
         {
             if (User.Identity.IsAuthenticated == true)
@@ -46,7 +47,9 @@ namespace SPKTOnline.Controllers
                     st.TrangThaiBienDich = 1;
                     st.TrangThaiCham = 1;
                     st.LanguageID = 1;
+                    st.SubmitTime = DateTime.Now;
                     db.Student_Summit.AddObject(st);
+                    
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");//trả ra thông tin ở trang kết quả.
                 }

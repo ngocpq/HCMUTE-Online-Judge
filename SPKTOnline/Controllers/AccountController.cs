@@ -252,7 +252,7 @@ namespace SPKTOnline.Controllers
             }
             else
             {
-                string Message = "Bạn đã kích hoạt tài khoản trong trang này. Hảy đăng nhập bằng tài khoản bạn đã kích hoạt ở đây!";
+                string Message = "Bạn đã kích hoạt tài khoản "+import.Username+ " trong trang này. Hảy đăng nhập bằng tài khoản bạn đã kích hoạt ở đây!";
                 return RedirectToAction("Logon", "Account", new { Message = Message });//TODO: đã kích hoạt tài khoản.
 
             }
