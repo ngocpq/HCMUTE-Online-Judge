@@ -7,6 +7,7 @@
     <div class="webtitle">
         Đăng Nhập</div>
     <p><b>@ViewBag.Message</b></p>
+
     <p style="margin-left:25px;">
         Nhập Username và Password.
     </p>
@@ -39,9 +40,9 @@
             <p>
                 <input type="submit" value="Log On" />
             </p>
-            <p>
-                @Html.ActionLink("Tạo tài khoản mới bằng tài khoản đăng ký môn học ", "Import","Account")
-            </p>
-        </div>
+    <p style="margin-left:0px;">
+        Nếu bạn chưa có tài khoản, hãy nhấp vào  @Html.ActionLink(" kích hoạt", "Import","Account") để kích hoạt tự động bằng tài khoản đăng ký môn học.
+    </p>
+    </div>
     </div>
 }

@@ -3,16 +3,12 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <fieldset>
     <legend style="color:Gray">@Html.DisplayFor(model => model.Name)</legend>
          @Html.DisplayFor(model => model.Content)
 </fieldset>
-@Html.BeginForm(){
-           <fieldset>
-           <legend>Bài làm của bạn</legend>
-                <div class="editor-field">
-                    @Html.TextAreaFor(model => model.Content, 20, 75, new { @style = "resize: none;" })
-                    
-                </div>
-           </fieldset>
-}
+<button name="button" type="button" onclick="document.location.href=$('#cancelUrl').attr('href')">Làm bài</button>
+       <a id="cancelUrl" href="@Html.AttributeEncode(Url.Action("TryTest", "Student_Submit", new { ID = Model.ID }))" style="display:none;"></a>
+  
+

@@ -91,7 +91,10 @@
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyClass.cs" />
+    <Compile Include="Controllers\NotbuildController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\Student_SubmitController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -328,7 +331,6 @@
     <Content Include="Views\Problem\Details.cshtml" />
     <Content Include="Views\Subject\AddSubject.cshtml" />
     <Content Include="Views\Subject\Index.cshtml" />
-    <Content Include="Views\Shared\NotBuilt.cshtml" />
     <Content Include="Views\TestCase\CreateTestCase.cshtml" />
     <Content Include="Views\TestCase\EditTestCase.cshtml" />
     <Content Include="Views\Problem\AllProblemForUpDate.cshtml" />
@@ -336,6 +338,9 @@
     <Content Include="Views\Account\Import.cshtml" />
     <None Include="Service References\DKMHServices\UsrSer.wsdl" />
     <Content Include="Views\Account\SetPassword.cshtml" />
+    <Content Include="Views\Notbuild\Index.cshtml" />
+    <Content Include="Views\Student_Submit\TryTest.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
