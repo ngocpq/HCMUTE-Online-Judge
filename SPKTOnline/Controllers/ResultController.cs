@@ -26,8 +26,8 @@ namespace SPKTOnline.Controllers
             {
                 if (StudentName != null && checkRole.IsStudent(StudentName))
                 {
-                    var st = db.Student_Summit.Where(p => p.StudentID == StudentName);
-                    List<Student_Summit> list = new List<Student_Summit>();
+                    var st = db.Student_Submit.Where(p => p.StudentID == StudentName);
+                    List<Student_Submit> list = new List<Student_Submit>();
                     foreach (var s in st)
                     {
                         list.Add(s);

@@ -25,7 +25,7 @@ namespace SPKTOnline.Controllers
                 if (checkRole.IsStudent(User.Identity.Name))
                 {
                     Problem p = db.Problems.FirstOrDefault(m => m.ID == ID);
-                    Student_Summit st = new Student_Summit();
+                    Student_Submit st = new Student_Submit();
                     st.Problem = p;
                     return View(st);
                 }
@@ -35,7 +35,7 @@ namespace SPKTOnline.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult TryTest(Student_Summit st)
+        public ActionResult TryTest(Student_Submit st)
         {
             if (User.Identity.IsAuthenticated == true)
             {
@@ -46,7 +46,7 @@ namespace SPKTOnline.Controllers
                     st.TrangThaiCham = 0;
                     st.LanguageID = 1;
                     st.SubmitTime = DateTime.Now;
-                    db.Student_Summit.AddObject(st);
+                    db.Student_Submit.AddObject(st);
                     
                     db.SaveChanges();
                     return RedirectToAction("TryTestResult", "Result", new { Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
