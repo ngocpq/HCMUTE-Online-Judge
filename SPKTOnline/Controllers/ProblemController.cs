@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System;
+using SPKTOnline.Reponsitories;
 
 
 namespace SPKTOnline.Controllers
@@ -16,7 +17,7 @@ namespace SPKTOnline.Controllers
         // GET: /Problem/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
-
+        ProblemRepository ProblemRep = new ProblemRepository();
         public ActionResult Index()
         {
             IEnumerable<SPKTOnline.Models.Subject> sb = db.Subjects;
@@ -32,7 +33,7 @@ namespace SPKTOnline.Controllers
                 List<Problem> dsProblem = new List<Problem>();
                 foreach (var s in ds)
                 {
-                    if (s.SubjectID == ID)
+                    if ((s.SubjectID == ID)&&(s.Problem.IsHiden==false))
                         dsProblem.Add(s.Problem);
                 }
                 return View(dsProblem);
@@ -92,7 +93,7 @@ namespace SPKTOnline.Controllers
                 if (checkRole.IsLecturer(name))
                 {
                     ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
-                    ViewBag.SubjectID = new MultiSelectList(db.Subjects, "ID", "Name");
+                    ViewBag.SubjectID = new MultiSelectList(ProblemRep.GetListSubjectByLecturerID(name), "ID", "Name");
                     ViewBag.ComparerID = new MultiSelectList(db.Comparers, "ID", "Name");
                     ViewBag.ClassID = new MultiSelectList(db.Classes, "ID", "SubjectID");
                     //List<SelectListItem> list = new List<SelectListItem>();
@@ -188,7 +189,7 @@ namespace SPKTOnline.Controllers
                         pm.Content = p.Content;
                         pm.MemoryLimit = (int)p.MemoryLimit;
                         ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name", p.DifficultyID);
-                        ViewBag.SubjectID = new MultiSelectList(db.Subjects, "ID", "Name", p.Problem_Subject);
+                        ViewBag.SubjectID = new MultiSelectList(ProblemRep.GetListSubjectByLecturerID(HttpContext.User.Identity.Name), "ID", "Name", p.Problem_Subject);
                         ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name", p.ComparerID);
                         return View(pm);
 

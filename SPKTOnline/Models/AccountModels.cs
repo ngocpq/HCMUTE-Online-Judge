@@ -98,5 +98,33 @@ namespace SPKTOnline.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+    public class EditAccountModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string Username { get; set; }
+        [Required]
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DisplayName("Last Name")]
+        public  string LastName { get; set; }
+
+       // [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public  string Password { get; set; }
+
+       // [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password mới")]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("Email address")]
+        public  string Email { get; set; }
+    }
 
 }

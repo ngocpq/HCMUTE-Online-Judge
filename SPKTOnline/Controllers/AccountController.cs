@@ -199,7 +199,10 @@ namespace SPKTOnline.Controllers
             else
                 return View("Logon");
         }
-
+        public ActionResult ManageRoles()
+        {
+            return View();
+        }
         public ActionResult Import(string message)
         {
 
@@ -242,7 +245,7 @@ namespace SPKTOnline.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username, false);
                     user.LastLoginTime = DateTime.Now;
                     string message = "Bạn đã kích hoạt thành công tài khoản. Chào mừng bạn là thành viên của Thi Lập Trình Online!";
-                    return RedirectToAction("Index", "Home", new { Message = message });
+                    return RedirectToAction("EditAccount", "Account", new { Message = message });
                 }
                 else
                 {
@@ -259,17 +262,42 @@ namespace SPKTOnline.Controllers
                     
             
         }
-        public ActionResult SetPassword(string username)
+         [ValidateInput(false)]
+        public ActionResult EditAccount(string message)
         {
-            User u = db.Users.FirstOrDefault(m => m.Username == username);
-            return View(u);
+            ViewBag.Message = message;
+            if (User.Identity.IsAuthenticated)
+            {
+                User u = db.Users.FirstOrDefault(m=>m.Username==User.Identity.Name);
+                EditAccountModel account = new EditAccountModel();
+                account.Username = u.Username;
+                account.LastName = u.LastName;
+                account.FirstName = u.FirstName;
+                account.Email = u.Email;
+                return View(account);
+            }
+            else
+                return RedirectToAction("Logon", "Account");
         }
-        [HttpPost]
-        public ActionResult SetPassword(User user)
-        {
-            db.Users.Attach(user);
 
-            return View();
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditAccount(EditAccountModel EAccount)
+        {
+            User u = db.Users.FirstOrDefault(m => m.Username == EAccount.Username);
+            u.LastName = EAccount.LastName;
+            u.FirstName = EAccount.FirstName;
+            u.Email = EAccount.Email;
+            db.SaveChanges();
+            if (u.Password == Cryptography.CreateMD5Hash(EAccount.Password))
+            {
+                u.Password = Cryptography.CreateMD5Hash(EAccount.NewPassword);
+                db.SaveChanges();
+                return RedirectToAction("EditAccount", "Account", new { Message = "<p style=\"color:Blue\"><b>Bạn đã thay đổi toàn khoản thành công!</b></p>" });
+            }
+            else
+                return RedirectToAction("EditAccount", "Account", new { Message = "<p style=\"color:Red\"><b>Password nhập vào không đúng!</b></p>" });
+
         }
              
     }

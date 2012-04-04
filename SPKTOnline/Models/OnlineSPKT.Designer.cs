@@ -694,7 +694,7 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> SchoolYear
+        public global::System.String SchoolYear
         {
             get
             {
@@ -704,13 +704,13 @@ namespace SPKTOnline.Models
             {
                 OnSchoolYearChanging(value);
                 ReportPropertyChanging("SchoolYear");
-                _SchoolYear = StructuralObject.SetValidValue(value);
+                _SchoolYear = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SchoolYear");
                 OnSchoolYearChanged();
             }
         }
-        private Nullable<global::System.Int32> _SchoolYear;
-        partial void OnSchoolYearChanging(Nullable<global::System.Int32> value);
+        private global::System.String _SchoolYear;
+        partial void OnSchoolYearChanging(global::System.String value);
         partial void OnSchoolYearChanged();
 
         #endregion
