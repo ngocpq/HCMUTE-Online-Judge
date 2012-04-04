@@ -42,14 +42,14 @@ namespace SPKTOnline.Controllers
                 if (checkRole.IsStudent(User.Identity.Name))
                 {
                     st.StudentID = User.Identity.Name;
-                    st.TrangThaiBienDich = 1;
-                    st.TrangThaiCham = 1;
+                    st.TrangThaiBienDich = 0;
+                    st.TrangThaiCham = 0;
                     st.LanguageID = 1;
                     st.SubmitTime = DateTime.Now;
                     db.Student_Summit.AddObject(st);
                     
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");//trả ra thông tin ở trang kết quả.
+                    return RedirectToAction("TryTestResult", "Result", new { Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
                 }
             }
             return RedirectToAction("Logon", "Home");

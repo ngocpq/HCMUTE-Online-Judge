@@ -1,0 +1,61 @@
+﻿@model SPKTOnline.Models.EditAccountModel
+@{
+    ViewBag.Title = "EditAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <div class="webtitle">
+        Thay đổi thông tin tài khoản cá nhân</div>
+        @Html.Raw(@ViewBag.Message) 
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Thông tin</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName, "Họ lót")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+        <div class="editor-label">
+         @Html.LabelFor(model => model.FirstName, "Tên")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email, "Email")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </fieldset>
+    <fieldset>
+    <legend>Đổi mật khẩu</legend>
+            <div class="editor-label">
+            @Html.LabelFor(model => model.Password, "Mật khẩu cũ")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NewPassword, "Mật khẩu mới")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NewPassword)
+            @Html.ValidationMessageFor(model => model.NewPassword)
+        </div>
+    </fieldset>
+        <div style="visibility:hidden"> @Html.EditorFor(model => model.Username)</div>
+        <p>
+            <input class="button" type="submit" value="Submit" />
+        </p>
+}

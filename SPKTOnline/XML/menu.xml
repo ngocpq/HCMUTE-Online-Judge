@@ -19,7 +19,7 @@
     <Menu2>
       <Title>Lớp học của bạn</Title>
       <TitleEng></TitleEng>
-      <Link>/Class/My Class</Link>
+      <Link>/Class/MyClass</Link>
     </Menu2>
   </Menu1>
   <Menu1>
@@ -40,7 +40,7 @@
     <Menu2>
       <Title>Kỳ Thi Của Bạn</Title>
       <TitleEng></TitleEng>
-      <Link>/Contest/My Class</Link>
+      <Link>/Contest/MyContest</Link>
     </Menu2>
   </Menu1>
     <Menu1>
@@ -66,12 +66,12 @@
     <Menu2>
       <Title>Kết quả thi thử</Title>
       <TitleEng></TitleEng>
-      <Link>/Result/TryTest</Link>
+      <Link>/Result/TryTestResult</Link>
     </Menu2>
     <Menu2>
       <Title>Kết quả kỳ thi</Title>
       <TitleEng></TitleEng>
-      <Link>/Result/Contest</Link>
+      <Link>/Result/ContestResult</Link>
     </Menu2>
   </Menu1>
   <Menu1>
@@ -84,13 +84,27 @@
     <Menu2>
       <Title>Manage Roles</Title>
       <TitleEng>Manage Roles</TitleEng>
-      <Link>/User/Index</Link>
+      <Link>/Account/ManageRole</Link>
     </Menu2>
     <Menu2>
       <Title>Tạo User</Title>
       <TitleEng>Create User</TitleEng>
       <Link>/Account/CreateUser</Link>
     </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Quản lý lớp học</Title>
+    <TitleEng>Manage Class</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+    <Menu2>
+      <Title>Thêm lớp học</Title>
+      <TitleEng>addClass</TitleEng>
+      <Link>/Class/CreateClass</Link>
+    </Menu2>
+    
   </Menu1>
   <Menu1>
     <Title>Quản lý môn học</Title>
