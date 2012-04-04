@@ -8,8 +8,8 @@ namespace SPKTOnline.Models
     public class Student_SubmitModels
     {
     }
-    public partial class Student_Submit
-    {
+    //public partial class Student_Submit
+    //{
 
-    }
+    //}
 }

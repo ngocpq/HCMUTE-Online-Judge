@@ -7,7 +7,7 @@ namespace BienDich_Cham
 {
     public class InputThiSinh : ChamDiem.IInputCham
     {
-        public string SourceCodeFile { get; set; }
+        public string SourceCode { get; set; }
 
         List<ChamDiem.ITestCase> _TestCases;
         public List<ChamDiem.ITestCase> TestCases

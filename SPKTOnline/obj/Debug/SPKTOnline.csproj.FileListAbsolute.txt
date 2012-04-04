@@ -27,3 +27,5 @@ D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.dll
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\obj\Debug\SPKTOnline.pdb
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\ChamDiem.dll
 D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\bin\ChamDiem.pdb
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\ChamDiem.dll
+D:\SPKT\HK2_2011-2012\KLTN\Van\SPKTOnline_SourceCode\SPKTOnline\bin\ChamDiem.pdb
