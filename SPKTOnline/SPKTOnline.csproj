@@ -100,8 +100,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Management\ChamDiemServise.cs" />
     <Compile Include="Management\CheckRoles.cs" />
-    <Compile Include="Management\FileComparerFactory.cs" />
+    <Compile Include="Management\BienDichCham\FileComparerFactory.cs" />
     <Compile Include="Management\EnCrypt\Cryptography.cs" />
     <Compile Include="Management\Menu\IMenu.cs" />
     <Compile Include="Management\Menu\MenuManager.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Management\MultiLanguage\MultiLanguage.cs" />
     <Compile Include="Management\MultiLanguage\VietNamese.cs" />
     <Compile Include="Management\MyEnum.cs" />
+    <Compile Include="Management\BienDichCham\ReflectionUtility.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\OnlineSPKT.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -349,6 +351,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Views\Class\" />
   </ItemGroup>
   <ItemGroup>

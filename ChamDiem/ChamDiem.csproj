@@ -36,27 +36,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BienDichCPP.cs" />
-    <Compile Include="BienDichFactory.cs" />
-    <Compile Include="BienDichJava.cs" />
-    <Compile Include="BienDichPascal.cs" />
-    <Compile Include="BienDichResult.cs" />
-    <Compile Include="BienDichVaCham.cs" />
-    <Compile Include="ChamBaiFactory.cs" />
-    <Compile Include="ChamEXE.cs" />
-    <Compile Include="ChamJava.cs" />
-    <Compile Include="FileManager.cs" />
-    <Compile Include="IBienDich.cs" />
-    <Compile Include="IChamDiem.cs" />
-    <Compile Include="IFileComparer.cs" />
-    <Compile Include="IInputCham.cs" />
-    <Compile Include="KetCham.cs" />
-    <Compile Include="KetQua.cs" />
-    <Compile Include="KetQuaTestCase.cs" />
+    <Compile Include="BienDich\BienDichCPP.cs" />
+    <Compile Include="BienDich\BienDichFactory.cs" />
+    <Compile Include="BienDich\BienDichJava.cs" />
+    <Compile Include="BienDich\BienDichPascal.cs" />
+    <Compile Include="Commons\BienDichResult.cs" />
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Cham\ChamBaiFactory.cs" />
+    <Compile Include="Cham\ChamEXE.cs" />
+    <Compile Include="Cham\ChamJava.cs" />
+    <Compile Include="BienDich\IBienDich.cs" />
+    <Compile Include="Cham\IChamDiem.cs" />
+    <Compile Include="Cham\IFileComparer.cs" />
+    <Compile Include="Commons\IInputCham.cs" />
+    <Compile Include="Cham\KetCham.cs" />
+    <Compile Include="Commons\KetQua.cs" />
+    <Compile Include="Commons\KetQuaTestCase.cs" />
+    <Compile Include="Managers\ChamBaiManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunUtility.cs" />
-    <Compile Include="RunResult.cs" />
-    <Compile Include="TestCase.cs" />
+    <Compile Include="Managers\RunUtility.cs" />
+    <Compile Include="Commons\RunResult.cs" />
+    <Compile Include="Commons\TestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

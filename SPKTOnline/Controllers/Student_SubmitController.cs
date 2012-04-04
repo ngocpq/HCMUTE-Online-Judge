@@ -36,7 +36,6 @@ namespace SPKTOnline.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
-        [ValidateInput(false)]
         public ActionResult TryTest(Student_Summit st)
         {
             if (User.Identity.IsAuthenticated == true)
