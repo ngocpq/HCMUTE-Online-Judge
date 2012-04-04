@@ -5,11 +5,10 @@ using System.Web;
 
 namespace SPKTOnline.Models
 {
-    public class Student_SubmitModels
+    public enum TrangThaiCham
     {
+        ChuaCham=0,
+        DangCham=1,
+        DaCham=2
     }
-    //public partial class Student_Submit
-    //{
-
-    //}
 }

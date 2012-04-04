@@ -86,8 +86,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Management\BienDichCham\FileComparerFactory.cs" />
+    <Compile Include="Management\BienDichCham\ReflectionUtility.cs" />
+    <Compile Include="Management\ChamDiemServise.cs" />
     <Compile Include="Management\CheckRoles.cs" />
-    <Compile Include="Management\FileComparerFactory.cs" />
     <Compile Include="Management\EnCrypt\Cryptography.cs" />
     <Compile Include="Management\Menu\IMenu.cs" />
     <Compile Include="Management\Menu\MenuManager.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Models\Student_SubmitModels.cs" />
     <Compile Include="Models\TestCas.cs" />
     <Compile Include="Models\TestCaseModels.cs" />
+    <Compile Include="Models\TrangThaiCham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ProblemRepository.cs" />
     <Compile Include="Service References\DKMHServices\Reference.cs">
@@ -346,7 +349,9 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Execution\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

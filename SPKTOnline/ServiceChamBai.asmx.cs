@@ -43,7 +43,7 @@ namespace SPKTOnline
             String executionDir = Server.MapPath(WebConfigurationManager.AppSettings["ExecutionDir"]);
             BienDichCPP.ApplicationFolder = Server.MapPath(WebConfigurationManager.AppSettings["VisualCCompilerDir"]);
             ChamBaiManager chamManager = new ChamBaiManager(NgonNgu,executionDir);
-            KetQuaThiSinh ketQua = chamManager.ChamBai(SourceCode, tescase, ss);
+            KetQuaThiSinh ketQua = chamManager.ChamBai(SourceCode, tescase, ss);            
             return ketQua;
             #region Bỏ
 
