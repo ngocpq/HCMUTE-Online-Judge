@@ -46,17 +46,18 @@ namespace SPKTOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateClass(Class newClass)
+        public ActionResult CreateClass(ClassModels newClassModel)
         {
             if (User.Identity.IsAuthenticated)
             {
                 string username = User.Identity.Name;
                 if (username != "")
                 {
-                    //Class newClass = new Class();
-                    //newClass.SubjectID = newClassModel.SubjectsID;
-                    //newClass.Group = newClassModel.Group;
-                    //newClass.SchoolYear = newClassModel.SchoolYear;
+                    Class newClass = new Class();
+                    newClass.SubjectID = newClassModel.SubjectID;
+                    newClass.Term = newClassModel.Term;
+                    newClass.Group = newClassModel.Group;
+                    newClass.SchoolYear = newClassModel.SchoolYear;
                     db.Classes.AddObject(newClass);
                     db.SaveChanges();
                     return View();

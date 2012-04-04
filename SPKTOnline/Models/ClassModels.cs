@@ -10,8 +10,8 @@ namespace SPKTOnline.Models
     public  class ClassModels
     {
         [Required]
-        [DisplayName("SubjectsID")]
-        public string SubjectsID { get; set; }
+        [DisplayName("SubjectID")]
+        public string SubjectID { get; set; }
         [Required]
         [DisplayName("Group")]
         public string Group { get; set; }

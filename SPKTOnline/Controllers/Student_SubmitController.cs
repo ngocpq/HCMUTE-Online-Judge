@@ -27,7 +27,7 @@ namespace SPKTOnline.Controllers
                 if (checkRole.IsStudent(User.Identity.Name))
                 {
                     Problem p = db.Problems.FirstOrDefault(m => m.ID == ID);
-                    Student_Summit st = new Student_Summit();
+                    Student_Submit st = new Student_Submit();
                     st.Problem = p;
                     return View(st);
                 }
@@ -37,7 +37,7 @@ namespace SPKTOnline.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult TryTest(Student_Summit st)
+        public ActionResult TryTest(Student_Submit st)
         {
             if (User.Identity.IsAuthenticated == true)
             {
@@ -48,7 +48,7 @@ namespace SPKTOnline.Controllers
                     st.TrangThaiCham = (int)TrangThaiCham.ChuaCham;
                     st.LanguageID = 1;
                     st.SubmitTime = DateTime.Now;
-                    db.Student_Summit.AddObject(st);
+                    db.Student_Submit.AddObject(st);
                     
                     db.SaveChanges();
                     
@@ -70,7 +70,7 @@ namespace SPKTOnline.Controllers
 
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)
         {
-            Student_Summit st = db.Student_Summit.FirstOrDefault(t => t.ID == kq.SubmitID);
+            Student_Submit st = db.Student_Submit.FirstOrDefault(t => t.ID == kq.SubmitID);
             st.TrangThaiCham = (int)TrangThaiCham.DaCham;
             st.TrangThaiBienDich = kq.KetQuaBienDich.BienDichThanhCong?1:0;
             if(kq.KetQuaBienDich.BienDichThanhCong)

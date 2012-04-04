@@ -25,7 +25,7 @@ namespace SPKTOnline.Management
         //    public string NgonNgu { get; set; }
         //}
 
-        public void ChamBaiThread(Student_Summit st)
+        public void ChamBaiThread(Student_Submit st)
         {                                    
             Thread t = new Thread(new ParameterizedThreadStart(Start));
             t.Start(st);
@@ -34,7 +34,7 @@ namespace SPKTOnline.Management
 
         void Start(object obj)
         {
-            Student_Summit st = (Student_Summit)obj;
+            Student_Submit st = (Student_Submit)obj;
             KetQuaThiSinh kq = ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
             kq.SubmitID = st.ID;
             if (ChamThiCompleted != null)

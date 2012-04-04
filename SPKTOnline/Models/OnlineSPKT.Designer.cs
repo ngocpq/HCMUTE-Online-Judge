@@ -27,16 +27,16 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Contest), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Exam), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Submit_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Difficulty", "Difficulties", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Difficulty), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Languages", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Language), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Submit_Languages", "Languages", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Language), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problem_Subject_Problems", "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "Problem_Subject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem_Subject), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problem_Subject_Subjects", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Subject), "Problem_Subject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem_Subject), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.User), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Problems", "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Submit_Problems", "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCases_Problems", "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Problem), "TestCases", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCas), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Summit), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Summit", "Student_Summit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Student_Summit), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Submit_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Submit", "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Student_Submit), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_TestCaseResult_TestCases", "TestCases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.TestCas), "TestCaseResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.TestCaseResult), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "Class_Student", "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Class), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "Lecturer_Subject", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Subject), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.User))]
@@ -304,18 +304,18 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Student_Summit> Student_Summit
+        public ObjectSet<Student_Submit> Student_Submit
         {
             get
             {
-                if ((_Student_Summit == null))
+                if ((_Student_Submit == null))
                 {
-                    _Student_Summit = base.CreateObjectSet<Student_Summit>("Student_Summit");
+                    _Student_Submit = base.CreateObjectSet<Student_Submit>("Student_Submit");
                 }
-                return _Student_Summit;
+                return _Student_Submit;
             }
         }
-        private ObjectSet<Student_Summit> _Student_Summit;
+        private ObjectSet<Student_Submit> _Student_Submit;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -505,11 +505,11 @@ namespace SPKTOnline.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Student_Summit EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Student_Submit EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToStudent_Summit(Student_Summit student_Summit)
+        public void AddToStudent_Submit(Student_Submit student_Submit)
         {
-            base.AddObject("Student_Summit", student_Summit);
+            base.AddObject("Student_Submit", student_Submit);
         }
     
         /// <summary>
@@ -1660,18 +1660,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Student_Summit")]
-        public EntityCollection<Student_Summit> Student_Summit
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Contests", "Student_Submit")]
+        public EntityCollection<Student_Submit> Student_Submit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Contests", "Student_Summit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Contests", "Student_Submit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Contests", "Student_Summit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Contests", "Student_Submit", value);
                 }
             }
         }
@@ -2314,18 +2314,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Student_Summit")]
-        public EntityCollection<Student_Summit> Student_Summit
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Languages", "Student_Submit")]
+        public EntityCollection<Student_Submit> Student_Submit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Languages", "Student_Summit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Languages", "Student_Submit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Languages", "Student_Summit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Languages", "Student_Submit", value);
                 }
             }
         }
@@ -2798,18 +2798,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Problems", "Student_Summit")]
-        public EntityCollection<Student_Summit> Student_Summit
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Problems", "Student_Submit")]
+        public EntityCollection<Student_Submit> Student_Submit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Problems", "Student_Summit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Problems", "Student_Submit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Problems", "Student_Summit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Problems", "Student_Submit", value);
                 }
             }
         }
@@ -3207,15 +3207,15 @@ namespace SPKTOnline.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Student_Summit")]
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Student_Submit")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Student_Summit : EntityObject
+    public partial class Student_Submit : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Student_Summit object.
+        /// Create a new Student_Submit object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="problemID">Initial value of the ProblemID property.</param>
@@ -3225,18 +3225,18 @@ namespace SPKTOnline.Models
         /// <param name="trangThaiCham">Initial value of the TrangThaiCham property.</param>
         /// <param name="timeStamp">Initial value of the TimeStamp property.</param>
         /// <param name="submitTime">Initial value of the SubmitTime property.</param>
-        public static Student_Summit CreateStudent_Summit(global::System.Int32 id, global::System.Int32 problemID, global::System.String studentID, global::System.String sourceCode, global::System.Int32 trangThaiBienDich, global::System.Int32 trangThaiCham, global::System.Byte[] timeStamp, global::System.DateTime submitTime)
+        public static Student_Submit CreateStudent_Submit(global::System.Int32 id, global::System.Int32 problemID, global::System.String studentID, global::System.String sourceCode, global::System.Int32 trangThaiBienDich, global::System.Int32 trangThaiCham, global::System.Byte[] timeStamp, global::System.DateTime submitTime)
         {
-            Student_Summit student_Summit = new Student_Summit();
-            student_Summit.ID = id;
-            student_Summit.ProblemID = problemID;
-            student_Summit.StudentID = studentID;
-            student_Summit.SourceCode = sourceCode;
-            student_Summit.TrangThaiBienDich = trangThaiBienDich;
-            student_Summit.TrangThaiCham = trangThaiCham;
-            student_Summit.TimeStamp = timeStamp;
-            student_Summit.SubmitTime = submitTime;
-            return student_Summit;
+            Student_Submit student_Submit = new Student_Submit();
+            student_Submit.ID = id;
+            student_Submit.ProblemID = problemID;
+            student_Submit.StudentID = studentID;
+            student_Submit.SourceCode = sourceCode;
+            student_Submit.TrangThaiBienDich = trangThaiBienDich;
+            student_Submit.TrangThaiCham = trangThaiCham;
+            student_Submit.TimeStamp = timeStamp;
+            student_Submit.SubmitTime = submitTime;
+            return student_Submit;
         }
 
         #endregion
@@ -3495,16 +3495,16 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Contests")]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Contests", "Contests")]
         public Contest Contest
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Summit_Contests", "Contests").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Submit_Contests", "Contests").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Summit_Contests", "Contests").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Submit_Contests", "Contests").Value = value;
             }
         }
         /// <summary>
@@ -3516,13 +3516,13 @@ namespace SPKTOnline.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Summit_Contests", "Contests");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Submit_Contests", "Contests");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Summit_Contests", "Contests", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contest>("OnlineSPKTModel.FK_Student_Submit_Contests", "Contests", value);
                 }
             }
         }
@@ -3533,16 +3533,16 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Languages")]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Languages", "Languages")]
         public Language Language
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Submit_Languages", "Languages").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Submit_Languages", "Languages").Value = value;
             }
         }
         /// <summary>
@@ -3554,13 +3554,13 @@ namespace SPKTOnline.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Language>("OnlineSPKTModel.FK_Student_Submit_Languages", "Languages");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Language>("OnlineSPKTModel.FK_Student_Summit_Languages", "Languages", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Language>("OnlineSPKTModel.FK_Student_Submit_Languages", "Languages", value);
                 }
             }
         }
@@ -3571,16 +3571,16 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Problems", "Problems")]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Problems", "Problems")]
         public Problem Problem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Summit_Problems", "Problems").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Submit_Problems", "Problems").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Summit_Problems", "Problems").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Submit_Problems", "Problems").Value = value;
             }
         }
         /// <summary>
@@ -3592,13 +3592,13 @@ namespace SPKTOnline.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Summit_Problems", "Problems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Submit_Problems", "Problems");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Summit_Problems", "Problems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Problem>("OnlineSPKTModel.FK_Student_Submit_Problems", "Problems", value);
                 }
             }
         }
@@ -3609,16 +3609,16 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Users", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Users", "Users")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Summit_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Submit_Users", "Users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Summit_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Submit_Users", "Users").Value = value;
             }
         }
         /// <summary>
@@ -3630,13 +3630,13 @@ namespace SPKTOnline.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Summit_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Student_Submit_Users", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OnlineSPKTModel.FK_Student_Summit_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OnlineSPKTModel.FK_Student_Submit_Users", "Users", value);
                 }
             }
         }
@@ -3647,18 +3647,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Summit", "TestCaseResult")]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Submit", "TestCaseResult")]
         public EntityCollection<TestCaseResult> TestCaseResults
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestCaseResult>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "TestCaseResult");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestCaseResult>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "TestCaseResult");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCaseResult>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "TestCaseResult", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCaseResult>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "TestCaseResult", value);
                 }
             }
         }
@@ -4455,16 +4455,16 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Summit", "Student_Summit")]
-        public Student_Summit Student_Summit
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_TestCaseResult_Student_Submit", "Student_Submit")]
+        public Student_Submit Student_Submit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Summit>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "Student_Summit").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Submit>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "Student_Submit").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Summit>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "Student_Summit").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Submit>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "Student_Submit").Value = value;
             }
         }
         /// <summary>
@@ -4472,17 +4472,17 @@ namespace SPKTOnline.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Student_Summit> Student_SummitReference
+        public EntityReference<Student_Submit> Student_SubmitReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Summit>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "Student_Summit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student_Submit>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "Student_Submit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Student_Summit>("OnlineSPKTModel.FK_TestCaseResult_Student_Summit", "Student_Summit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Student_Submit>("OnlineSPKTModel.FK_TestCaseResult_Student_Submit", "Student_Submit", value);
                 }
             }
         }
@@ -4901,18 +4901,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Summit_Users", "Student_Summit")]
-        public EntityCollection<Student_Summit> Student_Summit
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Student_Submit_Users", "Student_Submit")]
+        public EntityCollection<Student_Submit> Student_Submit
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Users", "Student_Summit");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Users", "Student_Submit");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Summit>("OnlineSPKTModel.FK_Student_Summit_Users", "Student_Summit", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Student_Submit>("OnlineSPKTModel.FK_Student_Submit_Users", "Student_Submit", value);
                 }
             }
         }
