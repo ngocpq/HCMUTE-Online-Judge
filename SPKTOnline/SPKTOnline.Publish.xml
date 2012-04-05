@@ -4,25 +4,26 @@
     <file relUrl="Content/Images/1.png" publishTime="03/11/2012 21:51:25" />
     <file relUrl="Scripts/MicrosoftAjax.js" publishTime="02/29/2012 23:18:18" />
     <file relUrl="Content/Images/banner_top.jpg" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Views/Problem/Details.cshtml" publishTime="04/03/2012 16:53:07" />
     <file relUrl="Content/Images/Feed_24x24.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="bin/MvcSiteMapProvider.dll" publishTime="03/07/2012 09:33:13" />
-    <file relUrl="bin/ChamDiem.dll" publishTime="03/31/2012 17:14:06" />
+    <file relUrl="bin/ChamDiem.dll" publishTime="04/05/2012 10:26:48" />
     <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="02/29/2012 22:10:04" />
-    <file relUrl="Content/Images/Down_24.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Content/Images/english_flag_16.jpg" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Problem/CreateProblem.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Views/Problem/EditProblem.cshtml" publishTime="04/04/2012 21:53:36" />
+    <file relUrl="Scripts/jquery-1.5.1.js" publishTime="02/29/2012 22:10:02" />
     <file relUrl="Views/Subject/AddSubject.cshtml" publishTime="03/31/2012 06:18:03" />
     <file relUrl="Scripts/jquery.form.js" publishTime="02/29/2012 23:18:15" />
     <file relUrl="Views/Shared/DisplayTemplates/SiteMapNodeModelList.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/Images/noticeexam.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="Views/Web.config" publishTime="03/07/2012 09:33:13" />
+    <file relUrl="Views/Problem/CreateProblem.cshtml" publishTime="04/05/2012 10:19:56" />
     <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="02/29/2012 22:10:03" />
     <file relUrl="Content/Images/noticePDTEng.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="Views/TestCase/CreateTestCase.cshtml" publishTime="03/31/2012 06:18:03" />
+    <file relUrl="Views/TestCase/CreateTestCase.cshtml" publishTime="04/03/2012 16:53:07" />
     <file relUrl="Content/Images/logo3.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Scripts/jquery.validate.js" publishTime="02/29/2012 23:18:16" />
-    <file relUrl="bin/EntityFramework.xml" publishTime="02/29/2012 22:10:05" />
+    <file relUrl="Content/Images/Refresh.png" publishTime="02/29/2012 23:17:02" />
+    <file relUrl="Views/Error/Index.cshtml" publishTime="04/05/2012 11:49:32" />
     <file relUrl="Content/Images/banner_right.jpg" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/themes/base/jquery.ui.all.css" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Scripts/jquery-1.5.1-vsdoc.js" publishTime="02/29/2012 22:10:02" />
@@ -30,11 +31,12 @@
     <file relUrl="Views/Problem/Browse.cshtml" publishTime="03/31/2012 06:18:03" />
     <file relUrl="Scripts/modernizr-1.7.min.js" publishTime="02/29/2012 22:10:07" />
     <file relUrl="Views/Shared/DisplayTemplates/MenuHelperModel.cshtml" publishTime="03/07/2012 09:49:27" />
+    <file relUrl="bin/SPKTOnline.pdb" publishTime="04/05/2012 11:51:32" />
     <file relUrl="Views/Shared/Error.cshtml" publishTime="02/29/2012 22:09:57" />
-    <file relUrl="Content/Images/top.png" publishTime="02/29/2012 23:17:02" />
+    <file relUrl="Views/Contest/MyContest.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Content/Images/image 85.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/right2.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="Content/Images/login_icon.png" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Views/Search/Index.cshtml" publishTime="04/03/2012 16:53:07" />
     <file relUrl="Content/Images/guideEng.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/Maps_small.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/Images/author-48.png" publishTime="02/29/2012 23:17:01" />
@@ -50,60 +52,66 @@
     <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="02/29/2012 22:10:03" />
     <file relUrl="Content/Images/FaceBook_24x24.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/catalogue.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Problem/AllProblemForUpDate.cshtml" publishTime="03/31/2012 06:18:03" />
+    <file relUrl="Views/Problem/AllProblemForUpDate.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Scripts/jquery-ui-1.8.11.min.js" publishTime="02/29/2012 22:10:03" />
     <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/Style.css" publishTime="02/29/2012 23:15:56" />
-    <file relUrl="Content/Images/Refresh_24.png" publishTime="02/29/2012 23:17:02" />
+    <file relUrl="XML/English.xml" publishTime="03/09/2012 11:29:30" />
+    <file relUrl="Views/Class/CreateClass.cshtml" publishTime="04/04/2012 23:05:20" />
     <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="02/29/2012 23:18:20" />
     <file relUrl="Views/Shared/DisplayTemplates/SiteMapNodeModel.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="Content/Images/banner_center.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="bin/SPKTOnline.pdb" publishTime="03/31/2012 17:14:11" />
+    <file relUrl="Views/Account/CreateUser.cshtml" publishTime="03/31/2012 17:09:48" />
     <file relUrl="Content/Images/Notes_small.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/Images/favicon.ico" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/Ebook-Icon.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Content/Images/box_mtl_ctr.gif" publishTime="02/29/2012 23:06:29" />
+    <file relUrl="Views/Class/MyClass.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Global.asax" publishTime="02/29/2012 22:09:57" />
     <file relUrl="Content/Images/noticeexamEng.png" publishTime="02/29/2012 23:17:02" />
+    <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="ServiceChamBai.asmx" publishTime="03/31/2012 17:09:48" />
     <file relUrl="Content/Images/arrow_left.gif" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Content/Images/Refresh_24.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="02/29/2012 23:18:21" />
-    <file relUrl="Views/Account/Import.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Views/Account/Import.cshtml" publishTime="04/03/2012 16:53:07" />
     <file relUrl="Content/Images/Down_16.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Web.config" publishTime="03/31/2012 17:28:52" />
+    <file relUrl="Web.config" publishTime="04/05/2012 11:39:40" />
     <file relUrl="XML/Memberships.xml" publishTime="03/09/2012 11:29:30" />
-    <file relUrl="Views/Shared/DisplayTemplates/SiteMapHelperModel.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="Content/Images/Twitter_24x24.png" publishTime="02/29/2012 23:17:02" />
+    <file relUrl="Views/Student_Submit/TryTest.cshtml" publishTime="04/04/2012 23:11:40" />
     <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="02/29/2012 23:18:20" />
-    <file relUrl="Content/Images/Refresh.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="Content/Images/help.png" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Views/Account/SetPassword.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="XML/VietNamese.xml" publishTime="03/09/2012 11:29:30" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="02/29/2012 22:09:57" />
     <file relUrl="Content/Images/book.PNG" publishTime="02/29/2012 23:17:01" />
     <file relUrl="packages.config" publishTime="03/07/2012 09:33:16" />
     <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="02/29/2012 22:10:04" />
+    <file relUrl="Content/Images/help.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/noticePDT2.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="XML/English.xml" publishTime="03/09/2012 11:29:30" />
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/Images/check.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/btnsearch.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Shared/NotBuilt.cshtml" publishTime="03/31/2012 06:18:03" />
+    <file relUrl="Views/Account/ManageRoles.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Content/Images/wellcome.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="02/29/2012 22:09:57" />
     <file relUrl="Content/Images/E_L.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Views/_ViewStart.cshtml" publishTime="02/29/2012 22:09:57" />
     <file relUrl="Content/Images/E-Learning.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="02/29/2012 22:10:04" />
+    <file relUrl="Views/Result/TryTestResult.cshtml" publishTime="04/05/2012 10:19:56" />
     <file relUrl="Content/Images/banner_button.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/header_v8.swf" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="XML/menu.xml" publishTime="03/31/2012 17:09:48" />
-    <file relUrl="Views/Account/CreateUser.cshtml" publishTime="03/31/2012 17:09:48" />
-    <file relUrl="Views/Account/EditUser.cshtml" publishTime="03/31/2012 06:18:03" />
+    <file relUrl="XML/menu.xml" publishTime="04/05/2012 10:26:31" />
+    <file relUrl="Views/Account/EditUser.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Content/Images/vietnam_flag_16.gif" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/Images/Cancel_32.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="02/29/2012 23:18:18" />
+    <file relUrl="Content/Images/top.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="02/29/2012 22:10:03" />
-    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="02/29/2012 22:09:57" />
-    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="02/29/2012 23:18:18" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="02/29/2012 22:10:04" />
+    <file relUrl="Views/Result/ContestResult.cshtml" publishTime="04/04/2012 21:53:36" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="02/29/2012 23:18:18" />
+    <file relUrl="Views/Class/Index.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Views/Shared/DisplayTemplates/SiteMapTitleHelperModel.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="Content/Images/Mail_small.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/Images/banner_button4.png" publishTime="02/29/2012 23:17:01" />
@@ -111,25 +119,24 @@
     <file relUrl="Content/Images/left.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Scripts/jquery.tablesorter.min.js" publishTime="02/29/2012 23:18:15" />
-    <file relUrl="XML/VietNamese.xml" publishTime="03/09/2012 11:29:30" />
     <file relUrl="Mvc.sitemap" publishTime="03/07/2012 09:50:55" />
     <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/Images/image 20.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Scripts/jquery-1.5.1.js" publishTime="02/29/2012 22:10:02" />
-    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Views/Notbuild/Index.cshtml" publishTime="04/03/2012 16:53:07" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Views/Subject/Index.cshtml" publishTime="03/31/2012 06:18:03" />
     <file relUrl="Content/Images/image 15_resize.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="02/29/2012 22:10:04" />
+    <file relUrl="Views/Account/EditAccount.cshtml" publishTime="04/04/2012 21:53:36" />
+    <file relUrl="Views/Web.config" publishTime="03/07/2012 09:33:13" />
     <file relUrl="Scripts/jquery.blockUI.js" publishTime="02/29/2012 23:18:15" />
-    <file relUrl="bin/ChamDiem.pdb" publishTime="03/31/2012 17:14:06" />
+    <file relUrl="bin/ChamDiem.pdb" publishTime="04/05/2012 10:26:48" />
     <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Content/tablecss.css" publishTime="02/29/2012 23:15:56" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="02/29/2012 22:10:05" />
     <file relUrl="Content/Images/s3.gif" publishTime="02/29/2012 23:05:25" />
     <file relUrl="Scripts/jquery.Jcrop.min.js" publishTime="02/29/2012 23:18:15" />
     <file relUrl="Content/Images/Evernote_small.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Account/SetPassword.cshtml" publishTime="03/31/2012 17:09:48" />
     <file relUrl="Content/Images/digitalclock2.swf" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/Down_32.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/banner_button2.png" publishTime="02/29/2012 23:17:01" />
@@ -141,18 +148,21 @@
     <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="02/29/2012 22:10:04" />
     <file relUrl="Scripts/jquery-ui-1.8.11.js" publishTime="02/29/2012 22:10:03" />
     <file relUrl="Content/Site.css" publishTime="03/17/2012 10:59:29" />
-    <file relUrl="bin/SPKTOnline.dll" publishTime="03/31/2012 17:14:11" />
+    <file relUrl="bin/SPKTOnline.dll" publishTime="04/05/2012 11:51:32" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="02/29/2012 22:09:57" />
-    <file relUrl="Content/Images/helpEng.png" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Content/Images/english_flag_16.jpg" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Scripts/modernizr-1.7.js" publishTime="02/29/2012 22:10:07" />
     <file relUrl="Content/Images/image 10.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/advertisment-48.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="02/29/2012 23:18:18" />
+    <file relUrl="bin/EntityFramework.xml" publishTime="02/29/2012 22:10:05" />
+    <file relUrl="Views/Result/TryTestAllResult.cshtml" publishTime="04/05/2012 10:19:56" />
+    <file relUrl="Content/Images/helpEng.png" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Views/Contest/Index.cshtml" publishTime="04/04/2012 21:53:36" />
     <file relUrl="Content/Images/Text_banner.png" publishTime="02/29/2012 23:17:02" />
-    <file relUrl="Views/Problem/EditProblem.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Views/Shared/DisplayTemplates/SiteMapHelperModel.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="bin/EntityFramework.dll" publishTime="02/29/2012 22:10:05" />
     <file relUrl="Content/Images/banner_button3.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Problem/Details.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Content/Images/box_mtl_ctr.gif" publishTime="02/29/2012 23:06:29" />
     <file relUrl="Content/Images/loading45.gif" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/Text_banner2.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="02/29/2012 22:10:04" />
@@ -161,18 +171,21 @@
     <file relUrl="Content/Images/Globe Internet_2.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="02/29/2012 22:10:05" />
     <file relUrl="Content/Images/guide.png" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Content/Images/login_icon.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/logo2.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Views/Shared/DisplayTemplates/SiteMapPathHelperModel.cshtml" publishTime="03/07/2012 09:49:28" />
     <file relUrl="Content/Images/2.png" publishTime="03/11/2012 21:49:10" />
     <file relUrl="Content/Images/right.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Content/Images/notice.png" publishTime="02/29/2012 23:17:02" />
     <file relUrl="Views/Account/AddLecture_Subject.cshtml" publishTime="03/24/2012 15:30:16" />
+    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="02/29/2012 23:18:18" />
     <file relUrl="Scripts/jquery.validate.min.js" publishTime="02/29/2012 23:18:17" />
     <file relUrl="Content/Images/check.jpg" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/digitalclock.swf" publishTime="02/29/2012 23:17:01" />
+    <file relUrl="Content/Images/Down_24.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/image 15.png" publishTime="02/29/2012 23:17:01" />
     <file relUrl="Content/Images/button_24.png" publishTime="02/29/2012 23:17:01" />
-    <file relUrl="Views/Account/Logon.cshtml" publishTime="03/31/2012 17:09:48" />
+    <file relUrl="Views/Account/Logon.cshtml" publishTime="04/03/2012 21:36:36" />
     <file relUrl="Content/themes/base/jquery.ui.base.css" publishTime="02/29/2012 22:10:04" />
     <file relUrl="bin/MvcSiteMapProvider.xml" publishTime="03/07/2012 09:33:13" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="02/29/2012 22:10:04" />

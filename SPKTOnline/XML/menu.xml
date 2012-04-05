@@ -6,10 +6,10 @@
     <TitleEng>Class</TitleEng>
     <Link>/Class</Link>
     <Roles>
-      <Role>Lecturer</Role>
-      <Role>Student</Role>
+      <!--<Role>Lecturer</Role>
+      <Role>Student</Role>-->
       <Role>Admin</Role>
-      <Role>Guest</Role>
+      <!--<Role>Guest</Role>-->
     </Roles>
     <Menu2>
       <Title>Tất cả lớp học</Title>
@@ -28,9 +28,9 @@
     <Link>/Contest</Link>
     <Roles>
       <Role>Admin</Role>
-      <Role>Lecturer</Role>
+      <!--<Role>Lecturer</Role>
       <Role>Student</Role>
-      <Role>Guest</Role>
+      <Role>Guest</Role>-->
     </Roles>
     <Menu2>
       <Title>Tất cả Kỳ Thi</Title>

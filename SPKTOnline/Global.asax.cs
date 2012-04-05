@@ -55,5 +55,49 @@ namespace SPKTOnline
 
             Language = new Dictionary<string, ILanguage>();
         }
+
+        void WriteToEventLog(Exception e)
+        {
+            if (e != null)
+            {
+                try
+                {
+                    IOFile mIOFile = new IOFile();
+                    mIOFile.WriteExceptionToFile(e);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        void WriteToEventLog(string message)
+        {
+            try
+            {
+                IOFile mIOFile = new IOFile();
+                mIOFile.WriteLogErrorToFile(message);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            // Code that runs when an unhandled error occurs
+            Exception ex = Server.GetLastError();
+            try
+            {
+                string ip = "";
+                ip = Request.ServerVariables["REMOTE_ADDR"];
+                WriteToEventLog(new Exception("User IP: " + ip, ex));
+            }
+            catch (Exception err)
+            {
+                Response.Redirect("~/Error");
+            }
+        }        
     }
 }
