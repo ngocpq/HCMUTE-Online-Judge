@@ -36,8 +36,8 @@ namespace ChamDiem
 
         string GetCompileOption(string sourceFile, string exeFile)
         {
-            string fileNameWithowExt = Path.GetFileNameWithoutExtension(exeFile);
-            string objFile = fileNameWithowExt + ".obj";
+            string objFile = Path.ChangeExtension(exeFile,".obj");
+            
             return String.Format("\"{0}\" /I\"{1}\" /Fo\"{2}\" /Fe\"{3}\" /link/LIBPATH:\"{4}\"", sourceFile, IncludeDir, objFile, exeFile, LibDir);
         }
 
@@ -79,7 +79,7 @@ namespace ChamDiem
                     else
                     {
                         ketQua.BienDichThanhCong = false;
-                        ketQua.FilePath = String.Format("Lỗi biên dịch: {0}", rs.Error);
+                        ketQua.Message= String.Format("Lỗi biên dịch: {0}\n{1}",rs.Error, rs.Output);
                     }
                     break;
             }

@@ -19,7 +19,8 @@ namespace SPKTOnline.Controllers
         }
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
-        public ActionResult TryTestResult(string Message)
+        [ValidateInput(false)]
+        public ActionResult TryTestAllResult(string Message)
         {
             string StudentName = User.Identity.Name;
             if (User.Identity.IsAuthenticated)
@@ -36,6 +37,28 @@ namespace SPKTOnline.Controllers
                     return View(list);
                 }
                 
+            }
+            return RedirectToAction("Logon", "Account");//trả ra bạn không được xem trang này
+        }
+         [ValidateInput(false)]
+        public ActionResult TryTestResult(int? ID, string Message)
+        {
+            string StudentName = User.Identity.Name;
+            if (User.Identity.IsAuthenticated)
+            {
+                if (StudentName != null && checkRole.IsStudent(StudentName))
+                {
+                    Student_Submit st = db.Student_Submit.Where(p => p.ID == ID).FirstOrDefault();
+                    ViewBag.Message = Message;
+                    //List<TestCaseResult> list = new List<TestCaseResult>();
+                    //var tcResult = db.TestCaseResults.Where(p => p.StudentSubmitID == st.ID);
+                    //foreach (var t in tcResult)
+                    //{
+                    //    list.Add(t);
+                    //}
+                    return View(st);
+                }
+
             }
             return RedirectToAction("Logon", "Account");//trả ra bạn không được xem trang này
         }

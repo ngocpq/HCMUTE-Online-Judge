@@ -66,7 +66,7 @@
     <Menu2>
       <Title>Kết quả thi thử</Title>
       <TitleEng></TitleEng>
-      <Link>/Result/TryTestResult</Link>
+      <Link>/Result/TryTestAllResult</Link>
     </Menu2>
     <Menu2>
       <Title>Kết quả kỳ thi</Title>
