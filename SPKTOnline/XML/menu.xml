@@ -59,8 +59,7 @@
     <TitleEng>Results</TitleEng>
     <Link></Link>
     <Roles>
-      <Role>Admin</Role>
-      <Role>Lecturer</Role>
+      
       <Role>Student</Role>
     </Roles>
     <Menu2>
@@ -73,6 +72,21 @@
       <TitleEng></TitleEng>
       <Link>/Result/ContestResult</Link>
     </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Xem Kết Quả</Title>
+    <TitleEng>Results</TitleEng>
+    <Link></Link>
+    <Roles>
+      
+      <Role>Lecturer</Role>
+    </Roles>
+    <Menu2>
+      <Title>Kết quả thi thử</Title>
+      <TitleEng></TitleEng>
+      <Link>/Result/LecturerViewProblem</Link>
+    </Menu2>
+   
   </Menu1>
   <Menu1>
     <Title>Quản lý người Dùng</Title>

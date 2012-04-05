@@ -43,10 +43,10 @@ namespace SPKTOnline.Controllers
          [ValidateInput(false)]
         public ActionResult TryTestResult(int? ID, string Message)
         {
-            string StudentName = User.Identity.Name;
+            string Name = User.Identity.Name;
             if (User.Identity.IsAuthenticated)
             {
-                if (StudentName != null && checkRole.IsStudent(StudentName))
+                if ((Name != null && checkRole.IsStudent(Name)) || (Name != null && checkRole.IsLecturer(Name)))
                 {
                     Student_Submit st = db.Student_Submit.Where(p => p.ID == ID).FirstOrDefault();
                     ViewBag.Message = Message;
@@ -66,5 +66,39 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
+        public ActionResult LecturerViewTryResult(int? ProblemID)
+        {
+
+                var student_submit = db.Student_Submit.Where(p => p.ProblemID == ProblemID);
+                List<Student_Submit> list = new List<Student_Submit>();
+                foreach (var i in student_submit)
+                {
+                    list.Add(i);
+                }
+                
+                return View(list);
+     
+        }
+        public ActionResult LecturerViewProblem()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (checkRole.IsLecturer(User.Identity.Name))
+                {
+                    var listPro_sub = db.Problem_Subject.Where(s => s.Problem.LecturerID == HttpContext.User.Identity.Name);
+                    List<Problem> list = new List<Problem>();
+                    foreach (var i in listPro_sub)
+                    {
+                        list.Add(i.Problem);
+                    }
+
+                    return View(list);
+                }
+                return RedirectToAction("Logon", "Account");
+            }
+            else
+                return RedirectToAction("Logon", "Account");
+        }
+
     }
 }

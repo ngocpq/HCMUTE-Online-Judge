@@ -74,7 +74,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\ContestController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyClass.cs" />
     <Compile Include="Controllers\NotbuildController.cs" />
@@ -92,7 +91,6 @@
     <Compile Include="Management\ChamDiemServise.cs" />
     <Compile Include="Management\CheckRoles.cs" />
     <Compile Include="Management\EnCrypt\Cryptography.cs" />
-    <Compile Include="Management\LogUtil.cs" />
     <Compile Include="Management\Menu\IMenu.cs" />
     <Compile Include="Management\Menu\MenuManager.cs" />
     <Compile Include="Management\MultiLanguage\English.cs" />
@@ -100,7 +98,6 @@
     <Compile Include="Management\MultiLanguage\MultiLanguage.cs" />
     <Compile Include="Management\MultiLanguage\VietNamese.cs" />
     <Compile Include="Management\MyEnum.cs" />
-    <Compile Include="Management\PathUtility.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClassModels.cs" />
     <Compile Include="Models\OnlineSPKT.Designer.cs">
@@ -347,7 +344,8 @@
     <Content Include="Views\Account\ManageRoles.cshtml" />
     <Content Include="Views\Class\CreateClass.cshtml" />
     <Content Include="Views\Result\TryTestAllResult.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Result\LecturerViewTryResult.cshtml" />
+    <Content Include="Views\Result\LecturerViewProblem.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
