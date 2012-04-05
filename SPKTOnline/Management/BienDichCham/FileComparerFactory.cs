@@ -12,8 +12,8 @@ namespace SPKTOnline.Management
     {        
         public static IFileComparer GetComparer(string assemblyName, string className)
         {
-            string root = HttpContext.Current.Server.MapPath("~/");
-            string comparersDir = Path.Combine(root,WebConfigurationManager.AppSettings["ComparersDir"]);
+            //string root = HttpContext.Current.Server.MapPath("~/");
+            string comparersDir = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings["ComparersDir"]);
             string asmPath = Path.Combine(comparersDir, assemblyName);
 
             if (!File.Exists(asmPath))

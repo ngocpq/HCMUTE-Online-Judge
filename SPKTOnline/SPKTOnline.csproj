@@ -109,6 +109,7 @@
     <Compile Include="Models\Student_SubmitModels.cs" />
     <Compile Include="Models\TestCas.cs" />
     <Compile Include="Models\TestCaseModels.cs" />
+    <Compile Include="Models\TrangThaiBienDich.cs" />
     <Compile Include="Models\TrangThaiCham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ProblemRepository.cs" />
@@ -342,6 +343,7 @@
     <Content Include="Views\Class\MyClass.cshtml" />
     <Content Include="Views\Account\ManageRoles.cshtml" />
     <Content Include="Views\Class\CreateClass.cshtml" />
+    <Content Include="Views\Result\TryTestAllResult.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
@@ -381,7 +383,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3658</DevelopmentServerPort>
+          <DevelopmentServerPort>10574</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

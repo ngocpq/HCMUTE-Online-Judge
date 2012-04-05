@@ -55,14 +55,16 @@ namespace SPKTOnline.Controllers
                     ChamDiemServise chamThiService = new ChamDiemServise();                    
                     //Chay va doi
                     //                    
-                    //KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
+                    KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
+                    kq.SubmitID = st.ID;
+                    chamThiService_ChamThiCompleted(null, kq);
                     //
                     //Chay ko doi
-                    chamThiService.ChamThiCompleted += new ChamThiServiceEventHandler(chamThiService_ChamThiCompleted);
-                    chamThiService.ChamBaiThread(st);
-                    st.TrangThaiCham = (int)TrangThaiCham.DangCham;
-                    db.SaveChanges();
-                    return RedirectToAction("TryTestResult", "Result", new { Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
+                    //chamThiService.ChamThiCompleted += new ChamThiServiceEventHandler(chamThiService_ChamThiCompleted);
+                    //chamThiService.ChamBaiThread(st);
+                    //st.TrangThaiCham = (int)TrangThaiCham.DangCham;
+                    //db.SaveChanges();
+                    return RedirectToAction("TryTestResult", "Result",new {ID=st.ID, Message = "<b>Bạn đã gửi bài làm thành công</b>" });//trả ra thông tin ở trang kết quả.
                 }
             }
             return RedirectToAction("Logon", "Home");
@@ -73,11 +75,11 @@ namespace SPKTOnline.Controllers
             Student_Submit st = db.Student_Submit.FirstOrDefault(t => t.ID == kq.SubmitID);
             st.TrangThaiCham = (int)TrangThaiCham.DaCham;
             st.TrangThaiBienDich = kq.KetQuaBienDich.BienDichThanhCong?1:0;
-            if(kq.KetQuaBienDich.BienDichThanhCong)
+            if (kq.KetQuaBienDich.BienDichThanhCong)
             {
-                foreach(var rs in kq.KetQuaCham.KetQuaTestCases)
+                foreach (var rs in kq.KetQuaCham.KetQuaTestCases)
                 {
-                    TestCas tc =((TestCas)rs.TestCase);
+                    TestCas tc = ((TestCas)rs.TestCase);
                     TestCaseResult tcResult = new TestCaseResult();
                     tcResult.TestCaseID = tc.MaTestCase;
                     tcResult.StudentSubmitID = st.ID;
@@ -85,10 +87,14 @@ namespace SPKTOnline.Controllers
                     tcResult.Comment = rs.ThongDiep;
                     //TODO: Them Error
                     //tcResult.Error = rs.Error;
-                    db.TestCaseResults.AddObject(tcResult);                    
+                    db.TestCaseResults.AddObject(tcResult);
                 }
                 db.SaveChanges();
-            }            
+            }
+            else
+            {
+                st.CompilerError = kq.KetQuaBienDich.Message;
+            }
 
         }
 
