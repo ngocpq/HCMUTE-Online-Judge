@@ -67,7 +67,7 @@ namespace ChamDiem
                 case RunResult.ResultState.Error:
                     ketQua.BienDichThanhCong = false;
                     ketQua.FilePath = null;
-                    ketQua.Message = String.Format("Error: {0}", rs.Error);
+                    ketQua.Message = String.Format("Chương trình biên dịch lỗi: {0}", rs.Error);
                     break;
                 case RunResult.ResultState.Success:
                     if (rs.ExitCode == 0)
@@ -79,7 +79,8 @@ namespace ChamDiem
                     else
                     {
                         ketQua.BienDichThanhCong = false;
-                        ketQua.Message= String.Format("Lỗi biên dịch: {0}\n{1}",rs.Error, rs.Output);
+                        string outMess =String.Format("{0}\n{1}",rs.Error, rs.Output);
+                        ketQua.Message = "Lỗi biên dịch: "+outMess.Substring(outMess.IndexOf(":") + 1);
                     }
                     break;
             }

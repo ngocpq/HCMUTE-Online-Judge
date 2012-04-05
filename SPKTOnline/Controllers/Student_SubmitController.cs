@@ -49,13 +49,19 @@ namespace SPKTOnline.Controllers
                     st.LanguageID = 1;
                     st.SubmitTime = DateTime.Now;
                     db.Student_Submit.AddObject(st);
-                    
+
+                    LogUtility.Logger.WriteDebug("Bat dau save");
                     db.SaveChanges();
-                    
+                    LogUtility.Logger.WriteDebug("Save lan 1");
                     ChamDiemServise chamThiService = new ChamDiemServise();                    
                     //Chay va doi
-                    //                    
+                    //
+                    st.TrangThaiCham = (int)TrangThaiCham.DangCham;
+                    LogUtility.Logger.WriteDebug("Save lan 2");
+                    db.SaveChanges();
+                    LogUtility.Logger.WriteDebug("Bat dau cham");
                     KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
+                    LogUtility.Logger.WriteDebug("Cham xong");
                     kq.SubmitID = st.ID;
                     chamThiService_ChamThiCompleted(null, kq);
                     //
@@ -72,11 +78,13 @@ namespace SPKTOnline.Controllers
 
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)
         {
+
             Student_Submit st = db.Student_Submit.FirstOrDefault(t => t.ID == kq.SubmitID);
             st.TrangThaiCham = (int)TrangThaiCham.DaCham;
             st.TrangThaiBienDich = kq.KetQuaBienDich.BienDichThanhCong?1:0;
             if (kq.KetQuaBienDich.BienDichThanhCong)
             {
+                LogUtility.Logger.WriteDebug("Bien dich thanh cong");
                 foreach (var rs in kq.KetQuaCham.KetQuaTestCases)
                 {
                     TestCas tc = ((TestCas)rs.TestCase);
@@ -88,14 +96,15 @@ namespace SPKTOnline.Controllers
                     //TODO: Them Error
                     //tcResult.Error = rs.Error;
                     db.TestCaseResults.AddObject(tcResult);
-                }
-                db.SaveChanges();
+                }            
             }
             else
             {
+                LogUtility.Logger.WriteDebug("Bien dich that bai");
                 st.CompilerError = kq.KetQuaBienDich.Message;
             }
-
+            LogUtility.Logger.WriteDebug("Luu ket qua");
+            db.SaveChanges();
         }
 
     }
