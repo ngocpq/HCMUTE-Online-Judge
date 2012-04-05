@@ -32,7 +32,7 @@ namespace SPKTOnline.Controllers
                     return View(st);
                 }
             }
-            return RedirectToAction("Logon", "Home");
+            return RedirectToAction("Logon", "Account");
         }
 
         [ValidateInput(false)]
@@ -67,7 +67,7 @@ namespace SPKTOnline.Controllers
                     return RedirectToAction("TryTestResult", "Result",new {ID=st.ID, Message = "<b>Bạn đã gửi bài làm thành công</b>" });//trả ra thông tin ở trang kết quả.
                 }
             }
-            return RedirectToAction("Logon", "Home");
+            return RedirectToAction("Logon", "Account");
         }
 
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)

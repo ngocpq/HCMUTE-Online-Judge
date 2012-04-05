@@ -10,6 +10,7 @@ namespace SPKTOnline.Models
     }
     public partial class Student_Submit
     {
+
         public TrangThaiCham TrangThai
         {
             get { return (Models.TrangThaiCham)TrangThaiCham; }

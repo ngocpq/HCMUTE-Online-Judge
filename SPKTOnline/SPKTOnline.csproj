@@ -344,6 +344,8 @@
     <Content Include="Views\Account\ManageRoles.cshtml" />
     <Content Include="Views\Class\CreateClass.cshtml" />
     <Content Include="Views\Result\TryTestAllResult.cshtml" />
+    <Content Include="Views\Result\LecturerViewTryResult.cshtml" />
+    <Content Include="Views\Result\LecturerViewProblem.cshtml" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
     <None Include="XML\menu.dtd" />
