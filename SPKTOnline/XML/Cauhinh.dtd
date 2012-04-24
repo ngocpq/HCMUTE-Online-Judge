@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ENTER_NAME_OF_ROOT_ELEMENT_HERE EMPTY>
+<!ELEMENT Cauhoi (Tencauhoi,Dokho,Diem,Testcases)>
+<!ELEMENT Tencauhoi (#PCDATA)>
+<!ELEMENT Dokho (#PCDATA)>
+<!ELEMENT Diem (#PCDATA)>
+<!ELEMENT Testcases (Testcase*)>
+<!ELEMENT Testcase (STT,phantramdiem,mota)>
+<!ELEMENT STT (#PCDATA)>
+<!ELEMENT phantramdiem (#PCDATA)>
+<!ELEMENT mota (#PCDATA)>

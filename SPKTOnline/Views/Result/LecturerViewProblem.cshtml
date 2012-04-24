@@ -57,10 +57,8 @@
                     }
                 </td>
                 <td>
-                    @foreach (var subject in item.Problem_Subject)
-                    {
-                         @Html.Display(subject.Subject.Name)
-                    }
+                       @Html.DisplayFor(modelItem=>item.Subject.Name)
+                   
                 </td>
                 <td>
                     

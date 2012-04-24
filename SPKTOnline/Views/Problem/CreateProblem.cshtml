@@ -41,6 +41,10 @@
         @Html.ValidationSummary(true)
         <fieldset>
             <legend>Câu hỏi</legend>
+            @if(Model.ExamID!=0)
+            {
+                @Html.HiddenFor(model=>model.ExamID)
+            }
             <div class="editor-label">
                 @Html.Label("Tên câu hỏi gợi ý")
             </div>
@@ -55,7 +59,13 @@
                 @Html.TextAreaFor(model => model.Content, 20, 75, new { @style = "resize: none;" })
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
-
+            <div class="editor-label">
+                @Html.Label("Điểm")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Score)
+                @Html.ValidationMessageFor(model => model.Score)
+            </div>
             <div class="editor-label">
                 @Html.Label("Giới hạn bộ nhớ")
             </div>
@@ -94,17 +104,7 @@
         </div>
         Chọn môn học:
        <div class="editor-field">
-            @foreach (var o in ViewBag.SubjectID)
-            {
-                var optionValue = "MyOptions_" + o.Value; 
-                <input type="checkbox"  
-                     id="@optionValue" 
-                     name="SubjectID" 
-                     value="@o.Value"/> 
-                <label for="@optionValue">@o.Text</label> 
-                <br /> 
-            }
-            </div>
+           @Html.DropDownList("SubjectID", "(Môn học)")
          Chọn lớp học:
        <div class="editor-field">
             @foreach (var o in ViewBag.ClassID)

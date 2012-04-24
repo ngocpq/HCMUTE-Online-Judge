@@ -1,0 +1,63 @@
+﻿@model SPKTOnline.Models.Problem
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function CheckImage() {
+
+        var ext = $('#file').val().split('.').pop().toLowerCase();
+        if (ext != "") {
+            if ($.inArray(ext, ['zip','docx','gif']) == -1) {
+                alert('Yêu cầu giáo viên chọn file zip!');
+                //                return false;
+                $('#msg').show();
+                document.getElementById("msg").innerHTML = "<span style='color:Red'>Tệp tin không hợp lệ. Giáo viên hãy chọn file zip!</span>";
+                $('#ok').hide();
+
+            }
+            else {
+                $('#msg').hide();
+                $('#ok').show();
+
+            }
+        }
+    }
+</script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    TẠO CÂU HỎI</div>
+
+@ViewBag.Message
+@using (Html.BeginForm("Upload", "UploadProblem", FormMethod.Post,
+                         new { enctype = "multipart/form-data" }))
+{
+         if (Model.ExamID != 0)
+         {
+                    @Html.HiddenFor(model => model.ExamID)
+         }
+        <div class ="editor-label">
+        Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+        </div>
+        
+        <div class="editor-label">
+        Chọn file đề
+        </div>
+        <div class="editor-field">          
+              <input type="file"  name="filebase" accept=".zip"  id="file" onmouseout="CheckImage()"/>
+              <div id="msg"></div>
+        </div>
+        <div class ="editor-label">
+        Số điểm: @Html.TextBoxFor(model => model.Score)
+        </div>
+
+         <div class ="editor-label">
+        Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
+        </div>
+        <div>
+        <input type="submit" value="Submit" />
+        </div>
+}
+
+

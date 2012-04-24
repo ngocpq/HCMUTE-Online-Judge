@@ -24,6 +24,9 @@
                Hình thức so sánh
             </th>
             <th>
+               Số điểm
+            </th>
+            <th>
                Môn học
             </th>
              <th>
@@ -52,11 +55,15 @@
                         @Html.DisplayFor(modelItem => item.ComparerParameter)
                     }
                 </td>
+               <td>
+                  
+                         @Html.DisplayFor(modelItem=>item.Score)
+                   
+                </td>
                 <td>
-                    @foreach (var subject in item.Problem_Subject)
-                    {
-                         @Html.Display(subject.Subject.Name)
-                    }
+                  
+                         @Html.DisplayFor(modelItem=>item.Subject.Name)
+                   
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) |

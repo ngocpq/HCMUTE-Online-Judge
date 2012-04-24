@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using DevExpress.Web.Mvc;
+
 
 namespace SPKTOnline.Models
 {
@@ -21,6 +23,9 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("SchoolYear")]
         public string SchoolYear { get; set; }
+        [Required]
+        [DisplayName("LecturerID")]
+        public string LecturerID { get; set; }
     }
     
 }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System;
 using SPKTOnline.Reponsitories;
+using System.Collections;
 
 
 namespace SPKTOnline.Controllers
@@ -18,6 +19,7 @@ namespace SPKTOnline.Controllers
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
+        public List<Problem> list;
         public ActionResult Index()
         {
             IEnumerable<SPKTOnline.Models.Subject> sb = db.Subjects;
@@ -29,12 +31,12 @@ namespace SPKTOnline.Controllers
         {
             if (ID != null)
             {
-                var ds = db.Problem_Subject;
+              
                 List<Problem> dsProblem = new List<Problem>();
-                foreach (var s in ds)
+                var list = db.Problems.Where(p => p.SubjectID == ID);
+                foreach (var i in list)
                 {
-                    if ((s.SubjectID == ID)&&(s.Problem.IsHiden==false))
-                        dsProblem.Add(s.Problem);
+                    dsProblem.Add(i);
                 }
                 return View(dsProblem);
 
@@ -43,6 +45,21 @@ namespace SPKTOnline.Controllers
                 return View("Index", "Home");
 
             
+        }
+        //public static IEnumerable GetProblem()
+        //{
+        //    return from i in list
+        //           select new
+        //           {
+        //               i.ID,
+        //               i.Name,
+        //               i.User.Username,
+        //               i.Difficulty.Name
+        //           };
+        //}
+        public ActionResult GridviewPartial()
+        {
+            return PartialView("GridviewPartial", list);
         }
         public ActionResult Details(int ID)
         {
@@ -85,29 +102,25 @@ namespace SPKTOnline.Controllers
                  return RedirectToAction("Logon", "Account");
         }
         [HttpGet]
-        public ActionResult CreateProblem()
+        public ActionResult CreateProblem(int ID=0)
         {
+           
             string name=HttpContext.User.Identity.Name;
             if(name!=null)
             {
                 if (checkRole.IsLecturer(name))
                 {
                     ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
-                    ViewBag.SubjectID = new MultiSelectList(ProblemRep.GetListSubjectByLecturerID(name), "ID", "Name");
-                    ViewBag.ComparerID = new MultiSelectList(db.Comparers, "ID", "Name");
+                    ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(name), "ID", "Name");
+                    ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name");
                     ViewBag.ClassID = new MultiSelectList(db.Classes, "ID", "SubjectID");
-                    //List<SelectListItem> list = new List<SelectListItem>();
-                    //SelectListItem item;
-                    //foreach (Difficulty dokho in db.Difficulties )
+                    //if (ID != 0)
                     //{
-                    //    item = new SelectListItem { Text = dokho.Name, Value = dokho.ID.ToString() };
-                    //    list.Add(item);
+                        AddProblemModels pro = new AddProblemModels();
+                        pro.ExamID = ID;
+                        return View(pro);
                     //}
-
-                    //ViewBag.MaDoKho = (IEnumerable<SelectListItem>)list; 
-
-
-                    return View();
+                    //return View();
                 }
                 else
                     return RedirectToAction("Index","Home");
@@ -131,35 +144,33 @@ namespace SPKTOnline.Controllers
                     problem.ComparerID = problemModel.ComparerID;
                     problem.MemoryLimit = problemModel.MemoryLimit;
                     problem.TimeLimit = problemModel.TimeLimit;
+                    problem.SubjectID = problemModel.SubjectID;
+                    problem.Score = problem.Score;
+                    if (problemModel.ExamID > 0)
+                    {
+                        problem.ExamID = problemModel.ExamID;
+                    }
+                    else
+                        problem.ExamID = null;
                     db.Problems.AddObject(problem);
                     db.SaveChanges();
-                    
-                    String[] kq = problemModel.SubjectID;
-                    foreach (String s in kq)
-                    {
-                        foreach (Subject sb in db.Subjects)
-                        {
-                            if (sb.ID == s)
-                            {
-                                Problem_Subject ps = new Problem_Subject();
-                                ps.ProblemID = problem.ID;
-                                ps.SubjectID = sb.ID;
-                                ps.DificultLevel = problem.DifficultyID;
-                                db.Problem_Subject.AddObject(ps);
-                            }
-                        }
-                    }
-                    String[] kqClass = problemModel.SubjectID;
-                    foreach (String s in kqClass)
-                    {
-                        foreach (Class c in db.Classes)
-                        {
-                            if (c.ID == int.Parse(s))
-                            {
-                                problem.Classes.Add(c);
-                            }
-                        }
-                    }
+                    #region AddClass
+
+                    //String[] kqClass = problemModel.ClassID;
+                    //if (kqClass.Count() > 0)
+                    //{
+                    //    foreach (String s in kqClass)
+                    //    {
+                    //        foreach (Class c in db.Classes)
+                    //        {
+                    //            if (c.ID == int.Parse(s))
+                    //            {
+                    //                problem.Classes.Add(c);
+                    //            }
+                    //        }
+                    //    }
+                    //} 
+                    #endregion
                     db.SaveChanges();
                     ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name", problemModel.DifficultyID);
                     return RedirectToAction("CreateTestCase", "TestCase", new { ProblemID = problem.ID });
@@ -189,7 +200,7 @@ namespace SPKTOnline.Controllers
                         pm.Content = p.Content;
                         pm.MemoryLimit = (int)p.MemoryLimit;
                         ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name", p.DifficultyID);
-                        ViewBag.SubjectID = new MultiSelectList(ProblemRep.GetListSubjectByLecturerID(HttpContext.User.Identity.Name), "ID", "Name", p.Problem_Subject);
+                        ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(HttpContext.User.Identity.Name), "ID", "Name", p.SubjectID);
                         ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name", p.ComparerID);
                         return View(pm);
 
@@ -219,29 +230,8 @@ namespace SPKTOnline.Controllers
                     problem.ComparerID = problemModel.ComparerID;
                     problem.MemoryLimit = problemModel.MemoryLimit;
                     problem.TimeLimit = problemModel.TimeLimit;
-                    String[] kq = problemModel.SubjectID;
-                    foreach (String s in kq)
-                    {
-                        foreach (Subject sb in db.Subjects)
-                        {
-                            if (sb.ID == s)
-                            {
-                                Problem_Subject ps = new Problem_Subject();
-                                ps.ProblemID = problem.ID;
-                                ps.SubjectID = sb.ID;
-                                ps.DificultLevel = problem.DifficultyID;
-                                db.Problem_Subject.Attach(ps);
-                            }
-                        }
-                    }
-                    //List<Problem_Subject> ds = new List<Problem_Subject>();
-                    //problem.Problem_Subject.Attach(ds);
-                    /*//Subject s = db.Subjects.FirstOrDefault(m => m.ID == problemModel.SubjectID);
-                    Problem_Subject ps = problem.Problem_Subject.FirstOrDefault();//= new Problem_Subject();
-                    ps.SubjectID = problemModel.SubjectID;
-                    ps.Problem = problem;
-                    problem.Problem_Subject.Add(ps); //db.Problem_Subject.FirstOrDefault(m => m.ProblemID == problem.ID);
-                    ps.SubjectID = problemModel.SubjectID;*/
+                    problem.SubjectID = problemModel.SubjectID;
+                    problem.Score = problem.Score;
                     db.SaveChanges();
                     return RedirectToAction("AllProblemForUpDate", "Problem");
                 }

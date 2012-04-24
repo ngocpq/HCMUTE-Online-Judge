@@ -1,0 +1,33 @@
+﻿@using DevExpress.Web.Mvc.UI
+@Html.DevExpress().HtmlEditor(
+    settings => {
+        settings.Name = "heCustomCss";
+        settings.CallbackRouteValues = new { Controller = "HtmlEditor", Action = "CustomCssPartial" };
+        settings.Width = Unit.Percentage(100);
+
+        string htmlContentPath = HttpContext.Current.Server.MapPath("~/Content/HtmlEditor/DemoHtml/CustomCss.htm");
+        settings.Html = System.IO.File.ReadAllText(htmlContentPath);
+        settings.CssFiles.Add("~/Content/HtmlEditor/CustomCss.css");
+
+        settings.SettingsImageUpload.UploadCallbackRouteValues = new { Controller = "HtmlEditor", Action = "CustomCssImageUpload" };
+        settings.SettingsImageUpload.UploadImageFolder = HtmlEditorDemosHelper.UploadDirectory;
+        settings.SettingsImageUpload.ValidationSettings.Assign(HtmlEditorDemosHelper.ImageUploadValidationSettings);
+
+        settings.Toolbars.CreateDefaultToolbars();
+        settings.Toolbars[1].Items.RemoveAll(item => item.GetType() == typeof(ToolbarParagraphFormattingEdit));
+
+        settings.Toolbars[1].Items.Add<ToolbarCustomCssEdit>(edit => {
+            edit.Items.Add("Clear Style", "", "", "");
+            edit.Items.Add("Title", "H1", "CommonTitle", "CommonTitlePreview");
+            edit.Items.Add("Header1", "H3", "CommonHeader1", "CommonHeader1Preview");
+            edit.Items.Add("Header2", "H4", "CommonHeader2", "CommonHeader2Preview");
+            edit.Items.Add("Content", "Div", "CommonContent", "CommonContentPreview");
+            edit.Items.Add("Features", "Strong", "CommonFeatures", "CommonFeaturesPreview");
+            edit.Items.Add("Footer", "Div", "CommonFooter", "CommonFooterPreview");
+            edit.Items.Add("ImageTitle", "EM", "ImageTitle", "ImageTitlePreview");
+            edit.Items.Add("Link", "", "Link", "LinkPreview");
+
+            edit.Width = 120;
+            edit.VisibleIndex = 0;
+        });
+    }).GetHtml()
