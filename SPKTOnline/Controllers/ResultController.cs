@@ -50,12 +50,6 @@ namespace SPKTOnline.Controllers
                 {
                     Student_Submit st = db.Student_Submit.Where(p => p.ID == ID).FirstOrDefault();
                     ViewBag.Message = Message;
-                    //List<TestCaseResult> list = new List<TestCaseResult>();
-                    //var tcResult = db.TestCaseResults.Where(p => p.StudentSubmitID == st.ID);
-                    //foreach (var t in tcResult)
-                    //{
-                    //    list.Add(t);
-                    //}
                     return View(st);
                 }
 
@@ -85,11 +79,11 @@ namespace SPKTOnline.Controllers
             {
                 if (checkRole.IsLecturer(User.Identity.Name))
                 {
-                    var listPro_sub = db.Problem_Subject.Where(s => s.Problem.LecturerID == HttpContext.User.Identity.Name);
+                    var listPro= db.Problems.Where(s => s.LecturerID == HttpContext.User.Identity.Name);
                     List<Problem> list = new List<Problem>();
-                    foreach (var i in listPro_sub)
+                    foreach (var i in listPro)
                     {
-                        list.Add(i.Problem);
+                        list.Add(i);
                     }
 
                     return View(list);

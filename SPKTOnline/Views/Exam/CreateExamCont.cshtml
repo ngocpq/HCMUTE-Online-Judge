@@ -1,0 +1,92 @@
+﻿@model SPKTOnline.Models.Exam
+@{
+    ViewBag.Title = "CreateExamCont";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    Tạo đề thi(cont)</div>
+@using (Html.BeginForm())
+    {
+    <fieldset>
+        <legend>Đề thi</legend>
+        @Html.HiddenFor(model=>model.ID)
+         <div class="editor-label">
+            @Html.LabelFor(model => model.ID, "Mã đề thi")
+            @Html.DisplayFor(model=>model.ID) 
+        </div>
+       
+    </fieldset>
+    <fieldset>
+        <legend style="color: Gray">TestCase</legend>
+        @if (Model.Problems.Count() != 0)
+        {
+            
+            <table style="width: 650px">
+                <tr>
+                    <th>
+                        Mã Câu Hỏi
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        Số Điểm
+                    </th>
+                    <th>
+                        Mô tả
+                    </th>
+                    <th>
+                        Xử lý
+                    </th>
+                </tr>
+                @foreach (var item in Model.Problems)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comparer.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Details", new { ID = item.ID })
+                            @Html.ActionLink("Edit", "EditTestCase", new { ID = item.ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <span>Mời tạo câu hỏi cho đề thi này!</span>
+        }
+        
+    </fieldset>
+      
+     
+    <p>
+        @Html.ActionLink("Tạo câu hỏi bằng Upload", "Upload","UploadProblem",new {ID=Model.ID},null)<br />
+        @Html.ActionLink("Tạo câu hỏi bằng cách nhập text", "CreateProblem","Problem",new {ID=Model.ID},null)
+    </p>
+    <p>
+      <button name="button" type="button" onclick="document.location.href=$('#CreateContest').attr('href')">Tạo Kỳ Thi</button>
+       <a id="CreateContest" href="@Html.AttributeEncode(Url.Action("CreateContest", "Contest", new { ID = Model.ID }))" style="display:none;"></a>
+    </p>
+    <p>
+        <input class="button" type="submit" value="Hoàn Tất" />
+    </p>
+    }

@@ -26,7 +26,7 @@ namespace SPKTOnline.Models
 
         [Required]
         [DisplayName("Môn học")]
-        public String[] SubjectID { get; set; }
+        public string SubjectID { get; set; }
 
         [Required]
         [DisplayName("Lớp học")]
@@ -41,11 +41,17 @@ namespace SPKTOnline.Models
         public int ComparerID { get; set; }
 
         [Required]
+        [DisplayName("Điểm")]
+        public int Score { get; set; }
+
+        [Required]
         [DisplayName("Giới hạn bộ nhớ")]
         public int MemoryLimit { get; set; }
 
         [Required]
         [DisplayName("Giới hạn thời gian")]
         public int TimeLimit { get; set; }
+        public int ExamID { get; set; }
     }
+
 }

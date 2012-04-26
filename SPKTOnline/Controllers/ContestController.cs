@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SPKTOnline.Models;
 
 namespace SPKTOnline.Controllers
 {
@@ -10,7 +11,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Contest/
-
+        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         public ActionResult Index()
         {
             return View();
@@ -19,9 +20,13 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
-        public ActionResult CreateContest()
+        public ActionResult CreateContest(int ID=0)
         {
-            return View();
+            ViewBag.ClassID = new  SelectList(db.Classes, "ID", "ID");
+            Contest c = new Contest();
+            c.ExamID = ID;
+            return View(c);
+
         }
     }
 }

@@ -46,6 +46,22 @@
     float:left;
 }
 
+.link
+{
+    float:left;
+    display:inherit;
+    height:16px;
+    margin:0px 10px;
+    padding: 10px;
+}
+
+.link:hover
+{
+    color:#c23d27;
+    -moz-border-radius : 12px;
+    background : #ffffff;
+    
+}
 .linav
 {
     float:left;

@@ -16,11 +16,11 @@ namespace SPKTOnline.Models
             get { return (Models.TrangThaiCham)TrangThaiCham; }
             set { TrangThaiCham = (int)value; }
         }
-        public int? TongDiem
+        public double? TongDiem
         {
             get
             {
-                int? tong = 0;
+                double? tong = 0;
                 foreach (var tc in this.TestCaseResults)
                     tong += tc.Score;
                 return tong;

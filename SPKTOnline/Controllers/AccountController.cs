@@ -20,12 +20,12 @@ namespace SPKTOnline.Controllers
         // GET: /Account/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
-        string Message;
         public bool UserNameAvailable(string username)
         {
             if (checkRole.UserNameExists(username))
             {
                 return false;
+                
             } 
             return true; 
         }
@@ -155,11 +155,11 @@ namespace SPKTOnline.Controllers
 
                         db.SaveChanges();
                         string Message = "Đã tạo User có tên đăng nhập là: " + user.Username + " thành công";
-                        return RedirectToAction("CreateUser", "Account", new { Message = Message });
+                        return RedirectToAction("Index", "Home", new { Message = Message });
                     }
                     else
                     {
-                        Message = "Username đã tồn tại. Vui lòng nhập lại!";
+                        string Message = "Username đã tồn tại. Vui lòng nhập lại!";
                         return RedirectToAction("CreateUser", "Account", new { Message = Message }); //TODO: báo ra username đã tồn tại. 
                     }
                 }
@@ -245,6 +245,8 @@ namespace SPKTOnline.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username, false);
                     user.LastLoginTime = DateTime.Now;
                     string message = "Bạn đã kích hoạt thành công tài khoản. Chào mừng bạn là thành viên của Thi Lập Trình Online!";
+
+                    ViewBag.msg = "demo";
                     return RedirectToAction("EditAccount", "Account", new { Message = message });
                 }
                 else

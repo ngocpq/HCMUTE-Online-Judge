@@ -46,13 +46,19 @@
     <Menu1>
     <Title>Đề mẫu tham khảo</Title>
     <TitleEng> Examination</TitleEng>
-    <Link>/Problem</Link>
+    <Link></Link>
     <Roles>
       <Role>Admin</Role>
       <Role>Lecturer</Role>
       <Role>Student</Role>
       <Role>Guest</Role>
     </Roles>
+      <Menu2>
+        <Title>Cơ sở lập trình 1</Title>
+        <TitleEng>Programming 1</TitleEng>
+        <Link>/Problem/Browse/1179011</Link>
+        <!--dành cho môn cơ sở lập trình 1-->
+      </Menu2>
   </Menu1>
   <Menu1>
     <Title>Kết Quả</Title>
@@ -159,7 +165,7 @@
   <Menu1>
     <Title>Quản Lý Đề Thi</Title>
     <TitleEng></TitleEng>
-    <Link>/Exam/Index</Link>
+    <Link>/Exam/CreateExam</Link>
     <Roles>
       <Role>Lecturer</Role>
     </Roles>

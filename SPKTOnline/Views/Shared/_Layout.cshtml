@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 @using SPKTOnline.Management
 @using SPKTOnline.Models
+@using DevExpress.Web.Mvc.UI
 @functions{
 	
 	private bool KiemTraQuyen(string user, string r)
@@ -41,18 +42,30 @@
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.blockUI.js" type="text/javascript"></script>
     <link type="image/x-icon" rel="icon" href="../../Content/Images/favicon.ico" />
-</head>
-<body>  
-   
-    <script type="text/javascript">
-        function InitMenu() {
-            $('#menu ul').hide();
-            $('#menu li a').click(function () { $(this).next('#menu li ul').slideToggle('normal').siblings('#menu li ul').slideUp("slow"); });
-        }
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
 
-        function InitMenu2() {
-            $('#menu ul').hide();
-            $('#menu li a').click(
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+      <script type="text/javascript">
+          function InitMenu() {
+              $('#menu ul').hide();
+              $('#menu li a').click(function () { $(this).next('#menu li ul').slideToggle('normal').siblings('#menu li ul').slideUp("slow"); });
+          }
+
+          function InitMenu2() {
+              $('#menu ul').hide();
+              $('#menu li a').click(
  function () {
      var checkElement = $(this).next();
      if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
@@ -72,45 +85,49 @@
      }
  }
  );
-        }
-        $(document).ready(function () {
-            InitMenu2();
-            $('#li1').mouseover(function () {
-                $('#a1').css("color", "#c23d27");
-            });
-            $('#li1').mouseleave(function () {
-                $('#a1').css("color", "white");
-            });
+          }
+          $(document).ready(function () {
+              InitMenu2();
+              $('#li1').mouseover(function () {
+                  $('#a1').css("color", "#c23d27");
+              });
+              $('#li1').mouseleave(function () {
+                  $('#a1').css("color", "white");
+              });
 
-            $('#li2').mouseover(function () {
-                $('#a2').css("color", "#c23d27");
-            });
-            $('#li2').mouseleave(function () {
-                $('#a2').css("color", "white");
-            });
+              $('#li2').mouseover(function () {
+                  $('#a2').css("color", "#c23d27");
+              });
+              $('#li2').mouseleave(function () {
+                  $('#a2').css("color", "white");
+              });
 
-            $('#li3').mouseover(function () {
-                $('#a3').css("color", "#c23d27");
-            });
-            $('#li3').mouseleave(function () {
-                $('#a3').css("color", "white");
-            });
+              $('#li3').mouseover(function () {
+                  $('#a3').css("color", "#c23d27");
+              });
+              $('#li3').mouseleave(function () {
+                  $('#a3').css("color", "white");
+              });
 
-            $('#li4').mouseover(function () {
-                $('#a4').css("color", "#c23d27");
-            });
-            $('#li4').mouseleave(function () {
-                $('#a4').css("color", "white");
-            });
+              $('#li4').mouseover(function () {
+                  $('#a4').css("color", "#c23d27");
+              });
+              $('#li4').mouseleave(function () {
+                  $('#a4').css("color", "white");
+              });
 
-            $('#li5').mouseover(function () {
-                $('#a5').css("color", "#c23d27");
-            });
-            $('#li5').mouseleave(function () {
-                $('#a5').css("color", "white");
-            });
-        });
+              $('#li5').mouseover(function () {
+                  $('#a5').css("color", "#c23d27");
+              });
+              $('#li5').mouseleave(function () {
+                  $('#a5').css("color", "white");
+              });
+          });
     </script>
+  
+</head>
+<body>  
+   
   
         @{ LanguageEnum lang;
         try
@@ -236,7 +253,7 @@
                    else
                    { 
                     <ul>
-                        <li id="li6" class="linav"><a id="a1" class="anav" href="">Trang Chủ</a></li>
+                        <li id="li6" class="linav"><a id="a1" class="anav" href="/Home">Trang Chủ</a></li>
                         <li id="li7" class="linav"><a id="a2" class="anav" href="/Account/EditAccount">Cá Nhân</a></li>
                         <li id="li8" class="linav"><a id="a3" class="anav" href="/Home">Quy Định</a></li>
                         <li id="li9" class="linav"><a id="a4" class="anav" href="/Home/About">Thông Tin</a></li>

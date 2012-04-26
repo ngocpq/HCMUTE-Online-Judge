@@ -35,7 +35,7 @@
                         Output
                     </th>
                     <th>
-                        Điểm
+                        Phần trăm số điểm
                     </th>
                     <th>
                         Mô tả
@@ -99,7 +99,7 @@
             @Html.ValidationMessageFor(model => model.Output)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Output, "Điểm")
+            @Html.LabelFor(model => model.Output, "Phần trăm số điểm")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.Diem)
@@ -116,6 +116,7 @@
         <p>
             <input class="button" type="submit" value="Thêm" />
         </p>
+
         <div style = "visibility:hidden" >
          @Html.TextBox("MaDB")
         </div>
