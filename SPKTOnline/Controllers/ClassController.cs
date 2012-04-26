@@ -126,6 +126,11 @@ namespace SPKTOnline.Controllers
             }
             return RedirectToAction("Logon", "Account");
         }
+        public ActionResult ClassDetailOfLecturer(int ID)
+        {
+            Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
+            return View(cl);
+        }
 
     }
 }

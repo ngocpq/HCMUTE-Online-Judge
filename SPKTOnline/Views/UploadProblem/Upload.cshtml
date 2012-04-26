@@ -8,7 +8,7 @@
 
         var ext = $('#file').val().split('.').pop().toLowerCase();
         if (ext != "") {
-            if ($.inArray(ext, ['zip','docx','gif']) == -1) {
+            if ($.inArray(ext, ['zip', 'docx', 'gif']) == -1) {
                 alert('Yêu cầu giáo viên chọn file zip!');
                 //                return false;
                 $('#msg').show();
@@ -28,36 +28,37 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <div class="webtitle">
     TẠO CÂU HỎI</div>
-
 @ViewBag.Message
 @using (Html.BeginForm("Upload", "UploadProblem", FormMethod.Post,
                          new { enctype = "multipart/form-data" }))
 {
-         if (Model.ExamID != 0)
-         {
-                    @Html.HiddenFor(model => model.ExamID)
-         }
-        <div class ="editor-label">
-        Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+    <div style="float: left; width: 100%;">
+        <div style="float: left; width: 15%;">
+            <img src="../../Content/Images/notes.ico" alt="Create Problem" /></div>
+        <div style="float: left; margin-left: 10%; width: 70%;">
+            @if (Model.ExamID != 0) {
+            @Html.HiddenFor(model => model.ExamID)
+            }
+            <div class="editor-label">
+                Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+            </div>
+            <div class="editor-label">
+                Chọn file đề
+            </div>
+            <div class="editor-field">
+                <input type="file" name="filebase" accept=".zip" id="file" onmouseout="CheckImage()" />
+                <div id="msg">
+                </div>
+            </div>
+            <div class="editor-label">
+                Số điểm: @Html.TextBoxFor(model => model.Score)
+            </div>
+            <div class="editor-label">
+                Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
+            </div>
+            <div>
+                <input type="submit" value="Submit" />
+            </div>
         </div>
-        
-        <div class="editor-label">
-        Chọn file đề
-        </div>
-        <div class="editor-field">          
-              <input type="file"  name="filebase" accept=".zip"  id="file" onmouseout="CheckImage()"/>
-              <div id="msg"></div>
-        </div>
-        <div class ="editor-label">
-        Số điểm: @Html.TextBoxFor(model => model.Score)
-        </div>
-
-         <div class ="editor-label">
-        Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
-        </div>
-        <div>
-        <input type="submit" value="Submit" />
-        </div>
+    </div>
 }
-
-

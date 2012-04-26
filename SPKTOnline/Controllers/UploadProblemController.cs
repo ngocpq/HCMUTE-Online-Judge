@@ -67,10 +67,18 @@ namespace SPKTOnline.Controllers
                                         problem.ExamID = null;
                                     }
                                     db.Problems.AddObject(problem);
-                                    db.SaveChanges();
+                                    //db.SaveChanges();
                                     Unzipfile(problem, filebase.InputStream);//, "~\\uploads");
                                     db.SaveChanges();
-                                    return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
+                                    if (problem.ExamID == 0)
+                                    {
+                                        
+                                        return RedirectToAction("Browse", "Problem", problem.SubjectID);
+                                    }
+                                    else
+                                    {
+                                        return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
+                                    }
                                 }
                             }
                         }

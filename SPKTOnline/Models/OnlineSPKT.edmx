@@ -176,11 +176,11 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ClassID" Type="int" Nullable="false" />
-          <Property Name="ExamID" Type="int" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
-          <Property Name="IsOpen" Type="bit" />
-          <Property Name="TotalScore" Type="int" />
+          <Property Name="ExamID" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="IsOpen" Type="bit" Nullable="false" />
+          <Property Name="TotalScore" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Difficulties">
           <Key>
@@ -459,7 +459,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NewContest_Exam">
-          <End Role="Exam" Type="OnlineSPKTModel.Store.Exam" Multiplicity="0..1" />
+          <End Role="Exam" Type="OnlineSPKTModel.Store.Exam" Multiplicity="1" />
           <End Role="Contests" Type="OnlineSPKTModel.Store.Contests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Exam">
@@ -849,11 +849,11 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClassID" Type="Int32" Nullable="false" />
-          <Property Name="ExamID" Type="Int32" />
-          <Property Name="StartTime" Type="DateTime" />
-          <Property Name="EndTime" Type="DateTime" />
-          <Property Name="IsOpen" Type="Boolean" />
-          <Property Name="TotalScore" Type="Int32" />
+          <Property Name="ExamID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" />
+          <Property Name="IsOpen" Type="Boolean" Nullable="false" />
+          <Property Name="TotalScore" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="OnlineSPKTModel.FK_NewContest_Classes" FromRole="Contests" ToRole="Classes" />
           <NavigationProperty Name="Contest_Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Contests" FromRole="Contests" ToRole="Contest_Student" />
           <NavigationProperty Name="Exam" Relationship="OnlineSPKTModel.FK_NewContest_Exam" FromRole="Contests" ToRole="Exam" />
@@ -1108,7 +1108,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NewContest_Exam">
-          <End Role="Exam" Type="OnlineSPKTModel.Exam" Multiplicity="0..1" />
+          <End Role="Exam" Type="OnlineSPKTModel.Exam" Multiplicity="1" />
           <End Role="Contests" Type="OnlineSPKTModel.Contest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Exam">

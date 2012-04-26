@@ -1,12 +1,12 @@
 ﻿@model SPKTOnline.Controllers.HtmlEditorModel
 @using DevExpress.Web.Mvc.UI
 @Html.DevExpress().HtmlEditor(Settings =>{
-    SPKTOnline.Controllers.HtmlEditorDemosHelper.SetHtmlEditorExportSettings(settings);
+    SPKTOnline.Controllers.HtmlEditorDemosHelper.SetHtmlEditorExportSettings(Settings);
         if (Model != null) {
-            settings.Html = Model.Html;
+            Settings.Html = Model.Html;
             if (Model.CssFiles != null) {
-                settings.CssFiles.Clear();
-                settings.CssFiles.AddRange(Model.CssFiles);
+                Settings.CssFiles.Clear();
+                Settings.CssFiles.AddRange(Model.CssFiles);
             }
         }
     }).GetHtml()

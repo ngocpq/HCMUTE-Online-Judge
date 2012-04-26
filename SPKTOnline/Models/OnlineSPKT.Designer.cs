@@ -24,7 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Comparers", "Comparers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Comparer), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Contest), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Exam), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Exam), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Difficulties", "Difficulties", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Difficulty), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Exam), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
@@ -1031,11 +1031,21 @@ namespace SPKTOnline.Models
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="classID">Initial value of the ClassID property.</param>
-        public static Contest CreateContest(global::System.Int32 id, global::System.Int32 classID)
+        /// <param name="examID">Initial value of the ExamID property.</param>
+        /// <param name="startTime">Initial value of the StartTime property.</param>
+        /// <param name="endTime">Initial value of the EndTime property.</param>
+        /// <param name="isOpen">Initial value of the IsOpen property.</param>
+        /// <param name="totalScore">Initial value of the TotalScore property.</param>
+        public static Contest CreateContest(global::System.Int32 id, global::System.Int32 classID, global::System.Int32 examID, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isOpen, global::System.Int32 totalScore)
         {
             Contest contest = new Contest();
             contest.ID = id;
             contest.ClassID = classID;
+            contest.ExamID = examID;
+            contest.StartTime = startTime;
+            contest.EndTime = endTime;
+            contest.IsOpen = isOpen;
+            contest.TotalScore = totalScore;
             return contest;
         }
 
@@ -1096,9 +1106,9 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ExamID
+        public global::System.Int32 ExamID
         {
             get
             {
@@ -1113,16 +1123,16 @@ namespace SPKTOnline.Models
                 OnExamIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _ExamID;
-        partial void OnExamIDChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _ExamID;
+        partial void OnExamIDChanging(global::System.Int32 value);
         partial void OnExamIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> StartTime
+        public global::System.DateTime StartTime
         {
             get
             {
@@ -1137,16 +1147,16 @@ namespace SPKTOnline.Models
                 OnStartTimeChanged();
             }
         }
-        private Nullable<global::System.DateTime> _StartTime;
-        partial void OnStartTimeChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _StartTime;
+        partial void OnStartTimeChanging(global::System.DateTime value);
         partial void OnStartTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndTime
+        public global::System.DateTime EndTime
         {
             get
             {
@@ -1161,16 +1171,16 @@ namespace SPKTOnline.Models
                 OnEndTimeChanged();
             }
         }
-        private Nullable<global::System.DateTime> _EndTime;
-        partial void OnEndTimeChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _EndTime;
+        partial void OnEndTimeChanging(global::System.DateTime value);
         partial void OnEndTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsOpen
+        public global::System.Boolean IsOpen
         {
             get
             {
@@ -1185,16 +1195,16 @@ namespace SPKTOnline.Models
                 OnIsOpenChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsOpen;
-        partial void OnIsOpenChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsOpen;
+        partial void OnIsOpenChanging(global::System.Boolean value);
         partial void OnIsOpenChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> TotalScore
+        public global::System.Int32 TotalScore
         {
             get
             {
@@ -1209,8 +1219,8 @@ namespace SPKTOnline.Models
                 OnTotalScoreChanged();
             }
         }
-        private Nullable<global::System.Int32> _TotalScore;
-        partial void OnTotalScoreChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _TotalScore;
+        partial void OnTotalScoreChanging(global::System.Int32 value);
         partial void OnTotalScoreChanged();
 
         #endregion

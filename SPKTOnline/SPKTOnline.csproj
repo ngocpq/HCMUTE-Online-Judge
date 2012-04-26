@@ -193,6 +193,7 @@
     <Content Include="Content\Images\Favorites.ico" />
     <Content Include="Content\Images\Feed_24x24.png" />
     <Content Include="Content\Images\Globe Internet_2.png" />
+    <Content Include="Content\Images\go_up.ico" />
     <Content Include="Content\Images\guide.png" />
     <Content Include="Content\Images\guideEng.png" />
     <Content Include="Content\Images\header_v8.swf" />
@@ -214,6 +215,7 @@
     <Content Include="Content\Images\logo3.png" />
     <Content Include="Content\Images\Mail_small.png" />
     <Content Include="Content\Images\Maps_small.png" />
+    <Content Include="Content\Images\notes.ico" />
     <Content Include="Content\Images\Notes_small.png" />
     <Content Include="Content\Images\notice.png" />
     <Content Include="Content\Images\noticeexam.png" />
@@ -229,6 +231,7 @@
     <Content Include="Content\Images\Search_black.ico" />
     <Content Include="Content\Images\Text_banner.png" />
     <Content Include="Content\Images\Text_banner2.png" />
+    <Content Include="Content\Images\text_x_copying.ico" />
     <Content Include="Content\Images\top.png" />
     <Content Include="Content\Images\Trashcan_empty.ico" />
     <Content Include="Content\Images\Twitter_24x24.png" />
@@ -2391,6 +2394,7 @@
     <Content Include="Views\Exam\CreateExam.cshtml" />
     <Content Include="Views\Exam\CreateExamCont.cshtml" />
     <Content Include="Views\Contest\CreateContest.cshtml" />
+    <Content Include="Views\Class\ClassDetailOfLecturer.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

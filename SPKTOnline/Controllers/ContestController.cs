@@ -22,13 +22,11 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult CreateContest(int ID=0)
         {
-            if (ID > 0)
-            {
-                Contest c = new Contest();
-                c.ExamID = ID;
-                return View(c);
-            }
-            return View();
+            ViewBag.ClassID = new  SelectList(db.Classes, "ID", "ID");
+            Contest c = new Contest();
+            c.ExamID = ID;
+            return View(c);
+
         }
     }
 }

@@ -11,6 +11,7 @@ namespace SPKTOnline.Models
 {
     public  class ClassModels
     {
+        OnlineSPKTEntities1 db=new OnlineSPKTEntities1();
         [Required]
         [DisplayName("SubjectID")]
         public string SubjectID { get; set; }
@@ -26,6 +27,16 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("LecturerID")]
         public string LecturerID { get; set; }
+
+        
+    }
+    public partial class Class
+    {
+        public int TotalStudent
+        {
+            get { return this.Users.Count(); }
+
+        }
     }
     
 }
