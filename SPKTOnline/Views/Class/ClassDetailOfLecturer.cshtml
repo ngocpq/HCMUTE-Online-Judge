@@ -1,0 +1,45 @@
+﻿@model SPKTOnline.Models.Class
+@{
+    ViewBag.Title = "ClassDetailOfLecturer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    <span style="Color:Black">Lớp</span> @Model.Subject.Name <span style="Color:Black">nhóm</span> @Model.Group </div>
+
+<fieldset>
+    <legend>Thông tin lớp học</legend>
+    Sĩ số lớp: @Model.TotalStudent
+    <div class="DSClass">Danh sách lớp: 
+    <p>
+        
+    </p>
+    </div>
+    
+</fieldset>
+<fieldset>
+    <legend>Kỳ thi</legend>
+    @if (Model.Contests.Count() != 0)
+    {
+        foreach (var item in Model.Contests)
+        {
+            <span>Thời gian bắt đầu </span><br />
+            @Html.DisplayFor(modelItem => item.StartTime)
+            <span>Thời gian kết thúc </span><br />
+            @Html.DisplayFor(modelItem => item.EndTime)
+        }
+    }
+    else
+    {
+        <span>Chưa có kỳ thi nào</span>
+    }
+
+    <div class="TaoKT" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
+    Tạo Kỳ Thi |</div>
+    <div class="KT">
+      
+    </div>
+
+
+</fieldset>

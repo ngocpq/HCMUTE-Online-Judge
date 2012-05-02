@@ -19,7 +19,7 @@ namespace SPKTOnline.Controllers
         UserRepository userRep = new UserRepository();
         public ActionResult Index()
         {
-            var cl = db.Classes.Where(c => c.SchoolYear.Contains("2012"));
+            var cl = db.Classes.Where(c => c.SchoolYear.Contains(DateTime.Now.Year.ToString()));
             List<Class> l = new List<Class>();
             foreach (var i in cl)
             {
@@ -126,7 +126,13 @@ namespace SPKTOnline.Controllers
             }
             return RedirectToAction("Logon", "Account");
         }
-        public ActionResult ClassDetailOfLecturer(int ID)
+        public ActionResult ClassDetailOfLecturer(int ID=0)
+        {
+            Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
+            return View(cl);
+        }
+
+        public ActionResult ClassDetail(int ID)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);

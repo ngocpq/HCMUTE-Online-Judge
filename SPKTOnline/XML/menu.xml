@@ -27,7 +27,7 @@
     <TitleEng>Contest</TitleEng>
     <Link>/Contest</Link>
     <Roles>
-      <Role>Admin</Role>
+      <Role>Student</Role>
       <!--<Role>Lecturer</Role>
       <Role>Student</Role>
       <Role>Guest</Role>-->
@@ -94,24 +94,7 @@
     </Menu2>
    
   </Menu1>
-  <Menu1>
-    <Title>Quản lý người Dùng</Title>
-    <TitleEng>Manage Users</TitleEng>
-    <Link></Link>
-    <Roles>
-      <Role>Admin</Role>
-    </Roles>
-    <Menu2>
-      <Title>Manage Roles</Title>
-      <TitleEng>Manage Roles</TitleEng>
-      <Link>/Account/ManageRole</Link>
-    </Menu2>
-    <Menu2>
-      <Title>Tạo User</Title>
-      <TitleEng>Create User</TitleEng>
-      <Link>/Account/CreateUser</Link>
-    </Menu2>
-  </Menu1>
+  
   <Menu1>
     <Title>Quản lý lớp học</Title>
     <TitleEng>Manage Class</TitleEng>
@@ -161,6 +144,11 @@
       <TitleEng>Add Question</TitleEng>
       <Link>/Problem/CreateProblem</Link>
     </Menu2>
+    <Menu2>
+      <Title>Upload câu hỏi</Title>
+      <TitleEng>Add Question</TitleEng>
+      <Link>/UploadProblem/Upload</Link>
+    </Menu2>
   </Menu1>
   <Menu1>
     <Title>Quản Lý Đề Thi</Title>
@@ -173,9 +161,32 @@
   <Menu1>
     <Title>Quản Lý Kỳ Thi</Title>
     <TitleEng></TitleEng>
-    <Link>/Contest/Index</Link>
+    <Link></Link>
     <Roles>
       <Role>Lecturer</Role>
     </Roles>
+    <Menu2>
+      <Title>Tạo Kỳ Thi</Title>
+      <TitleEng>Manage Roles</TitleEng>
+      <Link>/Contest/CreateContest</Link>
+    </Menu2>
+  </Menu1>
+  <Menu1>
+    <Title>Quản lý người Dùng</Title>
+    <TitleEng>Manage Users</TitleEng>
+    <Link></Link>
+    <Roles>
+      <Role>Admin</Role>
+    </Roles>
+    <Menu2>
+      <Title>Manage Roles</Title>
+      <TitleEng>Manage Roles</TitleEng>
+      <Link>/Account/ManageRole</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Tạo User</Title>
+      <TitleEng>Create User</TitleEng>
+      <Link>/Account/CreateUser</Link>
+    </Menu2>
   </Menu1>
 </Menus>

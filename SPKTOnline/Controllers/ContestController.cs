@@ -38,5 +38,6 @@ namespace SPKTOnline.Controllers
             return View(contest);
 
         }
+
     }
 }

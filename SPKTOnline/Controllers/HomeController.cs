@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SPKTOnline.Models;
+using System.IO;
 
 namespace SPKTOnline.Controllers
 {
@@ -23,11 +24,39 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult ShowFile()
         {
-            File f = db.Files.FirstOrDefault(p => p.ID == 21);
-          
+            #region ghifile
+
+            //var csv = "<html><head></head><body><table>...</table></body></html>";
+            //System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+            //byte[] result = encoding.GetBytes(csv);
+            //return File(result, "application/vnd.ms-excel", "segnalazioni.csv"); 
+            #endregion
+            #region Bỏ
+
+            //string filepath = Server.MapPath(@"\Content\HtmlEditor\SampleImportDocument.rtf");
+            //string content = string.Empty;
+
+            //try
+            //{
+            //    using (var stream = new StreamReader(filepath))
+            //    {
+            //        content = stream.ReadToEnd();
+            //    }
+            //}
+            //catch (Exception exc)
+            //{
+            //    return Content("Uh oh!");
+            //}
+
+            //return Content(content); 
+            #endregion
+
+            var f = db.Files.FirstOrDefault(p => p.ID == 21);
+
             Response.ContentType = "application/ms-word";
             Response.BinaryWrite(f.Content.ToArray());
-            return View();
+            return File(f.Content.ToArray(), "application/vnd.ms-word", "segnalazioni.csv"); 
+
         }
         public string Upload(HttpPostedFileBase fileData)
         {

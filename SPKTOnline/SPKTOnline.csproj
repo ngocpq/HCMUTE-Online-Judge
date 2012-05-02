@@ -2384,7 +2384,6 @@
     <Content Include="Views\Problem\GridviewPartial.cshtml" />
     <Content Include="Views\UploadProblem\Upload.cshtml" />
     <Content Include="Views\Home\Upload1.cshtml" />
-    <Content Include="Views\Home\ShowFile.cshtml" />
     <Content Include="Views\HtmlEditor\ImportExport.cshtml" />
     <Content Include="Views\HtmlEditor\ImportExportPartial.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
@@ -2392,6 +2391,8 @@
     <Content Include="Views\Exam\CreateExamCont.cshtml" />
     <Content Include="Views\Contest\CreateContest.cshtml" />
     <Content Include="Views\Class\ClassDetailOfLecturer.cshtml" />
+    <Content Include="Views\Home\ShowFile.cshtml" />
+    <Content Include="Views\Class\ClassDetail.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

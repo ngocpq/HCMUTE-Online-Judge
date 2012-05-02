@@ -35,7 +35,7 @@ namespace SPKTOnline.Models
     {
         [Required]
         [DisplayName("User name")]
-       // [Remote("UserNameAvailable","Account", "Username",ErrorMessage="UserName already!")]
+        //[Remote("UserNameAvailable","Account", "Username",ErrorMessage="UserName already!")]
         public string Username { get; set; }
 
         [Required]
