@@ -29,13 +29,13 @@ namespace SPKTOnline.Controllers
         {
             if (User.Identity.IsAuthenticated == true)
             {
-                if (checkRole.IsStudent(User.Identity.Name))
-                {
+                //if (checkRole.IsStudent(User.Identity.Name))
+                //{
                     Problem p = db.Problems.FirstOrDefault(m => m.ID == ID);
                     Student_Submit st = new Student_Submit();
                     st.Problem = p;
                     return View(st);
-                }
+                //}
             }
             return RedirectToAction("Logon", "Account");
         }

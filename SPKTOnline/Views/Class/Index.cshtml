@@ -9,18 +9,34 @@
     Danh sách lớp học hiện tại</div>
 @if (Model.Count() != 0)
 {
-    foreach(var item in Model)
+    foreach (var item in Model)
     {
+        SPKTOnline.Management.CheckRoles checkRole = new SPKTOnline.Management.CheckRoles();
+        if (checkRole.IsLecturer(User.Identity.Name))
+        {
         <div>
+        
+        <a href="ClassDetailOfLecturer/@item.ID" class="areadmore">
+        <img alt="button" src="../../Content/Images/favicon.ico" />
+        @Html.DisplayFor(modelitem => item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
+        @Html.DisplayFor(modelitem => item.User.FirstName) <span></span>@Html.DisplayFor(modelitem => item.User.LastName)
+        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem => item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
+        </a>
+        </div>
+        }
+        else if (checkRole.IsStudent(User.Identity.Name))
+        {
+             <div>
         
         <a href="ClassDetail" class="areadmore">
         <img alt="button" src="../../Content/Images/favicon.ico" />
-        @Html.DisplayFor(modelitem =>item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
+        @Html.DisplayFor(modelitem => item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
         @Html.DisplayFor(modelitem => item.User.FirstName) <span></span>@Html.DisplayFor(modelitem => item.User.LastName)
-        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem =>item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
+        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem => item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
         </a>
-        </div>
-        
+        </div> 
+        }
+
     }
 }
 else
