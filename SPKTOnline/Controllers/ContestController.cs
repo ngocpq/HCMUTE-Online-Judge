@@ -20,12 +20,22 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
-        public ActionResult CreateContest(int ID=0)
+        public ActionResult CreateContest(int ID = 0)
         {
-            ViewBag.ClassID = new  SelectList(db.Classes, "ID", "ID");
+            ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID");
             Contest c = new Contest();
             c.ExamID = ID;
             return View(c);
+
+
+        }
+        [HttpPost]
+        public ActionResult CreateContest(Contest contest)
+        {
+            db.Contests.AddObject(contest);
+            db.SaveChanges();
+            ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
+            return View(contest);
 
         }
     }

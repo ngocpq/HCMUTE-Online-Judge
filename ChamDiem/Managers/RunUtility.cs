@@ -25,6 +25,7 @@ namespace ChamDiem
                 {
                     rs.Result = RunResult.ResultState.Success;
                     rs.ExitCode = process.ExitCode;
+                    rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
                 }
                 else
                 {
@@ -64,6 +65,7 @@ namespace ChamDiem
             {
                 rs.Result = RunResult.ResultState.Success;
                 rs.ExitCode = process.ExitCode;
+                rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
             }
             else
             {

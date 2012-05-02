@@ -144,7 +144,7 @@ namespace SPKTOnline.Controllers
                     problem.ComparerID = problemModel.ComparerID;
                     problem.MemoryLimit = problemModel.MemoryLimit;
                     problem.TimeLimit = problemModel.TimeLimit;
-                    problem.SubjectID = problemModel.SubjectID;
+                    problem.SubjectID = problemModel.SubjectID;                    
                     problem.Score = problem.Score;
                     if (problemModel.ExamID > 0)
                     {

@@ -11,7 +11,7 @@ using DevExpress.Web.ASPxHtmlEditor;
 using System.Web.UI.WebControls;
 using DevExpress.Web.ASPxFileManager;
 using DevExpress.Web.ASPxUploadControl;
-using FredCK.FCKeditorV2;
+//using FredCK.FCKeditorV2;
 namespace SPKTOnline.Controllers
 {
     public class Student_SubmitController : Controller

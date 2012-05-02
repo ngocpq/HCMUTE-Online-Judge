@@ -48,12 +48,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.41079, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Rua\Documents\FredCK.FCKeditorV2.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\SharpZipLib_0860_Bin\netcf-20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\MvcSiteMapProvider.3.2.1.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
