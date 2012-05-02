@@ -14,59 +14,45 @@ namespace SPKTOnline.Controllers
         //
         // GET: /Exam/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
-        CheckRoles checkRole = new CheckRoles();
+        //CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
         UserRepository userRep = new UserRepository();
         public ActionResult Index()
         {
             return View();
         }
+
+        [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult CreateExam()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public ActionResult CreateExam(Exam exam)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string username = User.Identity.Name;
-                if (checkRole.IsLecturer(username))
-                {
-                    exam.LecturerID = username;
-                    db.Exams.AddObject(exam);
-                    db.SaveChanges();
-                    return RedirectToAction("CreateExamCont", "Exam", new { ID = exam.ID });
-                }
-            }
-            return RedirectToAction("Logon", "Home");//Tra ra không có quyền
+            string username = User.Identity.Name;
+            exam.LecturerID = username;
+            db.Exams.AddObject(exam);
+            db.SaveChanges();
+            return RedirectToAction("CreateExamCont", "Exam", new { ID = exam.ID });
+
         }
+
+        [Authorize(Roles = "Lecturer")]
         public ActionResult CreateExamCont(int ID)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string username = User.Identity.Name;
-                if (checkRole.IsLecturer(username))
-                {
-                    Exam exam = db.Exams.FirstOrDefault(p => p.ID == ID);
-                    return View(exam);
-                }
-            }
-            return RedirectToAction("Logon", "Home");//Tra ra không có quyền
+            string username = User.Identity.Name;
+            Exam exam = db.Exams.FirstOrDefault(p => p.ID == ID);
+            return View(exam);
         }
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public ActionResult CreateExamCont(Exam exam)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string username = User.Identity.Name;
-                if (checkRole.IsLecturer(username))
-                {
-                    
-                    return View(exam);
-                }
-            }
-            return RedirectToAction("Logon", "Home");//Tra ra không có quyền
+            string username = User.Identity.Name;
+            return View(exam);
+
         }
 
     }

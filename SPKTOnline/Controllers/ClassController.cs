@@ -15,6 +15,7 @@ namespace SPKTOnline.Controllers
         // GET: /Class/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         CheckRoles checkRole = new CheckRoles();
+
         ProblemRepository ProblemRep = new ProblemRepository();
         UserRepository userRep = new UserRepository();
         public ActionResult Index()
