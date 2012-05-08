@@ -25,9 +25,9 @@ namespace SPKTOnline.Controllers
             if (checkRole.UserNameExists(username))
             {
                 return false;
-                
-            } 
-            return true; 
+
+            }
+            return true;
         }
         public ActionResult Index()
         {
@@ -43,22 +43,32 @@ namespace SPKTOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User();
-                user = checkRole.IsUser(model.UserName, model.Password);
-                if (user!=null)
+                //User user = new User();
+                //user = checkRole.IsUser(model.UserName, model.Password);
+                if (Membership.ValidateUser(model.UserName, model.Password))
                 {
+
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        user.LastLoginTime = DateTime.Now;
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        user.LastLoginTime = DateTime.Now;
-                        return RedirectToAction("Index", "Home");
-                    }
+                    var user = db.Users.FirstOrDefault(u => u.Username == model.UserName);
+                    user.LastLoginTime = DateTime.Now;
+                    db.SaveChanges();
+                    FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
+
+                    //if (reUrl != null)
+                    //    //return RedirectToAction("Index", "Home");
+                    //    return Redirect(reUrl);
+                    //// Van's Original
+                    //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                    //    && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    //{
+                    //    user.LastLoginTime = DateTime.Now;
+                    //    return Redirect(returnUrl);
+                    //}
+                    //else
+                    //{
+                    //    user.LastLoginTime = DateTime.Now;
+                    //    return RedirectToAction("Index", "Home");
+                    //}
                 }
                 else
                 {
@@ -75,102 +85,77 @@ namespace SPKTOnline.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateUser(string Message)
-        {            
-            if (Request.IsAuthenticated)
-            {
-                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
-                {
-                    ViewBag.Roles = new MultiSelectList(db.Roles, "ID", "Name");
-                    //ViewBag.Options = new MyClass[] { new MyClass{ Value = 1, Text = "Tèo" }
-                    //                        , new MyClass{ Value = 2, Text = "Tí" }
-                    //                        , new MyClass{ Value = 3, Text = "Tủn" }
-                    //                        , new MyClass{ Value = 4, Text = "Tom" }
-                    //                        , new MyClass{ Value = 5, Text = "Chụt" } };
-                    ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
-                    ViewBag.Subjects = new MultiSelectList(db.Subjects, "ID", "Name");
-                    ViewBag.Message = Message;
-                    return View();
-                }
-                else
-                    return RedirectToAction("Index", "Home");
-            }
-            else
-                return View("Logon");
+        {
+            ViewBag.Roles = new MultiSelectList(db.Roles, "ID", "Name");
+            ViewBag.Options = new MultiSelectList(db.Roles, "ID", "Name");
+            ViewBag.Subjects = new MultiSelectList(db.Subjects, "ID", "Name");
+            ViewBag.Message = Message;
+            return View();
         }
-        
-        //admin
+
         [Authorize]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateUser(UserModels userModel)
         {
             User user = new User();
-            if (Request.IsAuthenticated)
+                       
+            if (Membership.GetUser(userModel.Username)==null)
             {
-                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
+                String[] kq = userModel.MyOption;
+                user.Username = userModel.Username;
+                user.Password = Cryptography.CreateMD5Hash(userModel.Password);
+                user.LastName = userModel.LastName;
+                user.FirstName = userModel.FirstName;
+                user.IsLocked = userModel.IsLocked;
+                user.Email = userModel.Email;                
+                if (kq.Count() != 0)
                 {
-                    if (checkRole.UserNameExists(userModel.Username) == false)
+                    foreach (String s in kq)
                     {
-                        String[] kq = userModel.MyOption;
-                        user.Username = userModel.Username;
-                        user.Password = Cryptography.CreateMD5Hash(userModel.Password);
-                        user.LastName = userModel.LastName;
-                        user.FirstName = userModel.FirstName;
-                        user.IsLocked = userModel.IsLocked;
-                        user.Email = userModel.Email;
-                        if (kq.Count() != 0)
+                        foreach (Role r in db.Roles)
                         {
-                            foreach (String s in kq)
-                            {
-                                foreach (Role r in db.Roles)
-                                {
-                                    if (r.ID.ToString() == s)
-                                        user.Roles.Add(r);
-                                }
-                            }
+                            if (r.ID.ToString() == s)
+                                user.Roles.Add(r);
                         }
-                        db.Users.AddObject(user);
-
-                        //---------------
-                        foreach (Role r in user.Roles)
-                        {
-                            if (r.ID == 2)
-                            {
-                                String[] ls = userModel.OptionSubject;
-                                if (userModel.OptionSubject.Count() != 0)
-                                {
-                                    foreach (String str in ls)
-                                    {
-                                        foreach (Subject s in db.Subjects)
-                                        {
-                                            if (s.ID == str)
-                                                user.Subjects.Add(s);
-                                        }
-                                    }
-                                }
-
-                            }
-
-                        }
-
-                        db.SaveChanges();
-                        string Message = "Đã tạo User có tên đăng nhập là: " + user.Username + " thành công";
-                        return RedirectToAction("Index", "Home", new { Message = Message });
-                    }
-                    else
-                    {
-                        string Message = "Username đã tồn tại. Vui lòng nhập lại!";
-                        return RedirectToAction("CreateUser", "Account", new { Message = Message }); //TODO: báo ra username đã tồn tại. 
                     }
                 }
-                else
-                    return RedirectToAction("Index", "Home");
-                //ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
-                //return View(userModel);
+                db.Users.AddObject(user);
+
+                //---------------
+                foreach (Role r in user.Roles)
+                {
+                    if (r.ID == 2) 
+                    {
+                        String[] ls = userModel.OptionSubject;
+                        if (userModel.OptionSubject.Count() != 0)
+                        {
+                            foreach (String str in ls)
+                            {
+                                foreach (Subject s in db.Subjects)
+                                {
+                                    if (s.ID == str)
+                                        user.Subjects.Add(s);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+                db.SaveChanges();
+                string Message = "Đã tạo User có tên đăng nhập là: " + user.Username + " thành công";
+                return RedirectToAction("Index", "Home", new { Message = Message });
             }
             else
-                return View("Logon");
-            
+            {
+                string Message = "Username đã tồn tại. Vui lòng nhập lại!";
+                return RedirectToAction("CreateUser", "Account", new { Message = Message }); //TODO: báo ra username đã tồn tại. 
+            }
+
         }
         public ActionResult EditUser()
         {
@@ -180,7 +165,7 @@ namespace SPKTOnline.Controllers
         [HttpPost]
         public ActionResult EditUser(User user)
         {
-  
+
             if (Request.IsAuthenticated)
             {
                 if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
@@ -257,20 +242,20 @@ namespace SPKTOnline.Controllers
             }
             else
             {
-                string Message = "Bạn đã kích hoạt tài khoản "+import.Username+ " trong trang này. Hảy đăng nhập bằng tài khoản bạn đã kích hoạt ở đây!";
+                string Message = "Bạn đã kích hoạt tài khoản " + import.Username + " trong trang này. Hảy đăng nhập bằng tài khoản bạn đã kích hoạt ở đây!";
                 return RedirectToAction("Logon", "Account", new { Message = Message });//TODO: đã kích hoạt tài khoản.
 
             }
-                    
-            
+
+
         }
-         [ValidateInput(false)]
+        [ValidateInput(false)]
         public ActionResult EditAccount(string message)
         {
             ViewBag.Message = message;
             if (User.Identity.IsAuthenticated)
             {
-                User u = db.Users.FirstOrDefault(m=>m.Username==User.Identity.Name);
+                User u = db.Users.FirstOrDefault(m => m.Username == User.Identity.Name);
                 EditAccountModel account = new EditAccountModel();
                 account.Username = u.Username;
                 account.LastName = u.LastName;
@@ -301,7 +286,7 @@ namespace SPKTOnline.Controllers
                 return RedirectToAction("EditAccount", "Account", new { Message = "<p style=\"color:Red\"><b>Password nhập vào không đúng!</b></p>" });
 
         }
-             
+
     }
 }
 

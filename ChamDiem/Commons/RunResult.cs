@@ -16,5 +16,6 @@ namespace ChamDiem
         public ResultState Result{get;set;}
         public string Output { get; set; }
         public string Error { get; set; }
+        public double ExecuteTime { get; set; }
     }
 }

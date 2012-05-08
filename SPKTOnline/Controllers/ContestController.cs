@@ -12,6 +12,7 @@ namespace SPKTOnline.Controllers
         //
         // GET: /Contest/
         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+
         public ActionResult Index()
         {
             return View();
@@ -20,12 +21,25 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
-        public ActionResult CreateContest(int ID=0)
+
+        [Authorize(Roles = "Lecturer,Admin")]
+        public ActionResult CreateContest(int ID = 0)
         {
-            ViewBag.ClassID = new  SelectList(db.Classes, "ID", "ID");
+            ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID");
             Contest c = new Contest();
             c.ExamID = ID;
             return View(c);
+
+
+        }
+        [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
+        public ActionResult CreateContest(Contest contest)
+        {
+            db.Contests.AddObject(contest);
+            db.SaveChanges();
+            ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
+            return View(contest);
 
         }
 

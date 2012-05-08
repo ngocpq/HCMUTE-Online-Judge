@@ -12,6 +12,7 @@ using System.Collections;
 
 namespace SPKTOnline.Controllers
 {
+
     public class ProblemController : Controller
     {
         //
@@ -31,7 +32,7 @@ namespace SPKTOnline.Controllers
         {
             if (ID != null)
             {
-              
+
                 List<Problem> dsProblem = new List<Problem>();
                 var list = db.Problems.Where(p => p.SubjectID == ID);
                 foreach (var i in list)
@@ -44,7 +45,7 @@ namespace SPKTOnline.Controllers
             else
                 return View("Index", "Home");
 
-            
+
         }
         //public static IEnumerable GetProblem()
         //{
@@ -70,7 +71,7 @@ namespace SPKTOnline.Controllers
                 {
                     if (pr.ID == ID)
                         p = pr;
-                        
+
                 }
                 return View(p);
             }
@@ -80,33 +81,25 @@ namespace SPKTOnline.Controllers
 
         }
         //Lecturer
+        [Authorize(Roles = "Lecturer")]
         public ActionResult AllProblemForUpDate()
         {
-             string name=HttpContext.User.Identity.Name;
-             if (name != null)
-             {
-                 if (checkRole.IsLecturer(name))
-                 {
-                     List<Problem> dsProblem = new List<Problem>();
-                     foreach (Problem p in db.Problems)
-                     {
-                         if (p.LecturerID == name)
-                             dsProblem.Add(p);
-                     }
-                     return View(dsProblem);
-                 }
-                 else
-                     return RedirectToAction("Index", "Home");
-             }
-             else
-                 return RedirectToAction("Logon", "Account");
+            string name = HttpContext.User.Identity.Name;
+            List<Problem> dsProblem = new List<Problem>();
+            foreach (Problem p in db.Problems)
+            {
+                if (p.LecturerID == name)
+                    dsProblem.Add(p);
+            }
+            return View(dsProblem);
+
         }
         [HttpGet]
-        public ActionResult CreateProblem(int ID=0)
+        public ActionResult CreateProblem(int ID = 0)
         {
-           
-            string name=HttpContext.User.Identity.Name;
-            if(name!=null)
+
+            string name = HttpContext.User.Identity.Name;
+            if (name != null)
             {
                 if (checkRole.IsLecturer(name))
                 {
@@ -116,16 +109,16 @@ namespace SPKTOnline.Controllers
                     ViewBag.ClassID = new MultiSelectList(db.Classes, "ID", "SubjectID");
                     //if (ID != 0)
                     //{
-                        AddProblemModels pro = new AddProblemModels();
-                        pro.ExamID = ID;
-                        return View(pro);
+                    AddProblemModels pro = new AddProblemModels();
+                    pro.ExamID = ID;
+                    return View(pro);
                     //}
                     //return View();
                 }
                 else
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
             }
-             return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
         [Authorize]
         [HttpPost]
@@ -180,7 +173,7 @@ namespace SPKTOnline.Controllers
                     return RedirectToAction("Index", "Home");
             }
             else
-                return RedirectToAction("Logon","Home");
+                return RedirectToAction("Logon", "Home");
         }
 
         public ActionResult EditProblem(int ID = 0)
@@ -218,7 +211,7 @@ namespace SPKTOnline.Controllers
         [HttpPost]
         public ActionResult EditProblem(AddProblemModels problemModel)
         {
-          if (Request.IsAuthenticated)
+            if (Request.IsAuthenticated)
             {
                 if (checkRole.IsLecturer(HttpContext.User.Identity.Name))
                 {
@@ -240,7 +233,7 @@ namespace SPKTOnline.Controllers
                     return RedirectToAction("Index", "Home");
             }
             else
-              return RedirectToAction("Logon", "Home");
+                return RedirectToAction("Logon", "Home");
         }
 
     }

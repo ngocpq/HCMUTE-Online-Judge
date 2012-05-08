@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="OnlineSPKTModelStoreContainer">
           <EntitySet Name="Class_Student" EntityType="OnlineSPKTModel.Store.Class_Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Classes" EntityType="OnlineSPKTModel.Store.Classes" store:Type="Tables" Schema="dbo" />
@@ -918,7 +918,7 @@
           <Property Name="ComparerID" Type="Int32" Nullable="false" />
           <Property Name="DifficultyID" Type="Int32" Nullable="false" />
           <Property Name="IsHiden" Type="Boolean" Nullable="false" />
-          <Property Name="AvailableTime" Type="DateTime" />
+          <Property Name="AvailableTime" Type="DateTime" Nullable="true" />
           <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="ComparerParameter" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FileID" Type="Int32" />
