@@ -132,6 +132,7 @@ namespace SPKTOnline.Controllers
                     problem.IsHiden = problemModel.IsHiden;
                     problem.DifficultyID = problemModel.DifficultyID;
                     problem.LecturerID = HttpContext.User.Identity.Name;
+
                     problem.ComparerID = problemModel.ComparerID;
                     problem.MemoryLimit = problemModel.MemoryLimit;
                     problem.TimeLimit = problemModel.TimeLimit;
