@@ -16,8 +16,9 @@ namespace ChamDiem
         }
         public ITestCase TestCase { get; set; }
         public KetQuaTestCase.LoaiKetQua KetQua { get; set; }
-        public String ThongDiep { get; set; }
-        public String Output { get; set; }
+        public string ThongDiep { get; set; }
+        public string Output { get; set; }
         public string Error { get; set; }
+        public double ThoiGianChay{ get; set; }
     }
 }

@@ -4194,7 +4194,7 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ExecutionTime
+        public Nullable<global::System.Double> ExecutionTime
         {
             get
             {
@@ -4209,8 +4209,8 @@ namespace SPKTOnline.Models
                 OnExecutionTimeChanged();
             }
         }
-        private Nullable<global::System.Int32> _ExecutionTime;
-        partial void OnExecutionTimeChanging(Nullable<global::System.Int32> value);
+        private Nullable<global::System.Double> _ExecutionTime;
+        partial void OnExecutionTimeChanging(Nullable<global::System.Double> value);
         partial void OnExecutionTimeChanged();
     
         /// <summary>

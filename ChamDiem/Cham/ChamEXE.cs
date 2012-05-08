@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using ChamDiem.Exceptions;
 
 namespace ChamDiem
 {
@@ -21,41 +22,44 @@ namespace ChamDiem
                 kqTest.TestCase = test;
                 kqTest.Output = rs.Output;
                 kqTest.Error = rs.Error;
+                kqTest.ThoiGianChay = rs.ExecuteTime;                                
                 switch (rs.Result)
                 {
                     case RunResult.ResultState.Error:
-                        kqTest.KetQua = KetQuaTestCase.LoaiKetQua.ViPham;
+                        kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Loi;
                         kqTest.ThongDiep = "Bị lỗi: " + rs.Error;
                         break;
                     case RunResult.ResultState.Timeout:
                         kqTest.KetQua = KetQuaTestCase.LoaiKetQua.QuaGio;
-                        kqTest.ThongDiep = "Quá giờ";                        
+                        kqTest.ThongDiep = "Quá giờ";                                
                         break;
                     case RunResult.ResultState.Success:
-                        try
-                        {
-                            string message;
-                            //if (SoSanh(kqTest.Output, test.Output, FileCham,out message))
-                            if(FileCham.SoSanh(kqTest.Output,test,out message))
-                            {
-                                kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Dung;
-                                kqTest.ThongDiep = "Đúng";
-                            }
-                            else
-                            {
-                                kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Sai;
-                                kqTest.ThongDiep = "Sai kết quả";
-                            }
-                        }
-                        catch (TimeoutException ex)
+                        if (kqTest.ThoiGianChay> test.TimeOut)
                         {
                             kqTest.KetQua = KetQuaTestCase.LoaiKetQua.QuaGio;
-                            kqTest.ThongDiep = ex.Message;
+                            kqTest.ThongDiep = "Quá giờ";
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Loi;
-                            kqTest.ThongDiep = ex.Message;
+                            try
+                            {
+                                string message;
+                                if (FileCham.SoSanh(kqTest.Output, test, out message))
+                                {
+                                    kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Dung;
+                                    kqTest.ThongDiep = "Đúng";                                    
+                                }
+                                else
+                                {
+                                    kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Sai;
+                                    kqTest.ThongDiep = "Sai";
+                                }
+                            }                            
+                            catch (Exception ex)
+                            {
+                                kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Loi;                                
+                                kqTest.ThongDiep = "Chương trình chấm bị lỗi";                                                                
+                            }
                         }
                         break;
                 }

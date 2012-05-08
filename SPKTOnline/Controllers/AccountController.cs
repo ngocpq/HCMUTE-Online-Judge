@@ -38,13 +38,12 @@ namespace SPKTOnline.Controllers
             ViewBag.Message = message;
             return View();
         }
+
         [HttpPost]
         public ActionResult Logon(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                //User user = new User();
-                //user = checkRole.IsUser(model.UserName, model.Password);
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
 
@@ -53,22 +52,6 @@ namespace SPKTOnline.Controllers
                     user.LastLoginTime = DateTime.Now;
                     db.SaveChanges();
                     FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
-
-                    //if (reUrl != null)
-                    //    //return RedirectToAction("Index", "Home");
-                    //    return Redirect(reUrl);
-                    //// Van's Original
-                    //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                    //    && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    //{
-                    //    user.LastLoginTime = DateTime.Now;
-                    //    return Redirect(returnUrl);
-                    //}
-                    //else
-                    //{
-                    //    user.LastLoginTime = DateTime.Now;
-                    //    return RedirectToAction("Index", "Home");
-                    //}
                 }
                 else
                 {
@@ -101,8 +84,8 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateUser(UserModels userModel)
         {
             User user = new User();
-                       
-            if (Membership.GetUser(userModel.Username)==null)
+
+            if (Membership.GetUser(userModel.Username) == null)
             {
                 String[] kq = userModel.MyOption;
                 user.Username = userModel.Username;
@@ -110,7 +93,7 @@ namespace SPKTOnline.Controllers
                 user.LastName = userModel.LastName;
                 user.FirstName = userModel.FirstName;
                 user.IsLocked = userModel.IsLocked;
-                user.Email = userModel.Email;                
+                user.Email = userModel.Email;
                 if (kq.Count() != 0)
                 {
                     foreach (String s in kq)
@@ -127,7 +110,7 @@ namespace SPKTOnline.Controllers
                 //---------------
                 foreach (Role r in user.Roles)
                 {
-                    if (r.ID == 2) 
+                    if (r.ID == 2)
                     {
                         String[] ls = userModel.OptionSubject;
                         if (userModel.OptionSubject.Count() != 0)
@@ -157,37 +140,31 @@ namespace SPKTOnline.Controllers
             }
 
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult EditUser()
         {
             return View();
         }
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditUser(User user)
         {
 
-            if (Request.IsAuthenticated)
-            {
-                if (checkRole.IsAdmin(HttpContext.User.Identity.Name))
-                {
 
-                    db.Users.Attach(user);
-                    db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
-                    db.SaveChanges();
-                    return View(user);
-                }
-                else
-                    return RedirectToAction("Index", "Home");
-                //ViewBag.MaPhanQuyen = new SelectList(db.Roles, "MaPhanQuyen", "TenPhanQuyen", user.Roles);
-                //return View(userModel);
-            }
-            else
-                return View("Logon");
+            db.Users.Attach(user);
+            db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
+            db.SaveChanges();
+            return View(user);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult ManageRoles()
         {
             return View();
         }
+
         public ActionResult Import(string message)
         {
 
@@ -246,9 +223,8 @@ namespace SPKTOnline.Controllers
                 return RedirectToAction("Logon", "Account", new { Message = Message });//TODO: đã kích hoạt tài khoản.
 
             }
-
-
         }
+
         [ValidateInput(false)]
         public ActionResult EditAccount(string message)
         {
@@ -280,10 +256,10 @@ namespace SPKTOnline.Controllers
             {
                 u.Password = Cryptography.CreateMD5Hash(EAccount.NewPassword);
                 db.SaveChanges();
-                return RedirectToAction("EditAccount", "Account", new { Message = "<p style=\"color:Blue\"><b>Bạn đã thay đổi toàn khoản thành công!</b></p>" });
+                return RedirectToAction("EditAccount", "Account", new { Message = "Bạn đã thay đổi toàn khoản thành công!" });
             }
             else
-                return RedirectToAction("EditAccount", "Account", new { Message = "<p style=\"color:Red\"><b>Password nhập vào không đúng!</b></p>" });
+                return RedirectToAction("EditAccount", "Account", new { Message = "Password nhập vào không đúng!" });
 
         }
 

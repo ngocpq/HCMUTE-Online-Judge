@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="OnlineSPKTModelStoreContainer">
           <EntitySet Name="Class_Student" EntityType="OnlineSPKTModel.Store.Class_Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Classes" EntityType="OnlineSPKTModel.Store.Classes" store:Type="Tables" Schema="dbo" />
@@ -176,11 +176,11 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ClassID" Type="int" Nullable="false" />
-          <Property Name="ExamID" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="datetime" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
-          <Property Name="IsOpen" Type="bit" Nullable="false" />
-          <Property Name="TotalScore" Type="int" Nullable="false" />
+          <Property Name="ExamID" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="IsOpen" Type="bit" />
+          <Property Name="TotalScore" Type="int" />
         </EntityType>
         <EntityType Name="Difficulties">
           <Key>
@@ -309,7 +309,7 @@
           </Key>
           <Property Name="StudentSubmitID" Type="int" Nullable="false" />
           <Property Name="TestCaseID" Type="int" Nullable="false" />
-          <Property Name="ExecutionTime" Type="int" />
+          <Property Name="ExecutionTime" Type="float" />
           <Property Name="ExecutionMemory" Type="int" />
           <Property Name="Score" Type="float" />
           <Property Name="Comment" Type="nvarchar" MaxLength="255" />
@@ -459,7 +459,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NewContest_Exam">
-          <End Role="Exam" Type="OnlineSPKTModel.Store.Exam" Multiplicity="1" />
+          <End Role="Exam" Type="OnlineSPKTModel.Store.Exam" Multiplicity="0..1" />
           <End Role="Contests" Type="OnlineSPKTModel.Store.Contests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Exam">
@@ -693,8 +693,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineSPKTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -992,7 +991,7 @@
           </Key>
           <Property Name="StudentSubmitID" Type="Int32" Nullable="false" />
           <Property Name="TestCaseID" Type="Int32" Nullable="false" />
-          <Property Name="ExecutionTime" Type="Int32" />
+          <Property Name="ExecutionTime" Type="Double" />
           <Property Name="ExecutionMemory" Type="Int32" />
           <Property Name="Score" Type="Double" />
           <Property Name="Comment" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
@@ -1473,7 +1472,7 @@
         <EntityTypeShape EntityType="OnlineSPKTModel.Student_Submit" Width="1.5" PointX="10.5" PointY="5.375" Height="4.0956022135416674" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Subject" Width="1.5" PointX="0.75" PointY="10.5" Height="2.1725878906250031" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.sysdiagram" Width="1.5" PointX="2.75" PointY="1.5" Height="1.9802864583333388" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.TestCaseResult" Width="1.5" PointX="12.75" PointY="7.875" Height="2.5571907552083388" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.TestCaseResult" Width="1.5" PointX="12.75" PointY="7.875" Height="2.5571907552083335" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.TestCas" Width="1.5" PointX="10.5" PointY="10.25" Height="2.749492187499996" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.User" Width="1.5" PointX="5.25" PointY="4.375" Height="4.2879036458333388" IsExpanded="true" />
         <AssociationConnector Association="OnlineSPKTModel.FK_Classes_Subjects" ManuallyRouted="false">
@@ -1585,9 +1584,9 @@
           <ConnectorPoint PointX="12.75" PointY="8.6728011067708337" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_TestCaseResult_TestCases" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="11.715841971354166" />
-          <ConnectorPoint PointX="13.5" PointY="11.715841971354166" />
-          <ConnectorPoint PointX="13.5" PointY="10.432190755208339" />
+          <ConnectorPoint PointX="12" PointY="11.715841971354164" />
+          <ConnectorPoint PointX="13.5" PointY="11.715841971354164" />
+          <ConnectorPoint PointX="13.5" PointY="10.432190755208334" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.Class_Student" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="10.063460538461539" />

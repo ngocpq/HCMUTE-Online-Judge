@@ -21,23 +21,24 @@ namespace ChamDiem
             try
             {
                 process = Process.Start(StartInfo);
-                if (process.WaitForExit(timeOut))
+                process.WaitForExit(timeOut + 3000);
+                if (!process.HasExited)
                 {
-                    rs.Result = RunResult.ResultState.Success;
-                    rs.ExitCode = process.ExitCode;
-                    rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
+                    process.Kill();
+                    rs.Result = RunResult.ResultState.Timeout;
                 }
                 else
                 {
-                    if (!process.HasExited)
-                        process.Kill();
-                    else
-                        rs.ExitCode = process.ExitCode;
+                    rs.ExitCode = process.ExitCode;
+                    rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
+                    rs.Result = RunResult.ResultState.Success;
                 }
                 if (process.StandardOutput != null)
                     rs.Output = process.StandardOutput.ReadToEnd();
                 if (process.StandardError != null)
                     rs.Error = process.StandardError.ReadToEnd();
+                process.StandardOutput.Close();
+                process.StandardError.Close();
             }
             catch (Exception ex)
             {
@@ -46,6 +47,7 @@ namespace ChamDiem
             }
             return rs;
         }
+
         public static RunResult RunFile(string fileName, string agr, int timeOut,string Input)
         {
             RunResult rs = new RunResult();
@@ -58,28 +60,38 @@ namespace ChamDiem
             StartInfo.RedirectStandardInput = true;
             StartInfo.RedirectStandardError = true;
             StartInfo.RedirectStandardOutput = true;
-            process = Process.Start(StartInfo);
-            process.StandardInput.Write(Input);
-            process.StandardInput.Close();
-            if (process.WaitForExit(timeOut))
+            try
             {
-                rs.Result = RunResult.ResultState.Success;
-                rs.ExitCode = process.ExitCode;
-                rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
-            }
-            else
-            {
+                process = Process.Start(StartInfo);
+                process.StandardInput.Write(Input);
+                process.StandardInput.Close();
+                process.WaitForExit(timeOut + 3000);
                 if (!process.HasExited)
+                {
                     process.Kill();
+                    rs.Result = RunResult.ResultState.Timeout;
+                }
                 else
+                {
                     rs.ExitCode = process.ExitCode;
+                    rs.ExecuteTime = process.ExitTime.Subtract(process.StartTime).TotalMilliseconds;
+                    rs.Result = RunResult.ResultState.Success;                    
+                }
+                if (process.StandardOutput != null)
+                    rs.Output = process.StandardOutput.ReadToEnd();                
+                if (process.StandardError != null)
+                    rs.Error = process.StandardError.ReadToEnd();
+                process.StandardOutput.Close();
+                process.StandardError.Close();
             }
-            if (process.StandardOutput != null)
-                rs.Output = process.StandardOutput.ReadToEnd();
-            if (process.StandardError != null)
-                rs.Error = process.StandardError.ReadToEnd();
+            catch (Exception ex)
+            {
+                rs.Result = RunResult.ResultState.Error;
+                rs.Error = ex.Message;                
+            }
             return rs;
         }
+
         public static RunResult RunFile(string fileName, int timeOut, string Input)
         {
             return RunFile(fileName, null, timeOut, Input);

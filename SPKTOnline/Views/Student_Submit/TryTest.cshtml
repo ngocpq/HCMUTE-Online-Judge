@@ -77,10 +77,18 @@ display:none;
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true) 
+    <div>
     <fieldset class="Problem">
-    <legend style="color:Gray">@Model.Problem.Name</legend>
-         @Html.DisplayFor(model => model.Problem.Content)
-    </fieldset>
+        <legend style="color:Gray">@Model.Problem.Name</legend>                 
+            @Html.DisplayFor(model => model.Problem.Content)         
+    </fieldset>    
+    </div>
+    if (Model.Problem.FileID != null)
+    {
+        <div>                           
+            @Html.ActionLink("Download đề thi", "Download", "File", new { ID = Model.Problem.FileID },null)
+        </div>
+    }
     <div class="lambai" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
     Làm bài |</div>
     

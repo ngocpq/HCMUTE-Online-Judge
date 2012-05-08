@@ -38,6 +38,9 @@ namespace SPKTOnline
 
         protected void Application_Start()
         {
+            //ghi log xuong file
+            LogUtility.SetLogger(new FileLogger());
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
@@ -94,7 +97,7 @@ namespace SPKTOnline
                 ip = Request.ServerVariables["REMOTE_ADDR"];
                 WriteToEventLog(new Exception("User IP: " + ip, ex));
             }
-            catch (Exception err)
+            catch
             {
                 Response.Redirect("~/Error");
             }

@@ -56,6 +56,11 @@
             <div class="editor-label">
                 Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
             </div>
+            <div class="editor-field">
+                Thời gian hiện: 
+                @Html.TextBoxFor(m => m.AvailableTime)                
+                @Html.ValidationMessageFor(m => m.AvailableTime)
+            </div>
             <div>
                 <input type="submit" value="Submit" />
             </div>

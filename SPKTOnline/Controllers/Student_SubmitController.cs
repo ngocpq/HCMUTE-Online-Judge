@@ -48,18 +48,18 @@ namespace SPKTOnline.Controllers
             st.SubmitTime = DateTime.Now;
             db.Student_Submit.AddObject(st);
 
-            LogUtility.Logger.WriteDebug("Bat dau save");
+            LogUtility.WriteDebug("Bat dau save");
             db.SaveChanges();
-            LogUtility.Logger.WriteDebug("Save lan 1");
+            LogUtility.WriteDebug("Save lan 1");
             ChamDiemServise chamThiService = new ChamDiemServise();
             //Chay va doi
             //
             st.TrangThaiCham = (int)TrangThaiCham.DangCham;
-            LogUtility.Logger.WriteDebug("Save lan 2");
+            LogUtility.WriteDebug("Save lan 2");
             db.SaveChanges();
-            LogUtility.Logger.WriteDebug("Bat dau cham");
+            LogUtility.WriteDebug("Bat dau cham");
             KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
-            LogUtility.Logger.WriteDebug("Cham xong");
+            LogUtility.WriteDebug("Cham xong");
             kq.SubmitID = st.ID;
             chamThiService_ChamThiCompleted(null, kq);
             //
@@ -68,8 +68,7 @@ namespace SPKTOnline.Controllers
             //chamThiService.ChamBaiThread(st);
             //st.TrangThaiCham = (int)TrangThaiCham.DangCham;
             //db.SaveChanges();
-            return RedirectToAction("TryTestResult", "Result", new { ID = st.ID, Message = "<b>Bạn đã gửi bài làm thành công</b>" });//trả ra thông tin ở trang kết quả.
-
+            return RedirectToAction("TryTestResult", "Result", new { ID = st.ID, Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
         }
 
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)
@@ -80,7 +79,7 @@ namespace SPKTOnline.Controllers
             st.TrangThaiBienDich = kq.KetQuaBienDich.BienDichThanhCong ? 1 : 0;
             if (kq.KetQuaBienDich.BienDichThanhCong)
             {
-                LogUtility.Logger.WriteDebug("Bien dich thanh cong");
+                LogUtility.WriteDebug("Bien dich thanh cong");
                 foreach (var rs in kq.KetQuaCham.KetQuaTestCases)
                 {
                     TestCas tc = ((TestCas)rs.TestCase);
@@ -89,6 +88,7 @@ namespace SPKTOnline.Controllers
                     tcResult.StudentSubmitID = st.ID;
                     tcResult.Score = rs.KetQua == KetQuaTestCase.LoaiKetQua.Dung ? (tc.Diem * tc.Problem.Score) / 100 : 0;
                     tcResult.Comment = rs.ThongDiep;
+                    tcResult.ExecutionTime = rs.ThoiGianChay;                    
                     //TODO: Them Error
                     //tcResult.Error = rs.Error;
                     db.TestCaseResults.AddObject(tcResult);
@@ -96,10 +96,10 @@ namespace SPKTOnline.Controllers
             }
             else
             {
-                LogUtility.Logger.WriteDebug("Bien dich that bai");
+                LogUtility.WriteDebug("Bien dich that bai");
                 st.CompilerError = kq.KetQuaBienDich.Message;
             }
-            LogUtility.Logger.WriteDebug("Luu ket qua");
+            LogUtility.WriteDebug("Luu ket qua");
             db.SaveChanges();
         }
         public ActionResult Htmlpartial()

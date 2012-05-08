@@ -34,12 +34,11 @@ namespace SPKTOnline.Controllers
             return View(list);
         }
 
-        [ValidateInput(false)]
+        [ValidateInput(false)]        
         [Authorize(Roles = "Student,Lecturer")]
         public ActionResult TryTestResult(int? ID, string Message)
         {
             string Name = User.Identity.Name;
-
             Student_Submit st = db.Student_Submit.Where(p => p.ID == ID).FirstOrDefault();
             ViewBag.Message = Message;
             return View(st);

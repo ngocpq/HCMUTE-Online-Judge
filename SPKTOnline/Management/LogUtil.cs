@@ -17,9 +17,8 @@ namespace SPKTOnline.Management
         void WriteException(Exception ex);
         void WriteDebug(string message);
     }
-    public class LogUtility:ILogger
+    public class FileLogger : ILogger
     {
-
         #region ILogger Members
 
         public void WriteLog(string message)
@@ -34,30 +33,39 @@ namespace SPKTOnline.Management
             mIOFile.WriteExceptionToFile(ex);
         }
 
-        #endregion
-
-        private static ILogger _Logger;
-        private LogUtility()
-        {
-            //_Logger = this;
-        }
-        public static ILogger Logger
-        {
-            get
-            {
-                if (_Logger == null)
-                    _Logger = new LogUtility();
-                return _Logger;
-            }
-        }
-
-        #region ILogger Members
-
-
         public void WriteDebug(string message)
         {
             IOFile mIOFile = new IOFile();
             mIOFile.WriteDebugToFile(message);
+        }
+        #endregion
+    }
+    public static class LogUtility
+    {
+        static ILogger _Logger;
+        public static void SetLogger(ILogger logger)
+        {
+            _Logger = logger;
+        }
+
+        #region ILogger Members
+
+        public static void WriteLog(string message)
+        {
+            if (_Logger != null)
+                _Logger.WriteLog(message);
+        }
+
+        public static void WriteException(Exception ex)
+        {
+            if (_Logger != null)
+                _Logger.WriteException(ex);
+        }
+
+        public static void WriteDebug(string message)
+        {
+            if (_Logger != null)
+                _Logger.WriteDebug(message);
         }
 
         #endregion

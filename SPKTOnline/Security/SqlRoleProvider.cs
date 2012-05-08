@@ -21,7 +21,8 @@ namespace SPKTOnline.Security
                 {
                     Models.Role role = db.Roles.FirstOrDefault(r => r.Name == rName);
                     if (role == null) continue;
-                    user.Roles.Add(role);
+                    //user.Roles.Add(role);
+                    role.Users.Add(user);
                 }
             }
             db.SaveChanges();

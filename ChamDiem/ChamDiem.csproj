@@ -41,6 +41,9 @@
     <Compile Include="BienDich\BienDichJava.cs" />
     <Compile Include="BienDich\BienDichPascal.cs" />
     <Compile Include="Commons\BienDichResult.cs" />
+    <Compile Include="Exceptions\BienDichFileException.cs" />
+    <Compile Include="Exceptions\ChamThiException.cs" />
+    <Compile Include="Exceptions\RunFileException.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Cham\ChamBaiFactory.cs" />
     <Compile Include="Cham\ChamEXE.cs" />
@@ -61,6 +64,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

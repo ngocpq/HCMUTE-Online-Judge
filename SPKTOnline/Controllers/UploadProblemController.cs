@@ -15,30 +15,26 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /UploadProblem/
-        static OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
         ProblemRepository ProblemRep = new ProblemRepository();
         CheckRoles checkRole = new CheckRoles();
-        public ActionResult Upload(int ID=0)
-        {
 
-            if (User.Identity.IsAuthenticated)
-            {
-                if (checkRole.IsLecturer(User.Identity.Name))
-                {
-                    ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
-                    //if (ID != 0)
-                    //{
-                        Problem pro = new Problem();
-                        pro.ExamID = ID;
-                        return View(pro);
-                    //}
-                    
-                }
-                return View();
-            }
-            return RedirectToAction("Logon", "Account");
+        [Authorize(Roles = "Admin,Lecturer")]
+        public ActionResult Upload(int? ID )
+        {
+            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
+            //if (ID != 0)
+            //{
+            Problem pro = new Problem();
+            pro.ExamID = ID;
+            pro.AvailableTime = DateTime.Now;
+            pro.Score = 10;
+            return View(pro);
+            //}
+
         }
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult Upload(Problem problem, HttpPostedFileBase filebase)
         {
             try
@@ -49,38 +45,33 @@ namespace SPKTOnline.Controllers
                     if (filebase != null)
                     {
                         if (filebase.ContentLength > 0)
-                        {
+                        {                            
                             fileName = Guid.NewGuid().ToString() + Path.GetExtension(filebase.FileName);
-                           // string filePath = Path.Combine(HttpContext.Server.MapPath("~/uploads/"), fileName);
-                           // filebase.SaveAs(filePath);
-                            if (User.Identity.IsAuthenticated)
+                            //TODO: đọc từ file cấu hình
+                            problem.LecturerID = User.Identity.Name;
+                            problem.Name = Path.GetFileNameWithoutExtension(filebase.FileName);
+                            problem.DifficultyID = 1;
+                            problem.MemoryLimit = 1000;
+                            problem.TimeLimit = 1000;
+                            problem.ComparerID = 1;
+                            if (problem.ExamID == 0)
                             {
-                                if (checkRole.IsLecturer(User.Identity.Name))
-                                {
-                                    problem.LecturerID = User.Identity.Name;
-                                    problem.DifficultyID = 1;
-                                    problem.MemoryLimit = 1000;
-                                    problem.TimeLimit = 1000;
-                                    problem.ComparerID = 1;
-                                    if (problem.ExamID == 0)
-                                    {
-                                        problem.ExamID = null;
-                                    }
-                                    db.Problems.AddObject(problem);
-                                    //db.SaveChanges();
-                                    Unzipfile(problem, filebase.InputStream);//, "~\\uploads");
-                                    db.SaveChanges();
-                                    if (problem.ExamID == 0)
-                                    {
-                                        
-                                        return RedirectToAction("Browse", "Problem", problem.SubjectID);
-                                    }
-                                    else
-                                    {
-                                        return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
-                                    }
-                                }
+                                problem.ExamID = null;
                             }
+                            db.Problems.AddObject(problem);
+                            //db.SaveChanges();
+                            Unzipfile(problem, filebase.InputStream);//, "~\\uploads");
+                            db.SaveChanges();
+                            if (problem.ExamID==null|| problem.ExamID == 0)
+                            {
+
+                                return RedirectToAction("Browse", "Problem", new { ID = problem.SubjectID });
+                            }
+                            else
+                            {
+                                return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
+                            }
+
                         }
 
                     }
@@ -91,10 +82,11 @@ namespace SPKTOnline.Controllers
                 throw (ex);
             }
             //TODO: redirect show problem
-            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name",problem.SubjectID);
+            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name", problem.SubjectID);
             return View();
         }
-        public static string Unzipfile(Problem problem, Stream inputStream)//, string UnzipPath)
+        
+        public string Unzipfile(Problem problem, Stream inputStream)//, string UnzipPath)
         {
             try
             {
@@ -108,8 +100,8 @@ namespace SPKTOnline.Controllers
                     string directoryName = "";
 
                     directoryName = Path.GetDirectoryName(ZEntry.Name);
-                    
-                    if (directoryName!=""&& directoryName!=null&&!dTestcase.ContainsKey(directoryName))
+
+                    if (directoryName != "" && directoryName != null && !dTestcase.ContainsKey(directoryName))
                     {
                         TestCas tcTemp = new TestCas();
                         tcTemp.MaDB = problem.ID;
@@ -118,7 +110,7 @@ namespace SPKTOnline.Controllers
                         problem.TestCases.Add(tcTemp);
                     }
 
-                    
+
 
                     sFileName = Path.GetFileName(ZEntry.Name);
                     if (sFileName == String.Empty)
@@ -166,17 +158,17 @@ namespace SPKTOnline.Controllers
                                 case ".docx":
                                 case ".pdf":
 
-                                    byte[] problemfile = memStream.ToArray();   
-                                                       
+                                    byte[] problemfile = memStream.ToArray();
+
                                     SPKTOnline.Models.File file = new SPKTOnline.Models.File();
                                     file.Content = problemfile;
                                     file.Type = Path.GetExtension(sFileName);
                                     file.Name = sFileName;
                                     db.Files.AddObject(file);
-                                    
+
                                     problem.File = file;
-                                   
-                                    
+
+
                                     FileStream streamWriter1 = System.IO.File.Create(@"D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\uploads\" + sFileName);
                                     streamWriter1.Write(file.Content, 0, problemfile.Length);
                                     streamWriter1.Close();
@@ -195,7 +187,7 @@ namespace SPKTOnline.Controllers
 
                 s.Close();
                 //TestCas test;
-              //  db.SaveChanges();
+                //  db.SaveChanges();
 
                 return sFileName;
             }

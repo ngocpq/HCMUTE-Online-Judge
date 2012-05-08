@@ -32,7 +32,6 @@ namespace SPKTOnline.Controllers
         {
             if (ID != null)
             {
-
                 List<Problem> dsProblem = new List<Problem>();
                 var list = db.Problems.Where(p => p.SubjectID == ID);
                 foreach (var i in list)
@@ -97,7 +96,6 @@ namespace SPKTOnline.Controllers
         [HttpGet]
         public ActionResult CreateProblem(int ID = 0)
         {
-
             string name = HttpContext.User.Identity.Name;
             if (name != null)
             {
@@ -208,31 +206,22 @@ namespace SPKTOnline.Controllers
                 return RedirectToAction("Logon", "Home");
         }
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public ActionResult EditProblem(AddProblemModels problemModel)
         {
-            if (Request.IsAuthenticated)
-            {
-                if (checkRole.IsLecturer(HttpContext.User.Identity.Name))
-                {
-                    Problem problem = db.Problems.FirstOrDefault(m => m.ID == problemModel.ID);
-                    problem.Name = problemModel.Name;
-                    problem.Content = problemModel.Content;
-                    problem.IsHiden = problemModel.IsHiden;
-                    problem.DifficultyID = problemModel.DifficultyID;
-                    problem.LecturerID = HttpContext.User.Identity.Name;
-                    problem.ComparerID = problemModel.ComparerID;
-                    problem.MemoryLimit = problemModel.MemoryLimit;
-                    problem.TimeLimit = problemModel.TimeLimit;
-                    problem.SubjectID = problemModel.SubjectID;
-                    problem.Score = problem.Score;
-                    db.SaveChanges();
-                    return RedirectToAction("AllProblemForUpDate", "Problem");
-                }
-                else
-                    return RedirectToAction("Index", "Home");
-            }
-            else
-                return RedirectToAction("Logon", "Home");
+            Problem problem = db.Problems.FirstOrDefault(m => m.ID == problemModel.ID);
+            problem.Name = problemModel.Name;
+            problem.Content = problemModel.Content;
+            problem.IsHiden = problemModel.IsHiden;
+            problem.DifficultyID = problemModel.DifficultyID;
+            problem.LecturerID = HttpContext.User.Identity.Name;
+            problem.ComparerID = problemModel.ComparerID;
+            problem.MemoryLimit = problemModel.MemoryLimit;
+            problem.TimeLimit = problemModel.TimeLimit;
+            problem.SubjectID = problemModel.SubjectID;
+            problem.Score = problemModel.Score;
+            db.SaveChanges();
+            return RedirectToAction("AllProblemForUpDate", "Problem");
         }
 
     }
