@@ -785,6 +785,7 @@
     <Content Include="Views\Class\ClassDetailOfLecturer.cshtml" />
     <Content Include="Views\Home\ShowFile.cshtml" />
     <Content Include="Views\Class\ClassDetail.cshtml" />
+    <Content Include="Views\Class\DSProblemPartial.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
@@ -798,6 +799,7 @@
   <ItemGroup>
     <Folder Include="Content\userfiles\" />
     <Folder Include="Execution\" />
+    <Folder Include="Filters\" />
     <Folder Include="uploads\file\" />
     <Folder Include="uploads\image\" />
   </ItemGroup>

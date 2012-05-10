@@ -40,12 +40,10 @@
     $(document).ready(function () {
         var i = 0;
         $(".lambai").click(function () {
+            
             if (i % 2 == 0) {
                 $(".lambai").html("Xem câu hỏi |");
                 i++;
-                if (i == 1) {
-                    $(".panel").slideToggle("fast");
-                }
             }
             else {
                 $(".lambai").html("Làm bài |");
@@ -53,8 +51,8 @@
             }
 
             $(".Problem").toggle();
-            
-          
+
+
         });
     });
 </script>
@@ -69,7 +67,7 @@ background:#FFFFFF;
 }
 div.panel
 {
-display:none;
+
 }
 </style>
 
@@ -109,7 +107,7 @@ display:none;
         <p>
             <input class="button" type="submit" value="Gửi bài" />
         </p>
-        <div style="visibility:hidden">@Html.TextBoxFor(model => model.ProblemID)</div>
+        <div >@Html.TextBoxFor(model => model.ProblemID)</div>
     </div>
 }
 

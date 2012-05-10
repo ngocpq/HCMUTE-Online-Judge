@@ -19,7 +19,7 @@
        
     </fieldset>
     <fieldset>
-        <legend style="color: Gray">TestCase</legend>
+        <legend style="color: Gray">Câu hỏi</legend>
         @if (Model.Problems.Count() != 0)
         {
             
@@ -64,7 +64,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Delete", "Details", new { ID = item.ID })
-                            @Html.ActionLink("Edit", "EditTestCase", new { ID = item.ID })
+                            
                         </td>
                     </tr>
                 }
@@ -79,8 +79,8 @@
       
      
     <p>
-        @Html.ActionLink("Tạo câu hỏi bằng Upload", "Upload","UploadProblem",new {ID=Model.ID},null)<br />
-        @Html.ActionLink("Tạo câu hỏi bằng cách nhập text", "CreateProblem","Problem",new {ID=Model.ID},null)
+        @Html.ActionLink("Upload câu hỏi từ file", "Upload","UploadProblem",new {ID=Model.ID},null)<br />
+        @Html.ActionLink("Tạo câu hỏi mới", "CreateProblem","Problem",new {ID=Model.ID},null)
     </p>
     <p>
       <button name="button" type="button" onclick="document.location.href=$('#CreateContest').attr('href')">Tạo Kỳ Thi</button>

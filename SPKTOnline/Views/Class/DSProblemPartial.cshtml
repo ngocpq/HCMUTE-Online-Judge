@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SPKTOnline.Models.Problem>
+
+@if (Model.Count() != 0)
+{
+    <table style="width:650px">
+        <tr>
+            <th>
+               Tên câu hỏi
+            </th>
+            <th>
+               Nội dung
+            </th>
+            <th>
+               Độ khó
+            </th>
+             <th>
+               Hình thức so sánh
+            </th>
+            <th>
+               Số điểm
+            </th>
+            <th>
+               Môn học
+            </th>
+             <th>
+              Xử lý
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty.Name)
+                </td>
+                <td>
+                    @if (item.Comparer != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Comparer.Name)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ComparerParameter)
+                    }
+                </td>
+               <td>
+                  
+                         @Html.DisplayFor(modelItem => item.Score)
+                   
+                </td>
+                <td>
+                  
+                         @Html.DisplayFor(modelItem => item.Subject.Name)
+                   
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteProblem", new { id = item.ID })|
+
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+else
+{ 
+    <p>
+        Lớp này chưa có câu hỏi nào!
+    </p>
+
+}

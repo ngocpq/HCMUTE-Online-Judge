@@ -20,7 +20,8 @@ namespace SPKTOnline.Controllers
         UserRepository userRep = new UserRepository();
         public ActionResult Index()
         {
-            var cl = db.Classes.Where(c => c.SchoolYear.Contains(DateTime.Now.Year.ToString()));
+            string currentYear=DateTime.Now.Year.ToString();
+            var cl = db.Classes.Where(c => c.SchoolYear.Contains(currentYear)==true);
             List<Class> l = new List<Class>();
             foreach (var i in cl)
             {
@@ -33,26 +34,27 @@ namespace SPKTOnline.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string username = User.Identity.Name;
+                List<Class> l = new List<Class>();
                 if (checkRole.IsStudent(username))
                 {
                     var cl = db.Classes.Where(c => c.User.Username == username);
-                    List<Class> l = new List<Class>();
+                  
                     foreach (var i in cl)
                     {
                         l.Add(i);
                     }
-                    return View("Index", l);
+                    
                 }
                 if (checkRole.IsLecturer(username))
                 {
-                    var cl = db.Classes.Where(c => c.User.Username == username);
-                    List<Class> l = new List<Class>();
+                    var cl = db.Classes.Where(c => c.LecturerID == username);
                     foreach (var i in cl)
                     {
                         l.Add(i);
                     }
-                    return View("Index", l);
+                   
                 }
+                return View("Index", l);
             }
             return RedirectToAction("Logon", "Home");
         }
@@ -127,16 +129,31 @@ namespace SPKTOnline.Controllers
             }
             return RedirectToAction("Logon", "Account");
         }
+        [Authorize(Roles="Lecturer")]
         public ActionResult ClassDetailOfLecturer(int ID=0)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);
         }
 
+        [Authorize(Roles="Student")]
         public ActionResult ClassDetail(int ID)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);
+        }
+        public ActionResult DsProblemPartial(Class cla)
+        {
+            List<Problem> ds = new List<Problem>();
+            foreach (var i in db.Problems)
+            {
+                foreach (var j in i.Classes)
+                {
+                    if (j.ID == cla.ID)
+                        ds.Add(i);
+                }
+            }
+            return PartialView("DSProblemPartial", ds);
         }
 
     }

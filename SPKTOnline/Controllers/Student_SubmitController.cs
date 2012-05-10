@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using SPKTOnline.Models;
 using SPKTOnline.Management;
 using ChamDiem;
-using DevExpress.Web.Mvc;
-using DevExpress.Web.ASPxHtmlEditor;
+//using DevExpress.Web.Mvc;
+//using DevExpress.Web.ASPxHtmlEditor;
 using System.Web.UI.WebControls;
-using DevExpress.Web.ASPxFileManager;
-using DevExpress.Web.ASPxUploadControl;
+//using DevExpress.Web.ASPxFileManager;
+//using DevExpress.Web.ASPxUploadControl;
 //using FredCK.FCKeditorV2;
 namespace SPKTOnline.Controllers
 {
@@ -88,7 +88,7 @@ namespace SPKTOnline.Controllers
                     tcResult.StudentSubmitID = st.ID;
                     tcResult.Score = rs.KetQua == KetQuaTestCase.LoaiKetQua.Dung ? (tc.Diem * tc.Problem.Score) / 100 : 0;
                     tcResult.Comment = rs.ThongDiep;
-                    tcResult.ExecutionTime = rs.ThoiGianChay;                    
+                    tcResult.ExecutionTime = (int)rs.ThoiGianChay;                    
                     //TODO: Them Error
                     //tcResult.Error = rs.Error;
                     db.TestCaseResults.AddObject(tcResult);

@@ -3,12 +3,16 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="webtitle">
+    BÀI TẬP CƠ SỞ LẬP TRÌNH I</div>
+<script type="text/javascript" src="~/Scripts/modernizr-1.7.min.js"></script>
 <fieldset>
     <legend style="color:Gray">@Html.DisplayFor(model => model.Name)</legend>
          @Html.DisplayFor(model => model.Content)
 </fieldset>
-<button name="button" type="button" onclick="document.location.href=$('#cancelUrl').attr('href')">Làm bài</button>
+    <div class="lambai" onclick="document.location.href=$('#cancelUrl').attr('href')" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
+    Làm bài |</div>
+@*<button name="button" type="button" onclick="document.location.href=$('#cancelUrl').attr('href')">Làm bài</button>*@
        <a id="cancelUrl" href="@Html.AttributeEncode(Url.Action("TryTest", "Student_Submit", new { ID = Model.ID }))" style="display:none;"></a>
   
 

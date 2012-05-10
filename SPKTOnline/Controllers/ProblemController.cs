@@ -224,6 +224,12 @@ namespace SPKTOnline.Controllers
             db.SaveChanges();
             return RedirectToAction("AllProblemForUpDate", "Problem");
         }
+        [Authorize(Roles = "Lecturer")]
+        public ActionResult Delete(int ID)
+        {
+            return View();
+        }
+
 
     }
 }

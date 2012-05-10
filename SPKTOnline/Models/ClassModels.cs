@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using DevExpress.Web.Mvc;
+
 
 
 namespace SPKTOnline.Models
@@ -35,7 +35,6 @@ namespace SPKTOnline.Models
         public int TotalStudent
         {
             get { return this.Users.Count(); }
-
         }
     }
     

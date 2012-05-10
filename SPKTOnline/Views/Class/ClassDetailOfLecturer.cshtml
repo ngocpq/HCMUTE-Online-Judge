@@ -19,6 +19,11 @@
     
 </fieldset>
 <fieldset>
+    <legend>Bài Tập</legend>
+   @Html.Partial("DsProblemPartial",Model.Problems)
+   @Html.ActionLink("Tạo câu hỏi mới","Upload","UploadProblem",new {ID= Model.ID})
+</fieldset>
+<fieldset>
     <legend>Kỳ thi</legend>
     @if (Model.Contests.Count() != 0)
     {

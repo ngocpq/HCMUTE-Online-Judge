@@ -14,31 +14,17 @@ namespace SPKTOnline.Management
     public interface ILogger
     {
         void WriteLog(string message);
-        void WriteException(Exception ex);
-        void WriteDebug(string message);
+        //void WriteException(Exception ex);
+        //void WriteDebug(string message);
     }
     public class FileLogger : ILogger
     {
-        #region ILogger Members
-
         public void WriteLog(string message)
         {
             IOFile mIOFile = new IOFile();
             mIOFile.WriteLogErrorToFile(message);
         }
 
-        public void WriteException(System.Exception ex)
-        {
-            IOFile mIOFile = new IOFile();
-            mIOFile.WriteExceptionToFile(ex);
-        }
-
-        public void WriteDebug(string message)
-        {
-            IOFile mIOFile = new IOFile();
-            mIOFile.WriteDebugToFile(message);
-        }
-        #endregion
     }
     public static class LogUtility
     {
@@ -47,28 +33,47 @@ namespace SPKTOnline.Management
         {
             _Logger = logger;
         }
-
-        #region ILogger Members
-
+      
         public static void WriteLog(string message)
         {
             if (_Logger != null)
                 _Logger.WriteLog(message);
         }
 
-        public static void WriteException(Exception ex)
+        public static void WriteLog(Exception e)
         {
             if (_Logger != null)
-                _Logger.WriteException(ex);
+            {
+                string message = "";
+                if (e == null) return;
+
+                Exception temp = e;
+                if (System.Web.HttpContext.Current != null)
+                    if (System.Web.HttpContext.Current.User != null)
+                        message += "User :" + System.Web.HttpContext.Current.User.Identity.Name + "\r\n";
+
+                while (temp != null)
+                {
+                    message += "* Exception : " + temp.Message + "\r\n";
+                    temp = temp.InnerException;
+                }
+
+                temp = e;
+                while (temp != null)
+                {
+                    if (temp.StackTrace != null)
+                        message += "* StackTrace : " + temp.StackTrace.ToString() + "\r\n";
+                    temp = temp.InnerException;
+                }
+                _Logger.WriteLog(message);
+            }
         }
 
         public static void WriteDebug(string message)
         {
             if (_Logger != null)
-                _Logger.WriteDebug(message);
+                _Logger.WriteLog(message);
         }
-
-        #endregion
     }
     public class IOFile
     {
@@ -93,33 +98,6 @@ namespace SPKTOnline.Management
 
             ss.Write(message);
             ss.Close();
-        }
-
-        public void WriteExceptionToFile(Exception e)
-        {
-            string message = "";
-            if (e == null) return;
-
-            Exception temp = e;
-            if (System.Web.HttpContext.Current != null)
-                if (System.Web.HttpContext.Current.User != null)
-                    message += "User :" + System.Web.HttpContext.Current.User.Identity.Name + "\r\n";
-
-            while (temp != null)
-            {
-                message += "* Exception : " + temp.Message + "\r\n";
-                temp = temp.InnerException;
-            }
-
-            temp = e;
-            while (temp != null)
-            {
-                if (temp.StackTrace != null)
-                    message += "* StackTrace : " + temp.StackTrace.ToString() + "\r\n";
-                temp = temp.InnerException;
-            }
-
-            WriteLogErrorToFile(message);
         }
 
         public void WriteLogErrorToFile(string message)

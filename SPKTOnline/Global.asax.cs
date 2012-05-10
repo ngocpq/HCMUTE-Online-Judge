@@ -59,33 +59,33 @@ namespace SPKTOnline
             Language = new Dictionary<string, ILanguage>();
         }
 
-        void WriteToEventLog(Exception e)
-        {
-            if (e != null)
-            {
-                try
-                {
-                    IOFile mIOFile = new IOFile();
-                    mIOFile.WriteExceptionToFile(e);
-                }
-                catch
-                {
-                    throw;
-                }
-            }
-        }
-        void WriteToEventLog(string message)
-        {
-            try
-            {
-                IOFile mIOFile = new IOFile();
-                mIOFile.WriteLogErrorToFile(message);
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        //void WriteToEventLog(Exception e)
+        //{
+        //    if (e != null)
+        //    {
+        //        try
+        //        {
+        //            IOFile mIOFile = new IOFile();
+        //            mIOFile.WriteExceptionToFile(e);
+        //        }
+        //        catch
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //}
+        //void WriteToEventLog(string message)
+        //{
+        //    try
+        //    {
+        //        IOFile mIOFile = new IOFile();
+        //        mIOFile.WriteLogErrorToFile(message);
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
 
         void Application_Error(object sender, EventArgs e)
         {
@@ -95,7 +95,8 @@ namespace SPKTOnline
             {
                 string ip = "";
                 ip = Request.ServerVariables["REMOTE_ADDR"];
-                WriteToEventLog(new Exception("User IP: " + ip, ex));
+                //WriteToEventLog(new Exception("User IP: " + ip, ex));
+                LogUtility.WriteLog(new Exception("User IP: " + ip, ex));
             }
             catch
             {
