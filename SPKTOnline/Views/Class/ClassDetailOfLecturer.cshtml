@@ -21,7 +21,14 @@
 <fieldset>
     <legend>Bài Tập</legend>
    @Html.Partial("DsProblemPartial",Model.Problems)
-   @Html.ActionLink("Tạo câu hỏi mới","Upload","UploadProblem",new {ID= Model.ID})
+@*    <div class="TaoKT" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
+    Tạo Kỳ Thi |</div>
+    <div>
+    @Html.ActionLink("gi","UploadProblemForClass", new { classID = Model.ID })   
+    </div>*@
+    @Html.ActionLink("Upload câu hỏi cho lớp", "Upload","UploadProblem",new {Id = 0, ClassID= Model.ID}, null)
+
+    
 </fieldset>
 <fieldset>
     <legend>Kỳ thi</legend>

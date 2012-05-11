@@ -155,6 +155,13 @@ namespace SPKTOnline.Controllers
             }
             return PartialView("DSProblemPartial", ds);
         }
+        [ChildActionOnly]
+        public ActionResult UploadProblemForClass(int classID)
+        {
+            Class cl = db.Classes.FirstOrDefault(c => c.ID == classID);
+           
+            return PartialView();
+        }
 
     }
 }

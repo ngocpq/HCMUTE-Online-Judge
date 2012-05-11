@@ -36,12 +36,46 @@
         <div style="float: left; width: 15%;">
             <img src="../../Content/Images/notes.ico" alt="Create Problem" /></div>
         <div style="float: left; margin-left: 10%; width: 70%;">
-            @if (Model.ExamID != 0) {
-            @Html.HiddenFor(model => model.ExamID)
+            @if (Model.ExamID != 0)
+            {
+                @Html.HiddenFor(model => model.ExamID)
             }
-            <div class="editor-label">
-                Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+            @if (Model.Classes.Count == 0)
+            {
+                <div class="editor-label">
+                    Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+                </div>
+            }
+            else
+            {
+                <span>Câu hỏi thuộc lớp</span>
+                <div class="editor-field">
+                @foreach (var o in ViewBag.ClassID)
+                {
+                    var optionValueS = "ClassID" + o.Value;
+                    if (o.Value == Model.Classes.First().ID.ToString())
+                    { 
+                    <input type="checkbox"  
+                         id="@optionValueS" 
+                         name="ClassID" 
+                         value="@o.Value" 
+                         checked=checked/> 
+                     <label for="@optionValueS">@o.Text</label> 
+                    }
+                    else
+                    {
+                        <input type="checkbox"  
+                         id="@optionValueS" 
+                         name="ClassID" 
+                         value="@o.Value"/> 
+                     <label for="@optionValueS">@o.Text</label> 
+                    }
+                    
+                   
+                    <br /> 
+                }
             </div>
+            }
             <div class="editor-label">
                 Chọn file đề
             </div>

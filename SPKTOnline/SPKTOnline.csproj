@@ -786,6 +786,7 @@
     <Content Include="Views\Home\ShowFile.cshtml" />
     <Content Include="Views\Class\ClassDetail.cshtml" />
     <Content Include="Views\Class\DSProblemPartial.cshtml" />
+    <Content Include="Views\Class\UploadProblemForClass.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
