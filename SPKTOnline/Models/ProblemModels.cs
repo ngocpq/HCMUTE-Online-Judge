@@ -7,6 +7,12 @@ using System.ComponentModel;
 
 namespace SPKTOnline.Models
 {
+    public partial class Problem
+    {
+        [Required]
+        [DisplayName("Lớp học")]
+        public String[] ClassID { get; set; }
+    }
     public class AddProblemModels
     {
         [Required]

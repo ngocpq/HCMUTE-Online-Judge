@@ -20,15 +20,21 @@ namespace SPKTOnline.Controllers
         CheckRoles checkRole = new CheckRoles();
 
         [Authorize(Roles = "Admin,Lecturer")]
-        public ActionResult Upload(int? ID )
+        public ActionResult Upload(int? ID, int ClassID=0 )
         {
-            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
-            //if (ID != 0)
-            //{
             Problem pro = new Problem();
+            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
+            if (ClassID != 0)
+            {
+                ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
+                pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
+            }
+            else
+                ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "Name");
             pro.ExamID = ID;
             pro.AvailableTime = DateTime.Now;
             pro.Score = 10;
+
             return View(pro);
             //}
 
@@ -39,8 +45,8 @@ namespace SPKTOnline.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
                     string fileName = "";
                     if (filebase != null)
                     {
@@ -58,9 +64,32 @@ namespace SPKTOnline.Controllers
                             {
                                 problem.ExamID = null;
                             }
+                       
                             db.Problems.AddObject(problem);
                             //db.SaveChanges();
                             Unzipfile(problem, filebase.InputStream);//, "~\\uploads");
+                            if(problem.ClassID!=null)
+                            {
+                                if (problem.ClassID.Count() != 0)
+                                {
+                                    String[] kqClass = problem.ClassID;
+                                    if (kqClass.Count() > 0)
+                                    {
+                                        foreach (String s in kqClass)
+                                        {
+                                            foreach (Class c in db.Classes)
+                                            {
+                                                if (c.ID == int.Parse(s))
+                                                {
+                                                    problem.Classes.Add(c);
+                                                    problem.SubjectID = c.SubjectID;
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             db.SaveChanges();
                             if (problem.ExamID==null|| problem.ExamID == 0)
                             {
@@ -75,7 +104,7 @@ namespace SPKTOnline.Controllers
                         }
 
                     }
-                }
+               // }
             }
             catch (Exception ex)
             {
@@ -83,7 +112,8 @@ namespace SPKTOnline.Controllers
             }
             //TODO: redirect show problem
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name", problem.SubjectID);
-            return View();
+            ViewBag.Message = "Thông tin không đúng";
+            return View(problem);
         }
         
         public string Unzipfile(Problem problem, Stream inputStream)//, string UnzipPath)

@@ -79,7 +79,7 @@
       
      
     <p>
-        @Html.ActionLink("Upload câu hỏi từ file", "Upload","UploadProblem",new {ID=Model.ID},null)<br />
+        @Html.ActionLink("Upload câu hỏi từ file", "Upload","UploadProblem",new {ID=Model.ID, ClassID=0},null)<br />
         @Html.ActionLink("Tạo câu hỏi mới", "CreateProblem","Problem",new {ID=Model.ID},null)
     </p>
     <p>
