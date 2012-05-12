@@ -23,8 +23,9 @@ namespace SPKTOnline.Controllers
         }
 
         [Authorize(Roles = "Lecturer,Admin")]
-        public ActionResult CreateExam()
+        public ActionResult CreateExam(int classID=0)
         {
+            ViewBag.ClassID = classID;
             return View();
         }
         [HttpPost]

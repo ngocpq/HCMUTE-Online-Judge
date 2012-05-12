@@ -1708,10 +1708,12 @@ namespace SPKTOnline.Models
         /// Create a new Exam object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Exam CreateExam(global::System.Int32 id)
+        /// <param name="classID">Initial value of the ClassID property.</param>
+        public static Exam CreateExam(global::System.Int32 id, global::System.Int32 classID)
         {
             Exam exam = new Exam();
             exam.ID = id;
+            exam.ClassID = classID;
             return exam;
         }
 
@@ -1792,6 +1794,30 @@ namespace SPKTOnline.Models
         private global::System.String _LecturerID;
         partial void OnLecturerIDChanging(global::System.String value);
         partial void OnLecturerIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ClassID
+        {
+            get
+            {
+                return _ClassID;
+            }
+            set
+            {
+                OnClassIDChanging(value);
+                ReportPropertyChanging("ClassID");
+                _ClassID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClassID");
+                OnClassIDChanged();
+            }
+        }
+        private global::System.Int32 _ClassID;
+        partial void OnClassIDChanging(global::System.Int32 value);
+        partial void OnClassIDChanged();
 
         #endregion
     
