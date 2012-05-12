@@ -158,7 +158,7 @@
       <Role>Lecturer</Role>
     </Roles>
   </Menu1>
-  <Menu1>
+  <!--<Menu1>
     <Title>Quản Lý Kỳ Thi</Title>
     <TitleEng></TitleEng>
     <Link></Link>
@@ -170,7 +170,7 @@
       <TitleEng>Manage Roles</TitleEng>
       <Link>/Contest/CreateContest</Link>
     </Menu2>
-  </Menu1>
+  </Menu1>-->
   <Menu1>
     <Title>Quản lý người Dùng</Title>
     <TitleEng>Manage Users</TitleEng>

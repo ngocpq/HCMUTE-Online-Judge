@@ -13,6 +13,13 @@
     <fieldset>
         <legend>Đề thi</legend>
         <div class="editor-label">
+            @Html.Label("Đề thi của lớp")
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(m=>m.ClassID)
+            @Html.TextBoxFor(m=>m.ClassID)
+        </div>
+        <div class="editor-label">
             @Html.Label("Mô tả đề thi")
         </div>
         <div class="editor-field">
