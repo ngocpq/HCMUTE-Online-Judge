@@ -39,28 +39,32 @@
         
         foreach (var item in Model.Contests)
         {
-            <span>Thời gian bắt đầu </span><br />
+            <br />
+            <span>Tên kỳ thi: </span>@Html.DisplayFor(modelItem => item.Name)
+            <span>Thời gian bắt đầu: </span>
             @Html.DisplayFor(modelItem => item.StartTime)
-            <span>Thời gian kết thúc </span><br />
+            <span>Thời gian kết thúc </span>
             @Html.DisplayFor(modelItem => item.EndTime)
+            <div class="TaoKT" style="width: 300px; height:2px;background-color:Black;border-bottom-color:Blue;border-top-color:Blue; border-bottom-style:inherit; border-top-style:inherit">
+   </div>
         }
     }
     else
     {
         <span>Chưa có kỳ thi nào</span>
     }
+    <p></p>
     <b>Tạo kỳ thi</b>
-    <p>Tạo kỳ thi từ đề thi có sẳn
-    <div>
-        @Html.ActionLink("Tạo","CreateContest","Contest",new {id=0},null)
-    </div></p>
-    <p>Tạo kỳ thi từ đề thi mới
-    @Html.ActionLink("Tạo đề", "CreateExam", "Exam", new { ClassID = Model.ID }, null)</p>
+    
+    @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)
+    
+    <br />
+    @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)</p>
     @*<div class="TaoKT" style="width: 300px; height:20px;background-color:Purple;border-bottom-color:Blue;border-top-color:Blue; border-bottom-style:inherit; border-top-style:inherit">
     Tạo Kỳ Thi |</div>
     <div class="KT">*@
       
-    </div>
+   
 
 
 </fieldset>
