@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamDiem", "ChamDiem\ChamDi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoSanh", "SoSanh\SoSanh.csproj", "{4D153AE1-916C-4387-A41B-0E0ED104AC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{3F068101-0D77-47B8-AF62-7923CC95B901}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{52B9E20D-3B3A-46E7-A69D-45B5DF69A173}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -59,16 +57,6 @@ Global
 		{4D153AE1-916C-4387-A41B-0E0ED104AC18}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4D153AE1-916C-4387-A41B-0E0ED104AC18}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4D153AE1-916C-4387-A41B-0E0ED104AC18}.Release|x86.ActiveCfg = Release|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{3F068101-0D77-47B8-AF62-7923CC95B901}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
