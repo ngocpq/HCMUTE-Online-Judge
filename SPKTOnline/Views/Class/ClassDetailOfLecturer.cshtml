@@ -27,44 +27,15 @@
     @Html.ActionLink("gi","UploadProblemForClass", new { classID = Model.ID })   
     </div>*@
     @Html.ActionLink("Upload câu hỏi cho lớp", "Upload","UploadProblem",new {Id = 0, ClassID= Model.ID}, null)
-
     
 </fieldset>
 
 <fieldset>
     <legend>Kỳ thi</legend>
-    @if (Model.Contests.Count() != 0)
-    {
-           
-        
-        foreach (var item in Model.Contests)
-        {
-            <br />
-            <span>Tên kỳ thi: </span>@Html.DisplayFor(modelItem => item.Name)
-            <span>Thời gian bắt đầu: </span>
-            @Html.DisplayFor(modelItem => item.StartTime)
-            <span>Thời gian kết thúc </span>
-            @Html.DisplayFor(modelItem => item.EndTime)
-            <div class="TaoKT" style="width: 300px; height:2px;background-color:Black;border-bottom-color:Blue;border-top-color:Blue; border-bottom-style:inherit; border-top-style:inherit">
-   </div>
-        }
-    }
-    else
-    {
-        <span>Chưa có kỳ thi nào</span>
-    }
-    <p></p>
-    <b>Tạo kỳ thi</b>
-    
-    @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)
-    
+    @Html.Partial("ListContestPartial",Model.Contests)
+    <div style="border-bottom-color:Gray; border-bottom-style:ridge"></div>    
+    @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
     <br />
-    @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)</p>
-    @*<div class="TaoKT" style="width: 300px; height:20px;background-color:Purple;border-bottom-color:Blue;border-top-color:Blue; border-bottom-style:inherit; border-top-style:inherit">
-    Tạo Kỳ Thi |</div>
-    <div class="KT">*@
-      
-   
-
+    @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
 
 </fieldset>

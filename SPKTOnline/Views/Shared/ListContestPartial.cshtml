@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SPKTOnline.Models.Contest>
+
+@if (Model.Count() != 0)
+{
+    <table style="width:650px">
+        <tr>
+            <th>
+               Kỳ thi
+            </th>
+            <th>
+               Thời gian
+            </th>
+             <th>
+               Sĩ số
+            </th>
+            <th>
+               Trạng thái
+            </th>
+             <th>
+              
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                        @Html.ActionLink(item.Name,"ViewContest","Contest",item.ID,null)
+                </td>
+                <td>
+                    Bắt đầu: <i> @Html.DisplayFor(modelItem => item.StartTime)</i>
+                    <br />
+                    Kết thúc: <i> @Html.DisplayFor(modelItem => item.EndTime)</i>
+                </td>
+                <td>                    
+                        @Html.DisplayFor(modelItem => item.Contest_Student.Count)                    
+                </td>
+               <td>                                            
+                        @if (item.IsOpen)
+                        {
+                           <span>Mở</span>
+                        }
+                        else
+                        {
+                            <span>Đóng</span>
+                        }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditContest","Contest", new { id = item.ID },null) |
+                    @Html.ActionLink("Delete", "DeleteContest","Contest", new { id = item.ID },null)|
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+else
+{ 
+    <p>
+        Lớp này chưa có kỳ thi nào!
+    </p>
+
+}

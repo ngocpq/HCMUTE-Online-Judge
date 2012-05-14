@@ -90,7 +90,23 @@ namespace SPKTOnline.Security
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            throw new NotImplementedException();
+            var user = db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+                return null;
+            MembershipUser us = new MembershipUser(this.Name
+                                                    , user.Username
+                                                    , user.Username
+                                                    , user.Email
+                                                    , null
+                                                    , null
+                                                    , (bool)!user.IsLocked
+                                                    , true
+                                                    , DateTime.Now
+                                                    , DateTime.Now
+                                                    , DateTime.Now
+                                                    , DateTime.Now
+                                                    , DateTime.Now);
+            return us;
         }
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)

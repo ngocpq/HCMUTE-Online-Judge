@@ -5,35 +5,35 @@
     <table style="width:650px">
         <tr>
             <th>
-               Tên câu hỏi
-            </th>
-            <th>
-               Nội dung
+               Câu hỏi
             </th>
             <th>
                Độ khó
             </th>
              <th>
-               Hình thức so sánh
+               So sánh
             </th>
             <th>
-               Số điểm
-            </th>
-            <th>
-               Môn học
+               Tổng điểm
             </th>
              <th>
-              Xử lý
+              
             </th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        <br />  
+                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
+                        @if (item.FileID != null)
+                        { 
+                            <br />
+                            @Html.ActionLink("Download đề", "Download","File", new { ID= item.FileID},null)
+                        }
+                    </p>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Difficulty.Name)
@@ -48,15 +48,8 @@
                         @Html.DisplayFor(modelItem => item.ComparerParameter)
                     }
                 </td>
-               <td>
-                  
-                         @Html.DisplayFor(modelItem => item.Score)
-                   
-                </td>
-                <td>
-                  
-                         @Html.DisplayFor(modelItem => item.Subject.Name)
-                   
+               <td>                  
+                         @Html.DisplayFor(modelItem => item.Score)                   
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) |

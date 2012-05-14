@@ -12,6 +12,8 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("Lớp học")]
         public String[] ClassID { get; set; }
+
+        public String ContentSubString { get { return Content.Substring(0,200); } }
     }
     public class AddProblemModels
     {
