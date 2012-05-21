@@ -11,7 +11,7 @@ namespace SPKTOnline.Models
 {
     public  class ClassModels
     {
-        OnlineSPKTEntities1 db=new OnlineSPKTEntities1();
+        OnlineSPKTEntities db=new OnlineSPKTEntities();
         [Required]
         [DisplayName("SubjectID")]
         public string SubjectID { get; set; }

@@ -13,7 +13,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /TestCase/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         CheckRoles checkRole = new CheckRoles();
         public ActionResult Index()
         {

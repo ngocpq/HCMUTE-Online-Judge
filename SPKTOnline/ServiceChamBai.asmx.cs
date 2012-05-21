@@ -21,7 +21,7 @@ namespace SPKTOnline
     // [System.Web.Script.Services.ScriptService]
     public class ServiceChamBai : System.Web.Services.WebService
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
 
         
         [WebMethod(EnableSession=true)]

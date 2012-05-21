@@ -9,7 +9,7 @@ namespace SPKTOnline.Controllers
 {
     public class FileController : Controller
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         //
         // GET: /File/
 

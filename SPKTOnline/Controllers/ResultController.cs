@@ -17,7 +17,7 @@ namespace SPKTOnline.Controllers
         {
             return View();
         }
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         //CheckRoles checkRole = new CheckRoles();
         [ValidateInput(false)]
         [Authorize(Roles = "Student")]

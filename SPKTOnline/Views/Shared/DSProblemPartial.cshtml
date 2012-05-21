@@ -16,6 +16,10 @@
             <th>
                Tổng điểm
             </th>
+            <th>
+                Thống kê<br />
+                (Lượt làm đúng/Tổng lượt làm)
+            </th>
              <th>
               
             </th>
@@ -52,8 +56,18 @@
                          @Html.DisplayFor(modelItem => item.Score)                   
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeleteProblem", new { id = item.ID })|
+                    
+                </td>
+                <td>
+                @if(User.IsInRole("Leturer"))
+                    {
+                           @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) <span>|</span>
+                           @Html.ActionLink("Delete", "DeleteProblem", new { id = item.ID })<span>|</span>
+                    }
+                else
+                {
+                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID },null) <span>|</span>
+                }
 
                 </td>
             </tr>

@@ -15,7 +15,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /UploadProblem/
-         OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+         OnlineSPKTEntities db = new OnlineSPKTEntities();
         ProblemRepository ProblemRep = new ProblemRepository();
         CheckRoles checkRole = new CheckRoles();
 

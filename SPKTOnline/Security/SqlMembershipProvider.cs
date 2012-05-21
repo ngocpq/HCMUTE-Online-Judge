@@ -10,7 +10,7 @@ namespace SPKTOnline.Security
 {
     public class SqlMembershipProvider:MembershipProvider
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
 
         string _ApplicationName;
         public override string ApplicationName

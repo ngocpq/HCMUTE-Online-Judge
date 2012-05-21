@@ -13,7 +13,7 @@ namespace SPKTOnline.Models
 {
     public class AccountModels
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public User IsUser(string username, string pass)
         {
             var user = db.Users.FirstOrDefault(u => u.Username == username && u.Password == pass);

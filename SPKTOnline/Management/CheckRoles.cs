@@ -8,7 +8,7 @@ namespace SPKTOnline.Management
 {
     public class CheckRoles
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public bool IsAdmin(string userName)
         {
             

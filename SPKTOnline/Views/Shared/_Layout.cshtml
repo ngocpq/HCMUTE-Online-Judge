@@ -7,7 +7,7 @@
 	private bool KiemTraQuyen(string user, string r)
 	{
 		// TODO: Implement this method
-		OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+		OnlineSPKTEntities db = new OnlineSPKTEntities();
 		Object listRole=new List<Role>();
 		User nd = db.Users.FirstOrDefault(n => n.Username == user);
         if (nd == null)
@@ -142,7 +142,7 @@
         }
 
         SPKTOnline.Management.Menu.Menu _menu = SPKTOnline.Management.Menu.MenuManager.ReadMenu(lang);
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         if (_menu != null)
         {
             if (@HttpContext.Current.User != null)

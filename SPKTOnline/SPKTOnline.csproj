@@ -138,6 +138,7 @@
     <Compile Include="Models\TrangThaiBienDich.cs" />
     <Compile Include="Models\TrangThaiCham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reponsitories\ClassRepository.cs" />
     <Compile Include="Reponsitories\ProblemRepository.cs" />
     <Compile Include="Reponsitories\UserRepository.cs" />
     <Compile Include="Security\SqlMembershipProvider.cs" />
@@ -785,7 +786,7 @@
     <Content Include="Views\Class\ClassDetailOfLecturer.cshtml" />
     <Content Include="Views\Home\ShowFile.cshtml" />
     <Content Include="Views\Class\ClassDetail.cshtml" />
-    <Content Include="Views\Class\DSProblemPartial.cshtml" />
+    <Content Include="Views\Shared\DSProblemPartial.cshtml" />
     <Content Include="Views\Class\UploadProblemForClass.cshtml" />
     <Content Include="Views\Shared\ListContestPartial.cshtml" />
     <None Include="XML\Cauhinh.dtd" />

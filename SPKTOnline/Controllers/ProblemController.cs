@@ -17,7 +17,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Problem/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
         public List<Problem> list;
@@ -33,7 +33,7 @@ namespace SPKTOnline.Controllers
             if (ID != null)
             {
                 List<Problem> dsProblem = new List<Problem>();
-                var list = db.Problems.Where(p => p.SubjectID == ID);
+                var list = db.Problems.Where(p => (p.SubjectID == ID && p.ExamID==null));
                 foreach (var i in list)
                 {
                     dsProblem.Add(i);

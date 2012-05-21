@@ -14,7 +14,7 @@ namespace SPKTOnline.Management
 
     public class ChamDiemServise
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
 
         public event ChamThiServiceEventHandler ChamThiCompleted;
 

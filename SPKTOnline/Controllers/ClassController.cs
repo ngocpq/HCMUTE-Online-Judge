@@ -13,15 +13,15 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Class/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         CheckRoles checkRole = new CheckRoles();
 
         ProblemRepository ProblemRep = new ProblemRepository();
         UserRepository userRep = new UserRepository();
         public ActionResult Index()
         {
-            string currentYear=DateTime.Now.Year.ToString();
-            var cl = db.Classes.Where(c => c.SchoolYear.Contains(currentYear)==true);
+            string currentYear = DateTime.Now.Year.ToString();
+            var cl = db.Classes.Where(c => c.SchoolYear.Contains(currentYear) == true);
             List<Class> l = new List<Class>();
             foreach (var i in cl)
             {
@@ -29,56 +29,48 @@ namespace SPKTOnline.Controllers
             }
             return View(l);
         }
+
+        [Authorize]
         public ActionResult MyClass()
         {
-            if (User.Identity.IsAuthenticated)
+            string username = User.Identity.Name;
+            List<Class> l = new List<Class>();
+            if (checkRole.IsStudent(username))
             {
-                string username = User.Identity.Name;
-                List<Class> l = new List<Class>();
-                if (checkRole.IsStudent(username))
+                var cl = db.Classes.Where(c => c.User.Username == username);
+
+                foreach (var i in cl)
                 {
-                    var cl = db.Classes.Where(c => c.User.Username == username);
-                  
-                    foreach (var i in cl)
-                    {
-                        l.Add(i);
-                    }
-                    
+                    l.Add(i);
                 }
-                if (checkRole.IsLecturer(username))
-                {
-                    var cl = db.Classes.Where(c => c.LecturerID == username);
-                    foreach (var i in cl)
-                    {
-                        l.Add(i);
-                    }
-                   
-                }
-                return View("Index", l);
+
             }
-            return RedirectToAction("Logon", "Home");
+            if (checkRole.IsLecturer(username))
+            {
+                var cl = db.Classes.Where(c => c.LecturerID == username);
+                foreach (var i in cl)
+                {
+                    l.Add(i);
+                }
+
+            }
+            return View("Index", l);
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateClass()
         {
-            if(User.Identity.IsAuthenticated)
-            {
-                string username=User.Identity.Name;
-                if(checkRole.IsAdmin(username))
-                {
-                    ViewBag.LecturerID = new SelectList(userRep.GetAllLecturer(), "UserName", "UserName");
+            string username = User.Identity.Name;
+            ViewBag.LecturerID = new SelectList(userRep.GetAllLecturer(), "UserName", "UserName");
 
-                    ViewBag.SubjectID = new SelectList(db.Subjects, "ID", "Name");
-                    ViewBag.SchoolYear = new SelectList(new MyClass[]{new MyClass{Value=1, Text="2011-2012"},
+            ViewBag.SubjectID = new SelectList(db.Subjects, "ID", "Name");
+            ViewBag.SchoolYear = new SelectList(new MyClass[]{new MyClass{Value=1, Text="2011-2012"},
                                                     new MyClass{Value=2,Text="2012-2013"},
                                                     new MyClass{Value=3,Text="2013-2014"}}, "Text", "Text");
-                    ViewBag.Term =  new SelectList(new MyClass[]{new MyClass{Value=1, Text="HK I"},
+            ViewBag.Term = new SelectList(new MyClass[]{new MyClass{Value=1, Text="HK I"},
                                                 new MyClass{Value=2, Text="HK II"},
-                                                new MyClass{Value=3, Text="HK III"}},"Text","Text");
-                                  
-                    return View();
-                }
-            }
-            return RedirectToAction("Logon", "Account");
+                                                new MyClass{Value=3, Text="HK III"}}, "Text", "Text");
+
+            return View();
         }
 
         [HttpPost]
@@ -104,39 +96,33 @@ namespace SPKTOnline.Controllers
         //    return RedirectToAction("Logon", "Account");
         //}
         #endregion
+        [Authorize(Roles = "Lecturer")]
         public ActionResult CreateClass(Class newClass)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string username = User.Identity.Name;
-                if (username != "")
-                {
-                    
-                    db.Classes.AddObject(newClass);
-                    db.SaveChanges();
-                    ViewBag.LecturerID = new SelectList(userRep.GetAllLecturer(), "UserName", "UserName", newClass.LecturerID);
+            string username = User.Identity.Name;
 
-                    ViewBag.SubjectID = new SelectList(db.Subjects, "ID", "Name", newClass.SubjectID);
-                    ViewBag.SchoolYear = new SelectList(new MyClass[]{new MyClass{Value=1, Text="2011-2012"},
+            db.Classes.AddObject(newClass);
+            db.SaveChanges();
+            ViewBag.LecturerID = new SelectList(userRep.GetAllLecturer(), "UserName", "UserName", newClass.LecturerID);
+
+            ViewBag.SubjectID = new SelectList(db.Subjects, "ID", "Name", newClass.SubjectID);
+            ViewBag.SchoolYear = new SelectList(new MyClass[]{new MyClass{Value=1, Text="2011-2012"},
                                                     new MyClass{Value=2,Text="2012-2013"},
                                                     new MyClass{Value=3,Text="2013-2014"}}, "Text", "Text", newClass.SchoolYear);
-                    ViewBag.Term = new SelectList(new MyClass[]{new MyClass{Value=1, Text="HK I"},
+            ViewBag.Term = new SelectList(new MyClass[]{new MyClass{Value=1, Text="HK I"},
                                                 new MyClass{Value=2, Text="HK II"},
                                                 new MyClass{Value=3, Text="HK III"}}, "Text", "Text", newClass.Term);
-                    return View();
-                }
-               
-            }
-            return RedirectToAction("Logon", "Account");
+            return View();
+
         }
-        [Authorize(Roles="Lecturer")]
-        public ActionResult ClassDetailOfLecturer(int ID=0)
+        [Authorize(Roles = "Lecturer")]
+        public ActionResult ClassDetailOfLecturer(int ID = 0)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);
         }
 
-        [Authorize(Roles="Student")]
+        [Authorize(Roles = "Student")]
         public ActionResult ClassDetail(int ID)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
@@ -159,7 +145,7 @@ namespace SPKTOnline.Controllers
         public ActionResult UploadProblemForClass(int classID)
         {
             Class cl = db.Classes.FirstOrDefault(c => c.ID == classID);
-           
+
             return PartialView();
         }
 

@@ -1,6 +1,36 @@
-﻿@{
+﻿@model SPKTOnline.Models.Class
+@{
     ViewBag.Title = "ClassDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    SPKTOnline.Reponsitories.ClassRepository rep = new SPKTOnline.Reponsitories.ClassRepository();    
 }
 
-<h2>ClassDetail</h2>
+<fieldset>
+    <legend>Thông tin lớp học</legend>
+    Sĩ số lớp: @Model.TotalStudent
+    <div class="DSClass">Danh sách lớp: 
+    <p>
+        
+    </p>
+    </div>
+    
+</fieldset>
+<fieldset>
+    <legend>Bài Tập</legend>
+    @Html.Partial("DsProblemPartial",Model.Problems)
+
+</fieldset>
+
+<fieldset>
+    <legend>Kỳ thi</legend>
+    @Html.Partial("ListContestPartial",Model.Contests)
+    <div style="border-bottom-color:Gray; border-bottom-style:ridge"></div>    
+</fieldset>
+@if (User.Identity.IsAuthenticated && rep.IsInClass(Model,User.Identity.Name))
+{
+    <fieldset>
+        <legend>Kết Quả Kỳ thi</legend>
+        
+        <div style="border-bottom-color:Gray; border-bottom-style:ridge"></div>    
+    </fieldset>
+}

@@ -9,7 +9,7 @@ namespace SPKTOnline.Controllers
 {
     public class SubjectController: Controller
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public ActionResult Index()
         {
             return View(db.Subjects);

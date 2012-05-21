@@ -11,7 +11,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Contest/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
 
         public ActionResult Index()
         {

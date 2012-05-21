@@ -13,7 +13,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Exam/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         //CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
         UserRepository userRep = new UserRepository();

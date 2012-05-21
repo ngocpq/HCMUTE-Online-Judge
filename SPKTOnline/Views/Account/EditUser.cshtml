@@ -1,7 +1,7 @@
 ﻿@model SPKTOnline.Models.UserModels
 @{
     ViewBag.Title = "EditUser";
-    SPKTOnline.Models.OnlineSPKTEntities1 db = new SPKTOnline.Models.OnlineSPKTEntities1();
+    SPKTOnline.Models.OnlineSPKTEntities db = new SPKTOnline.Models.OnlineSPKTEntities();
     ViewBag.ListRole = new MultiSelectList(db.Roles, "ID", "Name");
     Layout = "~/Views/Shared/_Layout.cshtml";
 

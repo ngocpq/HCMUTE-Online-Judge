@@ -8,7 +8,7 @@ namespace SPKTOnline.Reponsitories
 {
     public class UserRepository
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         
         public List<User> GetAllLecturer()
         {

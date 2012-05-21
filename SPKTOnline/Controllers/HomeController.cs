@@ -12,7 +12,7 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /Home/
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public ActionResult Index(string Message)
         {
             ViewBag.Message = Message;

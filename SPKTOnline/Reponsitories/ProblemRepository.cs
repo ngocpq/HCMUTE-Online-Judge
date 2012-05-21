@@ -8,7 +8,7 @@ namespace SPKTOnline.Reponsitories
 {
     public class ProblemRepository
     {
-        OnlineSPKTEntities1 db = new OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public List<Subject> GetListSubjectByLecturerID(string LecturerID)
         {
             List<Subject> list = new List<Subject>();

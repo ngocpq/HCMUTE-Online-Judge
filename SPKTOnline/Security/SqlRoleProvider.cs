@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using SPKTOnline;
+using SPKTOnline.Models;
 
 namespace SPKTOnline.Security
 {
     public class SqlRoleProvider:RoleProvider
     {
-        SPKTOnline.Models.OnlineSPKTEntities1 db = new SPKTOnline.Models.OnlineSPKTEntities1();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             foreach (string uName in usernames)
