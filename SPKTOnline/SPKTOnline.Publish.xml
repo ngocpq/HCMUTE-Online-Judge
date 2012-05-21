@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<publishData>
+<publishData >
   <publishProfile publishUrl="D:\SPKT\HK2_2011-2012\KLTN\Van\Publish" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="ngocpq" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAgbLL+UUb20GgSAhtU46uHQAAAAACAAAAAAAQZgAAAAEAACAAAAAUHyLvgdNJ6PA9n5fMByKKxQaCpIwTI3J1RZL4o4e4DgAAAAAOgAAAAAIAACAAAAC4Cu7YbEY++6g4svKhZ0Ta1s1zxZYcfO/WGaY1oewz1hAAAAD0W+1DpzYVyn8NDfX/9XX2QAAAAGsOkZ9q7EDNoDJRDUd+CoOS5IofrEIIsfj2mmWhO+DsyNDzeAO519DpeS0vcHHC9YMAlXEsqWFRVSngmL73oS8=" SelectedForPublish="True">
     <file relUrl="fckeditor/editor/images/smiley/msn/lightbulb.gif" publishTime="04/26/2012 15:41:03" />
     <file relUrl="XML/Memberships.xml" publishTime="03/09/2012 11:29:30" />
