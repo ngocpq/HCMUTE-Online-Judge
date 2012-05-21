@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SPKTOnline.Models.Problem>
+
+@if (Model.Count() != 0)
+{
+    <table style="width:650px">
+        <tr>
+            <th>
+               Câu hỏi
+            </th>
+            <th>
+               Độ khó
+            </th>
+            <th>
+               Tổng điểm
+            </th>
+            <th>
+                
+                (Lượt làm đúng/<br />Tổng lượt làm)
+            </th>
+             <th>
+              
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        <br />  
+                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
+                        @if (item.FileID != null)
+                        { 
+                            <br />
+                            @Html.ActionLink("Download đề", "Download","File", new { ID= item.FileID},null)
+                        }
+                    </p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty.Name)
+                </td>
+
+               <td>                  
+                         @Html.DisplayFor(modelItem => item.Score)                   
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+
+                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID },null)                                                      
+                    @if(
+
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+else
+{ 
+    <p>
+        Lớp này chưa có câu hỏi nào!
+    </p>
+
+}

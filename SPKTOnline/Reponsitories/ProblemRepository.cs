@@ -19,5 +19,16 @@ namespace SPKTOnline.Reponsitories
             }
             return list;
         }
+        public int GetSubmitCountInProblem(string username, int problemID)
+        {
+            int count = db.Student_Submit.Where(p => (p.ProblemID == problemID && p.User.Username == username)).Count();
+            return count;
+        }
+        public double GetMaxScoreInProblem(int problemID)
+        {
+            double max = db.Student_Submit.Where(p => p.ProblemID == problemID).Max(p => p.TongDiem);
+            return max;
+        }
+
     }
 }

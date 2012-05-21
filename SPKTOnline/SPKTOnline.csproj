@@ -789,6 +789,7 @@
     <Content Include="Views\Shared\DSProblemPartial.cshtml" />
     <Content Include="Views\Class\UploadProblemForClass.cshtml" />
     <Content Include="Views\Shared\ListContestPartial.cshtml" />
+    <Content Include="Views\Shared\DSProblemPartialStudent.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
