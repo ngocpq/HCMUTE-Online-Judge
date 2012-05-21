@@ -23,5 +23,6 @@ namespace SPKTOnline.Reponsitories
             }
             return list;
         }
+        
     }
 }

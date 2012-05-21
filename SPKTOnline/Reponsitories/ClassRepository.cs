@@ -9,6 +9,7 @@ namespace SPKTOnline.Reponsitories
     public class ClassRepository
     {
         OnlineSPKTEntities db = new OnlineSPKTEntities();
+
         public bool IsInClass(Class cl, string username)
         {
             foreach(var i in cl.Users)
@@ -18,5 +19,6 @@ namespace SPKTOnline.Reponsitories
             }
             return false;
         }
+
     }
 }
