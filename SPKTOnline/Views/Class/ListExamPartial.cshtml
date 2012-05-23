@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SPKTOnline.Models.Exam>
+
+@if (Model.Count() != 0)
+{
+    <table style="width:650px">
+        <tr>
+            <th>
+               Đề thi
+            </th>
+            <th>
+               Mô tả
+            </th>
+             <th>
+               Lớp
+            </th>
+             <th>
+              
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.IsPublic)
+            {
+            <tr>
+                <td>
+                   @Html.ActionLink(item.ID.ToString(), "ExamDetail", "Exam", new { examID = item.ID }, null)
+                </td>
+                <td>
+                  @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>                    
+                  @Html.DisplayFor(modelItem => item.Class.Subject.Name)                    
+                </td>
+                <td>
+                    @if (User.IsInRole("Lecturer") && item.LecturerID == User.Identity.Name)
+                    {
+                     @Html.ActionLink("Edit", "EditExam", "Exam", new { examID = item.ID }, null) <span>|</span>
+                     @Html.ActionLink("Delete", "DeleteExam", "Exam", new { examID = item.ID }, null)
+                    }
+                    else
+                    {
+                        int sl = 0;
+                        foreach (var i in item.Problems)
+                        {
+                            sl++;
+                             @Html.ActionLink("Làm bài số" + sl.ToString(), "TryTest", "Student_Submit", new { id = i.ID }, null)                                                      
+                                <br />
+                        }
+
+                    }
+                </td>
+            </tr>
+            }
+        }
+    </table>
+}
+
+else
+{ 
+    <p>
+        Chưa có đề thi nào được tạo!
+    </p>
+
+}

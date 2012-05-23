@@ -27,9 +27,7 @@ namespace SPKTOnline.Controllers
         {
             ViewBag.ExamID = new SelectList(db.Exams, "ID", "ID");
             Contest c = new Contest();
-          
             c.ExamID = ID;
-                
             Exam exam = db.Exams.FirstOrDefault(e => e.ID == ID);
             if (exam != null)
             {
@@ -42,13 +40,33 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult CreateContest(Contest contest)
         {
-            Exam exam = db.Exams.FirstOrDefault(e => e.ID ==contest.ExamID);
+            Exam exam = db.Exams.FirstOrDefault(e => e.ID == contest.ExamID);
             contest.ClassID = exam.ClassID;
             db.Contests.AddObject(contest);
             db.SaveChanges();
             ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
-            return View(contest);
+            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = exam.ClassID });
 
+        }
+        public ActionResult ContestDetail(int contestID)
+        {
+            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            return View(ct);
+        }
+        public ActionResult EditContest(int contestID)
+        {
+            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            return View(ct);
+        }
+        public ActionResult DeleteContest(int contestID)
+        {
+            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            return View(ct);
+        }
+        public ActionResult RegisterContest(int contestID)
+        {
+            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            return View(ct);
         }
 
     }

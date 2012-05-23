@@ -26,16 +26,33 @@
     <div>
     @Html.ActionLink("gi","UploadProblemForClass", new { classID = Model.ID })   
     </div>*@
-    @Html.ActionLink("Upload câu hỏi cho lớp", "Upload","UploadProblem",new {Id = 0, ClassID= Model.ID}, null)
-    
+    @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
+    {
+        @Html.ActionLink("Upload câu hỏi cho lớp", "Upload", "UploadProblem", new { Id = 0, ClassID = Model.ID }, null)
+    }
 </fieldset>
-
+<fieldset>
+    <legend>Đề Thi</legend>
+   @Html.Partial("ListExamPartial",Model.Exams)
+    @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
+    {
+        @Html.ActionLink("Tạo đề cho lớp", "CreateExam", "Exam", new { classID = Model.ID }, null)
+    }
+</fieldset>
 <fieldset>
     <legend>Kỳ thi</legend>
+     @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
+     {
+        @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
+        <br />
+        @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
+     }
     @Html.Partial("ListContestPartial",Model.Contests)
     <div style="border-bottom-color:Gray; border-bottom-style:ridge"></div>    
-    @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
-    <br />
-    @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
-
+    @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
+    {
+         @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
+        <br />
+        @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
+    }
 </fieldset>

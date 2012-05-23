@@ -24,7 +24,7 @@ namespace SPKTOnline.Controllers
         {
             Problem pro = new Problem();
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
-            if (ClassID != 0)
+            if (ClassID != 0 && ID ==0)
             {
                 ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
                 pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
@@ -91,10 +91,14 @@ namespace SPKTOnline.Controllers
                                 }
                             }
                             db.SaveChanges();
-                            if (problem.ExamID==null|| problem.ExamID == 0)
+                            if ((problem.ExamID==null|| problem.ExamID == 0) && problem.Classes.Count()==0)
                             {
 
                                 return RedirectToAction("Browse", "Problem", new { ID = problem.SubjectID });
+                            }
+                            if (problem.Classes.Count() > 0)
+                            {
+                                return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = problem.Classes.Last().ID });
                             }
                             else
                             {

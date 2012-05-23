@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>
-                        @Html.ActionLink(item.Name,"ViewContest","Contest",item.ID,null)
+                        @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
                 </td>
                 <td>
                     Bắt đầu: <i> @Html.DisplayFor(modelItem => item.StartTime)</i>
@@ -45,8 +45,15 @@
                         }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditContest","Contest", new { id = item.ID },null) |
-                    @Html.ActionLink("Delete", "DeleteContest","Contest", new { id = item.ID },null)|
+                    @if (User.IsInRole("Lecturer") && item.Exam.LecturerID == User.Identity.Name)
+                    {
+                        @Html.ActionLink("Edit", "EditContest", "Contest", new { contestID = item.ID }, null) <span>|</span>
+                        @Html.ActionLink("Delete", "DeleteContest", "Contest", new { contestID = item.ID }, null)
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Đăng ký thi", "RegisterContest", "Contest", new { contestID = item.ID }, null)
+                    }
                 </td>
             </tr>
         }

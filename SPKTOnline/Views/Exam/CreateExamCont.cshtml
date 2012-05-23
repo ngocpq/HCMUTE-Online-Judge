@@ -81,12 +81,11 @@
     <p>
         @Html.ActionLink("Upload câu hỏi từ file", "Upload","UploadProblem",new {ID=Model.ID, ClassID=Model.ClassID},null)<br />
         @Html.ActionLink("Tạo câu hỏi mới", "CreateProblem","Problem",new {ID=Model.ID},null)
-    </p>
-    <p>
-      <button name="button" type="button" onclick="document.location.href=$('#CreateContest').attr('href')">Tạo Kỳ Thi</button>
+    </p><span>Tiếp tục tạo kỳ thi:</span>
+      <button name="button" type="button" onclick="document.location.href=$('#CreateContest').attr('href')">Tạo kỳ thi</button>
        <a id="CreateContest" href="@Html.AttributeEncode(Url.Action("CreateContest", "Contest", new { ID = Model.ID }))" style="display:none;"></a>
-    </p>
-    <p>
-        <input class="button" type="submit" value="Hoàn Tất" />
+    
+    <p>Hoặc trở về trang lớp học:
+        <input class="button" type="submit" value="Trở về" />
     </p>
     }
