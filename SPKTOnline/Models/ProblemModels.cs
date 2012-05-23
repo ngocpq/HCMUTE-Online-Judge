@@ -13,8 +13,16 @@ namespace SPKTOnline.Models
         [DisplayName("Lớp học")]
         public String[] ClassID { get; set; }
         public int Submits { get { return this.Student_Submit.Count(); } }
-        
-        public String ContentSubString { get { return Content.Substring(0,200); } }
+
+        public String ContentSubString
+        {
+            get
+            {
+                if (Content == null)
+                    return "";
+                return Content.Substring(0, 200);
+            }
+        }
         public double ThongKe
         {
             get {
