@@ -1,0 +1,38 @@
+﻿@model SPKTOnline.Models.Contest
+@{
+    ViewBag.Title = "ContestDetail";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    Đề thi @Model.Name</div>
+
+  <div style="float: left; width: 100%;">
+        <div style="float: left; width: 17%;">
+            <div style="color:Blue">@Model.Name</div>
+            <img src="../../Content/Images/thanh.JPG" alt="" style=" width:40px; height:2px;"/>
+            <div>Môn: <span style="color:Blue">@Model.Class.Subject.Name</span></div>
+            <img src="../../Content/Images/thanh.JPG" alt="" style=" width:40px; height:2px;"/>
+            <div>Thời gian bắt đầu: <span style="color:Blue">@Model.StartTime</span></div>
+            <img src="../../Content/Images/thanh.JPG" alt="" style=" width:40px; height:2px;"/>
+            <div>Thời gian kết thúc: <span style="color:Blue">@Model.EndTime</span></div>
+            <img src="../../Content/Images/thanh.JPG" alt="" style=" width:40px; height:2px;"/>
+            <div>Số người đăng ký thi:<span style="color:Blue">@Model.Contest_Student.Count()</span></div>
+        </div>
+        <div style="float: left; margin-left: 5%; width: 60%; border-left-color:Blue; border-left-style:groove;border-left-width:1px;">
+            <div style="float:left;margin-left:5%;">
+            @if (Model.StartTime > DateTime.Now)
+            {
+                <img src="../../Content/Images/dialog-warning_4.png" alt=""/>
+                <p>Chưa tới thời gian thi</p>
+            }
+            else
+            {
+                <div style="color:Blue">@Model.Exam.Description<br /></div>
+                <div style="width:inherit">@Html.Partial("DSProblemForContest", Model.Exam.Problems)</div>
+                
+            }
+            </div>
+        </div>
+  </div>
+

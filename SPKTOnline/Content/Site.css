@@ -193,6 +193,7 @@ table
 {
   border: solid 1px #e8eef4;
   border-collapse: collapse;
+  
 }
 
 table td 
@@ -205,7 +206,9 @@ table th
 {
   padding: 6px 5px;
   text-align: left;
-  background-color: #e8eef4; 
+  color:Gray;
+  /*background-color: #e8eef4; */
+  background-color:White;
   border: solid 1px #e8eef4;   
 }
 

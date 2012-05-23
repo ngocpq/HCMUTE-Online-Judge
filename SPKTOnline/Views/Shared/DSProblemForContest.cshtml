@@ -2,19 +2,13 @@
 
 @if (Model.Count() != 0)
 {
-    <table style="width:650px">
+    <table style="width:450px">
         <tr>
             <th>
                Câu hỏi
             </th>
             <th>
-               Độ khó
-            </th>
-            <th>
-               Tổng điểm
-            </th>
-            <th>  
-                (Lượt làm đúng/<br />Tổng lượt làm)
+               Số điểm
             </th>
              <th>
               
@@ -35,15 +29,9 @@
                         }
                     </p>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Difficulty.Name)
-                </td>
 
                <td>                  
                          @Html.DisplayFor(modelItem => item.Score)                   
-                </td>
-                <td>
-                    
                 </td>
                 <td>
 
@@ -54,12 +42,4 @@
             </tr>
         }
     </table>
-}
-
-else
-{ 
-    <p>
-        Lớp này chưa có câu hỏi nào!
-    </p>
-
 }

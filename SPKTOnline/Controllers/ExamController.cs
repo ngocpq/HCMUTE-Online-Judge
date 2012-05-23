@@ -25,8 +25,11 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult CreateExam(int classID=0)
         {
+            Class c = db.Classes.FirstOrDefault(cl => cl.ID == classID);
+            Exam ex = new Exam();
+            ex.Class = c;
             ViewBag.ClassID = classID;
-            return View();
+            return View(ex);
         }
         [HttpPost]
         [Authorize(Roles = "Lecturer")]
@@ -51,9 +54,26 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer")]
         public ActionResult CreateExamCont(Exam exam)
         {
+            Exam ex = db.Exams.FirstOrDefault(p => p.ID == exam.ID);
             string username = User.Identity.Name;
-            return View(exam);
+            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = ex.ClassID });
 
+        }
+
+        public ActionResult ExamDetail(int examID)
+        {
+            Exam ex = db.Exams.FirstOrDefault(e => e.ID == examID);
+            return View(ex);
+        }
+        public ActionResult EditExam(int examID)
+        {
+            Exam ex = db.Exams.FirstOrDefault(e => e.ID == examID);
+            return View(ex);
+        }
+        public ActionResult DeleteExam(int examID)
+        {
+            Exam ex = db.Exams.FirstOrDefault(e => e.ID == examID);
+            return View(ex);
         }
 
     }

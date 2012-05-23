@@ -150,15 +150,15 @@
       <Link>/UploadProblem/Upload</Link>
     </Menu2>
   </Menu1>
-  <Menu1>
+  <!--<Menu1>
     <Title>Quản Lý Đề Thi</Title>
     <TitleEng></TitleEng>
     <Link>/Exam/CreateExam</Link>
     <Roles>
       <Role>Lecturer</Role>
     </Roles>
-  </Menu1>
-  <!--<Menu1>
+  </Menu1>-->
+  <!--<Menu1>s
     <Title>Quản Lý Kỳ Thi</Title>
     <TitleEng></TitleEng>
     <Link></Link>

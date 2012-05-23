@@ -76,16 +76,20 @@ div.panel
 {
     @Html.ValidationSummary(true) 
     <div>
-    <fieldset class="Problem">
-        <legend style="color:Gray">@Model.Problem.Name</legend>                 
-            @Html.DisplayFor(model => model.Problem.Content)         
-    </fieldset>    
+    
     </div>
     if (Model.Problem.FileID != null)
     {
         <div>                           
-            @Html.ActionLink("Download đề thi", "Download", "File", new { ID = Model.Problem.FileID },null)
+            @Html.ActionLink("Download đề thi", "Download", "File", new { ID = Model.Problem.FileID }, null)
         </div>
+    }
+    else
+    {
+    <fieldset class="Problem">
+        <legend style="color: Gray">@Model.Problem.Name</legend>
+        @Html.DisplayFor(model => model.Problem.Content)
+    </fieldset>    
     }
     <div class="lambai" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
     Làm bài |</div>
@@ -101,13 +105,13 @@ div.panel
            @* @Html.Partial("Htmlpartial");*@
            
            @* @Html.TextAreaFor(model => model.SourceCode, 30, 82, new { @class = "ckeditor", @id = "content" })*@
-           @Html.TextAreaFor(model=>model.SourceCode,30,82,null)
+           @Html.TextAreaFor(model => model.SourceCode, 30, 82, null)
            @Html.ValidationMessageFor(model => model.SourceCode)
         </div>
         <p>
             <input class="button" type="submit" value="Gửi bài" />
         </p>
-        <div >@Html.TextBoxFor(model => model.ProblemID)</div>
+        <div >@Html.HiddenFor(model => model.ProblemID)</div>
     </div>
 }
 

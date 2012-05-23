@@ -181,6 +181,7 @@
     <Content Include="Content\Images\catalogue.png" />
     <Content Include="Content\Images\check.jpg" />
     <Content Include="Content\Images\check.png" />
+    <Content Include="Content\Images\dialog-warning_4.png" />
     <Content Include="Content\Images\digitalclock.swf" />
     <Content Include="Content\Images\digitalclock2.swf" />
     <Content Include="Content\Images\Down_16.png" />
@@ -236,6 +237,7 @@
     <Content Include="Content\Images\Text_banner.png" />
     <Content Include="Content\Images\Text_banner2.png" />
     <Content Include="Content\Images\text_x_copying.ico" />
+    <Content Include="Content\Images\thanh.JPG" />
     <Content Include="Content\Images\top.png" />
     <Content Include="Content\Images\Trashcan_empty.ico" />
     <Content Include="Content\Images\Twitter_24x24.png" />
@@ -790,6 +792,14 @@
     <Content Include="Views\Class\UploadProblemForClass.cshtml" />
     <Content Include="Views\Shared\ListContestPartial.cshtml" />
     <Content Include="Views\Shared\DSProblemPartialStudent.cshtml" />
+    <Content Include="Views\Shared\ExamDetail.cshtml" />
+    <Content Include="Views\Contest\ContestDetail.cshtml" />
+    <Content Include="Views\Shared\DSProblemForContest.cshtml" />
+    <Content Include="Views\Class\ListExamPartial.cshtml" />
+    <Content Include="Views\Exam\ExamDetail.cshtml" />
+    <Content Include="Views\Exam\EditExam.cshtml" />
+    <Content Include="Views\Exam\DeleteExam.cshtml" />
+    <Content Include="Views\Contest\RegisterContest.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

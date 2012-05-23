@@ -12,12 +12,15 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Đề thi</legend>
-        <div class="editor-label">
-            @Html.Label("Đề thi của lớp")
-        </div>
-        <div class="editor-field">
-            @Html.HiddenFor(m=>m.ClassID)
-            @Html.TextBoxFor(m=>m.ClassID)
+        <div>
+        Bạn đang tạo đề thi cho môn:
+        
+        
+        @Html.DisplayFor(model => model.Class.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(model => model.Class.Group) 
+        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(model => model.Class.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(model => model.Class.SchoolYear)
+        
+        @Html.HiddenFor(m=>m.ClassID)
+
         </div>
         <div class="editor-label">
             @Html.Label("Mô tả đề thi")
@@ -26,9 +29,12 @@
             @Html.TextAreaFor(model => model.Description, 15, 75, new { @style = "resize: none;" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
+        <div class="editor-label">
+            @Html.Label("Đề thi này dành cho sinh viên luyện tập ngay?") @Html.CheckBoxFor(model => model.IsPublic)
+        </div>
     </fieldset>
     
     <p>
-        <input class="button" type="submit" value="Thêm" />
+        <input class="button" type="submit" value="Tiếp tục" />
     </p>
 }

@@ -17,10 +17,13 @@
 </fieldset>
 <fieldset>
     <legend>Bài Tập</legend>
-    @Html.Partial("DsProblemPartial",Model.Problems)
+    @Html.Partial("DSProblemPartialStudent", Model.Problems)
 
 </fieldset>
-
+<fieldset>
+    <legend>Đề Thi</legend>
+   @Html.Partial("ListExamPartial",Model.Exams)
+</fieldset>
 <fieldset>
     <legend>Kỳ thi</legend>
     @Html.Partial("ListContestPartial",Model.Contests)

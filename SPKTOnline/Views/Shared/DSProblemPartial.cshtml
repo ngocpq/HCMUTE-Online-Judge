@@ -59,14 +59,14 @@
                     
                 </td>
                 <td>
-                @if(User.IsInRole("Leturer"))
-                    {
+                 @if (User.IsInRole("Lecturer") && item.LecturerID == User.Identity.Name)
+                     {
                            @Html.ActionLink("Edit", "EditProblem", new { id = item.ID }) <span>|</span>
                            @Html.ActionLink("Delete", "DeleteProblem", new { id = item.ID })<span>|</span>
                     }
                 else
                 {
-                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID },null) <span>|</span>
+                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID },null) 
                 }
 
                 </td>
