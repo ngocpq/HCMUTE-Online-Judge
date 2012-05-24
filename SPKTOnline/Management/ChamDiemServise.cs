@@ -55,10 +55,9 @@ namespace SPKTOnline.Management
             foreach (ITestCase t in problem.TestCases)
             {
                 //TODO: config
-                t.TimeOut = (problem.TimeLimit <= 0? 1000 : problem.TimeLimit);
+                t.TimeOut = (problem.TimeLimit <= 0? 1000 : problem.TimeLimit);                
                 tescase.Add(t);
-            }
-            
+            }            
             IFileComparer ss = FileComparerFactory.GetComparer(problem.Comparer.DllPath, problem.Comparer.ClassName);
             ss.Init(problem.ComparerParameter);
 

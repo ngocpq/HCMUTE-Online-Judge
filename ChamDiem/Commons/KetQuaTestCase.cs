@@ -20,5 +20,6 @@ namespace ChamDiem
         public string Output { get; set; }
         public string Error { get; set; }
         public double ThoiGianChay{ get; set; }
+        public double Score { get; set; }
     }
 }

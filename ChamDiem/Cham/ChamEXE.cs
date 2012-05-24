@@ -37,6 +37,7 @@ namespace ChamDiem
                         if (kqTest.ThoiGianChay> test.TimeOut)
                         {
                             kqTest.KetQua = KetQuaTestCase.LoaiKetQua.QuaGio;
+                            kqTest.Score = 0;
                             kqTest.ThongDiep = "Quá giờ";
                         }
                         else
@@ -45,14 +46,16 @@ namespace ChamDiem
                             {
                                 string message;
                                 if (FileCham.SoSanh(kqTest.Output, test, out message))
-                                {
+                                {                                    
                                     kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Dung;
-                                    kqTest.ThongDiep = "Đúng";                                    
+                                    kqTest.ThongDiep = "Đúng";
+                                    kqTest.Score = test.Score;
                                 }
                                 else
                                 {
                                     kqTest.KetQua = KetQuaTestCase.LoaiKetQua.Sai;
                                     kqTest.ThongDiep = "Sai";
+                                    kqTest.Score = 0;
                                 }
                             }                            
                             catch (Exception ex)
