@@ -96,7 +96,7 @@ namespace SPKTOnline.Controllers
         //    return RedirectToAction("Logon", "Account");
         //}
         #endregion
-        [Authorize(Roles = "Lecturer")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateClass(Class newClass)
         {
             string username = User.Identity.Name;
@@ -118,13 +118,15 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer")]
         public ActionResult ClassDetailOfLecturer(int ID = 0)
         {
+            Session["CurrentUrl"] = Request.Url.ToString(); 
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);
         }
 
-        [Authorize(Roles = "Student")]
+        
         public ActionResult ClassDetail(int ID)
         {
+            Session["CurrentUrl"] = Request.Url.ToString(); 
             Class cl = db.Classes.FirstOrDefault(c => c.ID == ID);
             return View(cl);
         }

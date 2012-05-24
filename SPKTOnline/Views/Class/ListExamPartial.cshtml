@@ -19,7 +19,7 @@
         </tr>
         @foreach (var item in Model)
         {
-            if (item.IsPublic)
+            if (item.IsPublic &&item.Problems.Count()>0 &&item.IsDeleted==false)
             {
             <tr>
                 <td>

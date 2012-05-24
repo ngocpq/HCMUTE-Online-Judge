@@ -79,8 +79,8 @@
       
      
     <p>
-        @Html.ActionLink("Upload câu hỏi từ file", "Upload","UploadProblem",new {ID=Model.ID, ClassID=Model.ClassID},null)<br />
-        @Html.ActionLink("Tạo câu hỏi mới", "CreateProblem","Problem",new {ID=Model.ID},null)
+        @Html.ActionLink("Upload câu hỏi từ File", "Upload","UploadProblem",new {ID=Model.ID, ClassID=Model.ClassID},null)<br />
+        @Html.ActionLink("Tạo câu hỏi mới bằng Text", "CreateProblem","Problem",new {ID=Model.ID},null)
     </p><span>Tiếp tục tạo kỳ thi:</span>
       <button name="button" type="button" onclick="document.location.href=$('#CreateContest').attr('href')">Tạo kỳ thi</button>
        <a id="CreateContest" href="@Html.AttributeEncode(Url.Action("CreateContest", "Contest", new { ID = Model.ID }))" style="display:none;"></a>

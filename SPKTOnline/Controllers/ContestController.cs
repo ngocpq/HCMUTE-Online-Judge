@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SPKTOnline.Models;
+using SPKTOnline.BussinessLayer;
 
 namespace SPKTOnline.Controllers
 {
@@ -12,26 +13,32 @@ namespace SPKTOnline.Controllers
         //
         // GET: /Contest/
         OnlineSPKTEntities db = new OnlineSPKTEntities();
-
+        IContestBL contestBL;
+        public ContestController()
+        {
+            contestBL = new ContestBL(db);
+        }
         public ActionResult Index()
         {
-            return View();
+            return View(contestBL.LayDanhSach());
         }
+
+        [Authorize]
         public ActionResult MyContest()
         {
-            return View();
+            return View(contestBL.LayDanhSachForStudent(User.Identity.Name));
         }
        
         [Authorize(Roles = "Lecturer,Admin")]
-        public ActionResult CreateContest(int ID = 0)
+        public ActionResult CreateContest(int ID = 0, int classID=0)
         {
             ViewBag.ExamID = new SelectList(db.Exams, "ID", "ID");
             Contest c = new Contest();
             c.ExamID = ID;
             Exam exam = db.Exams.FirstOrDefault(e => e.ID == ID);
-            if (exam != null)
+            if (exam != null && classID!=0)
             {
-                c.ClassID = exam.ID;
+                c.ClassID = classID;
             }
             return View(c);
           
@@ -41,7 +48,8 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateContest(Contest contest)
         {
             Exam exam = db.Exams.FirstOrDefault(e => e.ID == contest.ExamID);
-            contest.ClassID = exam.ClassID;
+            if(contest.ClassID==null )
+                contest.ClassID = exam.ClassID;
             db.Contests.AddObject(contest);
             db.SaveChanges();
             ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
@@ -58,15 +66,31 @@ namespace SPKTOnline.Controllers
             Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
             return View(ct);
         }
-        public ActionResult DeleteContest(int contestID)
+        public ActionResult DeleteContest(int contestID, string URL)
         {
             Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
-            return View(ct);
+            ct.IsDeleted = true;
+            db.SaveChanges();
+            return Redirect(Session["CurrentUrl"].ToString()); 
+
+            //return View(ct);
         }
+        
+        [Authorize(Roles="Student")]
         public ActionResult RegisterContest(int contestID)
         {
             Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
-            return View(ct);
+            if (ct != null)
+            {
+                string studentID = User.Identity.Name;
+                contestBL.ThemSinhVienThi(studentID, contestID);
+                 return Redirect(Session["CurrentUrl"].ToString()); 
+            }
+            else
+            {
+                ViewBag.Error = "Lổi: không có kỳ thi này";
+                return Redirect(Session["CurrentUrl"].ToString()); 
+            }
         }
 
     }

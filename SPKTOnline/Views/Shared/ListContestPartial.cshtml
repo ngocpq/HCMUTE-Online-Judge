@@ -22,6 +22,8 @@
         </tr>
         @foreach (var item in Model)
         {
+            if (item.ExamID!= null && item.IsDeleted == false)
+            {
             <tr>
                 <td>
                         @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
@@ -52,10 +54,17 @@
                     }
                     else
                     {
-                        @Html.ActionLink("Đăng ký thi", "RegisterContest", "Contest", new { contestID = item.ID }, null)
+                        if(item.Contest_Student.Where(i=>i.StudentID==User.Identity.Name).FirstOrDefault()==null)
+                        {
+                            @Html.ActionLink("Đăng ký thi", "RegisterContest", "Contest", new { contestID = item.ID }, null)
+                        }
+                        else{
+                            <span>Đã đăng ký</span>
+                        }
                     }
                 </td>
             </tr>
+            }
         }
     </table>
 }
