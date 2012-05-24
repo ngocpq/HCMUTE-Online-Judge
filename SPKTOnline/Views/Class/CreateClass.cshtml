@@ -24,6 +24,10 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Group, "Lớp học thuộc nhóm")
         </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Group)
+            @Html.ValidationMessageFor(model => model.Group)
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.LecturerID, "Giảng viên")
         </div>
@@ -31,10 +35,7 @@
             @Html.DropDownList("LecturerID", string.Empty)
             @Html.ValidationMessageFor(model => model.LecturerID)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Group)
-            @Html.ValidationMessageFor(model => model.Group)
-        </div>
+
        <div class="editor-label">
             @Html.LabelFor(model => model.Term, "Học kỳ")
         </div>

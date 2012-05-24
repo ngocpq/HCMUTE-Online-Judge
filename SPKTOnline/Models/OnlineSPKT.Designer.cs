@@ -305,22 +305,6 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<TestCaseResult> TestCaseResults
         {
             get
@@ -474,14 +458,6 @@ namespace SPKTOnline.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the TestCaseResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTestCaseResults(TestCaseResult testCaseResult)
@@ -532,7 +508,8 @@ namespace SPKTOnline.Models
         /// <param name="term">Initial value of the Term property.</param>
         /// <param name="schoolYear">Initial value of the SchoolYear property.</param>
         /// <param name="lecturerID">Initial value of the LecturerID property.</param>
-        public static Class CreateClass(global::System.Int32 id, global::System.String subjectID, global::System.String group, global::System.String term, global::System.String schoolYear, global::System.String lecturerID)
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Class CreateClass(global::System.Int32 id, global::System.String subjectID, global::System.String group, global::System.String term, global::System.String schoolYear, global::System.String lecturerID, global::System.Boolean isDeleted)
         {
             Class @class = new Class();
             @class.ID = id;
@@ -541,6 +518,7 @@ namespace SPKTOnline.Models
             @class.Term = term;
             @class.SchoolYear = schoolYear;
             @class.LecturerID = lecturerID;
+            @class.IsDeleted = isDeleted;
             return @class;
         }
 
@@ -693,6 +671,30 @@ namespace SPKTOnline.Models
         private global::System.String _LecturerID;
         partial void OnLecturerIDChanging(global::System.String value);
         partial void OnLecturerIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
     
@@ -1062,7 +1064,8 @@ namespace SPKTOnline.Models
         /// <param name="isOpen">Initial value of the IsOpen property.</param>
         /// <param name="totalScore">Initial value of the TotalScore property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Contest CreateContest(global::System.Int32 id, global::System.Int32 classID, global::System.Int32 examID, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isOpen, global::System.Int32 totalScore, global::System.String name)
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Contest CreateContest(global::System.Int32 id, global::System.Int32 classID, global::System.Int32 examID, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isOpen, global::System.Int32 totalScore, global::System.String name, global::System.Boolean isDeleted)
         {
             Contest contest = new Contest();
             contest.ID = id;
@@ -1073,6 +1076,7 @@ namespace SPKTOnline.Models
             contest.IsOpen = isOpen;
             contest.TotalScore = totalScore;
             contest.Name = name;
+            contest.IsDeleted = isDeleted;
             return contest;
         }
 
@@ -1273,6 +1277,30 @@ namespace SPKTOnline.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
     
@@ -1734,12 +1762,14 @@ namespace SPKTOnline.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="classID">Initial value of the ClassID property.</param>
         /// <param name="isPublic">Initial value of the IsPublic property.</param>
-        public static Exam CreateExam(global::System.Int32 id, global::System.Int32 classID, global::System.Boolean isPublic)
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Exam CreateExam(global::System.Int32 id, global::System.Int32 classID, global::System.Boolean isPublic, global::System.Boolean isDeleted)
         {
             Exam exam = new Exam();
             exam.ID = id;
             exam.ClassID = classID;
             exam.IsPublic = isPublic;
+            exam.IsDeleted = isDeleted;
             return exam;
         }
 
@@ -1868,6 +1898,30 @@ namespace SPKTOnline.Models
         private global::System.Boolean _IsPublic;
         partial void OnIsPublicChanging(global::System.Boolean value);
         partial void OnIsPublicChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
     
@@ -2403,7 +2457,8 @@ namespace SPKTOnline.Models
         /// <param name="isHiden">Initial value of the IsHiden property.</param>
         /// <param name="score">Initial value of the Score property.</param>
         /// <param name="subjectID">Initial value of the SubjectID property.</param>
-        public static Problem CreateProblem(global::System.Int32 id, global::System.String lecturerID, global::System.Int32 memoryLimit, global::System.Int32 timeLimit, global::System.Int32 comparerID, global::System.Int32 difficultyID, global::System.Boolean isHiden, global::System.Double score, global::System.String subjectID)
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Problem CreateProblem(global::System.Int32 id, global::System.String lecturerID, global::System.Int32 memoryLimit, global::System.Int32 timeLimit, global::System.Int32 comparerID, global::System.Int32 difficultyID, global::System.Boolean isHiden, global::System.Double score, global::System.String subjectID, global::System.Boolean isDeleted)
         {
             Problem problem = new Problem();
             problem.ID = id;
@@ -2415,6 +2470,7 @@ namespace SPKTOnline.Models
             problem.IsHiden = isHiden;
             problem.Score = score;
             problem.SubjectID = subjectID;
+            problem.IsDeleted = isDeleted;
             return problem;
         }
 
@@ -2807,6 +2863,30 @@ namespace SPKTOnline.Models
         private Nullable<global::System.Int32> _ExamID;
         partial void OnExamIDChanging(Nullable<global::System.Int32> value);
         partial void OnExamIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
     
@@ -3739,12 +3819,14 @@ namespace SPKTOnline.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="timeStamp">Initial value of the TimeStamp property.</param>
-        public static Subject CreateSubject(global::System.String id, global::System.String name, global::System.Byte[] timeStamp)
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Subject CreateSubject(global::System.String id, global::System.String name, global::System.Byte[] timeStamp, global::System.Boolean isDeleted)
         {
             Subject subject = new Subject();
             subject.ID = id;
             subject.Name = name;
             subject.TimeStamp = timeStamp;
+            subject.IsDeleted = isDeleted;
             return subject;
         }
 
@@ -3825,6 +3907,30 @@ namespace SPKTOnline.Models
         private global::System.Byte[] _TimeStamp;
         partial void OnTimeStampChanging(global::System.Byte[] value);
         partial void OnTimeStampChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
     
@@ -3897,161 +4003,6 @@ namespace SPKTOnline.Models
         }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="sysdiagram")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagram object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
     }
     
     /// <summary>

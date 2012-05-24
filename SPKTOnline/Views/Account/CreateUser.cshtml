@@ -39,18 +39,18 @@
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.FirstName, "Họ lót")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastName, "Tên")
+            @Html.LabelFor(model => model.LastName, "Họ lót")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.LastName)
             @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName, "Tên")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Email, "Email")

@@ -16,6 +16,7 @@
         </tr>
         @foreach (var item in Model)
         {
+            
             <tr>
                 <td>
                     <p>
@@ -34,8 +35,16 @@
                          @Html.DisplayFor(modelItem => item.Score)                   
                 </td>
                 <td>
-
-                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID },null)                                                      
+                 @if (User.IsInRole("Lecturer") && item.LecturerID == User.Identity.Name)
+                 {
+                           @Html.ActionLink("Edit", "EditProblem", "Problem", new { id = item.ID }, null) <span>|</span>
+                           @Html.ActionLink("Delete", "DeleteProblem", "Problem", new { id = item.ID }, null)<span>|</span><br/>
+                           @Html.ActionLink("EditTestCase", "CreateTestCase", "TestCase", new { ProblemID = item.ID }, null)<span>|</span>
+                 }
+                 else
+                 { 
+                    @Html.ActionLink("Làm bài", "TryTest", "Student_Submit", new { id = item.ID }, null)                                                      
+                 }
                    
 
                 </td>

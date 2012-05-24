@@ -19,7 +19,7 @@
         <a href="ClassDetailOfLecturer/@item.ID" class="areadmore">
         <img alt="button" src="../../Content/Images/favicon.ico" />
         @Html.DisplayFor(modelitem => item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
-        @Html.DisplayFor(modelitem => item.User.FirstName) <span></span>@Html.DisplayFor(modelitem => item.User.LastName)
+        @Html.DisplayFor(modelitem => item.User.LastName)<span>&nbsp</span>@Html.DisplayFor(modelitem => item.User.FirstName)
         <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem => item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
         </a>
         </div>
