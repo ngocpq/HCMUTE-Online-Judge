@@ -39,8 +39,8 @@ namespace SPKTOnline
         protected void Application_Start()
         {
             //ghi log xuong file
-            LogUtility.SetLogger(new FileLogger());
-
+            //LogUtility.SetLogger(new FileLogger());
+            LogUtility.SetLogger(new DatabaseLogger());
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);

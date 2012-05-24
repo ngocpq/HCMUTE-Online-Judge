@@ -7,6 +7,7 @@ using SPKTOnline.Models;
 using ChamDiem.Managers;
 using System.Web.Configuration;
 using System.Threading;
+using SPKTOnline.Exceptions;
 
 namespace SPKTOnline.Management
 {    
@@ -50,7 +51,7 @@ namespace SPKTOnline.Management
         {            
             Problem problem = db.Problems.FirstOrDefault(m => m.ID == MaBai);
             if (problem == null)
-                throw new Exception("Ma bai khong ton tai");
+                throw new SPKTOnlineException("Mã bài không tồn tại");
             List<ITestCase> tescase = new List<ITestCase>();
             foreach (ITestCase t in problem.TestCases)
             {

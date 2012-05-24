@@ -349,6 +349,22 @@ namespace SPKTOnline.Models
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Logger> Loggers
+        {
+            get
+            {
+                if ((_Loggers == null))
+                {
+                    _Loggers = base.CreateObjectSet<Logger>("Loggers");
+                }
+                return _Loggers;
+            }
+        }
+        private ObjectSet<Logger> _Loggers;
 
         #endregion
         #region AddTo Methods
@@ -479,6 +495,14 @@ namespace SPKTOnline.Models
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Loggers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLoggers(Logger logger)
+        {
+            base.AddObject("Loggers", logger);
         }
 
         #endregion
@@ -2433,6 +2457,163 @@ namespace SPKTOnline.Models
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Logger")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Logger : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Logger object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="time">Initial value of the Time property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        /// <param name="message">Initial value of the Message property.</param>
+        public static Logger CreateLogger(global::System.Int32 id, global::System.DateTime time, global::System.String type, global::System.String message)
+        {
+            Logger logger = new Logger();
+            logger.ID = id;
+            logger.Time = time;
+            logger.Type = type;
+            logger.Message = message;
+            return logger;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Time
+        {
+            get
+            {
+                return _Time;
+            }
+            set
+            {
+                OnTimeChanging(value);
+                ReportPropertyChanging("Time");
+                _Time = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Time");
+                OnTimeChanged();
+            }
+        }
+        private global::System.DateTime _Time;
+        partial void OnTimeChanging(global::System.DateTime value);
+        partial void OnTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Message
+        {
+            get
+            {
+                return _Message;
+            }
+            set
+            {
+                OnMessageChanging(value);
+                ReportPropertyChanging("Message");
+                _Message = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Message");
+                OnMessageChanged();
+            }
+        }
+        private global::System.String _Message;
+        partial void OnMessageChanging(global::System.String value);
+        partial void OnMessageChanged();
+
+        #endregion
+    
     }
     
     /// <summary>

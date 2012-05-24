@@ -1,9 +1,11 @@
-﻿@model SPKTOnline.Models.Student_Submit
+﻿@using SPKTOnline.Extensions
+@model SPKTOnline.Models.Student_Submit
 @{
     ViewBag.Title = "TryTestResult";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int k = 0;
 }
+
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <div class="webtitle">
@@ -11,17 +13,17 @@
     Kết quả bài: @Model.Problem.Name </div>
 <p>@Html.Raw(@ViewBag.Message)</p>
 
-
-  <p>Kết quả biên dịch: @Model.KetQuaBienDich
+  <p><b>Kết quả biên dịch:</b> @Model.KetQuaBienDich
     @if (@Model.TrangThaiBienDich!=1)
-    {
-        <b>Lỗi biên dịch:</b><i>@Model.CompilerError</i>
+    { <br />        
+        <i>@Html.Raw(@Model.CompilerError.ToHTML())</i>
     }
   </p>
-  <p>Tổng điểm    <b>@Model.TongDiem</b></p>
-  Kết quả chi tiết
+  <p><b>Tổng điểm:</b>  @Model.TongDiem</p>  
   @if (@Model.TrangThaiBienDich==1)
   {
+      <b>Kết quả chi tiết:</b>
+      <br />
         <table style="width: 650px">
         <tr>
             <th>
