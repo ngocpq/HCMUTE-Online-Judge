@@ -14,8 +14,6 @@ namespace SPKTOnline.Management
     public interface ILogger
     {
         void WriteLog(string message);
-        //void WriteException(Exception ex);
-        //void WriteDebug(string message);
     }
     public class FileLogger : ILogger
     {
@@ -100,6 +98,12 @@ namespace SPKTOnline.Management
             ss.Close();
         }
 
+        public void TaoThuMuc(String dirPath)
+        {
+            if (Directory.Exists(dirPath))
+                return;
+            Directory.CreateDirectory(dirPath);
+        }
         public void WriteLogErrorToFile(string message)
         {
             string appPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath;
@@ -110,8 +114,9 @@ namespace SPKTOnline.Management
 
             string time = DateTime.Now.ToLongTimeString();
             message = "\r\n----------------------------------" + time + "------------------------------------\r\n" + message;
-
-            string filePath = Path.Combine(appPath, Path.Combine(WebConfigurationManager.AppSettings["ErrorLogDir"], s + ".txt"));
+            string errDirPath = Path.Combine(appPath, WebConfigurationManager.AppSettings["ErrorLogDir"]);
+            TaoThuMuc(errDirPath);
+            string filePath = Path.Combine(errDirPath,s + ".txt");
             StreamWriter ss = File.AppendText(filePath);
 
             ss.Write(message);

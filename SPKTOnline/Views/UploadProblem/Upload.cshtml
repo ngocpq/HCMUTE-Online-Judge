@@ -50,31 +50,31 @@
             {
                 <span>Câu hỏi thuộc lớp</span>
                 <div class="editor-field">
-                @foreach (var o in ViewBag.ClassID)
-                {
-                    var optionValueS = "ClassID" + o.Value;
-                    if (o.Value == Model.Classes.First().ID.ToString())
-                    { 
-                    <input type="checkbox"  
+                    @foreach (var o in ViewBag.ClassID)
+                    {
+                        var optionValueS = "ClassID" + o.Value;
+                        if (o.Value == Model.Classes.First().ID.ToString())
+                        { 
+                        <input type="checkbox"  
                          id="@optionValueS" 
                          name="ClassID" 
                          value="@o.Value" 
                          checked=checked/> 
-                     <label for="@optionValueS">@o.Text</label> 
-                    }
-                    else
-                    {
+                        <label for="@optionValueS">@o.Text</label> 
+                        }
+                        else
+                        {
                         <input type="checkbox"  
                          id="@optionValueS" 
                          name="ClassID" 
                          value="@o.Value"/> 
-                     <label for="@optionValueS">@o.Text</label> 
-                    }
+                        <label for="@optionValueS">@o.Text</label> 
+                        }
                     
                    
-                    <br /> 
-                }
-            </div>
+                        <br /> 
+                    }
+                </div>
             }
             <div class="editor-label">
                 Chọn file đề
@@ -91,8 +91,8 @@
                 Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
             </div>
             <div class="editor-field">
-                Thời gian hiện: 
-                @Html.TextBoxFor(m => m.AvailableTime)                
+                Thời gian hiện:
+                @Html.TextBoxFor(m => m.AvailableTime)
                 @Html.ValidationMessageFor(m => m.AvailableTime)
             </div>
             <div>

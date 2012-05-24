@@ -53,7 +53,14 @@ namespace ChamDiem
         ~FileManager()
         {
             if (DeleteOnDispose)
-                Directory.Delete(DirPath, true);
+            {
+                try
+                {
+                    Directory.Delete(DirPath, true);
+                }
+                catch
+                { }
+            }
         }
     }
 }

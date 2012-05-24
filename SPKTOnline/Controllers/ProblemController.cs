@@ -21,6 +21,7 @@ namespace SPKTOnline.Controllers
         CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
         public List<Problem> list;
+
         public ActionResult Index()
         {
             IEnumerable<SPKTOnline.Models.Subject> sb = db.Subjects;
@@ -46,17 +47,7 @@ namespace SPKTOnline.Controllers
 
 
         }
-        //public static IEnumerable GetProblem()
-        //{
-        //    return from i in list
-        //           select new
-        //           {
-        //               i.ID,
-        //               i.Name,
-        //               i.User.Username,
-        //               i.Difficulty.Name
-        //           };
-        //}
+
         public ActionResult GridviewPartial()
         {
             return PartialView("GridviewPartial", list);

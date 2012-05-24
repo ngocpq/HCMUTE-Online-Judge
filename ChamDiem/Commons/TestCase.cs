@@ -10,5 +10,6 @@ namespace ChamDiem
     string Input { get; set; }
     string Output { get; set; }
     int TimeOut { get; set; }
+    double Score { get; set; }
   }
 }

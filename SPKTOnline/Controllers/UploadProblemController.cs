@@ -8,6 +8,8 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using SPKTOnline.Reponsitories;
 using SPKTOnline.Management;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace SPKTOnline.Controllers
 {
@@ -15,16 +17,16 @@ namespace SPKTOnline.Controllers
     {
         //
         // GET: /UploadProblem/
-         OnlineSPKTEntities db = new OnlineSPKTEntities();
+        OnlineSPKTEntities db = new OnlineSPKTEntities();
         ProblemRepository ProblemRep = new ProblemRepository();
         CheckRoles checkRole = new CheckRoles();
 
         [Authorize(Roles = "Admin,Lecturer")]
-        public ActionResult Upload(int? ID, int ClassID=0 )
+        public ActionResult Upload(int? ID, int ClassID = 0)
         {
             Problem pro = new Problem();
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
-            if (ClassID != 0 && ID ==0)
+            if (ClassID != 0 && ID == 0)
             {
                 ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
                 pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
@@ -43,194 +45,160 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult Upload(Problem problem, HttpPostedFileBase filebase)
         {
-            try
+            if (filebase != null)
             {
-                //if (ModelState.IsValid)
-                //{
-                    string fileName = "";
-                    if (filebase != null)
+                if (filebase.ContentLength > 0)
+                {
+                    //TODO: đọc từ file cấu hình
+                    problem.LecturerID = User.Identity.Name;
+                    problem.Name = Path.GetFileNameWithoutExtension(filebase.FileName);
+                    problem.DifficultyID = 1;
+                    problem.MemoryLimit = 1000;
+                    problem.TimeLimit = 1000;
+                    problem.ComparerID = 1;
+                    if (problem.ExamID == 0)
                     {
-                        if (filebase.ContentLength > 0)
-                        {                            
-                            fileName = Guid.NewGuid().ToString() + Path.GetExtension(filebase.FileName);
-                            //TODO: đọc từ file cấu hình
-                            problem.LecturerID = User.Identity.Name;
-                            problem.Name = Path.GetFileNameWithoutExtension(filebase.FileName);
-                            problem.DifficultyID = 1;
-                            problem.MemoryLimit = 1000;
-                            problem.TimeLimit = 1000;
-                            problem.ComparerID = 1;
-                            if (problem.ExamID == 0)
+                        problem.ExamID = null;
+                    }
+                    db.Problems.AddObject(problem);
+                    try
+                    {
+                        Unzipfile(problem, filebase.InputStream);
+                        if (problem.ClassID != null)
+                        {
+                            foreach (String s in problem.ClassID)
                             {
-                                problem.ExamID = null;
-                            }
-                       
-                            db.Problems.AddObject(problem);
-                            //db.SaveChanges();
-                            Unzipfile(problem, filebase.InputStream);//, "~\\uploads");
-                            if(problem.ClassID!=null)
-                            {
-                                if (problem.ClassID.Count() != 0)
+                                foreach (Class c in db.Classes)
                                 {
-                                    String[] kqClass = problem.ClassID;
-                                    if (kqClass.Count() > 0)
+                                    if (c.ID == int.Parse(s))
                                     {
-                                        foreach (String s in kqClass)
-                                        {
-                                            foreach (Class c in db.Classes)
-                                            {
-                                                if (c.ID == int.Parse(s))
-                                                {
-                                                    problem.Classes.Add(c);
-                                                    problem.SubjectID = c.SubjectID;
-
-                                                }
-                                            }
-                                        }
+                                        problem.Classes.Add(c);
+                                        problem.SubjectID = c.SubjectID;
                                     }
                                 }
                             }
-                            db.SaveChanges();
-                            if ((problem.ExamID==null|| problem.ExamID == 0) && problem.Classes.Count()==0)
-                            {
-
-                                return RedirectToAction("Browse", "Problem", new { ID = problem.SubjectID });
-                            }
-                            if (problem.Classes.Count() > 0)
-                            {
-                                return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = problem.Classes.Last().ID });
-                            }
-                            else
-                            {
-                                return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
-                            }
-
                         }
-
+                        db.SaveChanges();
+                        if ((problem.ExamID == null || problem.ExamID == 0) && problem.Classes.Count() == 0)
+                            return RedirectToAction("Browse", "Problem", new { ID = problem.SubjectID });
+                        if (problem.Classes.Count() > 0)
+                            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = problem.Classes.Last().ID });
+                        else
+                            return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
                     }
-               // }
+                    catch (Exception ex)
+                    {
+                        //TODO: Hien thong bao loi
+                        throw (ex);
+                    }
+
+                }
+
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+
             //TODO: redirect show problem
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name", problem.SubjectID);
             ViewBag.Message = "Thông tin không đúng";
             return View(problem);
         }
-        
-        public string Unzipfile(Problem problem, Stream inputStream)//, string UnzipPath)
+
+        public string Unzipfile(Problem problem, Stream inputStream)
         {
-            try
+            Dictionary<string, TestCas> dTestcase = new Dictionary<string, TestCas>();
+            ZipInputStream s = new ZipInputStream(inputStream);
+            ZipEntry ZEntry;
+            string sFileName = "";
+            String configXML = null;
+            while ((ZEntry = s.GetNextEntry()) != null)
             {
-                Dictionary<string, TestCas> dTestcase = new Dictionary<string, TestCas>();
-                ZipInputStream s = new ZipInputStream(inputStream);
-                ZipEntry ZEntry;
-                string sFileName = "";
-                List<String> listTestCase = new List<string>();
-                while ((ZEntry = s.GetNextEntry()) != null)
+                string directoryName = "";
+                directoryName = Path.GetDirectoryName(ZEntry.Name);
+
+                if (directoryName != "" && directoryName != null && !dTestcase.ContainsKey(directoryName))
                 {
-                    string directoryName = "";
-
-                    directoryName = Path.GetDirectoryName(ZEntry.Name);
-
-                    if (directoryName != "" && directoryName != null && !dTestcase.ContainsKey(directoryName))
-                    {
-                        TestCas tcTemp = new TestCas();
-                        tcTemp.MaDB = problem.ID;
-                        dTestcase.Add(directoryName, tcTemp);
-                        db.TestCases.AddObject(tcTemp);
-                        problem.TestCases.Add(tcTemp);
-                    }
-
-
-
-                    sFileName = Path.GetFileName(ZEntry.Name);
-                    if (sFileName == String.Empty)
-                        continue;
-                    try
-                    {
-                        int size = 2048;
-                        using (MemoryStream memStream = new MemoryStream(size))
-                        {
-                            byte[] data = new byte[size];
-                            while (true)
-                            {
-                                size = s.Read(data, 0, data.Length);
-                                if (size > 0)
-                                {
-                                    memStream.Write(data, 0, size);
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                            memStream.Position = 0;
-                            switch (Path.GetExtension(sFileName).ToLower())
-                            {
-                                case ".inp":
-                                    using (StreamReader docFile = new System.IO.StreamReader(memStream))
-                                    {
-                                        TestCas tc = dTestcase[directoryName];
-                                        tc.Input = docFile.ReadToEnd();
-                                        docFile.Close();
-                                    }
-                                    break;
-                                case ".out":
-                                    using (StreamReader docFile = new System.IO.StreamReader(memStream))
-                                    {
-                                        TestCas tc = dTestcase[directoryName];
-                                        tc.Output = docFile.ReadToEnd();
-                                        docFile.Close();
-                                    }
-                                    break;
-                                case ".xml":
-                                    break;
-                                case ".doc":
-                                case ".docx":
-                                case ".pdf":
-
-                                    byte[] problemfile = memStream.ToArray();
-
-                                    SPKTOnline.Models.File file = new SPKTOnline.Models.File();
-                                    file.Content = problemfile;
-                                    file.Type = Path.GetExtension(sFileName);
-                                    file.Name = sFileName;
-                                    db.Files.AddObject(file);
-
-                                    problem.File = file;
-
-
-                                    FileStream streamWriter1 = System.IO.File.Create(@"D:\HKII-2011-2012\KLTN\SPKTOnline\SPKTOnline\uploads\" + sFileName);
-                                    streamWriter1.Write(file.Content, 0, problemfile.Length);
-                                    streamWriter1.Close();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ApplicationException(ex.Message);
-                    }
+                    TestCas tcTemp = new TestCas();
+                    tcTemp.MaDB = problem.ID;
+                    dTestcase.Add(directoryName, tcTemp);
+                    db.TestCases.AddObject(tcTemp);
+                    problem.TestCases.Add(tcTemp);
                 }
 
-                s.Close();
-                //TestCas test;
-                //  db.SaveChanges();
+                sFileName = Path.GetFileName(ZEntry.Name);
+                if (sFileName == String.Empty)
+                    continue;
+                #region Doc file entry
+                int size = 2048;
+                using (MemoryStream memStream = new MemoryStream(size))
+                {
+                    byte[] data = new byte[size];
+                    while (true)
+                    {
+                        size = s.Read(data, 0, data.Length);
+                        if (size > 0)
+                        {
+                            memStream.Write(data, 0, size);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    memStream.Position = 0;
+                    switch (Path.GetExtension(sFileName).ToLower())
+                    {
+                        case ".inp":
+                            using (StreamReader docFile = new System.IO.StreamReader(memStream))
+                            {
+                                TestCas tc = dTestcase[directoryName];
+                                tc.Input = docFile.ReadToEnd();
+                                docFile.Close();
+                            }
+                            break;
+                        case ".out":
+                            using (StreamReader docFile = new System.IO.StreamReader(memStream))
+                            {
+                                TestCas tc = dTestcase[directoryName];
+                                tc.Output = docFile.ReadToEnd();
+                                docFile.Close();
+                            }
+                            break;
+                        case ".xml":
+                            //Doc file cau hinh
+                            if (Path.GetFileNameWithoutExtension(sFileName).ToLower() == problem.Name)
+                                using (StreamReader docFile = new System.IO.StreamReader(memStream))
+                                {
+                                    configXML = docFile.ReadToEnd();
+                                    docFile.Close();
+                                }
+                            break;
+                        case ".doc":
+                        case ".docx":
+                        case ".pdf":
+                            byte[] problemfile = memStream.ToArray();
+                            SPKTOnline.Models.File file = new SPKTOnline.Models.File();
+                            file.Content = problemfile;
+                            file.Type = Path.GetExtension(sFileName);
+                            file.Name = sFileName;
+                            db.Files.AddObject(file);
+                            problem.File = file;
 
-                return sFileName;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                #endregion
             }
-            catch (Exception ex)
+            //TODO: Gan du lieu Problem tu cau hinh xml
+            double phanTramDiem = Math.Round(100.0 / problem.TestCases.Count, 2);
+            foreach (TestCas tc in dTestcase.Values)
             {
-                return ex.Message;
+                tc.Diem = phanTramDiem;
             }
+            s.Close();
+            return sFileName;
         }
 
-
     }
+
 }

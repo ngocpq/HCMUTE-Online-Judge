@@ -48,26 +48,14 @@ namespace SPKTOnline.Controllers
             st.SubmitTime = DateTime.Now;
             db.Student_Submit.AddObject(st);
 
-            LogUtility.WriteDebug("Bat dau save");
             db.SaveChanges();
-            LogUtility.WriteDebug("Save lan 1");
             ChamDiemServise chamThiService = new ChamDiemServise();
-            //Chay va doi
-            //
+            
             st.TrangThaiCham = (int)TrangThaiCham.DangCham;
-            LogUtility.WriteDebug("Save lan 2");
             db.SaveChanges();
-            LogUtility.WriteDebug("Bat dau cham");
             KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
-            LogUtility.WriteDebug("Cham xong");
             kq.SubmitID = st.ID;
-            chamThiService_ChamThiCompleted(null, kq);
-            //
-            //Chay ko doi
-            //chamThiService.ChamThiCompleted += new ChamThiServiceEventHandler(chamThiService_ChamThiCompleted);
-            //chamThiService.ChamBaiThread(st);
-            //st.TrangThaiCham = (int)TrangThaiCham.DangCham;
-            //db.SaveChanges();
+            chamThiService_ChamThiCompleted(null, kq);           
             return RedirectToAction("TryTestResult", "Result", new { ID = st.ID, Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
         }
 
@@ -85,7 +73,7 @@ namespace SPKTOnline.Controllers
                     TestCas tc = ((TestCas)rs.TestCase);
                     TestCaseResult tcResult = new TestCaseResult();
                     tcResult.TestCaseID = tc.MaTestCase;
-                    tcResult.StudentSubmitID = st.ID;
+                    tcResult.StudentSubmitID = st.ID;                    
                     tcResult.Score = rs.KetQua == KetQuaTestCase.LoaiKetQua.Dung ? (tc.Diem * tc.Problem.Score) / 100 : 0;
                     tcResult.Comment = rs.ThongDiep;
                     tcResult.ExecutionTime = (int)rs.ThoiGianChay;                    
