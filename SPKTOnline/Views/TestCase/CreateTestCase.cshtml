@@ -5,71 +5,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
    
 }
-
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend style="color:Gray">@Html.DisplayFor(model => model.problem.Name)</legend>
+        <legend style="color: Gray">@Html.DisplayFor(model => model.problem.Name)</legend>
         <div class="editor-field">
-         
-            @Html.DisplayFor(model => model.problem.Content)
+            @Html.DisplayFor(model => model.problem.Content)        
         </div>
+        
     </fieldset>
 }
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend style="color:Gray">TestCase</legend>
+        <legend style="color: Gray">TestCase</legend>
         @if (Model.problem.TestCases.Count() != 0)
         {
             
-          <table style="width: 650px">
-                <tr>
-                    <th>
-                        Mã TestCase
-                    </th>
-                    <th>
-                        Input
-                    </th>
-                    <th>
-                        Output
-                    </th>
-                    <th>
-                        Phần trăm số điểm
-                    </th>
-                    <th>
-                        Mô tả
-                    </th>
-                    <th>
-                        Xử lý
-                    </th>
-                 </tr>
-            @foreach (var item in Model.problem.TestCases)
-            {
-                <tr>
-                    <td>
-                       @Html.DisplayFor(modelItem =>item.MaTestCase)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Input)
-                    
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Output)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Diem)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MoTa)
-                    </td>
-                    <td>
-                         @Html.ActionLink("Delete", "Details", new { ID = item.MaTestCase })
-                         @Html.ActionLink("Edit", "EditTestCase", new { ID = item.MaTestCase })
-                    </td>
-                </tr>
-            }
-        </table>
+            <table style="width: 650px">
+                @foreach (var item in Model.problem.TestCases)
+                {
+                    <tr>
+                        <th style="background-color:Yellow">
+                            Testcase: @Html.DisplayFor(modelItem => item.MaTestCase) | % điểm: @Html.DisplayFor(modelItem => item.Diem)
+                        </th>
+                        <td align=right>
+                                @Html.ActionLink("Delete", "Details", new { ID = item.MaTestCase })|
+                                @Html.ActionLink("Edit", "EditTestCase", new { ID = item.MaTestCase })                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            @Html.DisplayFor(modelItem => item.MoTa)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Input:
+                            <br />
+                            <textarea style="text-align:left" readonly="readonly" rows="5" cols="75">
+                                            @Html.DisplayFor(modelItem => item.Input)                        
+                                        </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Output:
+                            <br />
+                            <textarea readonly="readonly" rows="5" cols="75">
+                                            @Html.DisplayFor(modelItem => item.Output)                        
+                                        </textarea>
+                        </td>
+                    </tr>                         
+                }
+            </table>
         }
         else
         {
@@ -81,21 +70,19 @@
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend style="color:Gray">Thêm Test Case</legend>
-
-         <div class="editor-label">
+        <legend style="color: Gray">Thêm Test Case</legend>
+        <div class="editor-label">
             @Html.LabelFor(model => model.Input, "Chuỗi đầu vào")
         </div>
         <div class="editor-field">
             @Html.TextAreaFor(model => model.Input, 8, 75, new { @style = "resize: none;" })
             @Html.ValidationMessageFor(model => model.Input)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Output, "Chuỗi đầu ra")
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Output ,8, 75, new { @style = "resize: none;" })
+            @Html.TextAreaFor(model => model.Output, 8, 75, new { @style = "resize: none;" })
             @Html.ValidationMessageFor(model => model.Output)
         </div>
         <div class="editor-label">
@@ -105,21 +92,18 @@
             @Html.TextBoxFor(model => model.Diem)
             @Html.ValidationMessageFor(model => model.Diem)
         </div>
-         <div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.MoTa, "Mô tả")
         </div>
         <div class="editor-field">
             @Html.TextAreaFor(model => model.MoTa, 8, 75, new { @style = "resize: none;" })
             @Html.ValidationMessageFor(model => model.MoTa)
         </div>
-
         <p>
             <input class="button" type="submit" value="Thêm" />
         </p>
-
-        <div style = "visibility:hidden" >
-         @Html.TextBox("MaDB")
+        <div style="visibility: hidden">
+            @Html.TextBox("MaDB")
         </div>
     </fieldset>
 }
-
