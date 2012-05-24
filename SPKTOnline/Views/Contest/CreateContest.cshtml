@@ -27,14 +27,14 @@
                 @Html.Label("Thời gian bắt đầu")
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.StartTime)
+                @Html.TextBoxFor(m => m.StartTime)<span><i>(tháng/ngày/năm)</i></span>
                 @Html.ValidationMessageFor(m => m.StartTime)
             </div>
             <div class="editor-label">
                 @Html.Label("Thời gian kết thúc")
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.EndTime)
+                @Html.TextBoxFor(m => m.EndTime)<span><i>(tháng/ngày/năm)</i></span>
                 @Html.ValidationMessageFor(m => m.EndTime)
             </div>
             <div class="editor-label">
