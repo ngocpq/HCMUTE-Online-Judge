@@ -12,29 +12,29 @@
     foreach (var item in Model)
     {
         SPKTOnline.Management.CheckRoles checkRole = new SPKTOnline.Management.CheckRoles();
-        if (checkRole.IsLecturer(User.Identity.Name) )
+        if (checkRole.IsLecturer(User.Identity.Name))
         {
-        <div>
-        
+    <div>
         <a href="ClassDetailOfLecturer/@item.ID" class="areadmore">
-        <img alt="button" src="../../Content/Images/favicon.ico" />
-        @Html.DisplayFor(modelitem => item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
-        @Html.DisplayFor(modelitem => item.User.LastName)<span>&nbsp</span>@Html.DisplayFor(modelitem => item.User.FirstName)
-        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem => item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
+            <img alt="button" src="../../Content/Images/favicon.ico" />
+            <b>@Html.DisplayFor(modelitem => item.Subject.Name)&nbsp-&nbsp<span>Nhóm(@Html.DisplayFor(modelItem => item.Group))</span></b>
+            <span>Giảng
+                viên(@Html.DisplayFor(modelitem => item.User.LastName) @Html.DisplayFor(modelitem => item.User.FirstName))</span>&nbsp-&nbsp<span>Học
+                    kỳ(@Html.DisplayFor(modelitem => item.Term))</span>&nbsp-&nbsp<span>Năm học(@Html.DisplayFor(modelitem => item.SchoolYear))</span>
         </a>
-        </div>
+    </div>
         }
-        else   
+        else
         {
-             <div>
-        
+    <div>
         <a href="ClassDetail/@item.ID" class="areadmore">
-        <img alt="button" src="../../Content/Images/favicon.ico" />
-        @Html.DisplayFor(modelitem => item.Subject.Name) <span>-&nbsp Nhóm </span> @Html.DisplayFor(modelItem => item.Group)<span>- &nbsp Giảng viên&nbsp</span>
-        @Html.DisplayFor(modelitem => item.User.LastName)<span>&nbsp</span>@Html.DisplayFor(modelitem => item.User.FirstName) 
-        <span>-&nbsp Học kỳ &nbsp</span>@Html.DisplayFor(modelitem => item.Term)<span>- &nbsp Năm học &nbsp</span>@Html.DisplayFor(modelitem => item.SchoolYear)
+            <img alt="button" src="../../Content/Images/favicon.ico" />
+            <b>@Html.DisplayFor(modelitem => item.Subject.Name)&nbsp-&nbsp<span>Nhóm(@Html.DisplayFor(modelItem => item.Group))</span></b>
+            <span>Giảng
+                viên(@Html.DisplayFor(modelitem => item.User.LastName) @Html.DisplayFor(modelitem => item.User.FirstName))</span>&nbsp-&nbsp<span>Học
+                    kỳ(@Html.DisplayFor(modelitem => item.Term))</span>&nbsp-&nbsp<span>Năm học(@Html.DisplayFor(modelitem => item.SchoolYear))</span>
         </a>
-        </div> 
+    </div> 
         }
 
     }

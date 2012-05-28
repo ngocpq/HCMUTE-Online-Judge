@@ -6,13 +6,9 @@
 }
 
 <fieldset>
-    <legend>Thông tin lớp học</legend>
-    Sĩ số lớp: @Model.TotalStudent
-    <div class="DSClass">Danh sách lớp: 
-    <p>
-        
-    </p>
-    </div>
+    <legend class="areadmore">@Html.DisplayFor(modelItem => modelItem.Subject.Name) - Nhóm(@Html.DisplayFor(modelItem => modelItem.Group)) - Học kỳ(@Html.DisplayFor(modelitem => modelitem.Term))-Năm học(@Html.DisplayFor(modelitem => modelitem.SchoolYear))</legend>
+    <p>Giảng viên: <b>@Html.DisplayFor(modelitem => modelitem.User.LastName) @Html.DisplayFor(modelitem => modelitem.User.FirstName)</b></p>
+    <p>Số sinh viên: @Model.TotalStudent | Số bài tập: @Model.Problems.Count | Số kỳ thi: @Model.Contests.Count</p>
     
 </fieldset>
 <fieldset>

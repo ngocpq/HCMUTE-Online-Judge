@@ -16,6 +16,8 @@ namespace SPKTOnline.Management
         void WriteLog(string message);
         void WriteLog(Exception ex);
     }
+
+
     public class DatabaseLogger : ILogger
     {
         void Write(string message, string logType)
