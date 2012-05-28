@@ -14,6 +14,64 @@ namespace SPKTOnline.Management
     public interface ILogger
     {
         void WriteLog(string message);
+        void WriteLog(Exception ex);
+    }
+
+
+    public class DatabaseLogger : ILogger
+    {
+        void Write(string message, string logType)
+        {
+            SPKTOnline.Models.OnlineSPKTEntities db = new Models.OnlineSPKTEntities();
+            SPKTOnline.Models.Logger log = new Models.Logger();
+            log.Time = DateTime.Now;
+            if (System.Web.HttpContext.Current != null && System.Web.HttpContext.Current.User != null)
+                log.UserName = System.Web.HttpContext.Current.User.Identity.Name;
+            log.Message = message;
+            log.Type = logType;
+            db.Loggers.AddObject(log);
+            db.SaveChanges();
+
+        }
+        public void WriteLog(string message)
+        {
+            try
+            {
+                Write(message, "LOG");
+            }
+            catch
+            {
+                FileLogger logger = new FileLogger();
+                logger.WriteLog(message);
+            }
+        }
+
+        public void WriteLog(Exception e)
+        {
+            try
+            {
+                string logType = e.GetType().FullName;
+                Exception temp = e;
+                string message = "";
+                string stackTrace = "";
+                while (temp != null)
+                {
+                    message += "* Exception : " + temp.Message + "\r\n";
+                    if (temp.StackTrace != null)
+                        stackTrace += "* StackTrace : " + temp.StackTrace.ToString() + "\r\n";
+                    temp = temp.InnerException;
+                }
+                message = message + stackTrace;
+                Write(message, logType);
+            }
+            catch
+            {
+                FileLogger logger = new FileLogger();
+                logger.WriteLog(e);
+            }
+        }
+
+
     }
     public class FileLogger : ILogger
     {
@@ -21,6 +79,32 @@ namespace SPKTOnline.Management
         {
             IOFile mIOFile = new IOFile();
             mIOFile.WriteLogErrorToFile(message);
+        }
+
+        public void WriteLog(Exception e)
+        {
+            string message = "";
+            if (e == null) return;
+
+            Exception temp = e;
+            if (System.Web.HttpContext.Current != null)
+                if (System.Web.HttpContext.Current.User != null)
+                    message += "User :" + System.Web.HttpContext.Current.User.Identity.Name + "\r\n";
+
+            while (temp != null)
+            {
+                message += "* Exception : " + temp.Message + "\r\n";
+                temp = temp.InnerException;
+            }
+
+            temp = e;
+            while (temp != null)
+            {
+                if (temp.StackTrace != null)
+                    message += "* StackTrace : " + temp.StackTrace.ToString() + "\r\n";
+                temp = temp.InnerException;
+            }
+            WriteLog(message);
         }
 
     }
@@ -31,46 +115,42 @@ namespace SPKTOnline.Management
         {
             _Logger = logger;
         }
-      
         public static void WriteLog(string message)
-        {
+        {            
             if (_Logger != null)
                 _Logger.WriteLog(message);
         }
-
+        public static void WriteLog(string message, int lever)
+        {
+            if (lever >= LogLever)
+                WriteLog(message);
+        }
+        public static void WriteLog(Exception e, int lever)
+        {
+            if (lever >= LogLever)
+                WriteLog(e);
+        }
         public static void WriteLog(Exception e)
         {
             if (_Logger != null)
             {
-                string message = "";
-                if (e == null) return;
-
-                Exception temp = e;
-                if (System.Web.HttpContext.Current != null)
-                    if (System.Web.HttpContext.Current.User != null)
-                        message += "User :" + System.Web.HttpContext.Current.User.Identity.Name + "\r\n";
-
-                while (temp != null)
-                {
-                    message += "* Exception : " + temp.Message + "\r\n";
-                    temp = temp.InnerException;
-                }
-
-                temp = e;
-                while (temp != null)
-                {
-                    if (temp.StackTrace != null)
-                        message += "* StackTrace : " + temp.StackTrace.ToString() + "\r\n";
-                    temp = temp.InnerException;
-                }
-                _Logger.WriteLog(message);
+                _Logger.WriteLog(e);
             }
         }
-
         public static void WriteDebug(string message)
         {
             if (_Logger != null)
                 _Logger.WriteLog(message);
+        }
+        public const int LEVER_MIN = 0;
+        public const int LEVER_MAX = 10;        
+        public const int LEVER_DEBUG = LEVER_MIN;
+        public const int LEVER_ERROR = LEVER_MAX;
+        public const int LEVER_LOG = 5;
+        static int LogLever = LEVER_MIN;
+        public static void SetLogLever(int lever)
+        {
+            LogLever = lever;
         }
     }
     public class IOFile
@@ -91,7 +171,7 @@ namespace SPKTOnline.Management
             string time = DateTime.Now.ToLongTimeString();
             message = "\r\n----------------------------------" + time + "------------------------------------\r\n" + message;
 
-            string filePath = Path.Combine(appPath, Path.Combine(WebConfigurationManager.AppSettings["ErrorLogDir"], "debug"+s + ".txt"));
+            string filePath = Path.Combine(appPath, Path.Combine(WebConfigurationManager.AppSettings["ErrorLogDir"], "debug" + s + ".txt"));
             StreamWriter ss = File.AppendText(filePath);
 
             ss.Write(message);
@@ -116,7 +196,7 @@ namespace SPKTOnline.Management
             message = "\r\n----------------------------------" + time + "------------------------------------\r\n" + message;
             string errDirPath = Path.Combine(appPath, WebConfigurationManager.AppSettings["ErrorLogDir"]);
             TaoThuMuc(errDirPath);
-            string filePath = Path.Combine(errDirPath,s + ".txt");
+            string filePath = Path.Combine(errDirPath, s + ".txt");
             StreamWriter ss = File.AppendText(filePath);
 
             ss.Write(message);
@@ -292,5 +372,5 @@ namespace SPKTOnline.Management
             ss.Write(message);
             ss.Close();
         }
-   }
+    }
 }

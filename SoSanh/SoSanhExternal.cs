@@ -39,15 +39,15 @@ namespace ChamDiem.SoSanh
                         return result == 1;
                     }
                     else
-                        throw new Exception("Không đọc được kết quả chấm");
+                        throw new SoSanhException("Kết quả file không đúng định dạng");
                 }
-                throw new Exception("Không đọc được kết quả chấm");
+                throw new SoSanhException("Không đọc được StandarOutput");
             }
             else
             {
                 if (!p.HasExited)
                     p.Kill();
-                throw new TimeoutException("Thời gian chấm quá lâu");
+                throw new TimeoutException("Thời gian chạy file quá lâu");
             }
         }
         public void Init(string parameter)

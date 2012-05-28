@@ -106,6 +106,7 @@
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Controllers\UploadProblemController.cs" />
+    <Compile Include="Exceptions\SPKTOnlineException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,6 +134,7 @@
       <DependentUpon>OnlineSPKT.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProblemModels.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\Student_SubmitModels.cs" />
     <Compile Include="Models\TestCas.cs" />
     <Compile Include="Models\TestCaseModels.cs" />

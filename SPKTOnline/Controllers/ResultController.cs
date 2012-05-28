@@ -38,7 +38,7 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Student,Lecturer")]
         public ActionResult TryTestResult(int? ID, string Message)
         {
-            string Name = User.Identity.Name;
+            string Name = User.Identity.Name; 
             Student_Submit st = db.Student_Submit.Where(p => p.ID == ID).FirstOrDefault();
             ViewBag.Message = Message;
             return View(st);

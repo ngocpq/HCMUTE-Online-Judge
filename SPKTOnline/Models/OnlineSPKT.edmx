@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="OnlineSPKTModelStoreContainer">
           <EntitySet Name="Class_Student" EntityType="OnlineSPKTModel.Store.Class_Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Classes" EntityType="OnlineSPKTModel.Store.Classes" store:Type="Tables" Schema="dbo" />
@@ -17,6 +17,7 @@
           <EntitySet Name="File" EntityType="OnlineSPKTModel.Store.File" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Languages" EntityType="OnlineSPKTModel.Store.Languages" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Lecturer_Subject" EntityType="OnlineSPKTModel.Store.Lecturer_Subject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Logger" EntityType="OnlineSPKTModel.Store.Logger" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Problem_Class" EntityType="OnlineSPKTModel.Store.Problem_Class" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Problems" EntityType="OnlineSPKTModel.Store.Problems" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Roles" EntityType="OnlineSPKTModel.Store.Roles" store:Type="Tables" Schema="dbo" />
@@ -247,6 +248,16 @@
           </Key>
           <Property Name="MaGV" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="MaMH" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Logger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Message" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="Problem_Class">
           <Key>
@@ -707,8 +718,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineSPKTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -829,6 +839,7 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Loggers" EntityType="OnlineSPKTModel.Logger" />
         </EntityContainer>
         <EntityType Name="Class">
           <Key>
@@ -1332,6 +1343,16 @@
           <End Role="Roles" Type="OnlineSPKTModel.Role" Multiplicity="*" />
           <End Role="Users" Type="OnlineSPKTModel.User" Multiplicity="*" />
         </Association>
+        <EntityType Name="Logger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Time" Nullable="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1504,6 +1525,17 @@
               <ScalarProperty Name="Username" ColumnName="Username" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Loggers">
+            <EntityTypeMapping TypeName="OnlineSPKTModel.Logger">
+              <MappingFragment StoreEntitySet="Logger">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1524,7 +1556,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="OnlineSPKT">
+      <Diagram Name="OnlineSPKT" ZoomLevel="64">
         <EntityTypeShape EntityType="OnlineSPKTModel.Class" Width="1.5" PointX="3" PointY="9.5" Height="3.5186979166666674" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Comparer" Width="1.5" PointX="11.25" PointY="6.5" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineSPKTModel.Contest_Student" Width="1.5" PointX="15.75" PointY="6.25" Height="1.9802864583333317" IsExpanded="true" />
@@ -1740,6 +1772,7 @@
           <ConnectorPoint PointX="8.0833333333333339" PointY="9.2968725000000063" />
           <ConnectorPoint PointX="8.25" PointY="9.2968725000000063" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="OnlineSPKTModel.Logger" Width="1.5" PointX="3.375" PointY="0.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

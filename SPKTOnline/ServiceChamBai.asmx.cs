@@ -8,6 +8,7 @@ using SPKTOnline.Models;
 using SPKTOnline.Management;
 using ChamDiem.Managers;
 using System.Web.Configuration;
+using SPKTOnline.Exceptions;
 
 namespace SPKTOnline
 {
@@ -29,7 +30,7 @@ namespace SPKTOnline
         {
             Problem problem = db.Problems.FirstOrDefault(m => m.ID == MaBai);
             if (problem == null)
-                throw new Exception("Ma bai khong ton tai");            
+                throw new SPKTOnlineException("Ma bai khong ton tai");            
             List<ITestCase> tescase = new List<ITestCase>();            
             foreach (ITestCase t in problem.TestCases)
             {

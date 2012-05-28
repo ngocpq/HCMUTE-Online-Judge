@@ -1,0 +1,25 @@
+USE [OnlineSPKT]
+GO
+
+/****** Object:  Table [dbo].[Logger]    Script Date: 05/25/2012 01:32:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Logger](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Time] [datetime] NOT NULL,
+	[UserName] [nvarchar](50) NULL,
+	[Type] [nvarchar](50) NOT NULL,
+	[Message] [ntext] NOT NULL,
+ CONSTRAINT [PK_Logger] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+

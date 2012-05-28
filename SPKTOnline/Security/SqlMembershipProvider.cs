@@ -15,6 +15,7 @@ namespace SPKTOnline.Security
         string _ApplicationName;
         public override string ApplicationName
         {
+
             get
             {
                 return _ApplicationName;
