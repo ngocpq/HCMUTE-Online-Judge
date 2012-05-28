@@ -43,7 +43,7 @@
     <legend>Kỳ thi</legend>
      @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
      {
-        @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
+        @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0, classID=Model.ID  }, null)    
         <br />
         @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
      }
@@ -51,7 +51,7 @@
     <div style="border-bottom-color:Gray; border-bottom-style:ridge"></div>    
     @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
     {
-         @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0 }, null)    
+         @Html.ActionLink("Tạo kỳ thi từ đề thi có sẳn", "CreateContest", "Contest", new { id = 0, classID=Model.ID }, null)    
         <br />
         @Html.ActionLink("Tạo kỳ thi từ đề thi mới", "CreateExam", "Exam", new { ClassID = Model.ID }, null)
     }

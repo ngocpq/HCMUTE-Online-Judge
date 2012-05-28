@@ -32,11 +32,12 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer,Admin")]
         public ActionResult CreateContest(int ID = 0, int classID=0)
         {
-            ViewBag.ExamID = new SelectList(db.Exams, "ID", "ID");
+            var exams = db.Exams.Where(e => e.LecturerID == User.Identity.Name);
+            ViewBag.ExamID = new SelectList(exams, "ID", "ID");
             Contest c = new Contest();
             c.ExamID = ID;
             Exam exam = db.Exams.FirstOrDefault(e => e.ID == ID);
-            if (exam != null && classID!=0)
+            if (exam == null && classID!=0)
             {
                 c.ClassID = classID;
             }
@@ -48,12 +49,13 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateContest(Contest contest)
         {
             Exam exam = db.Exams.FirstOrDefault(e => e.ID == contest.ExamID);
-            if(contest.ClassID==null )
+            if(contest.ClassID ==0 )
                 contest.ClassID = exam.ClassID;
+            db.Connection.Open();
             db.Contests.AddObject(contest);
             db.SaveChanges();
             ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
-            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = exam.ClassID });
+            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = contest.ClassID });
 
         }
         public ActionResult ContestDetail(int contestID)
