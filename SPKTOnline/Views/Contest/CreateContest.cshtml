@@ -8,7 +8,8 @@
 <div class="webtitle">
     Tạo Kỳ Thi</div>
 <p style="margin-left: 25px;">
-    Nhập các thông tin cần thiết để tạo kỳ thi!
+    Nhập các thông tin cần thiết để tạo kỳ thi cho môn: @Html.DisplayFor(model=>model.Class.Subject.Name) <span>-&nbsp Nhóm: </span> @Html.DisplayFor(model => model.Class.Group) 
+    <span>-&nbsp Học kỳ: &nbsp</span>@Html.DisplayFor(model => model.Class.Term)<span>- &nbsp Năm học: &nbsp</span>@Html.DisplayFor(model => model.Class.SchoolYear)
 </p>
 @using (Html.BeginForm())
 {
@@ -17,11 +18,18 @@
             <img src="../../Content/Images/text_x_copying.ico" alt="Create Contest" /></div>
         <div style="float: left; margin-left: 10%; width: 70%;">
             <div class="editor-label">
-                @Html.Label("Tên kỳ thi")
+                @Html.Label("Tên kỳ thi (*)")
             </div>
             <div class="editor-field">
                 @Html.TextBoxFor(m => m.Name)
                 @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="editor-label">
+                @Html.Label("Mô tả cho kỳ thi")
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Description, 15, 55, new { @style = "resize: none;" })
+                @Html.ValidationMessageFor(m => m.Description)
             </div>
             <div class="editor-label">
                 @Html.Label("Thời gian bắt đầu")
@@ -41,25 +49,10 @@
                 @Html.CheckBoxFor(m => m.IsOpen)
                 @Html.LabelFor(m => m.IsOpen)
             </div>
-            @if (Model.ExamID == 0)
-            {
-                
-
-                <div class="editor-label">
-                    @Html.Label(" Chọn đề thi có sẳn ")
-                </div>
-                <div class="editor-field">
-                    @Html.DropDownList("ExamID","Chọn đề thi")
-                </div>
-                
-            }
-            else
-            {
-                @Html.HiddenFor(m => m.ExamID)
-                @Html.HiddenFor(m => m.ClassID)
-            }
+      
+        
             <p>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Tiếp theo" />
             </p>
         </div>
     </div>

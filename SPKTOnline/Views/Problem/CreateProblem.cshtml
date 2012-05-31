@@ -41,9 +41,9 @@
         @Html.ValidationSummary(true)
         <fieldset>
             <legend>Câu hỏi</legend>
-            @if(Model.ExamID!=0)
+            @if(Model.ContestID!=0)
             {
-                @Html.HiddenFor(model=>model.ExamID)
+                @Html.HiddenFor(model => model.ContestID)
             }
             <div class="editor-label">
                 @Html.Label("Tên câu hỏi gợi ý")
@@ -102,22 +102,31 @@
             @Html.DropDownList("ComparerID", "(Loại file so sánh)")
             @Html.ValidationMessageFor(model => model.ComparerID)
         </div>
-        Chọn môn học:
-       <div class="editor-field">
-           @Html.DropDownList("SubjectID", "(Môn học)")
-         Chọn lớp học:
-       <div class="editor-field">
-            @foreach (var o in ViewBag.ClassID)
-            {
-                var optionValueS = "MyOptions_" + o.Value; 
-                <input type="checkbox"  
-                     id="@optionValueS" 
-                     name="ClassID" 
-                     value="@o.Value"/> 
-                <label for="@optionValueS">@o.Text</label> 
-                <br /> 
-            }
-            </div>
+        @if (Model.ClassID.Count() != 0)
+        {
+            <span>Chọn môn học:</span>
+           <div class="editor-field">
+               @Html.DropDownList("SubjectID", "(Môn học)")
+           </div>
+            <span>Chọn lớp học:</span>
+           <div class="editor-field">
+                @foreach (var o in ViewBag.ClassID)
+                {
+                    var optionValueS = "MyOptions_" + o.Value; 
+                    <input type="checkbox"  
+                         id="@optionValueS" 
+                         name="ClassID" 
+                         value="@o.Value"/> 
+                    <label for="@optionValueS">@o.Text</label> 
+                    <br /> 
+                }
+                </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.cla)
+            @Html.HiddenFor(model => model.SubjectID)
+        }
         </fieldset>
             <p>
                 <input class="button" type="submit" value="Thêm" />

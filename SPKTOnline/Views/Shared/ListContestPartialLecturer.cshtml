@@ -14,7 +14,7 @@
                Sĩ số
             </th>
             <th>
-               Điểm số đã đạt
+                Kết quả
             </th>
              <th>
               
@@ -26,15 +26,15 @@
             {
             <tr>
                 <td>
-                       @if(item.Contest_Student.Where(i=>i.StudentID==User.Identity.Name).FirstOrDefault()!=null)
-                       {
-                       
+                       @if (User.IsInRole("Lecturer") && item.Class.LecturerID == User.Identity.Name)
+                    {
                         @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
                            }
-                      else
+                           else
                            {
-                            @Html.DisplayFor(modelItem => item.Name)
-                           }
+                           @item.Name
+                       }
+                     
                 </td>
                 <td>
                     Bắt đầu: <i> @Html.DisplayFor(modelItem => item.StartTime)</i>
@@ -44,9 +44,9 @@
                 <td>                    
                         @Html.DisplayFor(modelItem => item.Contest_Student.Count)                    
                 </td>
-               <td>  
-                        @Html.DisplayFor(modelItem => item.Contest_Student.FirstOrDefault(s => s.StudentID == User.Identity.Name).Score)
-                </td>
+               <td>
+                    
+               </td>
                 <td>
                     @if (User.IsInRole("Lecturer") && item.Class.LecturerID == User.Identity.Name)
                     {

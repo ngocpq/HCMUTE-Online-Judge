@@ -19,6 +19,6 @@
     <div class="lambai" onclick="document.location.href=$('#LambaiUrl').attr('href')" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
     Làm bài |</div>
 @*<button name="button" type="button" onclick="document.location.href=$('#cancelUrl').attr('href')">Làm bài</button>*@
-       <a id="LambaiUrl" href="@Html.AttributeEncode(Url.Action("TryTest", "Student_Submit", new { ID = Model.ID }))" style="display:none;"></a>
+       <a id="LambaiUrl" href="@Html.AttributeEncode(Url.Action("TryTest", "Student_Submit", new { ID = Model.ID, ContestID=0 }))" style="display:none;"></a>
   
 

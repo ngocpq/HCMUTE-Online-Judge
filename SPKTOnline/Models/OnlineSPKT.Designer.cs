@@ -25,11 +25,10 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Comparers", "Comparers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Comparer), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Contest), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Exam), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Contest), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Difficulties", "Difficulties", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Difficulty), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Exam_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.User), "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Exam), true)]
-[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Exam", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Exam), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_File", "File", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.File), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Student_Summit_Languages", "Languages", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SPKTOnline.Models.Language), "Student_Submit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Student_Submit), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Subjects", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Subject), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
@@ -241,6 +240,22 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Logger> Loggers
+        {
+            get
+            {
+                if ((_Loggers == null))
+                {
+                    _Loggers = base.CreateObjectSet<Logger>("Loggers");
+                }
+                return _Loggers;
+            }
+        }
+        private ObjectSet<Logger> _Loggers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Problem> Problems
         {
             get
@@ -305,6 +320,22 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<TestCaseResult> TestCaseResults
         {
             get
@@ -349,22 +380,6 @@ namespace SPKTOnline.Models
             }
         }
         private ObjectSet<User> _Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Logger> Loggers
-        {
-            get
-            {
-                if ((_Loggers == null))
-                {
-                    _Loggers = base.CreateObjectSet<Logger>("Loggers");
-                }
-                return _Loggers;
-            }
-        }
-        private ObjectSet<Logger> _Loggers;
 
         #endregion
         #region AddTo Methods
@@ -442,6 +457,14 @@ namespace SPKTOnline.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Loggers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLoggers(Logger logger)
+        {
+            base.AddObject("Loggers", logger);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Problems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToProblems(Problem problem)
@@ -474,6 +497,14 @@ namespace SPKTOnline.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the TestCaseResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTestCaseResults(TestCaseResult testCaseResult)
@@ -495,14 +526,6 @@ namespace SPKTOnline.Models
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Loggers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLoggers(Logger logger)
-        {
-            base.AddObject("Loggers", logger);
         }
 
         #endregion
@@ -1081,25 +1104,23 @@ namespace SPKTOnline.Models
         /// Create a new Contest object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
         /// <param name="classID">Initial value of the ClassID property.</param>
-        /// <param name="examID">Initial value of the ExamID property.</param>
         /// <param name="startTime">Initial value of the StartTime property.</param>
         /// <param name="endTime">Initial value of the EndTime property.</param>
         /// <param name="isOpen">Initial value of the IsOpen property.</param>
         /// <param name="totalScore">Initial value of the TotalScore property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
-        public static Contest CreateContest(global::System.Int32 id, global::System.Int32 classID, global::System.Int32 examID, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isOpen, global::System.Int32 totalScore, global::System.String name, global::System.Boolean isDeleted)
+        public static Contest CreateContest(global::System.Int32 id, global::System.String name, global::System.Int32 classID, global::System.DateTime startTime, global::System.DateTime endTime, global::System.Boolean isOpen, global::System.Double totalScore, global::System.Boolean isDeleted)
         {
             Contest contest = new Contest();
             contest.ID = id;
+            contest.Name = name;
             contest.ClassID = classID;
-            contest.ExamID = examID;
             contest.StartTime = startTime;
             contest.EndTime = endTime;
             contest.IsOpen = isOpen;
             contest.TotalScore = totalScore;
-            contest.Name = name;
             contest.IsDeleted = isDeleted;
             return contest;
         }
@@ -1139,6 +1160,78 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreateDate
+        {
+            get
+            {
+                return _CreateDate;
+            }
+            set
+            {
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreateDate;
+        partial void OnCreateDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreateDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 ClassID
         {
             get
@@ -1157,30 +1250,6 @@ namespace SPKTOnline.Models
         private global::System.Int32 _ClassID;
         partial void OnClassIDChanging(global::System.Int32 value);
         partial void OnClassIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ExamID
-        {
-            get
-            {
-                return _ExamID;
-            }
-            set
-            {
-                OnExamIDChanging(value);
-                ReportPropertyChanging("ExamID");
-                _ExamID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ExamID");
-                OnExamIDChanged();
-            }
-        }
-        private global::System.Int32 _ExamID;
-        partial void OnExamIDChanging(global::System.Int32 value);
-        partial void OnExamIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1259,7 +1328,7 @@ namespace SPKTOnline.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 TotalScore
+        public global::System.Double TotalScore
         {
             get
             {
@@ -1274,33 +1343,9 @@ namespace SPKTOnline.Models
                 OnTotalScoreChanged();
             }
         }
-        private global::System.Int32 _TotalScore;
-        partial void OnTotalScoreChanging(global::System.Int32 value);
+        private global::System.Double _TotalScore;
+        partial void OnTotalScoreChanging(global::System.Double value);
         partial void OnTotalScoreChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1396,34 +1441,18 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Exam")]
-        public Exam Exam
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Problems_Contests", "Problems")]
+        public EntityCollection<Problem> Problems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_NewContest_Exam", "Exam").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_NewContest_Exam", "Exam").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Exam> ExamReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_NewContest_Exam", "Exam");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Problem>("OnlineSPKTModel.FK_Problems_Contests", "Problems");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exam>("OnlineSPKTModel.FK_NewContest_Exam", "Exam", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Problem>("OnlineSPKTModel.FK_Problems_Contests", "Problems", value);
                 }
             }
         }
@@ -1556,6 +1585,30 @@ namespace SPKTOnline.Models
         private Nullable<global::System.Double> _Score;
         partial void OnScoreChanging(Nullable<global::System.Double> value);
         partial void OnScoreChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsLock
+        {
+            get
+            {
+                return _IsLock;
+            }
+            set
+            {
+                OnIsLockChanging(value);
+                ReportPropertyChanging("IsLock");
+                _IsLock = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsLock");
+                OnIsLockChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsLock;
+        partial void OnIsLockChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsLockChanged();
 
         #endregion
     
@@ -1995,28 +2048,6 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_NewContest_Exam", "Contests")]
-        public EntityCollection<Contest> Contests
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Contest>("OnlineSPKTModel.FK_NewContest_Exam", "Contests");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Contest>("OnlineSPKTModel.FK_NewContest_Exam", "Contests", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Exam_Users", "Users")]
         public User User
         {
@@ -2045,28 +2076,6 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OnlineSPKTModel.FK_Exam_Users", "Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Problems_Exam", "Problems")]
-        public EntityCollection<Problem> Problems
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Problem>("OnlineSPKTModel.FK_Problems_Exam", "Problems");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Problem>("OnlineSPKTModel.FK_Problems_Exam", "Problems", value);
                 }
             }
         }
@@ -3024,30 +3033,6 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ExamID
-        {
-            get
-            {
-                return _ExamID;
-            }
-            set
-            {
-                OnExamIDChanging(value);
-                ReportPropertyChanging("ExamID");
-                _ExamID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ExamID");
-                OnExamIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ExamID;
-        partial void OnExamIDChanging(Nullable<global::System.Int32> value);
-        partial void OnExamIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Boolean IsDeleted
@@ -3068,6 +3053,30 @@ namespace SPKTOnline.Models
         private global::System.Boolean _IsDeleted;
         partial void OnIsDeletedChanging(global::System.Boolean value);
         partial void OnIsDeletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ContestID
+        {
+            get
+            {
+                return _ContestID;
+            }
+            set
+            {
+                OnContestIDChanging(value);
+                ReportPropertyChanging("ContestID");
+                _ContestID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContestID");
+                OnContestIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ContestID;
+        partial void OnContestIDChanging(Nullable<global::System.Int32> value);
+        partial void OnContestIDChanged();
 
         #endregion
     
@@ -3117,6 +3126,44 @@ namespace SPKTOnline.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Problems_Contests", "Contests")]
+        public Contest Contest
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Problems_Contests", "Contests").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Problems_Contests", "Contests").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Contest> ContestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contest>("OnlineSPKTModel.FK_Problems_Contests", "Contests");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contest>("OnlineSPKTModel.FK_Problems_Contests", "Contests", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Problems_Difficulties", "Difficulties")]
         public Difficulty Difficulty
         {
@@ -3145,44 +3192,6 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Difficulty>("OnlineSPKTModel.FK_Problems_Difficulties", "Difficulties", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Problems_Exam", "Exam")]
-        public Exam Exam
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_Problems_Exam", "Exam").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_Problems_Exam", "Exam").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Exam> ExamReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("OnlineSPKTModel.FK_Problems_Exam", "Exam");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exam>("OnlineSPKTModel.FK_Problems_Exam", "Exam", value);
                 }
             }
         }
@@ -4184,6 +4193,161 @@ namespace SPKTOnline.Models
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+    
     }
     
     /// <summary>

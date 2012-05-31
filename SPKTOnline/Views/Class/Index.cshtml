@@ -12,7 +12,7 @@
     foreach (var item in Model)
     {
         SPKTOnline.Management.CheckRoles checkRole = new SPKTOnline.Management.CheckRoles();
-        if (checkRole.IsLecturer(User.Identity.Name))
+        if (checkRole.IsLecturer(User.Identity.Name) && item.LecturerID==User.Identity.Name)
         {
     <div>
         <a href="ClassDetailOfLecturer/@item.ID" class="areadmore">

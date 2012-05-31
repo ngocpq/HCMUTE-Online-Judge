@@ -282,9 +282,13 @@
         </div>
         <div id="main">
             
-            <div id="maincontain">
-                <div id="MainContainPlaceHolder">
-                    @RenderBody()
+            <div id="maincontain">                
+                <div id="MainContainPlaceHolder">                                            
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <p><b>Bị lỗi rồi</b></p>
+                    }
+                    @RenderBody()                    
                 </div>
                 <div id="menuleft">
                     <div id="topcatalogue">
@@ -323,9 +327,11 @@
                             }
                         </ul>
                     </div>
+                   
                     <div id="buttonmenuleft">
                         <div id="toplinkto">
                             <div id="topmenuleftbutton">
+                           
                             </div>
                             <div id="linkto">
                             </div>
@@ -353,6 +359,11 @@
                             </ul>
                             <%} %>*@
                         </div>
+                    </div>
+                     <div id="infoSession">
+                        Số lượng truy cập: @HttpContext.Current.Application["SLTruyCap"].ToString()
+                        <br />
+                        Số người đang online: @HttpContext.Current.Application["SLOnline"].ToString()
                     </div>
                 </div>
             </div>

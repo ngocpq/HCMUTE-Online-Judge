@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SPKTOnline.Models.Problem>
+
+@if (Model.Count() != 0)
+{
+    <table style="width:510px">
+        <tr>
+            <th>
+               Câu hỏi
+            </th>
+            <th>
+               Số điểm đạt được
+            
+             
+              
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+                <td>
+                    
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        <br />  
+                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
+                        @if (item.FileID != null)
+                        { 
+                            <br />
+                            @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
+                        }
+                    </p>
+                </td>
+
+               <td>                  
+              
+              
+                     @if (item.Student_Submit.FirstOrDefault(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID == item.ID) != null)
+                     {
+                      @item.Student_Submit.FirstOrDefault(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID == item.ID).TongDiem.ToString()<span>đ</span> <br />
+                                                                           
+                      @Html.ActionLink("Xem kết quả", "TryTestResult", "Result", new { ID = item.Student_Submit.FirstOrDefault(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID == item.ID).ID }, null)
+                     <span></span>
+                     }
+                     else
+                     {
+                         <span>Bạn không làm bài này!</span>
+                     }
+                 
+                   
+
+                </td>
+            </tr>
+        }
+    </table>
+}

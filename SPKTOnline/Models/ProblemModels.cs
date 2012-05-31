@@ -76,7 +76,8 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("Giới hạn thời gian")]
         public int TimeLimit { get; set; }
-        public int ExamID { get; set; }
+        public int ContestID { get; set; }
+        public Class cla { get; set; }
     }
 
 }

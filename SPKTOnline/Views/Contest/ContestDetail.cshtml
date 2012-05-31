@@ -28,8 +28,23 @@
             }
             else
             {
-                <div style="color:Blue">@Model.Exam.Description<br /></div>
-                <div style="width:inherit">@Html.Partial("DSProblemForContest", Model.Exam.Problems)</div>
+                <div style="color:Blue">@Model.Description<br /></div>
+                if (User.IsInRole("Lecturer") && User.Identity.Name == Model.Class.LecturerID)
+                {
+                
+                <div style="width:inherit">@Html.Partial("DSProblemForContest", Model.Problems)</div>
+                }
+                else
+                {
+                    if (Model.EndTime >= DateTime.Now)
+                    {
+                     <div style="width:inherit">@Html.Partial("DSProblemForContestStudent", Model.Problems)</div>
+                    }
+                    else
+                    {
+                      <div style="width:inherit">@Html.Partial("DSProblemForContestStudentEndTime", Model.Problems)</div>
+                    }
+                }
                 
             }
             </div>
