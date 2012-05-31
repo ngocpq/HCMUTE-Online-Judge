@@ -26,7 +26,7 @@
             {
             <tr>
                 <td>
-                       @if(item.Contest_Student.Where(i=>i.StudentID==User.Identity.Name).FirstOrDefault()!=null)
+                       @if(item.Contest_Student.Where(i=>i.StudentID==User.Identity.Name).FirstOrDefault()!=null ||item.EndTime<DateTime.Now)
                        {
                        
                         @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
@@ -58,6 +58,10 @@
                         if (item.Contest_Student.Where(i => i.StudentID == User.Identity.Name).FirstOrDefault() == null && item.EndTime > DateTime.Now)
                         {
                             @Html.ActionLink("Đăng ký thi", "RegisterContest", "Contest", new { contestID = item.ID }, null)
+                        }
+                        else if(item.EndTime < DateTime.Now)
+                        {
+                            <span>Hết thời gian</span>
                         }
                         else
                         {

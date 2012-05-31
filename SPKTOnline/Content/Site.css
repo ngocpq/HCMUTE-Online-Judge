@@ -334,3 +334,19 @@ div#title
     text-align:center;
     width : 240px;
 }
+.classColumnMiddle
+{
+    text-align:center;
+    
+}
+.classColumnRight
+{
+    text-align:right;
+    
+}
+.classMessage
+{
+   color:Red;
+   font-style:italic;
+   
+}

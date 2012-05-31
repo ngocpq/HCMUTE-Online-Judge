@@ -20,9 +20,9 @@
             <tr>
                 <td>
                     <p>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <b>@Html.DisplayFor(modelItem => item.Name)</b> 
                         <br />  
-                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
+                        Đề:<i>@Html.DisplayFor(modelItem => item.ContentSubString) </i>
                         @if (item.FileID != null)
                         { 
                             <br />

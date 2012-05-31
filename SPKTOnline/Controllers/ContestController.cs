@@ -21,19 +21,24 @@ namespace SPKTOnline.Controllers
         public ActionResult Index()
         {
             Session["CurrentUrl"] = Request.Url.ToString(); 
+            
             return View(contestBL.LayDanhSach());
         }
 
         [Authorize]
         public ActionResult MyContest()
         {
-            Session["CurrentUrl"] = Request.Url.ToString(); 
+            Session["CurrentUrl"] = Request.Url.ToString();
             if (User.IsInRole("Student"))
             {
+                ViewBag.IsStudent = true;
                 return View(contestBL.LayDanhSachKyThiCuaSinhVien(User.Identity.Name));
             }
             else
+            {
+                ViewBag.IsStudent = false;
                 return View(contestBL.LayDanhSachKyThiCuaGiaoVien(User.Identity.Name));
+            }
         }
 
         [Authorize(Roles = "Lecturer,Admin")]
@@ -77,11 +82,12 @@ namespace SPKTOnline.Controllers
         [Authorize]
         public ActionResult ContestDetail(int contestID)
         {
-            if (!contestBL.IsRegisterContest(contestID, User.Identity.Name) && !contestBL.IsLecturerOfClass(contestID, User.Identity.Name))
+            Contest ct = contestBL.LayTheoMa(contestID);
+            if ((!contestBL.IsRegisterContest(contestID, User.Identity.Name) && !contestBL.IsLecturerOfClass(contestID, User.Identity.Name))&& ct.EndTime>DateTime.Now)
             {
                 return RedirectToAction("ClassDetail", "Class", new { ID = contestBL.LayTheoMa(contestID).ClassID });
             }
-            Contest ct = contestBL.LayTheoMa(contestID);
+            
             return View(ct);
         }
         public ActionResult EditContest(int contestID)

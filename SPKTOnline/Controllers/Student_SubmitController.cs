@@ -54,7 +54,9 @@ namespace SPKTOnline.Controllers
             st.TrangThaiBienDich = 0;
             st.TrangThaiCham = (int)TrangThaiCham.ChuaCham;
             st.LanguageID = 1;
-            st.SubmitTime = DateTime.Now;            
+            st.SubmitTime = DateTime.Now;
+            if (st.ContestID == 0)
+                st.ContestID = null;
             db.Student_Submit.AddObject(st);            
             db.SaveChanges();
 

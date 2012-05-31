@@ -2,64 +2,44 @@
 
 @if (Model.Count() != 0)
 {
-    <table style="width:650px">
+    <table style="width: 650px">
         <tr>
+           <th>
+                Mã
+            </th>
             <th>
                Câu hỏi
             </th>
             <th>
                Độ khó
             </th>
-             <th>
-               So sánh
-            </th>
+            <th>Thống kê</th>                                  
             <th>
-               Tổng điểm
-            </th>
-            <th>
-                Thống kê<br />
-                (Lượt làm đúng/Tổng lượt làm)
-            </th>
-             <th>
-              
-            </th>
-        </tr>
+                
+            </th>            
+         </tr>
         @foreach (var item in Model)
         {
-            if (item.IsDeleted == false)
-            {
             <tr>
-                <td>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Name)
-                        <br />  
-                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
-                        @if (item.FileID != null)
-                        { 
+                <td class="classColumnMiddle">
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                 <td style="width:50%">
+                    <b>@Html.DisplayFor(modelItem => item.Name)</b>                    
+                    <br />
+                    Đề: <i>@Html.DisplayFor(modelItem => item.ContentSubString)</i>
+                    @if (item.FileID != null)
+                       { 
                             <br />
-                            @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
+                             @Html.ActionLink("Download", "Download","File", new { ID= item.FileID},null)
                         }
-                    </p>
-                </td>
-                <td>
+                </td>                
+                <td class="classColumnMiddle">
                     @Html.DisplayFor(modelItem => item.Difficulty.Name)
-                </td>
-                <td>
-                    @if (item.Comparer != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.Comparer.Name)
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.ComparerParameter)
-                    }
-                </td>
-               <td>                  
-                         @Html.DisplayFor(modelItem => item.Score)                   
-                </td>
-                <td>
-                    
-                </td>
+                </td>        
+                <td  class="classColumnMiddle">
+                    @Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)
+                </td>               
                 <td>
                  @if (User.IsInRole("Lecturer") && item.LecturerID == User.Identity.Name)
                  {
@@ -72,17 +52,16 @@
                     @Html.ActionLink("Làm bài", "TryTest", "Student_Submit", new { id = item.ID, ContestID=0 }, null) 
                  }
 
-                </td>
+                </td>           
             </tr>
-            }
         }
-    </table>
+    </table>                
 }
 
 else
 { 
     <p>
-        Lớp này chưa có câu hỏi nào!
+        Không có dữ liệu!
     </p>
 
 }

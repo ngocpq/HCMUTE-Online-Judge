@@ -12,9 +12,27 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("Lớp học")]
         public String[] ClassID { get; set; }
-        
-        public int Submits { get { return this.Student_Submit.Count(); } }
 
+        public int SubmitCount
+        {
+            get
+            {
+                if (this.Student_Submit != null)
+                    return this.Student_Submit.Count();
+                else
+                    return 0;
+            }
+        }
+        public int SubmitCoDiemToiDaCount
+        {
+            get
+            {
+                if (this.Student_Submit != null)
+                    return this.Student_Submit.Where(s => s.TongDiem == this.Score).Count();
+                else
+                    return 0;
+            }
+        }
         public String ContentSubString
         {
             get

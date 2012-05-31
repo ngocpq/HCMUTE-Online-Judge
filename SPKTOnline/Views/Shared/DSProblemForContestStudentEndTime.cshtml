@@ -21,10 +21,9 @@
                 <td>
                     
                     <p>
-                        @Html.DisplayFor(modelItem => item.Name)
+                       <b>@Html.DisplayFor(modelItem => item.Name)</b> 
                         <br />  
-                        <b>Đề bài:</b> @Html.DisplayFor(modelItem => item.ContentSubString) ...
-                        @if (item.FileID != null)
+                        Đề:<i>@Html.DisplayFor(modelItem => item.ContentSubString) </i>
                         { 
                             <br />
                             @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)

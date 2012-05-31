@@ -11,31 +11,60 @@
 {
     <table style="width: 650px">
         <tr>
-            <th>
-                Tên câu hỏi
+           <th>
+                Mã
             </th>
             <th>
-                Độ khó
+               Câu hỏi
             </th>
+            <th>
+               Độ khó
+            </th>
+            <th>Lần Đúng/Lần Giải</th>             
             <th>
                 Người tạo
             </th>
-           
+            @if (User.Identity.IsAuthenticated)
+            {           
+            <th>
+                Điểm của bạn
+            </th>
+            }
          </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.ActionLink(@item.ID.ToString(), "Details", new { id = item.ID })
+                <td class="classColumnMiddle">
+                    @Html.DisplayFor(modelItem => item.ID)
                 </td>
-                <td>
+                 <td style="width:50%">
+                    <b>@Html.DisplayFor(modelItem => item.Name)</b>                    
+                    <br />
+                    Đề: <i>@Html.DisplayFor(modelItem => item.ContentSubString)</i>
+                    @if (item.FileID != null)
+                       { 
+                            <br />
+                             @Html.ActionLink("Download", "Download","File", new { ID= item.FileID},null)
+                        }
+                </td>                
+                <td class="classColumnMiddle">
                     @Html.DisplayFor(modelItem => item.Difficulty.Name)
-                    
-                </td>
-                <td>
+                </td>        
+                <td  class="classColumnMiddle">
+                    @Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)
+                </td>        
+                <td  class="classColumnMiddle">
                     @Html.DisplayFor(modelItem => item.User.Username)
                 </td>
-
+                @if(User.Identity.IsAuthenticated)
+                {
+                <td  class="classColumnMiddle">
+                    @if(item.Student_Submit.Where(s=>s.StudentID==User.Identity.Name).Count()>0)
+                    {
+                        @item.Student_Submit.Where(s => s.StudentID == User.Identity.Name).Select(d => d.TongDiem).Max().ToString()
+                    }
+                </td>
+                }
             </tr>
         }
     </table>

@@ -13,23 +13,15 @@
     <table style="width:650px">
         <tr>
             <th>
-                Mã câu hỏi
+                Mã
             </th>
             <th>
-               Tên câu hỏi
-            </th>
-            <th>
-               Nội dung
+               Câu hỏi
             </th>
             <th>
                Độ khó
             </th>
-             <th>
-               Hình thức so sánh
-            </th>
-            <th>
-               Môn học
-            </th>
+            <th>Lần Đúng/Lần Giải</th>
              <th>
               Xử lý
             </th>
@@ -38,31 +30,24 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.ID)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
+                 <td>
+                    <b>@Html.DisplayFor(modelItem => item.Name)</b>                    
+                    <br />
+                    Đề: <i>@Html.DisplayFor(modelItem => item.ContentSubString)</i>
+                    @if (item.FileID != null)
+                       { 
+                            <br />
+                             @Html.ActionLink("Download", "Download","File", new { ID= item.FileID},null)
+                        }
+                </td>                
                 <td>
                     @Html.DisplayFor(modelItem => item.Difficulty.Name)
-                </td>
+                </td>        
                 <td>
-                    @if (item.Comparer != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.Comparer.Name)
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.ComparerParameter)
-                    }
-                </td>
-                <td>
-                       @Html.DisplayFor(modelItem=>item.Subject.Name)
-                   
-                </td>
-                <td>
-                    
-                </td>
+                    @Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)
+                </td>        
                 <td>
                      @Html.ActionLink("Xem kết quả", "LecturerViewTryResult", "Result", new { ProblemID = (int?)item.ID }, new AllowHtmlAttribute()) 
                 </td>
@@ -79,5 +64,5 @@ else
 }
 <p>
     @Html.ActionLink("Thêm câu hỏi bằng Upload", "Upload", "UploadProblem")<br />
-    @Html.ActionLink("Hoặc thêm câu hỏi bằng text", "CreateProblem", "Problem")
+ 
 </p>

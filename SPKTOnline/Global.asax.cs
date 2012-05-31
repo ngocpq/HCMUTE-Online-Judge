@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using SPKTOnline.Management.MultiLanguage;
 using SPKTOnline.Management;
+using System.IO;
 
 namespace SPKTOnline
 {
@@ -35,7 +36,42 @@ namespace SPKTOnline
             );
 
         }
-
+        public long SoLuotTruycap
+        {
+            get
+            {
+                if (Application["SLTruyCap"] == null)
+                    Application.Add("SLTruyCap", 0L);
+                return (long)Application["SLTruyCap"];
+            }
+            set
+            {
+                Application.Lock();
+                if (Application["SLTruyCap"] == null)
+                    Application.Add("SLTruyCap", value);
+                else
+                    Application["SLTruyCap"] = value;
+                Application.UnLock();
+            }
+        }
+        public long SoNguoiOnline
+        {
+            get
+            {
+                if (Application["SLOnline"] == null)
+                    Application.Add("SLOnline", 0L);
+                return (long)Application["SLOnline"];
+            }
+            set
+            {
+                Application.Lock();
+                if (Application["SLOnline"] == null)
+                    Application.Add("SLOnline", value);
+                else
+                    Application["SLOnline"] = value;
+                Application.UnLock();
+            }
+        }
         protected void Application_Start()
         {
             //ghi log xuong file
@@ -59,35 +95,18 @@ namespace SPKTOnline
             Language = new Dictionary<string, ILanguage>();
 
 
-            Application.Lock();
-            Application.Add("SLOnline", 1);
-            System.IO.StreamReader sr;
-            sr = new System.IO.StreamReader(Server.MapPath("SLTruyCap.txt"));
-            string S = sr.ReadLine();
-            sr.Close();
-            Application.UnLock();
-            Application.Add("SLTruyCap", S);
+            SoNguoiOnline = 0;
+            SoLuotTruycap = ReadSoLuotTruyCapTuFile();
         }
         void Session_Start(object sender, EventArgs e)
         {
-
-            Application["SLOnline"] = (int)Application["SLOnline"] + 1;
-            Application.Contents["SLTruyCap"] =
-            int.Parse(Application.Contents["SLTruyCap"].ToString()) + 1;
-
-            System.IO.StreamWriter sw;
-            sw = new System.IO.StreamWriter(Server.MapPath("SLTruyCap.txt"));
-            sw.Write(Application.Contents["SLTruyCap"].ToString());
-            sw.Close();
+            SoNguoiOnline++;
+            SoLuotTruycap++;
+            WriteSoLuotTruyCapVaoFile();
         }
         void Session_End(object sender, EventArgs e)
         {
-            Application["SLOnline"] = (int)Application["SLOnline"] - 1;
-            // Code that runs when a session ends. 
-            // Note: The Session_End event is raised only when the sessionstate mode
-            // is set to InProc in the Web.config file. If session mode is set to StateServer 
-            // or SQLServer, the event is not raised.
-
+            SoNguoiOnline--;            
         }
         void Application_Error(object sender, EventArgs e)
         {
@@ -96,8 +115,7 @@ namespace SPKTOnline
             try
             {
                 string ip = "";
-                ip = Request.ServerVariables["REMOTE_ADDR"];
-                //WriteToEventLog(new Exception("User IP: " + ip, ex));
+                ip = Request.ServerVariables["REMOTE_ADDR"];                
                 LogUtility.WriteLog(new Exception("User IP: " + ip, ex));
             }
             catch
@@ -105,5 +123,38 @@ namespace SPKTOnline
                 Response.Redirect("~/Error");
             }
         }        
+        
+        long ReadSoLuotTruyCapTuFile()
+        {
+            string countFilePath = Server.MapPath("~\\SLTruyCap.txt");
+            if (!File.Exists(countFilePath))
+                return 0;
+            System.IO.StreamReader sw=null;
+            try
+            {                
+                FileStream fi = File.Open(countFilePath, FileMode.Open);
+                sw = new System.IO.StreamReader(fi);
+                return long.Parse(sw.ReadLine());
+            }
+            catch
+            {
+                return 0;
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
+        }
+        void WriteSoLuotTruyCapVaoFile()
+        {
+            System.IO.StreamWriter sw;
+            string countFilePath = Server.MapPath("~\\SLTruyCap.txt");
+            FileStream fi = File.Open(countFilePath, FileMode.Create);
+            sw = new System.IO.StreamWriter(fi);
+            sw.Write(SoLuotTruycap.ToString());
+            sw.Close();
+        }
+       
     }
 }

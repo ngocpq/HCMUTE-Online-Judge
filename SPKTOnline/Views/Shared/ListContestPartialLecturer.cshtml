@@ -5,17 +5,15 @@
     <table style="width:650px">
         <tr>
             <th>
-               Kỳ thi
+            Kỳ thi
             </th>
             <th>
-               Thời gian
-            </th>
-             <th>
-               Sĩ số
+             Thời gian  
             </th>
             <th>
-                Kết quả
+                Sĩ số
             </th>
+           
              <th>
               
             </th>
@@ -27,14 +25,13 @@
             <tr>
                 <td>
                        @if (User.IsInRole("Lecturer") && item.Class.LecturerID == User.Identity.Name)
-                    {
-                        @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
-                           }
-                           else
-                           {
-                           @item.Name
-                       }
-                     
+                        {
+                            @Html.ActionLink(item.Name, "ContestDetail", "Contest", new { contestID = item.ID }, null)
+                        }
+                        else
+                        {
+                            @item.Name
+                       }                     
                 </td>
                 <td>
                     Bắt đầu: <i> @Html.DisplayFor(modelItem => item.StartTime)</i>
@@ -44,9 +41,7 @@
                 <td>                    
                         @Html.DisplayFor(modelItem => item.Contest_Student.Count)                    
                 </td>
-               <td>
-                    
-               </td>
+             
                 <td>
                     @if (User.IsInRole("Lecturer") && item.Class.LecturerID == User.Identity.Name)
                     {
