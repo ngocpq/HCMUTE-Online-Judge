@@ -31,6 +31,7 @@ namespace SPKTOnline.Controllers
 
         public ActionResult Browse(string ID)
         {
+            Session["CurrentUrl"] = Request.Url.ToString();
             if (ID != null)
             {
                 List<Problem> dsProblem = new List<Problem>();
@@ -54,6 +55,7 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult Details(int ID)
         {
+            Session["CurrentUrl"] = Request.Url.ToString();
             if (ID > 0)
             {
                 Problem p = new Problem();
@@ -74,6 +76,7 @@ namespace SPKTOnline.Controllers
         [Authorize(Roles = "Lecturer")]
         public ActionResult AllProblemForUpDate()
         {
+            Session["CurrentUrl"] = Request.Url.ToString();
             string name = HttpContext.User.Identity.Name;
             List<Problem> dsProblem = new List<Problem>();
             foreach (Problem p in db.Problems)
@@ -216,9 +219,15 @@ namespace SPKTOnline.Controllers
             return RedirectToAction("AllProblemForUpDate", "Problem");
         }
         [Authorize(Roles = "Lecturer")]
-        public ActionResult Delete(int ID)
+        public ActionResult DeleteProblem(int ID)
         {
-            return View();
+            Problem pr = db.Problems.FirstOrDefault(p => p.ID == ID);
+            if (pr != null)
+            {
+                pr.IsDeleted = true;
+                db.SaveChanges();
+            }
+            return Redirect(Session["CurrentUrl"].ToString());
         }
 
 

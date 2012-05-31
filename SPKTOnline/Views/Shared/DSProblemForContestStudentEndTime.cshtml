@@ -16,7 +16,8 @@
         </tr>
         @foreach (var item in Model)
         {
-            
+            if (item.IsDeleted == false)
+            {
             <tr>
                 <td>
                     
@@ -50,6 +51,7 @@
 
                 </td>
             </tr>
+            }
         }
     </table>
 }

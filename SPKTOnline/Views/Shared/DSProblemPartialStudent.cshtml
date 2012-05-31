@@ -22,6 +22,8 @@
         </tr>
         @foreach (var item in Model)
         {
+            if (item.IsDeleted == false)
+            {
             <tr>
                 <td>
                     <p>
@@ -31,7 +33,7 @@
                         @if (item.FileID != null)
                         { 
                             <br />
-                            @Html.ActionLink("Download đề", "Download","File", new { ID= item.FileID},null)
+                            @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
                         }
                     </p>
                 </td>
@@ -47,11 +49,12 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("Làm bài","TryTest", "Student_Submit", new { id = item.ID, ContestID=0 },null)                                                      
+                    @Html.ActionLink("Làm bài", "TryTest", "Student_Submit", new { id = item.ID, ContestID = 0 }, null)                                                      
                    
 
                 </td>
             </tr>
+            }
         }
     </table>
 }

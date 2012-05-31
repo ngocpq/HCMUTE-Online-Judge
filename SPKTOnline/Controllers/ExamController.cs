@@ -27,7 +27,7 @@ namespace SPKTOnline.Controllers
         {
             Class c = db.Classes.FirstOrDefault(cl => cl.ID == classID);
             Exam ex = new Exam();
-            ex.Class = c;
+            //ex.Class = c;//Da bo exam
             ViewBag.ClassID = classID;
             return View(ex);
         }
