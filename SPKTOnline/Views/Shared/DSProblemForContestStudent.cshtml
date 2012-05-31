@@ -42,7 +42,7 @@
                  }
                  else
                  {
-                     <span> Bạn đã làm bài này với</span> @item.Student_Submit.FirstOrDefault(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID==item.ID).TongDiem.ToString()<span>đ</span> <br />
+                     <span> Bạn đã làm bài này với</span> @item.Student_Submit.Where(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID==item.ID).Max(p=>p.TongDiem).ToString()<span>đ</span> <br />
                                                                            
                      @Html.ActionLink("Xem kết quả","TryTestResult","Result",new {ID=item.Student_Submit.FirstOrDefault(s => s.StudentID == User.Identity.Name && s.ContestID == item.ContestID && s.ProblemID==item.ID).ID},null)
                      <span>|</span>

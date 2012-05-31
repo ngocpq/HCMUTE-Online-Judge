@@ -46,6 +46,30 @@
                 @Html.ValidationMessageFor(m => m.EndTime)
             </div>
             <div class="editor-label">
+                @Html.Label("Số lần submit tối đa")<br />
+               
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.SubmitLimit)<i>(Quá số lượng submit này thí sinh sẽ bị trừ điểm theo thang điểm bên dưới)</i>
+                @Html.ValidationMessageFor(m => m.SubmitLimit)
+            </div>
+            <div class="editor-label">
+                @Html.Label("Số điểm sẽ bị trừ")
+                 
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.SubmitLimit)<i>(Quá số lượng submit này thí sinh sẽ bị trừ điểm theo thang điểm bên dưới)</i>
+                @Html.ValidationMessageFor(m => m.SubmitLimit)
+            </div>
+            <div class="editor-label">
+                @Html.Label("Tổng điểm")
+                 
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.TotalScore)
+                @Html.ValidationMessageFor(m => m.TotalScore)
+            </div>
+            <div class="editor-label">
                 @Html.CheckBoxFor(m => m.IsOpen)
                 @Html.LabelFor(m => m.IsOpen)
             </div>
