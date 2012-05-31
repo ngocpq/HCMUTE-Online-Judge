@@ -94,6 +94,7 @@ namespace SPKTOnline.Controllers
                 user.FirstName = userModel.FirstName;
                 user.IsLocked = userModel.IsLocked;
                 user.Email = userModel.Email;
+                user.CreateDate = DateTime.Now;
                 if (kq.Count() != 0)
                 {
                     foreach (String s in kq)
@@ -193,6 +194,8 @@ namespace SPKTOnline.Controllers
                     user.Password = Cryptography.CreateMD5Hash(import.Password);
                     user.LastName = s.Ho;
                     user.FirstName = s.Ten;
+                    user.CreateDate = DateTime.Now;
+                    user.LastLoginTime = DateTime.Now;
                     if (u.Email != null)
                     {
                         user.Email = u.Email;

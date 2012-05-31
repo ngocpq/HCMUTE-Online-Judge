@@ -138,6 +138,7 @@ namespace SPKTOnline.BussinessLayer
         public void UpdateScoreForContest(int ContestID, string StudentID)
         {
             var varProblems = db.Problems.Where(p => p.ContestID == ContestID);
+            Contest contest=db.Contests.FirstOrDefault(c=>c.ID==ContestID);
             List<Student_Submit> student_submits = new List<Student_Submit>();
             Double TongDiem = 0;
             foreach (var i in varProblems)
@@ -146,7 +147,14 @@ namespace SPKTOnline.BussinessLayer
                  if (count != 0)
                  {
                      Double score = i.Student_Submit.Where(s => s.StudentID == StudentID && s.ContestID == ContestID).Max(s => s.TongDiem);
-                     TongDiem += score - 0.2 * (count - 1);
+                     if (contest.SubmitLimit != null && contest.DeductScore != null)
+                     {
+                         if (count - contest.SubmitLimit > 0)
+                         {
+                             TongDiem += score - (double)contest.DeductScore * (count - (int)contest.SubmitLimit);
+                         }      
+                     }
+                     TongDiem += score;
                  }
             }
             Contest_Student cs = db.Contest_Student.FirstOrDefault(c => c.ContestID == ContestID && c.StudentID == StudentID);

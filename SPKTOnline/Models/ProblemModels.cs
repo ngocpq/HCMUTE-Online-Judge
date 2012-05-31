@@ -28,7 +28,7 @@ namespace SPKTOnline.Models
             get
             {
                 if (this.Student_Submit != null)
-                    return this.Student_Submit.Where(s => s.TongDiem == this.Score).Count();
+                    return this.Student_Submit.Where(s => s.TongDiem >= this.Score).Count();
                 else
                     return 0;
             }

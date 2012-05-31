@@ -21,6 +21,8 @@
 *.sbr
 *.sdf
 *.licx
+SLTruyCap.txt
+
 ipch/
 obj*/
 bin/

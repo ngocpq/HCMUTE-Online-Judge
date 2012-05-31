@@ -20,8 +20,14 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult Index()
         {
-            Session["CurrentUrl"] = Request.Url.ToString(); 
-            
+            Session["CurrentUrl"] = Request.Url.ToString();
+            if (User.IsInRole("Student"))
+            {
+                foreach (var i in contestBL.LayDanhSachKyThiCuaSinhVien(User.Identity.Name))
+                {
+                    contestBL.UpdateScoreForContest(i.ID, User.Identity.Name);
+                }
+            }
             return View(contestBL.LayDanhSach());
         }
 
@@ -31,6 +37,10 @@ namespace SPKTOnline.Controllers
             Session["CurrentUrl"] = Request.Url.ToString();
             if (User.IsInRole("Student"))
             {
+                foreach (var i in contestBL.LayDanhSachKyThiCuaSinhVien(User.Identity.Name))
+                {
+                    contestBL.UpdateScoreForContest(i.ID, User.Identity.Name);
+                }
                 ViewBag.IsStudent = true;
                 return View(contestBL.LayDanhSachKyThiCuaSinhVien(User.Identity.Name));
             }
