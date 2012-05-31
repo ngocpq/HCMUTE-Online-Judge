@@ -88,7 +88,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinessLayer\BusinessBase.cs" />
+    <Compile Include="BussinessLayer\ClassBL.cs" />
     <Compile Include="BussinessLayer\ContestBL.cs" />
+    <Compile Include="BussinessLayer\ProblemBL.cs" />
+    <Compile Include="BussinessLayer\StudentSubmitBL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\ContestController.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Controllers\UploadProblemController.cs" />
     <Compile Include="Exceptions\SPKTOnlineException.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -127,6 +132,7 @@
     <Compile Include="Management\MyEnum.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClassModels.cs" />
+    <Compile Include="Models\ContestModels.cs" />
     <Compile Include="Models\ExamModels.cs" />
     <Compile Include="Models\OnlineSPKT.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -694,6 +700,7 @@
     </None>
     <Content Include="Scripts\uploader.swf" />
     <Content Include="ServiceChamBai.asmx" />
+    <Content Include="SLTruyCap.txt" />
     <Content Include="TienIch\Comparers\ChamDiem.dll" />
     <Content Include="TienIch\Comparers\SoSanh.dll" />
     <Content Include="Web.config">
@@ -725,9 +732,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="XML\VietNamese.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -803,6 +807,10 @@
     <Content Include="Views\Exam\EditExam.cshtml" />
     <Content Include="Views\Exam\DeleteExam.cshtml" />
     <Content Include="Views\Contest\RegisterContest.cshtml" />
+    <Content Include="Views\Contest\CreateContestCont.cshtml" />
+    <Content Include="Views\Shared\DSProblemForContestStudent.cshtml" />
+    <Content Include="Views\Shared\DSProblemForContestStudentEndTime.cshtml" />
+    <Content Include="Views\Shared\ListContestPartialLecturer.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

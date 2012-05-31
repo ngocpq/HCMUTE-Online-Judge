@@ -57,36 +57,38 @@ namespace SPKTOnline
             MultiLanguage.CreateLanguageKey(VietNamese, LanguageEnum.VietNamese);
 
             Language = new Dictionary<string, ILanguage>();
+
+
+            Application.Lock();
+            Application.Add("SLOnline", 1);
+            System.IO.StreamReader sr;
+            sr = new System.IO.StreamReader(Server.MapPath("SLTruyCap.txt"));
+            string S = sr.ReadLine();
+            sr.Close();
+            Application.UnLock();
+            Application.Add("SLTruyCap", S);
         }
+        void Session_Start(object sender, EventArgs e)
+        {
 
-        //void WriteToEventLog(Exception e)
-        //{
-        //    if (e != null)
-        //    {
-        //        try
-        //        {
-        //            IOFile mIOFile = new IOFile();
-        //            mIOFile.WriteExceptionToFile(e);
-        //        }
-        //        catch
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
-        //void WriteToEventLog(string message)
-        //{
-        //    try
-        //    {
-        //        IOFile mIOFile = new IOFile();
-        //        mIOFile.WriteLogErrorToFile(message);
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
+            Application["SLOnline"] = (int)Application["SLOnline"] + 1;
+            Application.Contents["SLTruyCap"] =
+            int.Parse(Application.Contents["SLTruyCap"].ToString()) + 1;
 
+            System.IO.StreamWriter sw;
+            sw = new System.IO.StreamWriter(Server.MapPath("SLTruyCap.txt"));
+            sw.Write(Application.Contents["SLTruyCap"].ToString());
+            sw.Close();
+        }
+        void Session_End(object sender, EventArgs e)
+        {
+            Application["SLOnline"] = (int)Application["SLOnline"] - 1;
+            // Code that runs when a session ends. 
+            // Note: The Session_End event is raised only when the sessionstate mode
+            // is set to InProc in the Web.config file. If session mode is set to StateServer 
+            // or SQLServer, the event is not raised.
+
+        }
         void Application_Error(object sender, EventArgs e)
         {
             // Code that runs when an unhandled error occurs

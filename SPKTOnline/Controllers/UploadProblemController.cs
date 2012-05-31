@@ -22,18 +22,32 @@ namespace SPKTOnline.Controllers
         CheckRoles checkRole = new CheckRoles();
 
         [Authorize(Roles = "Admin,Lecturer")]
-        public ActionResult Upload(int? ID, int ClassID = 0)
+        public ActionResult Upload(int? ContestID, int ClassID = 0)
         {
+            //khi tạo problem từ contest thì ta có ContestID!=0 và ClassID!=0, if ContestID!=0 và ClassID==0 thì cho ClassID=Contest.ClassID
+            //khi tạo problem từ Class thì contestID =0, ClassID !=0
+            //Khi tạo problem từ Bên ngoài. thì ContestID=null, ClassID=0
             Problem pro = new Problem();
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
-            if (ClassID != 0 && ID == 0)
+            if (ClassID != 0)
             {
-                ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
-                pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
+                if (ContestID == 0)
+                {
+                    ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
+                    pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
+                    pro.SubjectID = db.Classes.FirstOrDefault(c => c.ID == ClassID).SubjectID;
+                }
+                else
+                {
+                    pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
+                    pro.SubjectID = db.Classes.FirstOrDefault(c => c.ID == ClassID).SubjectID;
+                }
+                pro.ContestID = ContestID;
             }
             else
+            {
                 ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "Name");
-            pro.ExamID = ID;
+            }
             pro.AvailableTime = DateTime.Now;
             pro.Score = 10;
 
@@ -56,9 +70,9 @@ namespace SPKTOnline.Controllers
                     problem.MemoryLimit = 1000;
                     problem.TimeLimit = 1000;
                     problem.ComparerID = 1;
-                    if (problem.ExamID == 0)
+                    if (problem.ContestID == 0)
                     {
-                        problem.ExamID = null;
+                        problem.ContestID = null;
                     }
                     db.Problems.AddObject(problem);
                     try
@@ -79,17 +93,18 @@ namespace SPKTOnline.Controllers
                             }
                         }
                         db.SaveChanges();
-                        if ((problem.ExamID == null || problem.ExamID == 0) && problem.Classes.Count() == 0)
+                        if ((problem.ContestID == null || problem.ContestID == 0) && problem.Classes.Count() == 0)
                             return RedirectToAction("Browse", "Problem", new { ID = problem.SubjectID });
                         if (problem.Classes.Count() > 0)
                             return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = problem.Classes.Last().ID });
                         else
-                            return RedirectToAction("CreateExamCont", "Exam", new { ID = problem.ExamID });
+                            return RedirectToAction("CreateContestCont", "Contest", new { ContestID = problem.ContestID });//TODO:Sua EXAM
                     }
                     catch (Exception ex)
-                    {
-                        //TODO: Hien thong bao loi
-                        throw (ex);
+                    {                        
+                        //throw (ex);
+                        LogUtility.WriteLog(ex);
+                        ViewBag.ErrorMessage = "Có lỗi trong khi upload đề bài";
                     }
 
                 }
@@ -98,7 +113,7 @@ namespace SPKTOnline.Controllers
 
             //TODO: redirect show problem
             ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name", problem.SubjectID);
-            ViewBag.Message = "Thông tin không đúng";
+            //ViewBag.Message = "Thông tin không đúng";
             return View(problem);
         }
 

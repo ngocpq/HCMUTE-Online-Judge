@@ -9,6 +9,7 @@ using ChamDiem;
 //using DevExpress.Web.Mvc;
 //using DevExpress.Web.ASPxHtmlEditor;
 using System.Web.UI.WebControls;
+using SPKTOnline.BussinessLayer;
 //using DevExpress.Web.ASPxFileManager;
 //using DevExpress.Web.ASPxUploadControl;
 //using FredCK.FCKeditorV2;
@@ -20,18 +21,27 @@ namespace SPKTOnline.Controllers
         // GET: /Student_Submit/
         OnlineSPKTEntities db = new OnlineSPKTEntities();
         CheckRoles checkRole = new CheckRoles();
-
+        IProblemBL blProblem;
+        IStudentSubmitBL blSubmit;
+        IContestBL blContest; 
+        public Student_SubmitController()
+        {
+            blProblem = new ProblemBL(db);
+            blSubmit = new StudentSubmitBL(db);
+            blContest = new ContestBL(db);
+        }
         public ActionResult Index()
         {
             return View();
         }
 
         [Authorize]
-        public ActionResult TryTest(int ID)
+        public ActionResult TryTest(int ID, int ContestID = 0)
         {
-            Problem p = db.Problems.FirstOrDefault(m => m.ID == ID);
+            Problem p = blProblem.LayTheoMa(ID);
             Student_Submit st = new Student_Submit();
             st.Problem = p;
+            st.ContestID = ContestID;
             return View(st);
         }
 
@@ -39,24 +49,31 @@ namespace SPKTOnline.Controllers
         [HttpPost]
         [Authorize(Roles = "Lecturer,Student")]
         public ActionResult TryTest(Student_Submit st)
-        {
-
+        {            
             st.StudentID = User.Identity.Name;
             st.TrangThaiBienDich = 0;
             st.TrangThaiCham = (int)TrangThaiCham.ChuaCham;
             st.LanguageID = 1;
-            st.SubmitTime = DateTime.Now;
-            db.Student_Submit.AddObject(st);
-
+            st.SubmitTime = DateTime.Now;            
+            db.Student_Submit.AddObject(st);            
             db.SaveChanges();
+
             ChamDiemServise chamThiService = new ChamDiemServise();
             
             st.TrangThaiCham = (int)TrangThaiCham.DangCham;
             db.SaveChanges();
             KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
             kq.SubmitID = st.ID;
-            chamThiService_ChamThiCompleted(null, kq);           
-            return RedirectToAction("TryTestResult", "Result", new { ID = st.ID, Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
+            chamThiService_ChamThiCompleted(null, kq);
+            if (st.ContestID == null)
+            {
+                return RedirectToAction("TryTestResult", "Result", new { ID = st.ID, Message = "Bạn đã gửi bài làm thành công" });//trả ra thông tin ở trang kết quả.
+            }
+            else
+            {
+                blContest.UpdateScoreForContest((int)st.ContestID, st.StudentID);
+                return RedirectToAction("ContestDetail", "Contest", new { contestID = st.ContestID});//trả ra thông tin ở trang kết quả.
+            }
         }
 
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)
@@ -89,6 +106,7 @@ namespace SPKTOnline.Controllers
             }
             LogUtility.WriteDebug("Luu ket qua");
             db.SaveChanges();
+           
         }
         public ActionResult Htmlpartial()
         {

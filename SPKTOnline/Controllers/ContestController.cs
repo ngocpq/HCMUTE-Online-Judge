@@ -20,47 +20,68 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult Index()
         {
+            Session["CurrentUrl"] = Request.Url.ToString(); 
             return View(contestBL.LayDanhSach());
         }
 
         [Authorize]
         public ActionResult MyContest()
         {
-            return View(contestBL.LayDanhSachForStudent(User.Identity.Name));
-        }
-       
-        [Authorize(Roles = "Lecturer,Admin")]
-        public ActionResult CreateContest(int ID = 0, int classID=0)
-        {
-            var exams = db.Exams.Where(e => e.LecturerID == User.Identity.Name);
-            ViewBag.ExamID = new SelectList(exams, "ID", "ID");
-            Contest c = new Contest();
-            c.ExamID = ID;
-            Exam exam = db.Exams.FirstOrDefault(e => e.ID == ID);
-            if (exam == null && classID!=0)
+            Session["CurrentUrl"] = Request.Url.ToString(); 
+            if (User.IsInRole("Student"))
             {
-                c.ClassID = classID;
+                return View(contestBL.LayDanhSachKyThiCuaSinhVien(User.Identity.Name));
+            }
+            else
+                return View(contestBL.LayDanhSachKyThiCuaGiaoVien(User.Identity.Name));
+        }
+
+        [Authorize(Roles = "Lecturer,Admin")]
+        public ActionResult CreateContest(int ClassID = 0)
+        {
+            Class cl = db.Classes.FirstOrDefault(p => p.ID == ClassID);
+            Contest c = new Contest();
+            c.Class = cl;
+            c.ClassID = ClassID;
+            if (ClassID != 0)
+            {
+                c.ClassID = ClassID;
             }
             return View(c);
-          
-        }
-        [HttpPost]
-        [Authorize(Roles = "Lecturer,Admin")]
-        public ActionResult CreateContest(Contest contest)
-        {
-            Exam exam = db.Exams.FirstOrDefault(e => e.ID == contest.ExamID);
-            if(contest.ClassID ==0 )
-                contest.ClassID = exam.ClassID;
-            db.Connection.Open();
-            db.Contests.AddObject(contest);
-            db.SaveChanges();
-            ViewBag.ClassID = new SelectList(db.Classes, "ID", "ID",contest.ClassID);
-            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = contest.ClassID });
 
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Lecturer")]
+        public ActionResult CreateContest(Contest contest)
+        {
+            contestBL.ThemKyThiChoLop(contest, contest.ClassID);
+            contestBL.SaveChange();
+            return RedirectToAction("CreateContestCont", "Contest", new { ContestID = contest.ID });
+
+        }
+        [Authorize(Roles = "Lecturer")]
+        public ActionResult CreateContestCont(int ContestID)
+        {
+            Contest contest = db.Contests.FirstOrDefault(p => p.ID == ContestID);
+            return View(contest);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Lecturer")]
+        public ActionResult CreateContestCont(Contest contest)
+        {
+            Contest cont = db.Contests.FirstOrDefault(p => p.ID == contest.ID);
+            return RedirectToAction("ClassDetailOfLecturer", "Class", new { ID = cont.ClassID });
+        }
+        [Authorize]
         public ActionResult ContestDetail(int contestID)
         {
-            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            if (!contestBL.IsRegisterContest(contestID, User.Identity.Name) && !contestBL.IsLecturerOfClass(contestID, User.Identity.Name))
+            {
+                return RedirectToAction("ClassDetail", "Class", new { ID = contestBL.LayTheoMa(contestID).ClassID });
+            }
+            Contest ct = contestBL.LayTheoMa(contestID);
             return View(ct);
         }
         public ActionResult EditContest(int contestID)
@@ -70,30 +91,30 @@ namespace SPKTOnline.Controllers
         }
         public ActionResult DeleteContest(int contestID, string URL)
         {
-            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
-            ct.IsDeleted = true;
-            db.SaveChanges();
-            return Redirect(Session["CurrentUrl"].ToString()); 
+            contestBL.XoaKyThi(contestID);
+            contestBL.SaveChange();
+            return Redirect(Session["CurrentUrl"].ToString());
 
             //return View(ct);
         }
-        
-        [Authorize(Roles="Student")]
+
+        [Authorize(Roles = "Student")]
         public ActionResult RegisterContest(int contestID)
         {
-            Contest ct = db.Contests.FirstOrDefault(c => c.ID == contestID);
+            Contest ct = contestBL.LayTheoMa(contestID);
             if (ct != null)
             {
                 string studentID = User.Identity.Name;
                 contestBL.ThemSinhVienThi(studentID, contestID);
-                 return Redirect(Session["CurrentUrl"].ToString()); 
+                contestBL.SaveChange();
+                return Redirect(Session["CurrentUrl"].ToString());
             }
             else
             {
                 ViewBag.Error = "Lổi: không có kỳ thi này";
-                return Redirect(Session["CurrentUrl"].ToString()); 
+                return Redirect(Session["CurrentUrl"].ToString());
             }
         }
-
+        
     }
 }

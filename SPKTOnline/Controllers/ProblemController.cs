@@ -34,7 +34,7 @@ namespace SPKTOnline.Controllers
             if (ID != null)
             {
                 List<Problem> dsProblem = new List<Problem>();
-                var list = db.Problems.Where(p => (p.SubjectID == ID && p.ExamID==null));
+                var list = db.Problems.Where(p => (p.SubjectID == ID && p.ContestID==null));
                 foreach (var i in list)
                 {
                     dsProblem.Add(i);
@@ -85,29 +85,29 @@ namespace SPKTOnline.Controllers
 
         }
         [HttpGet]
-        public ActionResult CreateProblem(int ID = 0)
+        [Authorize(Roles="Lecturer")]
+        public ActionResult CreateProblem(int ContestID = 0, int ClassID=0)
         {
-            string name = HttpContext.User.Identity.Name;
-            if (name != null)
-            {
-                if (checkRole.IsLecturer(name))
-                {
+                    string name = HttpContext.User.Identity.Name;
+           
                     ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
                     ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(name), "ID", "Name");
                     ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name");
-                    ViewBag.ClassID = new MultiSelectList(db.Classes, "ID", "SubjectID");
-                    //if (ID != 0)
-                    //{
                     AddProblemModels pro = new AddProblemModels();
-                    pro.ExamID = ID;
+                    pro.ContestID = ContestID;
+                    if (ClassID == 0 || ClassID == null)
+                    {
+                        ViewBag.ClassID = new MultiSelectList(db.Classes, "ID", "SubjectID");
+
+                    }
+                    else
+                    {
+                        Class cl=db.Classes.FirstOrDefault(c=>c.ID==ClassID);
+                        pro.cla = cl;
+                        pro.SubjectID = cl.SubjectID;
+                    }
                     return View(pro);
-                    //}
-                    //return View();
-                }
-                else
-                    return RedirectToAction("Index", "Home");
-            }
-            return RedirectToAction("Index", "Home");
+
         }
         [Authorize]
         [HttpPost]
@@ -123,18 +123,18 @@ namespace SPKTOnline.Controllers
                     problem.IsHiden = problemModel.IsHiden;
                     problem.DifficultyID = problemModel.DifficultyID;
                     problem.LecturerID = HttpContext.User.Identity.Name;
-
+                    problem.SubjectID = problemModel.SubjectID;
                     problem.ComparerID = problemModel.ComparerID;
                     problem.MemoryLimit = problemModel.MemoryLimit;
                     problem.TimeLimit = problemModel.TimeLimit;
                     problem.SubjectID = problemModel.SubjectID;
                     problem.Score = problem.Score;
-                    if (problemModel.ExamID > 0)
+                    if (problemModel.ContestID > 0)
                     {
-                        problem.ExamID = problemModel.ExamID;
+                        problem.ContestID = problemModel.ContestID;
                     }
                     else
-                        problem.ExamID = null;
+                        problem.ContestID = null;
                     db.Problems.AddObject(problem);
                     db.SaveChanges();
                     #region AddClass

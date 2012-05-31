@@ -326,4 +326,11 @@ div#title
     font-size:20px;  
     font-weight: bold; 
 } 
-
+#infoSession
+{
+    margin-top: 15px;
+    margin-left : 15px;
+    float:left;
+    text-align:center;
+    width : 240px;
+}

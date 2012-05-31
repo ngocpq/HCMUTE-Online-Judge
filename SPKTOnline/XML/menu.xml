@@ -140,11 +140,6 @@
       <Link>/Problem/AllProblemForUpDate</Link>
     </Menu2>
     <Menu2>
-      <Title>Thêm câu hỏi</Title>
-      <TitleEng>Add Question</TitleEng>
-      <Link>/Problem/CreateProblem</Link>
-    </Menu2>
-    <Menu2>
       <Title>Upload câu hỏi</Title>
       <TitleEng>Add Question</TitleEng>
       <Link>/UploadProblem/Upload</Link>
