@@ -8,6 +8,7 @@ using System.Linq;
 using System;
 using SPKTOnline.Reponsitories;
 using System.Collections;
+using SPKTOnline.BussinessLayer;
 
 
 namespace SPKTOnline.Controllers
@@ -21,7 +22,13 @@ namespace SPKTOnline.Controllers
         CheckRoles checkRole = new CheckRoles();
         ProblemRepository ProblemRep = new ProblemRepository();
         public List<Problem> list;
-
+        ICommentBL commentBL;
+        IProblemBL problemBL;
+        public ProblemController()
+        {
+            commentBL = new CommentBL(db);
+            problemBL = new ProblemBL(db);
+        }
         public ActionResult Index()
         {
             IEnumerable<SPKTOnline.Models.Subject> sb = db.Subjects;
@@ -49,9 +56,35 @@ namespace SPKTOnline.Controllers
 
         }
 
-        public ActionResult GridviewPartial()
+        //public ActionResult GridviewPartial()
+        //{
+        //    return PartialView("GridviewPartial", list);
+        //}
+
+        public ActionResult CommentProblemPartial(int ProblemID)
         {
-            return PartialView("GridviewPartial", list);
+            Comment comment = new Comment();
+            comment.SystemObjectRecordID = ProblemID;
+            comment.SystemObjectID = db.SystemObjects.FirstOrDefault(s => s.Name == "Problems").SystemObjectID;
+            return PartialView("CommentProblemPartial", comment);
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult CommentProblemPartial(Comment comment)
+        {
+            if (comment.Body != "")
+            {
+                comment.CommentByAccountID = User.Identity.Name;
+                commentBL.SaveComment(comment);
+                commentBL.SaveChange();
+                Problem p = problemBL.LayTheoMa(comment.SystemObjectRecordID);
+            }
+            //return RedirectToAction("Details", "Problem", new { ID = p.ID });// PartialView("GridviewPartial", comment);
+            Comment comment2 = new Comment();
+            comment2.SystemObjectRecordID = comment.SystemObjectRecordID;
+            comment2.SystemObjectID = comment.SystemObjectID;
+            comment2.Body = "";
+            return PartialView("CommentProblemPartial", comment2);
         }
         public ActionResult Details(int ID)
         {

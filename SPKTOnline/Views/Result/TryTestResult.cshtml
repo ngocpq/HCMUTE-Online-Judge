@@ -89,7 +89,12 @@
 <div class="SourceCode" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge;">
     @Html.TextAreaFor(model => model.SourceCode, 35, 75, new { ReadOnly = true })
     </div>
-
+<div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
+    ---NHẬN XÉT---------------------------------------------------------------------------------------------------------</div>
+    @Html.Action("CommentSubmitPartial", new { SubmitID = Model.ID })
+ <div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
+    ---XEM NHẬN XÉT---</div>
+    @Html.Partial("ViewCommentPartial", Model.ListComment)    
   
     
 

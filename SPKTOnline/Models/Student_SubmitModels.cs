@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SPKTOnline.BussinessLayer;
 
 namespace SPKTOnline.Models
 {
@@ -10,7 +11,17 @@ namespace SPKTOnline.Models
     }
     public partial class Student_Submit
     {
-
+        ICommentBL commentBL;
+        OnlineSPKTEntities db;
+        public IEnumerable<Comment> ListComment
+        {
+            get
+            {
+                db = new OnlineSPKTEntities();
+                commentBL = new CommentBL(db);
+                return commentBL.GetCommentForStudentSubmit(this.ID);
+            }
+        }
         public TrangThaiCham TrangThai
         {
             get { return (Models.TrangThaiCham)TrangThaiCham; }

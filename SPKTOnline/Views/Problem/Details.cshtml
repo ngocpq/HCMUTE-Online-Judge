@@ -15,10 +15,19 @@
             @Html.ActionLink("Download đề thi", "Download", "File", new { ID = Model.FileID }, null)
             </div>
          }
-</fieldset>
-    <div class="lambai" onclick="document.location.href=$('#LambaiUrl').attr('href')" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
-    Làm bài |</div>
-@*<button name="button" type="button" onclick="document.location.href=$('#cancelUrl').attr('href')">Làm bài</button>*@
+         <div style="float:right">
+<button name="button" type="button" onclick="document.location.href=$('#LambaiUrl').attr('href')">Làm bài</button></div>
        <a id="LambaiUrl" href="@Html.AttributeEncode(Url.Action("TryTest", "Student_Submit", new { ID = Model.ID, ContestID=0 }))" style="display:none;"></a>
-  
+  <br />    
+</fieldset>
+@*    <div class="lambai" onclick="document.location.href=$('#LambaiUrl').attr('href')" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge">
+    Làm bài |</div>*@
+   
+
+ <div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
+    ---BÌNH LUẬN---------------------------------------------------------------------------------------------------------</div>
+    @Html.Action("CommentProblemPartial", new { ProblemID = Model.ID })
+ <div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
+    ---XEM BÌNH LUẬN---</div>
+    @Html.Partial("ViewCommentPartial", Model.ListComment)
 

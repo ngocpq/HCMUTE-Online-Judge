@@ -23,12 +23,14 @@ namespace SPKTOnline.Controllers
         CheckRoles checkRole = new CheckRoles();
         IProblemBL blProblem;
         IStudentSubmitBL blSubmit;
-        IContestBL blContest; 
+        IContestBL blContest;
+        ICommentBL commentBL;
         public Student_SubmitController()
         {
             blProblem = new ProblemBL(db);
             blSubmit = new StudentSubmitBL(db);
             blContest = new ContestBL(db);
+            commentBL = new CommentBL(db);
         }
         public ActionResult Index()
         {
@@ -267,5 +269,8 @@ namespace SPKTOnline.Controllers
         //    public bool AllowHtmlView { get; set; }
 
         //}
+
+
+        
     }
 }

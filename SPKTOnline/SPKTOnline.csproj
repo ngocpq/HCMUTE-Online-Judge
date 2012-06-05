@@ -90,7 +90,9 @@
   <ItemGroup>
     <Compile Include="BussinessLayer\BusinessBase.cs" />
     <Compile Include="BussinessLayer\ClassBL.cs" />
+    <Compile Include="BussinessLayer\CommentBL.cs" />
     <Compile Include="BussinessLayer\ContestBL.cs" />
+    <Compile Include="BussinessLayer\Email.cs" />
     <Compile Include="BussinessLayer\ProblemBL.cs" />
     <Compile Include="BussinessLayer\StudentSubmitBL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -184,6 +186,7 @@
     <Content Include="Content\Images\book.PNG" />
     <Content Include="Content\Images\box_mtl_ctr.gif" />
     <Content Include="Content\Images\btnsearch.png" />
+    <Content Include="Content\Images\bt_c2.jpg" />
     <Content Include="Content\Images\button_24.png" />
     <Content Include="Content\Images\cancel.png" />
     <Content Include="Content\Images\Cancel_32.png" />
@@ -811,6 +814,11 @@
     <Content Include="Views\Shared\DSProblemForContestStudent.cshtml" />
     <Content Include="Views\Shared\DSProblemForContestStudentEndTime.cshtml" />
     <Content Include="Views\Shared\ListContestPartialLecturer.cshtml" />
+    <Content Include="Views\Shared\ViewCommentPartial.cshtml" />
+    <Content Include="Views\Problem\CommentPartial.cshtml" />
+    <Content Include="Views\Problem\CommentProblemPartial.cshtml" />
+    <Content Include="Views\Result\CommentSubmitPartial.cshtml" />
+    <Content Include="Views\Contest\CommentContestPartial.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
@@ -824,7 +832,6 @@
   <ItemGroup>
     <Folder Include="Content\userfiles\" />
     <Folder Include="Execution\" />
-    <Folder Include="Filters\" />
     <Folder Include="uploads\file\" />
     <Folder Include="uploads\image\" />
   </ItemGroup>

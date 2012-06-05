@@ -762,3 +762,72 @@ height:60px;
 {
     color : Black;
 }
+#div-alcomment{
+	position:absolute;
+	top:320px;
+	left:340px;
+	width:340px;
+	height:620px;
+}
+#div-alcomment{
+	position:inherit;
+	width:675px;
+	height:620px;
+	overflow-y scroll;
+	display:auto;
+}
+#BodyComment
+{
+    margin-top:5px;
+    margin-left: 10px;
+}
+.UserComment i
+{
+    margin-right:2px;
+    font-style:italic;
+    font-size:small;
+    color:Gray;
+}
+.UserComment span
+{
+    margin-right:2px;
+    font-style:oblique;
+    color:Blue;
+}
+.dotline
+{
+    margin-top:10px;
+	height:1px;
+	border-bottom:1px dashed #b5b5b5;
+}
+#div-alinfo{
+	position:absolute;
+	top:320px;
+	left:0px;
+	width:750px;
+	height:400px;
+}
+.commentitem{
+	margin-bottom:5px;
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:5px;	
+}
+
+.commentitem p{
+	color:Black;
+}
+.commentitem span{
+	color:#b5b5b5;
+}
+#comments
+{
+	height:400px;
+	overflow-y:scroll;
+	font-size:11pt;
+	text-align:justify;
+}
+#comment
+{
+    margin-top:10px;
+}

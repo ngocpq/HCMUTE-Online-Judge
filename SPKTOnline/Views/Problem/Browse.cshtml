@@ -7,7 +7,8 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <div class="webtitle">
     Danh sách câu hỏi</div>
-<div class="classMessage">Nhấn vào mã câu hỏi để gởi bài giải của bạn!</div>
+<div class="classMessage">Nhấn vào mã câu hỏi để xem comment cho bài tập và gửi bài giải của bạn!</div>
+<div class="classMessage">Nhấn vào Lần Đúng/ Lần Giải để xem danh sách làm bài và kết quả!</div>
 @if (Model.Count() != 0)
 {
     <table style="width: 650px">
@@ -41,16 +42,19 @@
             {
             <tr>
                 <td class="classColumnMiddle">
-                    @Html.ActionLink(item.ID.ToString(), "TryTest", "Student_Submit", new { id = item.ID, ContestID = item.ContestID }, null)                                                      
+                    @Html.ActionLink(item.ID.ToString(), "Details", "Problem", new { ID=item.ID}, null)                                                      
+                    @*@Html.ActionLink(item.ID.ToString(), "TryTest", "Student_Submit", new { id = item.ID, ContestID = item.ContestID }, null)                                                      *@
                 </td>
                  <td style="width:40%">
                     <b>@Html.DisplayFor(modelItem => item.Name)</b>                    
                     <br />
                     Đề: <i>@Html.DisplayFor(modelItem => item.ContentSubString)</i>
                     @if (item.FileID != null)
-                    { 
-                            <br />
-                             @Html.ActionLink("Download", "Download", "File", new { ID = item.FileID }, null)
+                    {  <br />
+                                                   
+                                @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
+                       
+
                     }
                 </td>                
                 <td class="classColumnMiddle">
@@ -60,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.Score)
                 </td>        
                 <td  class="classColumnMiddle">
-                    @Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)
+                   <a href="/Result/LecturerViewTryResult?ProblemID=@item.ID">@Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)</a>
                 </td>        
                 <td  class="classColumnMiddle">
                     @Html.DisplayFor(modelItem => item.User.LastName) @Html.DisplayFor(modelItem => item.User.FirstName)

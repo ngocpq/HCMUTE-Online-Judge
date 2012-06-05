@@ -1,0 +1,11 @@
+﻿@model SPKTOnline.Models.Comment
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(model=>model.SystemObjectRecordID)
+    @Html.HiddenFor(model => model.SystemObjectID)
+    @Html.TextAreaFor(model=>model.Body,3,81,null)
+    <br />
+    <input class="button" type="submit" value="Gửi" />
+    
+}

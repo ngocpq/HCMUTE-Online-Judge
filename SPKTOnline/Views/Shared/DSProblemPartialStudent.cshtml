@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SPKTOnline.Models.Problem>
-
+<div class="classMessage">Nhấn vào mã câu hỏi để xem comment cho bài tập và gửi bài giải của bạn!</div>
+<div class="classMessage">Nhấn vào Lần Đúng/ Lần Giải để xem danh sách làm bài và kết quả!</div>
 @if (Model.Count() != 0)
 {
     <table style="width:650px">
@@ -33,7 +34,10 @@
                         @if (item.FileID != null)
                         { 
                             <br />
-                            @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
+                                                       
+                                @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
+                           
+
                         }
                     </p>
                 </td>
@@ -45,7 +49,7 @@
                          @Html.DisplayFor(modelItem => item.Score)                   
                 </td>
                 <td>
-                     @Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)
+                    <a href="/Result/LecturerViewTryResult?ProblemID=@item.ID">@Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.SubmitCount)</a>
                 </td>
                 <td>
 

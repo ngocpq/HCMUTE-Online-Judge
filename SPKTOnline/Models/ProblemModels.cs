@@ -4,15 +4,28 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using SPKTOnline.BussinessLayer;
 
 namespace SPKTOnline.Models
 {
+
     public partial class Problem
     {
+        
+        ICommentBL commentBL;
+        OnlineSPKTEntities db;
         [Required]
         [DisplayName("Lớp học")]
         public String[] ClassID { get; set; }
-
+        public IEnumerable<Comment> ListComment
+        {   
+            get
+            {
+                db=new OnlineSPKTEntities();
+                commentBL = new CommentBL(db);
+                return commentBL.GetCommentForProblem(this.ID);
+            }
+        }
         public int SubmitCount
         {
             get
