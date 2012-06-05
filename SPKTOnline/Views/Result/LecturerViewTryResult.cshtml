@@ -30,9 +30,12 @@
             <th>
                 Tổng điểm
             </th>
+             @if (User.IsInRole("Lecturer"))
+             {
             <th>
                 Chi tiết
             </th>
+             }
         </tr>
         @foreach (var item in Model)
         {
@@ -57,9 +60,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TongDiem)
                 </td>
+                @if (User.IsInRole("Lecturer") && item.Problem.LecturerID == User.Identity.Name)
+                {
                 <td>
                     @Html.ActionLink("Xem", "TryTestResult", new { ID = (int?)item.ID, Message = "" })
                 </td>
+                }
             </tr>
         }
     </table>

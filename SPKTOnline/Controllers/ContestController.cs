@@ -14,9 +14,11 @@ namespace SPKTOnline.Controllers
         // GET: /Contest/
         OnlineSPKTEntities db = new OnlineSPKTEntities();
         IContestBL contestBL;
+        ICommentBL commentBL;
         public ContestController()
         {
             contestBL = new ContestBL(db);
+            commentBL = new CommentBL(db);
         }
         public ActionResult Index()
         {
@@ -130,6 +132,31 @@ namespace SPKTOnline.Controllers
                 ViewBag.Error = "Lổi: không có kỳ thi này";
                 return Redirect(Session["CurrentUrl"].ToString());
             }
+        }
+        public ActionResult CommentContestPartial(int ContestID)
+        {
+            Comment comment = new Comment();
+            comment.SystemObjectRecordID = ContestID;
+            comment.SystemObjectID = db.SystemObjects.FirstOrDefault(s => s.Name == "Contests").SystemObjectID;
+            return PartialView("CommentContestPartial", comment);
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult CommentContestPartial(Comment comment)
+        {
+            if (comment.Body != "")
+            {
+                comment.CommentByAccountID = User.Identity.Name;
+                commentBL.SaveComment(comment);
+                commentBL.SaveChange();
+
+            }
+
+            Comment comment2 = new Comment();
+            comment2.SystemObjectRecordID = comment.SystemObjectRecordID;
+            comment2.SystemObjectID = db.SystemObjects.FirstOrDefault(s => s.Name == "Contests").SystemObjectID; ;
+            comment2.Body = "không có gì";
+            return PartialView("CommentContestPartial", comment2);
         }
         
     }

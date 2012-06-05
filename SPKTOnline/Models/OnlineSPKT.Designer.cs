@@ -21,6 +21,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Classes_Subjects", "Subjects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Subject), "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Class), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Classes_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Class), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_NewContest_Classes", "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Class), "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Comments_SystemObjects1", "SystemObjects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.SystemObject), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Comment), true)]
+[assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Comments_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Comment), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Problems_Comparers", "Comparers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Comparer), "Problems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Problem), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Contests", "Contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.Contest), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
 [assembly: EdmRelationshipAttribute("OnlineSPKTModel", "FK_Contest_Student_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SPKTOnline.Models.User), "Contest_Student", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SPKTOnline.Models.Contest_Student), true)]
@@ -107,6 +109,22 @@ namespace SPKTOnline.Models
             }
         }
         private ObjectSet<Class> _Classes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Comment> Comments
+        {
+            get
+            {
+                if ((_Comments == null))
+                {
+                    _Comments = base.CreateObjectSet<Comment>("Comments");
+                }
+                return _Comments;
+            }
+        }
+        private ObjectSet<Comment> _Comments;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -335,6 +353,38 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SystemObject> SystemObjects
+        {
+            get
+            {
+                if ((_SystemObjects == null))
+                {
+                    _SystemObjects = base.CreateObjectSet<SystemObject>("SystemObjects");
+                }
+                return _SystemObjects;
+            }
+        }
+        private ObjectSet<SystemObject> _SystemObjects;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<TestCaseResult> TestCaseResults
         {
             get
@@ -389,6 +439,14 @@ namespace SPKTOnline.Models
         public void AddToClasses(Class @class)
         {
             base.AddObject("Classes", @class);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Comments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToComments(Comment comment)
+        {
+            base.AddObject("Comments", comment);
         }
     
         /// <summary>
@@ -501,6 +559,22 @@ namespace SPKTOnline.Models
         public void AddToSubjects(Subject subject)
         {
             base.AddObject("Subjects", subject);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SystemObjects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSystemObjects(SystemObject systemObject)
+        {
+            base.AddObject("SystemObjects", systemObject);
         }
     
         /// <summary>
@@ -884,6 +958,322 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Problem>("OnlineSPKTModel.Problem_Class", "Problems", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="Comment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Comment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Comment object.
+        /// </summary>
+        /// <param name="commentID">Initial value of the CommentID property.</param>
+        /// <param name="systemObjectRecordID">Initial value of the SystemObjectRecordID property.</param>
+        /// <param name="timestamp">Initial value of the Timestamp property.</param>
+        /// <param name="body">Initial value of the Body property.</param>
+        /// <param name="createDate">Initial value of the CreateDate property.</param>
+        /// <param name="commentByAccountID">Initial value of the CommentByAccountID property.</param>
+        /// <param name="systemObjectID">Initial value of the SystemObjectID property.</param>
+        /// <param name="isDelete">Initial value of the IsDelete property.</param>
+        public static Comment CreateComment(global::System.Int32 commentID, global::System.Int32 systemObjectRecordID, global::System.Byte[] timestamp, global::System.String body, global::System.DateTime createDate, global::System.String commentByAccountID, global::System.Int32 systemObjectID, global::System.Boolean isDelete)
+        {
+            Comment comment = new Comment();
+            comment.CommentID = commentID;
+            comment.SystemObjectRecordID = systemObjectRecordID;
+            comment.Timestamp = timestamp;
+            comment.Body = body;
+            comment.CreateDate = createDate;
+            comment.CommentByAccountID = commentByAccountID;
+            comment.SystemObjectID = systemObjectID;
+            comment.IsDelete = isDelete;
+            return comment;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CommentID
+        {
+            get
+            {
+                return _CommentID;
+            }
+            set
+            {
+                if (_CommentID != value)
+                {
+                    OnCommentIDChanging(value);
+                    ReportPropertyChanging("CommentID");
+                    _CommentID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("CommentID");
+                    OnCommentIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CommentID;
+        partial void OnCommentIDChanging(global::System.Int32 value);
+        partial void OnCommentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SystemObjectRecordID
+        {
+            get
+            {
+                return _SystemObjectRecordID;
+            }
+            set
+            {
+                OnSystemObjectRecordIDChanging(value);
+                ReportPropertyChanging("SystemObjectRecordID");
+                _SystemObjectRecordID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SystemObjectRecordID");
+                OnSystemObjectRecordIDChanged();
+            }
+        }
+        private global::System.Int32 _SystemObjectRecordID;
+        partial void OnSystemObjectRecordIDChanging(global::System.Int32 value);
+        partial void OnSystemObjectRecordIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] Timestamp
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_Timestamp);
+            }
+            set
+            {
+                OnTimestampChanging(value);
+                ReportPropertyChanging("Timestamp");
+                _Timestamp = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Timestamp");
+                OnTimestampChanged();
+            }
+        }
+        private global::System.Byte[] _Timestamp;
+        partial void OnTimestampChanging(global::System.Byte[] value);
+        partial void OnTimestampChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Body
+        {
+            get
+            {
+                return _Body;
+            }
+            set
+            {
+                OnBodyChanging(value);
+                ReportPropertyChanging("Body");
+                _Body = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Body");
+                OnBodyChanged();
+            }
+        }
+        private global::System.String _Body;
+        partial void OnBodyChanging(global::System.String value);
+        partial void OnBodyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreateDate
+        {
+            get
+            {
+                return _CreateDate;
+            }
+            set
+            {
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
+            }
+        }
+        private global::System.DateTime _CreateDate;
+        partial void OnCreateDateChanging(global::System.DateTime value);
+        partial void OnCreateDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CommentByAccountID
+        {
+            get
+            {
+                return _CommentByAccountID;
+            }
+            set
+            {
+                OnCommentByAccountIDChanging(value);
+                ReportPropertyChanging("CommentByAccountID");
+                _CommentByAccountID = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CommentByAccountID");
+                OnCommentByAccountIDChanged();
+            }
+        }
+        private global::System.String _CommentByAccountID;
+        partial void OnCommentByAccountIDChanging(global::System.String value);
+        partial void OnCommentByAccountIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SystemObjectID
+        {
+            get
+            {
+                return _SystemObjectID;
+            }
+            set
+            {
+                OnSystemObjectIDChanging(value);
+                ReportPropertyChanging("SystemObjectID");
+                _SystemObjectID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SystemObjectID");
+                OnSystemObjectIDChanged();
+            }
+        }
+        private global::System.Int32 _SystemObjectID;
+        partial void OnSystemObjectIDChanging(global::System.Int32 value);
+        partial void OnSystemObjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDelete
+        {
+            get
+            {
+                return _IsDelete;
+            }
+            set
+            {
+                OnIsDeleteChanging(value);
+                ReportPropertyChanging("IsDelete");
+                _IsDelete = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDelete");
+                OnIsDeleteChanged();
+            }
+        }
+        private global::System.Boolean _IsDelete;
+        partial void OnIsDeleteChanging(global::System.Boolean value);
+        partial void OnIsDeleteChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Comments_SystemObjects1", "SystemObjects")]
+        public SystemObject SystemObject
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SystemObject>("OnlineSPKTModel.FK_Comments_SystemObjects1", "SystemObjects").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SystemObject>("OnlineSPKTModel.FK_Comments_SystemObjects1", "SystemObjects").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SystemObject> SystemObjectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SystemObject>("OnlineSPKTModel.FK_Comments_SystemObjects1", "SystemObjects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SystemObject>("OnlineSPKTModel.FK_Comments_SystemObjects1", "SystemObjects", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Comments_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Comments_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Comments_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("OnlineSPKTModel.FK_Comments_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OnlineSPKTModel.FK_Comments_Users", "Users", value);
                 }
             }
         }
@@ -2273,6 +2663,30 @@ namespace SPKTOnline.Models
         private global::System.String _Length;
         partial void OnLengthChanging(global::System.String value);
         partial void OnLengthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DownloadCount
+        {
+            get
+            {
+                return _DownloadCount;
+            }
+            set
+            {
+                OnDownloadCountChanging(value);
+                ReportPropertyChanging("DownloadCount");
+                _DownloadCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DownloadCount");
+                OnDownloadCountChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DownloadCount;
+        partial void OnDownloadCountChanging(Nullable<global::System.Int32> value);
+        partial void OnDownloadCountChanged();
 
         #endregion
     
@@ -4294,6 +4708,293 @@ namespace SPKTOnline.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="SystemObject")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SystemObject : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SystemObject object.
+        /// </summary>
+        /// <param name="systemObjectID">Initial value of the SystemObjectID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="timestamp">Initial value of the Timestamp property.</param>
+        public static SystemObject CreateSystemObject(global::System.Int32 systemObjectID, global::System.String name, global::System.Byte[] timestamp)
+        {
+            SystemObject systemObject = new SystemObject();
+            systemObject.SystemObjectID = systemObjectID;
+            systemObject.Name = name;
+            systemObject.Timestamp = timestamp;
+            return systemObject;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SystemObjectID
+        {
+            get
+            {
+                return _SystemObjectID;
+            }
+            set
+            {
+                if (_SystemObjectID != value)
+                {
+                    OnSystemObjectIDChanging(value);
+                    ReportPropertyChanging("SystemObjectID");
+                    _SystemObjectID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SystemObjectID");
+                    OnSystemObjectIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SystemObjectID;
+        partial void OnSystemObjectIDChanging(global::System.Int32 value);
+        partial void OnSystemObjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] Timestamp
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_Timestamp);
+            }
+            set
+            {
+                OnTimestampChanging(value);
+                ReportPropertyChanging("Timestamp");
+                _Timestamp = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Timestamp");
+                OnTimestampChanged();
+            }
+        }
+        private global::System.Byte[] _Timestamp;
+        partial void OnTimestampChanging(global::System.Byte[] value);
+        partial void OnTimestampChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Comments_SystemObjects1", "Comments")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("OnlineSPKTModel.FK_Comments_SystemObjects1", "Comments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("OnlineSPKTModel.FK_Comments_SystemObjects1", "Comments", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="OnlineSPKTModel", Name="TestCas")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -5167,6 +5868,28 @@ namespace SPKTOnline.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Class>("OnlineSPKTModel.FK_Classes_Users", "Classes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OnlineSPKTModel", "FK_Comments_Users", "Comments")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("OnlineSPKTModel.FK_Comments_Users", "Comments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("OnlineSPKTModel.FK_Comments_Users", "Comments", value);
                 }
             }
         }

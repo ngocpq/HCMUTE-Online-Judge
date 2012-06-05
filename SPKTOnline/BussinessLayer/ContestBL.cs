@@ -137,6 +137,7 @@ namespace SPKTOnline.BussinessLayer
 
         public void UpdateScoreForContest(int ContestID, string StudentID)
         {
+            //TODO: code lại
             var varProblems = db.Problems.Where(p => p.ContestID == ContestID);
             Contest contest=db.Contests.FirstOrDefault(c=>c.ID==ContestID);
             List<Student_Submit> student_submits = new List<Student_Submit>();

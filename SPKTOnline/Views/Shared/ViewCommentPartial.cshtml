@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SPKTOnline.Models.Comment>
+@if (Model.Count() != 0)
+{
+    
+  
+    foreach (var item in Model)
+    {   
+      
+        <div class="UserComment">
+          <span>@item.User.LastName @item.User.FirstName <span> ( @item.User.Username  )</span></span>
+          <i>@item.CreateDate</i>
+        </div>
+        <div id="BodyComment">
+            @item.Body
+        </div>
+       
+        <div class="dotline">
+        </div>
+          
+    }
+   
+}
+else
+{
+
+}

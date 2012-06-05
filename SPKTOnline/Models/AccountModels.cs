@@ -20,6 +20,7 @@ namespace SPKTOnline.Models
             return user;
         }
     }
+
     public class ImportModels
     {
         [Required]
