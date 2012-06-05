@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BienDich\BienDichBase.cs" />
     <Compile Include="BienDich\BienDichCPP.cs" />
     <Compile Include="BienDich\BienDichFactory.cs" />
     <Compile Include="BienDich\BienDichJava.cs" />
