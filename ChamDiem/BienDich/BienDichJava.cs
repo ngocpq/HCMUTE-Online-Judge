@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ChamDiem.BienDich;
 
 namespace ChamDiem
 {
-  public class BienDichJava:IBienDich
-  {
-    #region IBienDich Members
-
-    public KetQuaBienDich BienDich(string FileSourcePath, string ResultFilePath)
+  public class BienDichJava:BienDichBase,IBienDich
+  {    
+    public override string CompilerFile
     {
-      throw new NotImplementedException();
+        get { throw new NotImplementedException(); }
     }
 
-    #endregion
+    public override string GetCompileOption(string sourceFile, string exeFile)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

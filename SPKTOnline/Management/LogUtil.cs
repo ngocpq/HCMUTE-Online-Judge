@@ -26,7 +26,7 @@ namespace SPKTOnline.Management
             SPKTOnline.Models.Logger log = new Models.Logger();
             log.Time = DateTime.Now;
             if (System.Web.HttpContext.Current != null && System.Web.HttpContext.Current.User != null)
-                log.UserName = System.Web.HttpContext.Current.User.Identity.Name;
+                log.UserName = System.Web.HttpContext.Current.User.Identity.Name;            
             log.Message = message;
             log.Type = logType;
             db.Loggers.AddObject(log);
@@ -53,6 +53,8 @@ namespace SPKTOnline.Management
                 string logType = e.GetType().FullName;
                 Exception temp = e;
                 string message = "";
+                if (System.Web.HttpContext.Current != null && System.Web.HttpContext.Current.Request != null)
+                    message = "Path: " + System.Web.HttpContext.Current.Request.Path + "\r\n";
                 string stackTrace = "";
                 while (temp != null)
                 {
@@ -70,8 +72,6 @@ namespace SPKTOnline.Management
                 logger.WriteLog(e);
             }
         }
-
-
     }
     public class FileLogger : ILogger
     {

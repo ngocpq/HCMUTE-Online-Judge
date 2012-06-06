@@ -7,6 +7,7 @@ using System.Web.Routing;
 using SPKTOnline.Management.MultiLanguage;
 using SPKTOnline.Management;
 using System.IO;
+using System.Reflection;
 
 namespace SPKTOnline
 {
@@ -96,18 +97,20 @@ namespace SPKTOnline
 
 
             SoNguoiOnline = 0;
-            SoLuotTruycap = ReadSoLuotTruyCapTuFile();
+            //SoLuotTruycap = ReadSoLuotTruyCapTuFile();
+            SoLuotTruycap = SoLuotTruyCapBL.Read();
         }
         void Session_Start(object sender, EventArgs e)
         {
             SoNguoiOnline++;
             SoLuotTruycap++;
-            WriteSoLuotTruyCapVaoFile();
+            //WriteSoLuotTruyCapVaoFile();
         }
         void Session_End(object sender, EventArgs e)
         {
-            SoNguoiOnline--;            
+            SoNguoiOnline--;
         }
+
         void Application_Error(object sender, EventArgs e)
         {
             // Code that runs when an unhandled error occurs
@@ -115,46 +118,69 @@ namespace SPKTOnline
             try
             {
                 string ip = "";
-                ip = Request.ServerVariables["REMOTE_ADDR"];                
+                ip = Request.ServerVariables["REMOTE_ADDR"];
                 LogUtility.WriteLog(new Exception("User IP: " + ip, ex));
             }
             catch
             {
                 Response.Redirect("~/Error");
             }
-        }        
-        
-        long ReadSoLuotTruyCapTuFile()
+        }
+        void Application_End(object sender, EventArgs e)
         {
-            string countFilePath = Server.MapPath("~\\SLTruyCap.txt");
-            if (!File.Exists(countFilePath))
-                return 0;
-            System.IO.StreamReader sw=null;
             try
-            {                
-                FileStream fi = File.Open(countFilePath, FileMode.Open);
-                sw = new System.IO.StreamReader(fi);
-                return long.Parse(sw.ReadLine());
-            }
-            catch
             {
-                return 0;
+                string message = ": Application_End. \r\n";
+
+                // LogShutdown Event
+                #region LogShutdown Event
+
+                HttpRuntime runtime = (HttpRuntime)typeof(System.Web.HttpRuntime).InvokeMember("_theRuntime",
+                                                                                            BindingFlags.NonPublic
+                                                                                            | BindingFlags.Static
+                                                                                            | BindingFlags.GetField,
+                                                                                            null,
+                                                                                            null,
+                                                                                            null);
+                if (runtime == null)
+                    return;
+                string shutDownMessage = (string)runtime.GetType().InvokeMember("_shutDownMessage",
+                                                                                 BindingFlags.NonPublic
+                                                                                 | BindingFlags.Instance
+                                                                                 | BindingFlags.GetField,
+                                                                                 null,
+                                                                                 runtime,
+                                                                                 null);
+                string shutDownStack = (string)runtime.GetType().InvokeMember("_shutDownStack",
+                                                                               BindingFlags.NonPublic
+                                                                               | BindingFlags.Instance
+                                                                               | BindingFlags.GetField,
+                                                                               null,
+                                                                               runtime,
+                                                                               null);
+                message += String.Format("\r\n_shutDownMessage={0}\r\n\r\n_shutDownStack={1}\r\n",
+                                             shutDownMessage,
+                                             shutDownStack);
+
+                #endregion
+                LogUtility.WriteLog(message);
+                //Lưu số lượt truy cập
+                SoLuotTruyCapBL.Write(SoLuotTruycap);
             }
-            finally
+            catch (Exception ex)
             {
-                if (sw != null)
-                    sw.Close();
+                LogUtility.WriteLog(ex);
             }
+
         }
-        void WriteSoLuotTruyCapVaoFile()
+
+        SPKTOnline.BussinessLayer.ISoLuotTruyCapBL SoLuotTruyCapBL
         {
-            System.IO.StreamWriter sw;
-            string countFilePath = Server.MapPath("~\\SLTruyCap.txt");
-            FileStream fi = File.Open(countFilePath, FileMode.Create);
-            sw = new System.IO.StreamWriter(fi);
-            sw.Write(SoLuotTruycap.ToString());
-            sw.Close();
+            get
+            {
+                //return new SPKTOnline.BussinessLayer.SoLuotTruyCapBL();
+                return new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(Server.MapPath("~\\SLTruyCap.txt"));
+            }
         }
-       
     }
 }

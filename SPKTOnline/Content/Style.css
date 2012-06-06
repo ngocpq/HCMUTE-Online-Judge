@@ -781,20 +781,20 @@ height:60px;
     margin-top:5px;
     margin-left: 10px;
 }
-.UserComment i
+#i
 {
     margin-right:2px;
     font-style:italic;
     font-size:small;
     color:Gray;
 }
-.UserComment span
+#comment
 {
     margin-right:2px;
     font-style:oblique;
     color:Blue;
 }
-.dotline
+#dotline
 {
     margin-top:10px;
 	height:1px;

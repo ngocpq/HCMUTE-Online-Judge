@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChamDiem.SoSanh
 {
-    public class SoSanhSoNguyen : IFileComparer
+    public class SoSanhSoThuc: IFileComparer
     {
         public void Init(String para) { }
 
@@ -60,8 +60,8 @@ namespace ChamDiem.SoSanh
             {
                 try
                 {
-                    long n1 = long.Parse(num1[i]);
-                    long n2 = long.Parse(num2[i]);
+                    double n1 = double.Parse(num1[i]);
+                    double n2 = double.Parse(num2[i]);
                     if (n1 != n2)
                         return false;
                 }

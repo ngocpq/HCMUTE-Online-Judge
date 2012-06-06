@@ -6,15 +6,15 @@
     foreach (var item in Model)
     {   
       
-        <div class="UserComment">
-          <span>@item.User.LastName @item.User.FirstName <span> ( @item.User.Username  )</span></span>
-          <i>@item.CreateDate</i>
+        <div id="UserComment">
+          <span id="comment">@item.User.LastName @item.User.FirstName <span> ( @item.User.Username  )</span></span>
+          <i id="i">@item.CreateDate</i>
         </div>
         <div id="BodyComment">
             @item.Body
         </div>
        
-        <div class="dotline">
+        <div id="dotline">
         </div>
           
     }

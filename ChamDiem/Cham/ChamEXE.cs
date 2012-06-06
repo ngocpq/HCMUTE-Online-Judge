@@ -12,11 +12,7 @@ namespace ChamDiem
         {
             KetQuaCham kq = new KetQuaCham();
             foreach (ITestCase test in lstTestcase)
-            {
-                //String outTS;
-                //string errTS;
-                //String exception;
-                //RunResult rs = RunFile(FileExe, test.TimeOut, test.Input, out outTS, out  errTS, out exception);
+            {                
                 RunResult rs = RunUtility.RunFile(FileExe, test.TimeOut, test.Input);
                 KetQuaTestCase kqTest = new KetQuaTestCase();
                 kqTest.TestCase = test;

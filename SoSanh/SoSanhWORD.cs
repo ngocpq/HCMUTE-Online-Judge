@@ -4,8 +4,9 @@ using System.Text;
 
 namespace ChamDiem.SoSanh
 {
-    public class SoSanhSoNguyen : IFileComparer
+    public class SoSanhWORD:IFileComparer
     {
+        #region IFileComparer Members
         public void Init(String para) { }
 
         public bool SoSanh(string output, ITestCase testcase, out string message)
@@ -43,7 +44,7 @@ namespace ChamDiem.SoSanh
             message = "ĐÚNG KẾT QUẢ";
             return true;
         }
-        
+
         private static bool IsEmptyLine(string s)
         {
             return s.Trim() == "";
@@ -60,8 +61,8 @@ namespace ChamDiem.SoSanh
             {
                 try
                 {
-                    long n1 = long.Parse(num1[i]);
-                    long n2 = long.Parse(num2[i]);
+                    string n1 = num1[i];
+                    string n2 = num2[i];
                     if (n1 != n2)
                         return false;
                 }
@@ -72,6 +73,7 @@ namespace ChamDiem.SoSanh
             }
             return true;
         }        
+
+        #endregion
     }
-    
 }

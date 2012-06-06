@@ -8,6 +8,6 @@ namespace ChamDiem
     public interface IBienDich
     {
         KetQuaBienDich BienDich(String FileSourcePath, String ResultFilePath);
-        //event BienDichHandler BienDichCompleted;
+        int CompileTimeOut { get; set; }
     }
 }
