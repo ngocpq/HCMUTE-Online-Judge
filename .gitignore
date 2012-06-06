@@ -21,7 +21,8 @@
 *.sbr
 *.sdf
 *.licx
-SLTruyCap.txt
+
+SPKTOnline/SLTruyCap.txt
 
 ipch/
 obj*/
