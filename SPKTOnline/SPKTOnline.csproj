@@ -93,6 +93,7 @@
     <Compile Include="BussinessLayer\CommentBL.cs" />
     <Compile Include="BussinessLayer\ContestBL.cs" />
     <Compile Include="BussinessLayer\Email.cs" />
+    <Compile Include="BussinessLayer\NotificationBL.cs" />
     <Compile Include="BussinessLayer\ProblemBL.cs" />
     <Compile Include="BussinessLayer\SoLuotTruyCapBL.cs" />
     <Compile Include="BussinessLayer\StudentSubmitBL.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Controllers\HtmlEditorController.cs" />
     <Compile Include="Controllers\MyClass.cs" />
     <Compile Include="Controllers\NotbuildController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Models\ClassModels.cs" />
     <Compile Include="Models\ContestModels.cs" />
     <Compile Include="Models\ExamModels.cs" />
+    <Compile Include="Models\NotificationModels.cs" />
     <Compile Include="Models\OnlineSPKT.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -821,6 +824,13 @@
     <Content Include="Views\Problem\CommentProblemPartial.cshtml" />
     <Content Include="Views\Result\CommentSubmitPartial.cshtml" />
     <Content Include="Views\Contest\CommentContestPartial.cshtml" />
+    <Content Include="Views\Shared\ListContestStudent.cshtml" />
+    <Content Include="Views\Contest\ViewAllContestStudent.cshtml" />
+    <Content Include="Views\Shared\ViewDetailResultContest.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Notification\Details.cshtml" />
+    <Content Include="Views\Shared\ViewNotificationPartial.cshtml" />
+    <Content Include="Views\Notification\CreateNotification.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

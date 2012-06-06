@@ -1,0 +1,10 @@
+﻿@model IEnumerable<SPKTOnline.Models.Notification>
+@foreach (var item in Model)
+{
+    <a href="/Notification/Details/?NotifiID=@item.ID" class="areadmore">
+            <img alt="button" src="../../Content/Images/favicon.ico" />
+            @Html.DisplayFor(modelitem => item.Name)&nbsp-&nbsp<span style="color:Red; font-size:small">(@item.CreateDate)</span>
+           
+    </a>
+    <br />
+}

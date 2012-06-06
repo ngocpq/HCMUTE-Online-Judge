@@ -19,6 +19,26 @@ namespace SPKTOnline.Models
                 return commentBL.GetCommentForContest(this.ID);
             }
         }
+        public int RegisterCount
+        {
+            get
+            {
+                if (this.Contest_Student != null)
+                    return this.Contest_Student.Count();
+                else
+                    return 0;
+            }
+        }
+        public int SubmitCoDiemToiDaCount
+        {
+            get
+            {
+                if (this.Contest_Student != null)
+                    return this.Contest_Student.Where(s => s.Score >=this.TotalScore).Count();
+                else
+                    return 0;
+            }
+        }
     }
 
 }

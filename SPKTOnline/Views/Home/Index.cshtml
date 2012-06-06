@@ -1,9 +1,11 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
 }
    
     @{ //SPKTOnline.Management.MultiLanguage.ILanguage Lang = SPKTOnline.MvcApplication.Language[User.Identity.Name];
         SPKTOnline.Management.MultiLanguage.ILanguage Lang = new SPKTOnline.Management.MultiLanguage.VietNamese();
+        SPKTOnline.Models.OnlineSPKTEntities db=new SPKTOnline.Models.OnlineSPKTEntities();
        }
 
 
@@ -11,7 +13,7 @@
          Lang.Language = new Dictionary<string, string>();
          Lang.Language.Add("WebsiteName", "Thi Lập trình online");
          Lang.Language.Add("HomeKey1", "Trang web đang được xây dựng nhằm giúp các bạn sinh viên thi và luyện thi các bài tập về lập trình!");
-         Lang.Language.Add("ReadMore", "Readmore");
+         Lang.Language.Add("ReadMore", "Xem Thêm");
          Lang.Language.Add("FunctionGuide", "Thi Lập trình online");
          Lang.Language.Add("HomeKey2", "Thi Lập trình online");
          Lang.Language.Add("CommentSupport", "Thi Lập trình online");
@@ -110,44 +112,16 @@
             <%} %>
             <%else
                 { %>*@
-            <div class="titlePDT">
+            <div class="titleExam">
             </div>
          @*   <%} %>*@
             <ul>
-                <li><a href="">
-                    @Lang.Language["NoticeReceive"]
-                </a></li>
-                <li><a href="">
-                    @Lang.Language["NoticeCancel"]</a></li>
-                <li><a href="">
-                    @Lang.Language["NoticeAdjust"]</a></li>
+                @Html.Partial("ViewNotificationPartial",db.Notifications.Top("3"))
             </ul>
             <div class="divreadmore">
-                <a class="areadmore" href="">
+                <a class="areadmore" href="/Notification/Index">
                     @Lang.Language["ReadMore"]...</a></div>
         </div>
-        <div class="newtitle">
-@*             <%if (Lang.Lang == LanguageEnum.English)
-              { %>
-            <div class="titleExamEng">
-            </div>
-            <%} %>
-            <%else
-                { %>*@
-            <div class="titleExam">
-            </div>
-       @*     <%} %>*@
-            <ul>
-                <li><a href="">
-                    @Lang.Language["NoticeReceive"]
-                </a></li>
-                <li><a href="">
-                    @Lang.Language["NoticeCancel"]</a></li>
-                <li><a href="">
-                    @Lang.Language["NoticeAdjust"]</a></li>
-            </ul>
-            <div class="divreadmore">
-                <a class="areadmore" href="">
-                    @Lang.Language["ReadMore"]...</a></div>
-        </div>
+        
     </div>
+    

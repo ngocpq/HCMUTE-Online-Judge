@@ -5,6 +5,18 @@
 }
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var i = 0;
+        $(".ViewNote").click(function () {
+
+            $(".Note").slideToggle();
+
+
+        });
+    });
+</script>
+
 <div class="webtitle">
     <span style="Color:Black">Lớp</span> @Model.Subject.Name <span style="Color:Black">nhóm</span> @Model.Group </div>
 
@@ -13,8 +25,16 @@
     Sĩ số lớp: @Model.TotalStudent
     <div class="DSClass">Danh sách lớp: 
     <p>
-        
+    
     </p>
+    </div>
+    <div class="CreateNote" onclick="document.location.href=$('#CreateUrl').attr('href')" style=" width:120px;color:Blue;border-bottom-color:Gray; border-bottom-style:ridge; ">
+    Đăng thông báo |</div>
+    <a id="CreateUrl" href="@Html.AttributeEncode(Url.Action("CreateNotification", "Notification", new { ClassID=Model.ID }))" style="display:none;"></a>
+    <div class="ViewNote" style=" width:120px;color:Blue;border-bottom-color:Gray; border-bottom-style:ridge; ">
+    Xem thông báo |</div>
+    <div class="Note" style="display:none">
+    @Html.Action("ViewNotificationByPartial",new {ClassID=Model.ID})
     </div>
     
 </fieldset>

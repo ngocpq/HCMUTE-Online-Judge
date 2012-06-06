@@ -9,8 +9,27 @@ namespace SPKTOnline.BussinessLayer
     { 
     
     }
-    public class ClassBL
+    public class ClassBL: IClassBL
     {
 
+        public void BeginChange()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CommitChange()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RollbackChange()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChange()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

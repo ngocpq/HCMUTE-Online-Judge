@@ -13,7 +13,7 @@
         var i = 0;
         $(".ViewSourceCode").click(function () {
 
-        $(".SourceCode").toggle();
+            $(".SourceCode").slideToggle();
 
 
         });
@@ -86,8 +86,8 @@
   }
 <div class="ViewSourceCode" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge; ">
     Xem source code |</div>
-<div class="SourceCode" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge;">
-    @Html.TextAreaFor(model => model.SourceCode, 35, 75, new { ReadOnly = true })
+<div class="SourceCode" style="color:Olive;border-bottom-color:Gray; border-bottom-style:ridge; display:none">
+    @Html.TextAreaFor(model => model.SourceCode, 35, 80, new { ReadOnly = true })
     </div>
 <div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
     ---NHẬN XÉT---------------------------------------------------------------------------------------------------------</div>
