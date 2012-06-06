@@ -1,0 +1,10 @@
+﻿@model IEnumerable<SPKTOnline.Models.Student_Submit>
+
+<div style="margin-left:10px;">
+@foreach (var item in Model)
+{
+
+    @item.Problem.Name <span>Số điểm: @item.TongDiem</span> @Html.ActionLink("Xem","Result","TryTestResult",new {ID=item.ID},null)<br />
+           
+}
+</div>

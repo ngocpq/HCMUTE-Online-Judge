@@ -145,14 +145,25 @@
       <Link>/UploadProblem/Upload</Link>
     </Menu2>
   </Menu1>
-  <!--<Menu1>
-    <Title>Quản Lý Đề Thi</Title>
+  <Menu1>
+    <Title>THÔNG BÁO</Title>
     <TitleEng></TitleEng>
-    <Link>/Exam/CreateExam</Link>
+    <Link>/Notification/CreateNotification</Link>
     <Roles>
       <Role>Lecturer</Role>
+      <Role>Admin</Role>
     </Roles>
-  </Menu1>-->
+    <Menu2>
+      <Title>Tất cả thông báo</Title>
+      <TitleEng>All Notification</TitleEng>
+      <Link>/Notification/Index</Link>
+    </Menu2>
+    <Menu2>
+      <Title>Thêm thông báo</Title>
+      <TitleEng>Create Notification</TitleEng>
+      <Link>/Notification/CreateNotification/0</Link>
+    </Menu2>
+  </Menu1>
   <!--<Menu1>s
     <Title>Quản Lý Kỳ Thi</Title>
     <TitleEng></TitleEng>

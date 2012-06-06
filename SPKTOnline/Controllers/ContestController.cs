@@ -133,6 +133,16 @@ namespace SPKTOnline.Controllers
                 return Redirect(Session["CurrentUrl"].ToString());
             }
         }
+        public ActionResult ViewAllContestStudent(int ContestID)
+        {
+            Contest contest = contestBL.LayTheoMa(ContestID);
+            if (contest != null)
+            {
+                return View(contest);
+            }
+            return View();//TODO: bao loi
+        }
+
         public ActionResult CommentContestPartial(int ContestID)
         {
             Comment comment = new Comment();

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="OnlineSPKTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="OnlineSPKTModelStoreContainer">
           <EntitySet Name="Class_Student" EntityType="OnlineSPKTModel.Store.Class_Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Classes" EntityType="OnlineSPKTModel.Store.Classes" store:Type="Tables" Schema="dbo" />
@@ -20,12 +20,14 @@
           <EntitySet Name="Lecturer_Subject" EntityType="OnlineSPKTModel.Store.Lecturer_Subject" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Logger" EntityType="OnlineSPKTModel.Store.Logger" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Mentions" EntityType="OnlineSPKTModel.Store.Mentions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notifications" EntityType="OnlineSPKTModel.Store.Notifications" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Parameters" EntityType="OnlineSPKTModel.Store.Parameters" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Problem_Class" EntityType="OnlineSPKTModel.Store.Problem_Class" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Problems" EntityType="OnlineSPKTModel.Store.Problems" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Roles" EntityType="OnlineSPKTModel.Store.Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student_Submit" EntityType="OnlineSPKTModel.Store.Student_Submit" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Subjects" EntityType="OnlineSPKTModel.Store.Subjects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="OnlineSPKTModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemObjects" EntityType="OnlineSPKTModel.Store.SystemObjects" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestCaseResult" EntityType="OnlineSPKTModel.Store.TestCaseResult" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestCases" EntityType="OnlineSPKTModel.Store.TestCases" store:Type="Tables" Schema="dbo" />
@@ -78,6 +80,18 @@
           <AssociationSet Name="FK_NewContest_Classes" Association="OnlineSPKTModel.Store.FK_NewContest_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Contests" EntitySet="Contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Classes" Association="OnlineSPKTModel.Store.FK_Notifications_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_File" Association="OnlineSPKTModel.Store.FK_Notifications_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Users" Association="OnlineSPKTModel.Store.FK_Notifications_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Problem_Class_Classes" Association="OnlineSPKTModel.Store.FK_Problem_Class_Classes">
             <End Role="Classes" EntitySet="Classes" />
@@ -289,6 +303,18 @@
           <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="IsRemove" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="ntext" Nullable="false" />
+          <Property Name="Body" Type="ntext" Nullable="false" />
+          <Property Name="FileID" Type="int" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UserNameID" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Parameters">
           <Key>
             <PropertyRef Name="Ma" />
@@ -360,6 +386,16 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="SystemObjects">
           <Key>
@@ -559,6 +595,42 @@
             </Principal>
             <Dependent Role="Contests">
               <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Classes">
+          <End Role="Classes" Type="OnlineSPKTModel.Store.Classes" Multiplicity="0..1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Store.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_File">
+          <End Role="File" Type="OnlineSPKTModel.Store.File" Multiplicity="0..1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Store.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Users">
+          <End Role="Users" Type="OnlineSPKTModel.Store.Users" Multiplicity="1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Store.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserNameID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -784,11 +856,13 @@
           <EntitySet Name="Languages" EntityType="OnlineSPKTModel.Language" />
           <EntitySet Name="Loggers" EntityType="OnlineSPKTModel.Logger" />
           <EntitySet Name="Mentions" EntityType="OnlineSPKTModel.Mention" />
+          <EntitySet Name="Notifications" EntityType="OnlineSPKTModel.Notification" />
           <EntitySet Name="Parameters" EntityType="OnlineSPKTModel.Parameter" />
           <EntitySet Name="Problems" EntityType="OnlineSPKTModel.Problem" />
           <EntitySet Name="Roles" EntityType="OnlineSPKTModel.Role" />
           <EntitySet Name="Student_Submit" EntityType="OnlineSPKTModel.Student_Submit" />
           <EntitySet Name="Subjects" EntityType="OnlineSPKTModel.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="OnlineSPKTModel.sysdiagram" />
           <EntitySet Name="SystemObjects" EntityType="OnlineSPKTModel.SystemObject" />
           <EntitySet Name="TestCaseResults" EntityType="OnlineSPKTModel.TestCaseResult" />
           <EntitySet Name="TestCases" EntityType="OnlineSPKTModel.TestCas" />
@@ -804,6 +878,10 @@
           <AssociationSet Name="FK_NewContest_Classes" Association="OnlineSPKTModel.FK_NewContest_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Contests" EntitySet="Contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Classes" Association="OnlineSPKTModel.FK_Notifications_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Comments_SystemObjects1" Association="OnlineSPKTModel.FK_Comments_SystemObjects1">
             <End Role="SystemObjects" EntitySet="SystemObjects" />
@@ -841,6 +919,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Exam" EntitySet="Exams" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notifications_File" Association="OnlineSPKTModel.FK_Notifications_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
           <AssociationSet Name="FK_Problems_File" Association="OnlineSPKTModel.FK_Problems_File">
             <End Role="File" EntitySet="Files" />
             <End Role="Problems" EntitySet="Problems" />
@@ -848,6 +930,10 @@
           <AssociationSet Name="FK_Student_Summit_Languages" Association="OnlineSPKTModel.FK_Student_Summit_Languages">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="Student_Submit" EntitySet="Student_Submit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Users" Association="OnlineSPKTModel.FK_Notifications_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Problems_Subjects" Association="OnlineSPKTModel.FK_Problems_Subjects">
             <End Role="Subjects" EntitySet="Subjects" />
@@ -908,6 +994,7 @@
           <NavigationProperty Name="Subject" Relationship="OnlineSPKTModel.FK_Classes_Subjects" FromRole="Classes" ToRole="Subjects" />
           <NavigationProperty Name="User" Relationship="OnlineSPKTModel.FK_Classes_Users" FromRole="Classes" ToRole="Users" />
           <NavigationProperty Name="Contests" Relationship="OnlineSPKTModel.FK_NewContest_Classes" FromRole="Classes" ToRole="Contests" />
+          <NavigationProperty Name="Notifications" Relationship="OnlineSPKTModel.FK_Notifications_Classes" FromRole="Classes" ToRole="Notifications" />
           <NavigationProperty Name="Users" Relationship="OnlineSPKTModel.Class_Student" FromRole="Classes" ToRole="Users" />
           <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.Problem_Class" FromRole="Classes" ToRole="Problems" />
         </EntityType>
@@ -1007,6 +1094,7 @@
           <Property Name="Content" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Length" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="DownloadCount" Type="Int32" />
+          <NavigationProperty Name="Notifications" Relationship="OnlineSPKTModel.FK_Notifications_File" FromRole="File" ToRole="Notifications" />
           <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_File" FromRole="File" ToRole="Problems" />
         </EntityType>
         <EntityType Name="Language">
@@ -1036,6 +1124,21 @@
           <Property Name="ClassID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="IsRemove" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FileID" Type="Int32" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="UserNameID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Class" Relationship="OnlineSPKTModel.FK_Notifications_Classes" FromRole="Notifications" ToRole="Classes" />
+          <NavigationProperty Name="File" Relationship="OnlineSPKTModel.FK_Notifications_File" FromRole="Notifications" ToRole="File" />
+          <NavigationProperty Name="User" Relationship="OnlineSPKTModel.FK_Notifications_Users" FromRole="Notifications" ToRole="Users" />
         </EntityType>
         <EntityType Name="Parameter">
           <Key>
@@ -1119,6 +1222,16 @@
           <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_Subjects" FromRole="Subjects" ToRole="Problems" />
           <NavigationProperty Name="Users" Relationship="OnlineSPKTModel.Lecturer_Subject" FromRole="Subjects" ToRole="Users" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="SystemObject">
           <Key>
             <PropertyRef Name="SystemObjectID" />
@@ -1176,6 +1289,7 @@
           <NavigationProperty Name="Comments" Relationship="OnlineSPKTModel.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
           <NavigationProperty Name="Contest_Student" Relationship="OnlineSPKTModel.FK_Contest_Student_Users" FromRole="Users" ToRole="Contest_Student" />
           <NavigationProperty Name="Exams" Relationship="OnlineSPKTModel.FK_Exam_Users" FromRole="Users" ToRole="Exam" />
+          <NavigationProperty Name="Notifications" Relationship="OnlineSPKTModel.FK_Notifications_Users" FromRole="Users" ToRole="Notifications" />
           <NavigationProperty Name="Problems" Relationship="OnlineSPKTModel.FK_Problems_Users" FromRole="Users" ToRole="Problems" />
           <NavigationProperty Name="Student_Submit" Relationship="OnlineSPKTModel.FK_Student_Summit_Users" FromRole="Users" ToRole="Student_Submit" />
           <NavigationProperty Name="Classes1" Relationship="OnlineSPKTModel.Class_Student" FromRole="Users" ToRole="Classes" />
@@ -1214,6 +1328,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Contests">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Classes">
+          <End Role="Classes" Type="OnlineSPKTModel.Class" Multiplicity="0..1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notifications">
               <PropertyRef Name="ClassID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1326,6 +1452,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Notifications_File">
+          <End Role="File" Type="OnlineSPKTModel.File" Multiplicity="0..1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Problems_File">
           <End Role="File" Type="OnlineSPKTModel.File" Multiplicity="0..1" />
           <End Role="Problems" Type="OnlineSPKTModel.Problem" Multiplicity="*" />
@@ -1347,6 +1485,18 @@
             </Principal>
             <Dependent Role="Student_Submit">
               <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Users">
+          <End Role="Users" Type="OnlineSPKTModel.User" Multiplicity="1" />
+          <End Role="Notifications" Type="OnlineSPKTModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserNameID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1544,6 +1694,15 @@
             <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="IsRemove" ColumnName="IsRemove" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Notifications"><EntityTypeMapping TypeName="OnlineSPKTModel.Notification"><MappingFragment StoreEntitySet="Notifications">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Body" ColumnName="Body" />
+            <ScalarProperty Name="FileID" ColumnName="FileID" />
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="UserNameID" ColumnName="UserNameID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Parameters"><EntityTypeMapping TypeName="OnlineSPKTModel.Parameter"><MappingFragment StoreEntitySet="Parameters">
             <ScalarProperty Name="Ma" ColumnName="Ma" />
             <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
@@ -1592,6 +1751,13 @@
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
             <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams"><EntityTypeMapping TypeName="OnlineSPKTModel.sysdiagram"><MappingFragment StoreEntitySet="sysdiagrams">
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+            <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+            <ScalarProperty Name="version" ColumnName="version" />
+            <ScalarProperty Name="definition" ColumnName="definition" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="SystemObjects"><EntityTypeMapping TypeName="OnlineSPKTModel.SystemObject"><MappingFragment StoreEntitySet="SystemObjects">
             <ScalarProperty Name="SystemObjectID" ColumnName="SystemObjectID" />
@@ -1682,187 +1848,222 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="OnlineSPKT">
-        <EntityTypeShape EntityType="OnlineSPKTModel.Class" Width="1.5" PointX="3" PointY="9" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Comment" Width="1.5" PointX="13.5" PointY="4.125" Height="2.9417936197916656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Comparer" Width="1.5" PointX="8.25" PointY="12.75" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Contest_Student" Width="1.5" PointX="7.5" PointY="9.625" Height="1.9802864583333353" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Contest" Width="1.5" PointX="5.25" PointY="8.625" Height="4.0956022135416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Difficulty" Width="1.5" PointX="8.25" PointY="15.625" Height="1.7879850260416657" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Exam" Width="1.5" PointX="10.5" PointY="4.125" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Facuty" Width="1.5" PointX="0.75" PointY="1.125" Height="1.4033821614583317" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.File" Width="1.5" PointX="8.25" PointY="18.25" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Language" Width="1.5" PointX="10.5" PointY="14.5" Height="1.7879850260416692" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Logger" Width="1.5" PointX="2.75" PointY="1.125" Height="1.9802864583333353" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Mention" Width="1.5" PointX="0.75" PointY="4.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Parameter" Width="1.5" PointX="2.75" PointY="4.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Problem" Width="1.5" PointX="10.5" PointY="7.625" Height="6.0186165364583388" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Role" Width="1.5" PointX="6" PointY="4.75" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Student_Submit" Width="1.5" PointX="12.75" PointY="8.375" Height="4.0956022135416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.Subject" Width="1.5" PointX="0.75" PointY="9.5" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.SystemObject" Width="1.5" PointX="11.25" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.TestCaseResult" Width="1.5" PointX="15" PointY="11.375" Height="2.5571907552083388" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.TestCas" Width="1.5" PointX="12.75" PointY="14.125" Height="2.749492187499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineSPKTModel.User" Width="1.5" PointX="8.25" PointY="3.125" Height="5.0571093750000067" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Class" Width="1.5" PointX="3" PointY="10.5" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Comment" Width="1.5" PointX="13.5" PointY="19.75" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Comparer" Width="1.5" PointX="8.25" PointY="2.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Contest_Student" Width="1.5" PointX="7.5" PointY="11.25" Height="1.9802864583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Contest" Width="1.5" PointX="5.25" PointY="10.25" Height="4.0956022135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Difficulty" Width="1.5" PointX="8.25" PointY="20.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Exam" Width="1.5" PointX="10.5" PointY="19.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Facuty" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.File" Width="1.5" PointX="6" PointY="6" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Language" Width="1.5" PointX="10.5" PointY="6.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Logger" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Mention" Width="1.5" PointX="0.75" PointY="3.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Notification" Width="1.5" PointX="8.25" PointY="6.75" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Parameter" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Problem" Width="1.5" PointX="10.5" PointY="9.25" Height="6.0186165364583388" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Role" Width="1.5" PointX="6" PointY="16.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Student_Submit" Width="1.5" PointX="12.75" PointY="10.5" Height="4.0956022135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.Subject" Width="1.5" PointX="0.75" PointY="11.125" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.sysdiagram" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.SystemObject" Width="1.5" PointX="11.25" PointY="23.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.TestCaseResult" Width="1.5" PointX="15" PointY="13.25" Height="2.5571907552083388" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.TestCas" Width="1.5" PointX="12.75" PointY="15.75" Height="2.7494921875000085" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineSPKTModel.User" Width="1.5" PointX="8.25" PointY="14.625" Height="5.2494108072916674" IsExpanded="true" />
         <AssociationConnector Association="OnlineSPKTModel.FK_Classes_Subjects" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.682444661458334" />
-          <ConnectorPoint PointX="3" PointY="10.682444661458334" />
+          <ConnectorPoint PointX="2.25" PointY="12.307444661458334" />
+          <ConnectorPoint PointX="3" PointY="12.307444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Classes_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="7.3912972005208371" />
-          <ConnectorPoint PointX="4.40625" PointY="7.3912972005208371" />
-          <ConnectorPoint PointX="4.40625" PointY="9" />
+          <ConnectorPoint PointX="8.25" PointY="15.46875" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="15.46875" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="15.46875" />
+          <ConnectorPoint PointX="3.75" PointY="15.46875" />
+          <ConnectorPoint PointX="3.75" PointY="14.018697916666667" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_NewContest_Classes" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="10.6631982421875" />
-          <ConnectorPoint PointX="5.25" PointY="10.6631982421875" />
+          <ConnectorPoint PointX="4.5" PointY="12.259348958333334" />
+          <ConnectorPoint PointX="5.25" PointY="12.259348958333334" />
+        </AssociationConnector>
+        <AssociationConnector Association="OnlineSPKTModel.FK_Notifications_Classes" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="10.5" />
+          <ConnectorPoint PointX="3.75" PointY="9.1557421875" />
+          <ConnectorPoint PointX="6.947916666666667" PointY="9.1557421875" />
+          <ConnectorPoint PointX="7.114583333333333" PointY="9.1557421875" />
+          <ConnectorPoint PointX="8.25" PointY="9.1557421875" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Comments_SystemObjects1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.40625" PointY="2.5379850260416674" />
-          <ConnectorPoint PointX="12.40625" PointY="6.8095914713541665" />
-          <ConnectorPoint PointX="13.010416666666666" PointY="6.8095914713541656" />
-          <ConnectorPoint PointX="13.177083333333334" PointY="6.8095914713541665" />
-          <ConnectorPoint PointX="13.5" PointY="6.8095914713541665" />
+          <ConnectorPoint PointX="12.75" PointY="24.268992513020834" />
+          <ConnectorPoint PointX="14.25" PointY="24.268992513020834" />
+          <ConnectorPoint PointX="14.25" PointY="22.691793619791667" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Comments_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="6.6184903971354174" />
-          <ConnectorPoint PointX="12.322916666666666" PointY="6.6184903971354165" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="6.6184903971354174" />
-          <ConnectorPoint PointX="13.010416666666666" PointY="6.6184903971354165" />
-          <ConnectorPoint PointX="13.177083333333334" PointY="6.6184903971354174" />
-          <ConnectorPoint PointX="13.5" PointY="6.6184903971354174" />
+          <ConnectorPoint PointX="9.75" PointY="19.155995593750006" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="19.155995593750006" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="19.155995593750006" />
+          <ConnectorPoint PointX="14.625" PointY="19.155995593750006" />
+          <ConnectorPoint PointX="14.625" PointY="19.75" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_Comparers" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="13.196808268229169" />
-          <ConnectorPoint PointX="10.041666666666666" PointY="13.196808268229169" />
-          <ConnectorPoint PointX="10.270833333333334" PointY="13.196808268229169" />
-          <ConnectorPoint PointX="10.5" PointY="13.196808268229169" />
+          <ConnectorPoint PointX="9.75" PointY="5.0464330444711534" />
+          <ConnectorPoint PointX="10.125" PointY="5.4214330444711534" />
+          <ConnectorPoint PointX="10.125" PointY="12.259308268229169" />
+          <ConnectorPoint PointX="10.5" PointY="12.259308268229169" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Contest_Student_Contests" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="10.615143229166668" />
-          <ConnectorPoint PointX="7.5" PointY="10.615143229166668" />
+          <ConnectorPoint PointX="6.75" PointY="12.240143229166668" />
+          <ConnectorPoint PointX="7.5" PointY="12.240143229166668" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Contest_Student_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.625" PointY="8.1821093750000067" />
-          <ConnectorPoint PointX="8.625" PointY="9.625" />
+          <ConnectorPoint PointX="8.625" PointY="14.625" />
+          <ConnectorPoint PointX="8.625" PointY="13.230286458333335" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_Contests" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="12.194194335937501" />
-          <ConnectorPoint PointX="10.041666666666666" PointY="12.194194335937501" />
-          <ConnectorPoint PointX="10.270833333333334" PointY="12.194194335937501" />
-          <ConnectorPoint PointX="10.5" PointY="12.194194335937501" />
+          <ConnectorPoint PointX="6.75" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="13.819194335937501" />
+          <ConnectorPoint PointX="10.5" PointY="13.819194335937501" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Student_Summit_Contests" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="9.5888196145833327" />
-          <ConnectorPoint PointX="7.25" PointY="9.5888196145833327" />
-          <ConnectorPoint PointX="7.25" PointY="9.375" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="9.375" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="9.375" />
-          <ConnectorPoint PointX="10.25" PointY="9.375" />
-          <ConnectorPoint PointX="10.25" PointY="7.375" />
-          <ConnectorPoint PointX="13.010416666666666" PointY="7.3749999999999991" />
-          <ConnectorPoint PointX="13.177083333333334" PointY="7.375" />
-          <ConnectorPoint PointX="13.5" PointY="7.375" />
-          <ConnectorPoint PointX="13.5" PointY="8.375" />
+          <ConnectorPoint PointX="6.75" PointY="11.213819614583333" />
+          <ConnectorPoint PointX="7.25" PointY="11.213819614583333" />
+          <ConnectorPoint PointX="7.25" PointY="11" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="11" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="11" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="11" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="11" />
+          <ConnectorPoint PointX="10.25" PointY="11" />
+          <ConnectorPoint PointX="10.25" PointY="9" />
+          <ConnectorPoint PointX="13.010414166666665" PointY="9" />
+          <ConnectorPoint PointX="13.177080833333333" PointY="9" />
+          <ConnectorPoint PointX="13.5" PointY="9" />
+          <ConnectorPoint PointX="13.5" PointY="10.5" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_Difficulties" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="15.625" />
-          <ConnectorPoint PointX="10.125" PointY="15.25" />
-          <ConnectorPoint PointX="10.125" PointY="10.753344667968758" />
-          <ConnectorPoint PointX="10.5" PointY="10.753344667968758" />
+          <ConnectorPoint PointX="9.75" PointY="20.93730669230769" />
+          <ConnectorPoint PointX="10.1875" PointY="20.49980669230769" />
+          <ConnectorPoint PointX="10.1875" PointY="10.125000499999999" />
+          <ConnectorPoint PointX="10.5" PointY="10.125000499999999" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Exam_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="5.3074446614583337" />
-          <ConnectorPoint PointX="10.5" PointY="5.3074446614583337" />
+          <ConnectorPoint PointX="9.75" PointY="19.874410807291667" />
+          <ConnectorPoint PointX="10" PointY="20.124410807291667" />
+          <ConnectorPoint PointX="10" PointY="19.25" />
+          <ConnectorPoint PointX="10.128574434901122" PointY="19.378574434901122" />
+          <ConnectorPoint PointX="10.246425565098878" PointY="19.496425565098878" />
+          <ConnectorPoint PointX="10.5" PointY="19.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="OnlineSPKTModel.FK_Notifications_File" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="7.6535953776041659" />
+          <ConnectorPoint PointX="8.25" PointY="7.6535953776041659" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_File" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="18.31230669230769" />
-          <ConnectorPoint PointX="10.1875" PointY="17.87480669230769" />
-          <ConnectorPoint PointX="10.1875" PointY="8.5000005" />
-          <ConnectorPoint PointX="10.5" PointY="8.5000005" />
+          <ConnectorPoint PointX="7.03125" PointY="8.5571907552083317" />
+          <ConnectorPoint PointX="7.03125" PointY="9.90839455989584" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="9.90839455989584" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="9.90839455989584" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="9.9083945598958376" />
+          <ConnectorPoint PointX="10.333333333333334" PointY="9.90839455989584" />
+          <ConnectorPoint PointX="10.5" PointY="9.90839455989584" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Student_Summit_Languages" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="14.5" />
-          <ConnectorPoint PointX="12.375" PointY="14.125" />
-          <ConnectorPoint PointX="12.375" PointY="10.422801106770834" />
-          <ConnectorPoint PointX="12.75" PointY="10.422801106770834" />
+          <ConnectorPoint PointX="12" PointY="7.6439925130208337" />
+          <ConnectorPoint PointX="13.0937475" PointY="7.6439925130208337" />
+          <ConnectorPoint PointX="13.0937475" PointY="10.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="OnlineSPKTModel.FK_Notifications_Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.40625" PointY="14.625" />
+          <ConnectorPoint PointX="9.40625" PointY="9.6917936197916674" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_Subjects" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="9.5" />
-          <ConnectorPoint PointX="1.5" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="4.322916666666667" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="4.5208358333333338" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="9.1354186666666664" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="9.3020853333333342" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="10.166666666666666" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="10.333333333333334" PointY="8.34105243750001" />
-          <ConnectorPoint PointX="10.5" PointY="8.34105243750001" />
+          <ConnectorPoint PointX="1.5" PointY="13.489889322916667" />
+          <ConnectorPoint PointX="1.5" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="14.485301106770834" />
+          <ConnectorPoint PointX="10.5" PointY="14.485301106770834" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Problems_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="7.9035546875000033" />
-          <ConnectorPoint PointX="10.166666666666666" PointY="7.9035546875000025" />
-          <ConnectorPoint PointX="10.333333333333334" PointY="7.9035546875000033" />
-          <ConnectorPoint PointX="10.5" PointY="7.9035546875000033" />
+          <ConnectorPoint PointX="9.75" PointY="14.946808268229169" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="14.946808268229169" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="14.946808268229169" />
+          <ConnectorPoint PointX="10.5" PointY="14.946808268229169" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Student_Summit_Problems" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="9.3364005533854169" />
-          <ConnectorPoint PointX="12.75" PointY="9.3364005533854169" />
+          <ConnectorPoint PointX="12" PointY="12.547801106770834" />
+          <ConnectorPoint PointX="12.75" PointY="12.547801106770834" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_TestCases_Problems" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="13.581307844150649" />
-          <ConnectorPoint PointX="12.316074434901122" PointY="13.897382279051769" />
-          <ConnectorPoint PointX="12.433925565098878" PointY="14.015233409249527" />
-          <ConnectorPoint PointX="12.5625" PointY="14.143807844150649" />
-          <ConnectorPoint PointX="12.5625" PointY="13.9375" />
-          <ConnectorPoint PointX="12.75" PointY="14.125" />
+          <ConnectorPoint PointX="11.25" PointY="15.268616536458339" />
+          <ConnectorPoint PointX="11.25" PointY="17.124746093750005" />
+          <ConnectorPoint PointX="12.416666666666666" PointY="17.124746093750005" />
+          <ConnectorPoint PointX="12.583333333333334" PointY="17.124746093750005" />
+          <ConnectorPoint PointX="12.75" PointY="17.124746093750005" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_Student_Summit_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="3.59375" />
-          <ConnectorPoint PointX="12.322916666666666" PointY="3.5937499999999996" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="3.59375" />
-          <ConnectorPoint PointX="13.09375" PointY="3.59375" />
-          <ConnectorPoint PointX="13.09375" PointY="8.375" />
+          <ConnectorPoint PointX="9.75" PointY="18.109118343750012" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="18.109118343750012" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="18.109118343750012" />
+          <ConnectorPoint PointX="12.5" PointY="18.109118343750012" />
+          <ConnectorPoint PointX="12.5" PointY="15.5" />
+          <ConnectorPoint PointX="13.5" PointY="15.5" />
+          <ConnectorPoint PointX="13.5" PointY="14.595602213541667" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_TestCaseResult_Student_Summit" ManuallyRouted="false">
-          <ConnectorPoint PointX="14.25" PointY="11.922801106770834" />
-          <ConnectorPoint PointX="15" PointY="11.922801106770834" />
+          <ConnectorPoint PointX="14.25" PointY="13.922801106770834" />
+          <ConnectorPoint PointX="15" PointY="13.922801106770834" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.FK_TestCaseResult_TestCases" ManuallyRouted="false">
-          <ConnectorPoint PointX="14.25" PointY="15.499746093749998" />
-          <ConnectorPoint PointX="15.75" PointY="15.499746093749998" />
-          <ConnectorPoint PointX="15.75" PointY="13.932190755208339" />
+          <ConnectorPoint PointX="14.25" PointY="17.153341971354173" />
+          <ConnectorPoint PointX="15.75" PointY="17.153341971354173" />
+          <ConnectorPoint PointX="15.75" PointY="15.807190755208339" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.Class_Student" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.4375025" PointY="9" />
-          <ConnectorPoint PointX="4.4375025" PointY="3.59375" />
-          <ConnectorPoint PointX="8.25" PointY="3.59375" />
+          <ConnectorPoint PointX="4.1562525" PointY="14.018697916666667" />
+          <ConnectorPoint PointX="4.1562525" PointY="19.049947916666667" />
+          <ConnectorPoint PointX="8.25" PointY="19.049947916666667" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.Lecturer_Subject" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.059970330729165" />
-          <ConnectorPoint PointX="2.75" PointY="10.059970330729165" />
-          <ConnectorPoint PointX="2.75" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="4.322916666666667" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="4.5208358333333338" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="9.218752" PointY="8.4321093750000067" />
-          <ConnectorPoint PointX="9.218752" PointY="8.1821093750000067" />
+          <ConnectorPoint PointX="1.9062525" PointY="13.489889322916667" />
+          <ConnectorPoint PointX="1.9062525" PointY="15.015622500000006" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="15.015622500000006" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="15.015622500000006" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="15.015622500000006" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="15.015622500000006" />
+          <ConnectorPoint PointX="8.25" PointY="15.015622500000006" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.Problem_Class" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.6718725" PointY="9" />
-          <ConnectorPoint PointX="3.6718725" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="4.322916666666667" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="4.5208358333333338" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="10.166666666666666" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="10.333333333333334" PointY="8.4687480000000068" />
-          <ConnectorPoint PointX="10.5" PointY="8.4687480000000068" />
+          <ConnectorPoint PointX="3.3437475" PointY="14.018697916666667" />
+          <ConnectorPoint PointX="3.3437475" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="10.104166666666666" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="10.270833333333334" PointY="14.45404860677084" />
+          <ConnectorPoint PointX="10.5" PointY="14.45404860677084" />
         </AssociationConnector>
         <AssociationConnector Association="OnlineSPKTModel.User_Role" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="5.6439925130208337" />
-          <ConnectorPoint PointX="8.25" PointY="5.6439925130208337" />
+          <ConnectorPoint PointX="7.5" PointY="17.268992513020834" />
+          <ConnectorPoint PointX="8.25" PointY="17.268992513020834" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

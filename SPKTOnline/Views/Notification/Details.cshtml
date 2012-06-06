@@ -1,0 +1,22 @@
+﻿@model SPKTOnline.Models.Notification
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    [THÔNG BÁO] @Model.Name  <i id="i">@Model.CreateDate</i></div>
+<div  class="NotificationBody">
+    @Html.Raw(Model.Body)
+   
+</div>
+<div style="color:Red">
+---CÁC TIN MỚI HƠN---
+</div>
+@Html.Partial("ViewNotificationPartial",Model.LaterNoti)
+<div style="color:Red">
+---CÁC TIN CỦ HƠN ---
+</div>
+@Html.Partial("ViewNotificationPartial",Model.OlderNoti)
+

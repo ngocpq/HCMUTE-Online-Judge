@@ -44,6 +44,7 @@ namespace SPKTOnline.BussinessLayer
         /// <returns>Danh sach cac ky thi cua sinh vien</returns>
         IEnumerable<Contest> LayDanhSachKyThiCuaSinhVien(string studentID);
         IEnumerable<Contest> LayDanhSachKyThiCuaGiaoVien(string LecturerID);
+        IEnumerable<Contest_Student> LayDanhSachSinhVienForContest(int ContestID);
         /// <summary>
         /// Them ky thi cho mot Lop
         /// </summary>
@@ -186,6 +187,12 @@ namespace SPKTOnline.BussinessLayer
             if (cs != null)
                 return true;
             return false;
+        }
+
+
+        public IEnumerable<Contest_Student> LayDanhSachSinhVienForContest(int ContestID)
+        {
+            return db.Contest_Student.Where(cs => cs.ContestID == ContestID);
         }
     }
 }

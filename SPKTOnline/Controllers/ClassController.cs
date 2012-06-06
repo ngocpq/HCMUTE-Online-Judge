@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SPKTOnline.Models;
 using SPKTOnline.Management;
 using SPKTOnline.Reponsitories;
+using SPKTOnline.BussinessLayer;
 
 namespace SPKTOnline.Controllers
 {
@@ -18,6 +19,11 @@ namespace SPKTOnline.Controllers
 
         ProblemRepository ProblemRep = new ProblemRepository();
         UserRepository userRep = new UserRepository();
+        INotificationBL notificationBL;
+        public ClassController()
+        {
+            notificationBL = new NotificationBL(db);
+        }
         public ActionResult Index()
         {
             string currentYear = DateTime.Now.Year.ToString();
@@ -149,6 +155,11 @@ namespace SPKTOnline.Controllers
             Class cl = db.Classes.FirstOrDefault(c => c.ID == classID);
 
             return PartialView();
+        }
+
+        public ActionResult ViewNotificationByPartial(int ClassID)
+        {
+            return PartialView("ViewNotificationPartial", notificationBL.GetNotificationOfClass(ClassID));
         }
 
     }

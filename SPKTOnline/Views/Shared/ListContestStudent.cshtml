@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SPKTOnline.Models.Contest_Student>
+
+@if (Model.Count() != 0)
+{
+    int i = 0;
+    <table style="width: 650px">
+        <tr>
+            <th>
+            STT
+            </th>
+            <th>
+                Mã sinh viên
+            </th>
+            <th>
+                Tên sinh viên
+            </th>
+            <th>
+                Tổng điểm
+            </th>
+             @if (User.IsInRole("Lecturer"))
+             {
+            <th>
+                Chi tiết
+            </th>
+             }
+        </tr>
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.LastName) <span></span>
+                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                </td>
+                   
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                @if (User.IsInRole("Lecturer") )
+                {
+                <td>
+                   @* @Html.Partial("ViewDetailResultContest",item.Contest.Student_Submit.Where(s=>s.StudentID==item.StudentID))*@
+                </td>
+                }
+            </tr>
+        }
+    </table>
+}
+
+else
+{ 
+    <p>
+        Chưa có sinh viên làm bài này!
+    </p>
+}

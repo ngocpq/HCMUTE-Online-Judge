@@ -39,7 +39,7 @@
                     Kết thúc: <i> @Html.DisplayFor(modelItem => item.EndTime)</i>
                 </td>
                 <td>                    
-                        @Html.DisplayFor(modelItem => item.Contest_Student.Count)                    
+                         <a href="/Contest/ViewAllContestStudent?ContestID=@item.ID">@Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.RegisterCount)</a>
                 </td>
              
                 <td>
