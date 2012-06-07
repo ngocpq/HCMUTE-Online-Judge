@@ -245,6 +245,7 @@
     <Content Include="Content\Images\noticePDT.png" />
     <Content Include="Content\Images\noticePDT2.png" />
     <Content Include="Content\Images\noticePDTEng.png" />
+    <Content Include="Content\Images\pencil.jpg" />
     <Content Include="Content\Images\Refresh.png" />
     <Content Include="Content\Images\Refresh_24.png" />
     <Content Include="Content\Images\right.png" />
@@ -831,6 +832,8 @@
     <Content Include="Views\Notification\Details.cshtml" />
     <Content Include="Views\Shared\ViewNotificationPartial.cshtml" />
     <Content Include="Views\Notification\CreateNotification.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\ManageUser.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />

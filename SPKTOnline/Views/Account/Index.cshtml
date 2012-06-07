@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SPKTOnline.Models.User>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="webtitle">
+    Danh sách thành viên</div>
+@using (Html.BeginForm())
+{
+    <div style="float:left">
+    <span>Tổng số thành viên: @Model.Count().ToString()</span>
+    </div>
+    <div style="float:right">
+    <input id="txtSearch" type="text" name="txtSearch" /> <input class="button" type="submit" value="Search" />
+    </div>
+}
+
+  <br />    
+  <br />  
+@if (Model.Count() != 0)
+{
+    <table style="width: 650px">
+        <tr>
+           <th>
+                UserName
+            </th>
+            <th>
+               FullName
+            </th>
+            <th>Email</th>
+            <th>
+               CreateDate
+            </th>
+            
+            <th>
+               IsLock 
+            </th>             
+            <th>
+               Role
+            </th>
+                 
+           
+            
+         </tr>
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+                <td >
+                     @item.Username
+                </td>
+                 <td>
+                    @item.LastName
+                    @item.FirstName
+                </td>  
+                <td>
+                    @item.Email
+                </td>
+                 <td class="classColumnMiddle">
+                   @item.CreateDate
+                </td>   
+                     
+                <td  class="classColumnMiddle">
+                   @Html.CheckBoxFor(modelitem => item.IsLocked, new { ReadOnly = true })
+                </td>        
+                <td  class="classColumnMiddle">
+                   @item.roles
+                </td>
+                <td>
+                    <a href="/Account/ManageUser/@item.Username"><img src="../../Content/Images/pencil.jpg" style="width:20px;height:20px;"/></a>
+                </td>
+                
+                
+            </tr>
+        }
+        
+    </table>
+}
+
+

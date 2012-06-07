@@ -6090,14 +6090,16 @@ namespace SPKTOnline.Models
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="isLocked">Initial value of the IsLocked property.</param>
         /// <param name="createDate">Initial value of the CreateDate property.</param>
-        public static User CreateUser(global::System.String username, global::System.String firstName, global::System.String lastName, global::System.String email, global::System.DateTime createDate)
+        public static User CreateUser(global::System.String username, global::System.String firstName, global::System.String lastName, global::System.String email, global::System.Boolean isLocked, global::System.DateTime createDate)
         {
             User user = new User();
             user.Username = username;
             user.FirstName = firstName;
             user.LastName = lastName;
             user.Email = email;
+            user.IsLocked = isLocked;
             user.CreateDate = createDate;
             return user;
         }
@@ -6255,9 +6257,9 @@ namespace SPKTOnline.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsLocked
+        public global::System.Boolean IsLocked
         {
             get
             {
@@ -6272,8 +6274,8 @@ namespace SPKTOnline.Models
                 OnIsLockedChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsLocked;
-        partial void OnIsLockedChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsLocked;
+        partial void OnIsLockedChanging(global::System.Boolean value);
         partial void OnIsLockedChanged();
     
         /// <summary>

@@ -148,7 +148,7 @@
   <Menu1>
     <Title>THÔNG BÁO</Title>
     <TitleEng></TitleEng>
-    <Link>/Notification/CreateNotification</Link>
+    <Link></Link>
     <Roles>
       <Role>Lecturer</Role>
       <Role>Admin</Role>
@@ -185,9 +185,9 @@
       <Role>Admin</Role>
     </Roles>
     <Menu2>
-      <Title>Manage Roles</Title>
+      <Title>TẤT CẢ USER</Title>
       <TitleEng>Manage Roles</TitleEng>
-      <Link>/Account/ManageRole</Link>
+      <Link>/Account/</Link>
     </Menu2>
     <Menu2>
       <Title>Tạo User</Title>
