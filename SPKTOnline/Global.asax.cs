@@ -37,42 +37,7 @@ namespace SPKTOnline
             );
 
         }
-        public long SoLuotTruycap
-        {
-            get
-            {
-                if (Application["SLTruyCap"] == null)
-                    Application.Add("SLTruyCap", 0L);
-                return (long)Application["SLTruyCap"];
-            }
-            set
-            {
-                Application.Lock();
-                if (Application["SLTruyCap"] == null)
-                    Application.Add("SLTruyCap", value);
-                else
-                    Application["SLTruyCap"] = value;
-                Application.UnLock();
-            }
-        }
-        public long SoNguoiOnline
-        {
-            get
-            {
-                if (Application["SLOnline"] == null)
-                    Application.Add("SLOnline", 0L);
-                return (long)Application["SLOnline"];
-            }
-            set
-            {
-                Application.Lock();
-                if (Application["SLOnline"] == null)
-                    Application.Add("SLOnline", value);
-                else
-                    Application["SLOnline"] = value;
-                Application.UnLock();
-            }
-        }
+
         protected void Application_Start()
         {
             //ghi log xuong file
@@ -96,19 +61,25 @@ namespace SPKTOnline
             Language = new Dictionary<string, ILanguage>();
 
 
-            SoNguoiOnline = 0;
-            //SoLuotTruycap = ReadSoLuotTruyCapTuFile();
-            SoLuotTruycap = SoLuotTruyCapBL.Read();
+            WebContext.SoNguoiOnline = 0;
+            long soLuot;
+            DateTime ngayBatDau;
+            DocSoLuotTruyCap(out soLuot,out ngayBatDau);
+            WebContext.SoLuotTruycap = soLuot;
+            WebContext.NgayBatDauTinhSoLuotTruyCap = ngayBatDau;
+            
         }
+        
         void Session_Start(object sender, EventArgs e)
         {
-            SoNguoiOnline++;
-            SoLuotTruycap++;
-            //WriteSoLuotTruyCapVaoFile();
+            WebContext.SoNguoiOnline++;
+            WebContext.SoLuotTruycap++;
+            //Lưu số lượt truy cập
+            LuuSoLuotTruyCap(WebContext.SoLuotTruycap, WebContext.NgayBatDauTinhSoLuotTruyCap);
         }
         void Session_End(object sender, EventArgs e)
         {
-            SoNguoiOnline--;
+            WebContext.SoNguoiOnline--;
         }
 
         void Application_Error(object sender, EventArgs e)
@@ -131,7 +102,6 @@ namespace SPKTOnline
             try
             {
                 string message = ": Application_End. \r\n";
-
                 // LogShutdown Event
                 #region LogShutdown Event
 
@@ -164,23 +134,31 @@ namespace SPKTOnline
 
                 #endregion
                 LogUtility.WriteLog(message);
-                //Lưu số lượt truy cập
-                SoLuotTruyCapBL.Write(SoLuotTruycap);
+                
             }
             catch (Exception ex)
             {
-                LogUtility.WriteLog(ex);
+                LogUtility.WriteLog(new Exception("Application_End error", ex));
             }
 
         }
 
-        SPKTOnline.BussinessLayer.ISoLuotTruyCapBL SoLuotTruyCapBL
+        const string _CounterFileName = "SLTruyCap.txt";
+        string CounterFilePath
         {
-            get
-            {
-                //return new SPKTOnline.BussinessLayer.SoLuotTruyCapBL();
-                return new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(Server.MapPath("~\\SLTruyCap.txt"));
-            }
+            get { return Path.Combine(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath, _CounterFileName); }
         }
+        private void LuuSoLuotTruyCap(long soLuot, DateTime ngayBatDau)
+        {
+            
+            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl= new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(CounterFilePath);
+            bl.Write(soLuot, ngayBatDau);
+        }
+        private void DocSoLuotTruyCap(out long soLuot, out DateTime ngayBatDau)
+        {
+            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl = new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(CounterFilePath);
+            bl.Read(out soLuot, out ngayBatDau);
+        }
+        
     }
 }

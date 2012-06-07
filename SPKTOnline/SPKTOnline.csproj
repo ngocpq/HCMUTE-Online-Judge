@@ -94,6 +94,9 @@
     <Compile Include="BussinessLayer\ContestBL.cs" />
     <Compile Include="BussinessLayer\Email.cs" />
     <Compile Include="BussinessLayer\NotificationBL.cs" />
+    <Compile Include="BussinessLayer\ParametersBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BussinessLayer\ProblemBL.cs" />
     <Compile Include="BussinessLayer\SoLuotTruyCapBL.cs" />
     <Compile Include="BussinessLayer\StudentSubmitBL.cs" />
@@ -135,7 +138,7 @@
     <Compile Include="Management\MultiLanguage\MultiLanguage.cs" />
     <Compile Include="Management\MultiLanguage\VietNamese.cs" />
     <Compile Include="Management\MyEnum.cs" />
-    <Compile Include="Management\WebsiteParameters.cs" />
+    <Compile Include="Management\WebContext.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClassModels.cs" />
     <Compile Include="Models\ContestModels.cs" />

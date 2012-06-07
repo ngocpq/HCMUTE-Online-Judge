@@ -361,9 +361,11 @@
                         </div>
                     </div>
                      <div id="infoSession">
-                        Số lượng truy cập: @HttpContext.Current.Application["SLTruyCap"].ToString()
+                        Số người đang online: @WebContext.SoNguoiOnline.ToString()                        
                         <br />
-                        Số người đang online: @HttpContext.Current.Application["SLOnline"].ToString()
+                        Số lượt truy cập: @WebContext.SoLuotTruycap.ToString()
+                        <br />
+                        Từ ngày: @WebContext.NgayBatDauTinhSoLuotTruyCap.ToString("dd/MM/yyyy HH:mm")
                     </div>
                 </div>
             </div>

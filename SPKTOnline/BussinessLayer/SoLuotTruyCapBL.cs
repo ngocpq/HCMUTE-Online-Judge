@@ -9,34 +9,21 @@ namespace SPKTOnline.BussinessLayer
 {
     public interface ISoLuotTruyCapBL
     {
-        long Read();
-        void Write(long value);
+        void Read(out long soLuong,out DateTime ngayBatDau);
+        void Write(long value,DateTime ngayBatDau);        
     }
-    public class SoLuotTruyCapBL:ISoLuotTruyCapBL
+    public class SoLuotTruyCapBL : ISoLuotTruyCapBL
     {
-        public long Read()
+        IParameterBL blParameter=new ParameterBL();
+        public void Read(out long soLuong,out DateTime ngayBatDau)
         {
-            SPKTOnline.Models.OnlineSPKTEntities db = new Models.OnlineSPKTEntities();
-            SPKTOnline.Models.Parameter para = db.Parameters.FirstOrDefault(p => p.Ma == WebsiteParameters.SO_LUOT_TRUY_CAP);
-            if (para == null)
-                return 0;
-            long kq;
-            if (long.TryParse(para.GiaTri, out kq))
-                return kq;
-            return 0;
+            soLuong= blParameter.SoLuotTruyCap;
+            ngayBatDau= blParameter.NgayBatDauTinhSoLuotTruyCap;            
         }
-
-        public void Write(long value)
+        public void Write(long soLuot,DateTime ngayBatDau)
         {
-            SPKTOnline.Models.OnlineSPKTEntities db = new Models.OnlineSPKTEntities();
-            SPKTOnline.Models.Parameter para = db.Parameters.FirstOrDefault(p => p.Ma == WebsiteParameters.SO_LUOT_TRUY_CAP);
-            if (para == null)
-            {
-                para = new SPKTOnline.Models.Parameter { Ma = WebsiteParameters.SO_LUOT_TRUY_CAP, KieuDuLieu = "System.Int64",  GiaiThich = "Số lượt người truy cập website" };
-                db.Parameters.AddObject(para);
-            }
-            para.GiaTri = value.ToString();
-            db.SaveChanges();
+            blParameter.SoLuotTruyCap = soLuot;
+            blParameter.NgayBatDauTinhSoLuotTruyCap = ngayBatDau;
         }
     }
 
@@ -47,35 +34,38 @@ namespace SPKTOnline.BussinessLayer
         {
             FilePath = countFilePath;
         }
-        public long Read()
-        {            
-            if (!File.Exists(FilePath))
-                return 0;
-            System.IO.StreamReader sw = null;
+        public void Read(out long soLuot,out DateTime ngayBatDau)
+        {
+            soLuot = 0;
+            ngayBatDau = DateTime.Now;
             try
-            {
-                FileStream fi = File.Open(FilePath, FileMode.Open);
-                sw = new System.IO.StreamReader(fi);
-                return long.Parse(sw.ReadLine());
+            {                
+                String[] buff = File.ReadAllLines(FilePath);
+                soLuot= long.Parse(buff[0]);
+                ngayBatDau= DateTime.ParseExact(buff[1], "dd/MM/yyyy HH:mm", null);                
             }
-            catch
+            catch(Exception ex)
             {
-                return 0;
+                LogUtility.WriteLog(ex);                                
             }
+        }
+
+        public void Write(long soLuot,DateTime ngayBatDau)
+        {
+            System.IO.StreamWriter sw = null;
+            try
+            {                
+                FileStream fi = File.Open(FilePath, FileMode.Create);
+                sw = new System.IO.StreamWriter(fi);
+                sw.WriteLine(soLuot);
+                sw.WriteLine(ngayBatDau.ToString("dd/MM/yyyy HH:mm"));
+            }
+            catch { }
             finally
             {
                 if (sw != null)
                     sw.Close();
             }
-        }
-
-        public void Write(long value)
-        {
-            System.IO.StreamWriter sw;            
-            FileStream fi = File.Open(FilePath, FileMode.Create);
-            sw = new System.IO.StreamWriter(fi);
-            sw.Write(value.ToString());
-            sw.Close();
         }
 
     }
