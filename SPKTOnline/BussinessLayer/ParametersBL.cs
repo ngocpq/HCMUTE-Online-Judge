@@ -50,7 +50,7 @@ namespace SPKTOnline.BussinessLayer
             }
             set
             {
-                WriteParameterValue<long>(SO_LUOT_TRUY_CAP, value,false);
+                WriteParameterValue<long>(SO_LUOT_TRUY_CAP, value,true);
             }
         }
         public DateTime NgayBatDauTinhSoLuotTruyCap
@@ -61,7 +61,7 @@ namespace SPKTOnline.BussinessLayer
             }
             set
             {
-                WriteParameterValue<DateTime>(SO_LUOT_TRUY_CAP_NGAY_BAT_DAU_TINH, value, false);
+                WriteParameterValue<DateTime>(SO_LUOT_TRUY_CAP_NGAY_BAT_DAU_TINH, value, true);
             }
         }
     }

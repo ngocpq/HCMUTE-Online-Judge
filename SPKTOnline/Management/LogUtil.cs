@@ -143,10 +143,14 @@ namespace SPKTOnline.Management
                 _Logger.WriteLog(message);
         }
         public const int LEVER_MIN = 0;
-        public const int LEVER_MAX = 10;        
+        public const int LEVER_NORMAL = 5;
+        public const int LEVER_MAX = 10; 
+       
         public const int LEVER_DEBUG = LEVER_MIN;
+        public const int LEVER_MESSAGE = LEVER_NORMAL;
+        public const int LEVER_LOG = LEVER_NORMAL+1;
         public const int LEVER_ERROR = LEVER_MAX;
-        public const int LEVER_LOG = 5;
+        
         static int LogLever = LEVER_MIN;
         public static void SetLogLever(int lever)
         {

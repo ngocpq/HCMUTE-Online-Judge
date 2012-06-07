@@ -61,25 +61,25 @@ namespace SPKTOnline
             Language = new Dictionary<string, ILanguage>();
 
 
-            WebContext.SoNguoiOnline = 0;
+            SoNguoiOnline = 0;
             long soLuot;
             DateTime ngayBatDau;
             DocSoLuotTruyCap(out soLuot,out ngayBatDau);
-            WebContext.SoLuotTruycap = soLuot;
-            WebContext.NgayBatDauTinhSoLuotTruyCap = ngayBatDau;
+            SoLuotTruycap = soLuot;
+            NgayBatDauTinhSoLuotTruyCap = ngayBatDau;
             
         }
         
         void Session_Start(object sender, EventArgs e)
         {
-            WebContext.SoNguoiOnline++;
-            WebContext.SoLuotTruycap++;
+            SoNguoiOnline++;
+            SoLuotTruycap++;
             //Lưu số lượt truy cập
-            LuuSoLuotTruyCap(WebContext.SoLuotTruycap, WebContext.NgayBatDauTinhSoLuotTruyCap);
+            LuuSoLuotTruyCap(SoLuotTruycap, NgayBatDauTinhSoLuotTruyCap);
         }
         void Session_End(object sender, EventArgs e)
-        {
-            WebContext.SoNguoiOnline--;
+        {            
+            SoNguoiOnline--;
         }
 
         void Application_Error(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace SPKTOnline
                 LogUtility.WriteLog(new Exception("User IP: " + ip, ex));
             }
             catch
-            {
+            {                
                 Response.Redirect("~/Error");
             }
         }
@@ -150,15 +150,86 @@ namespace SPKTOnline
         }
         private void LuuSoLuotTruyCap(long soLuot, DateTime ngayBatDau)
         {
-            
-            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl= new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(CounterFilePath);
+
+            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl = GetSoLuotTruyCapBL();
             bl.Write(soLuot, ngayBatDau);
         }
         private void DocSoLuotTruyCap(out long soLuot, out DateTime ngayBatDau)
         {
-            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl = new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(CounterFilePath);
+            SPKTOnline.BussinessLayer.ISoLuotTruyCapBL bl = GetSoLuotTruyCapBL();            
             bl.Read(out soLuot, out ngayBatDau);
         }
-        
+        SPKTOnline.BussinessLayer.ISoLuotTruyCapBL GetSoLuotTruyCapBL()
+        {
+            //return new SPKTOnline.BussinessLayer.SoLuotTruyCapSuDungFileBL(CounterFilePath); 
+            return new SPKTOnline.BussinessLayer.SoLuotTruyCapBL();
+        }
+
+        #region Couter
+        public const string SLTruyCap_AppName = "SLTruyCap";
+        public const string SLOnline_AppName = "SLOnline";
+        public const string NgayBatDau_AppName = "NgayBD";
+        public const string NgayBatDau_Display_AppName = "NgayBD_String";
+        public DateTime NgayBatDauTinhSoLuotTruyCap
+        {
+            get
+            {                
+                if (Application[NgayBatDau_AppName] == null)
+                    Application.Add(NgayBatDau_AppName, DateTime.Now);                
+                return (DateTime)Application["NgayBD"];
+            }
+            set
+            {
+                Application.Lock();
+                if (Application[NgayBatDau_AppName] == null)
+                    Application.Add(NgayBatDau_AppName, value);
+                else
+                    Application[NgayBatDau_AppName] = value;
+                if (Application[NgayBatDau_Display_AppName] == null)
+                    Application.Add(NgayBatDau_Display_AppName, value.ToString("dd/MM/yyyy HH:mm"));
+                else
+                    Application[NgayBatDau_Display_AppName] = value.ToString("dd/MM/yyyy HH:mm");
+                Application.UnLock();
+            }
+        }
+
+        public long SoLuotTruycap
+        {
+            get
+            {
+                if (Application[SLTruyCap_AppName] == null)
+                    Application.Add(SLTruyCap_AppName, 0L);
+                return (long)Application[SLTruyCap_AppName];
+            }
+            set
+            {
+                Application.Lock();
+                if (Application[SLTruyCap_AppName] == null)
+                    Application.Add(SLTruyCap_AppName, value);
+                else
+                    Application[SLTruyCap_AppName] = value;
+                Application.UnLock();
+            }
+        }
+        public long SoNguoiOnline
+        {
+            get
+            {                
+                if (Application[SLOnline_AppName] == null)
+                    Application.Add(SLOnline_AppName, 0L);
+                return (long)Application[SLOnline_AppName];
+            }
+            set
+            {
+                Application.Lock();
+                if (Application[SLOnline_AppName] == null)
+                    Application.Add(SLOnline_AppName, value);
+                else
+                    Application[SLOnline_AppName] = value;
+                Application.UnLock();
+            }
+        }
+ 
+        #endregion
     }
 }
