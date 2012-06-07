@@ -20,6 +20,21 @@ namespace SPKTOnline.Models
             return user;
         }
     }
+    public partial class User
+    {
+        public string roles
+        {
+            get
+            {
+                string s = "";
+                foreach (var i in this.Roles)
+                {
+                    s += i.Name + "\n";
+                }
+                return s;
+            }
+        }
+    }
 
     public class ImportModels
     {

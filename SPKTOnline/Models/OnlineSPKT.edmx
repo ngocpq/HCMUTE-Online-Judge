@@ -447,7 +447,7 @@
           <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="IsActived" Type="bit" />
-          <Property Name="IsLocked" Type="bit" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
           <Property Name="LastLoginTime" Type="datetime" />
           <Property Name="PasswordInvalidCount" Type="int" />
           <Property Name="SecurityCode" Type="varchar" MaxLength="50" />
@@ -1279,7 +1279,7 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="IsActived" Type="Boolean" />
-          <Property Name="IsLocked" Type="Boolean" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
           <Property Name="LastLoginTime" Type="DateTime" />
           <Property Name="PasswordInvalidCount" Type="Int32" />
           <Property Name="SecurityCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />

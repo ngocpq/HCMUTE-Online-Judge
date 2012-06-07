@@ -29,7 +29,23 @@ namespace SPKTOnline.Controllers
             }
             return true;
         }
+        [Authorize(Roles="Admin")]
         public ActionResult Index()
+        {
+            return View(db.Users);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index(IEnumerable<User> users)
+        {
+            string txtSearch = Request["txtSearch"];
+            if (txtSearch != "")
+                return View("Index", db.Users.Where(u => u.Username.Contains(txtSearch) || u.LastName.Contains(txtSearch) || u.FirstName.Contains(txtSearch)|| u.Email.Contains(txtSearch)));
+            else
+                return View(db.Users);
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageUser(string Username)
         {
             return View();
         }
