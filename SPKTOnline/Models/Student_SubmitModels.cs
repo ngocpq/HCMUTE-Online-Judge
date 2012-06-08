@@ -43,7 +43,8 @@ namespace SPKTOnline.Models
                 double tong = 0;
                 foreach (var tc in this.TestCaseResults)
                     tong += (double)(tc.Score == null ? 0 : tc.Score);
-                
+                if (tong > this.Problem.Score)
+                    tong = Problem.Score;
                 return tong;
             }
         }

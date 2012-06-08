@@ -43,7 +43,8 @@
                         <a href="/Contest/ViewAllContestStudent?ContestID=@item.ID">@Html.DisplayFor(modelItem => item.RegisterCount)</a>                  
                 </td>
                <td>  
-                        @Html.DisplayFor(modelItem => item.Contest_Student.FirstOrDefault(s => s.StudentID == User.Identity.Name).Score)
+                        @Html.DisplayFor(modelItem => item.Contest_Student.FirstOrDefault(s => s.StudentID == User.Identity.Name).Score)<span>/</span>
+                        @Html.DisplayFor(modelItem => item.TotalScore)
                 </td>
            
             </tr>
