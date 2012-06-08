@@ -109,6 +109,7 @@ namespace SPKTOnline.Controllers
                 user.LastName = userModel.LastName;
                 user.FirstName = userModel.FirstName;
                 user.IsLocked = userModel.IsLocked;
+                user.IsActived = userModel.IsActive;
                 user.Email = userModel.Email;
                 user.CreateDate = DateTime.Now;
                 if (kq.Count() != 0)

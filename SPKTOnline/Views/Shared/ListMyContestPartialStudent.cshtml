@@ -16,9 +16,6 @@
             <th>
                Điểm số đã đạt
             </th>
-             <th>
-              
-            </th>
         </tr>
         @foreach (var item in Model)
         {
@@ -48,28 +45,7 @@
                <td>  
                         @Html.DisplayFor(modelItem => item.Contest_Student.FirstOrDefault(s => s.StudentID == User.Identity.Name).Score)
                 </td>
-                <td>
-                    @if (User.IsInRole("Lecturer") && item.Class.LecturerID == User.Identity.Name)
-                    {
-                        @Html.ActionLink("Edit", "EditContest", "Contest", new { contestID = item.ID }, null) <span>|</span>
-                        @Html.ActionLink("Delete", "DeleteContest", "Contest", new { contestID = item.ID }, null)
-                    }
-                    else
-                    {
-                        if (item.Contest_Student.Where(i => i.StudentID == User.Identity.Name).FirstOrDefault() == null && item.EndTime > DateTime.Now)
-                        {
-                            @Html.ActionLink("Đăng ký thi", "RegisterContest", "Contest", new { contestID = item.ID }, null)
-                        }
-                        else if (item.EndTime < DateTime.Now)
-                        {
-                            <span>Hết thời gian</span>
-                        }
-                        else
-                        {
-                            <span>Đã đăng ký</span>
-                        }
-                    }
-                </td>
+           
             </tr>
             }
         }

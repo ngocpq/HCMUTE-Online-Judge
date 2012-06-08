@@ -12,6 +12,10 @@ namespace SPKTOnline.BussinessLayer
         IEnumerable<Comment> GetCommentForProblem(int ProblemID);
         IEnumerable<Comment> GetCommentForContest(int ContestID);
         IEnumerable<Comment> GetCommentForStudentSubmit(int SubmitID);
+        SystemObject GetSystemObject(int type);
+        int ProblemCommentTotal(int ProblemID);
+        int ContestCommentTotal(int ContestID);
+        int SubmitCommentTotal(int SubmitID);
         bool SaveComment(Comment comment);
 
     }
@@ -56,6 +60,28 @@ namespace SPKTOnline.BussinessLayer
                 RollbackChange();
                 return false;
             }
+        }
+
+
+        public int ProblemCommentTotal(int ProblemID)
+        {
+            return db.Comments.Where(c => c.SystemObjectID == (int)EnumCommentType.Problems && c.SystemObjectRecordID == ProblemID).Count();
+        }
+
+        public int ContestCommentTotal(int ContestID)
+        {
+            return db.Comments.Where(c => c.SystemObjectID == (int)EnumCommentType.Contests && c.SystemObjectRecordID == ContestID).Count();
+        }
+
+        public int SubmitCommentTotal(int SubmitID)
+        {
+            return db.Comments.Where(c => c.SystemObjectID == (int)EnumCommentType.Student_Submit && c.SystemObjectRecordID == SubmitID).Count();
+        }
+
+
+        public SystemObject GetSystemObject(int type)
+        {
+            return db.SystemObjects.FirstOrDefault(s=>s.SystemObjectID==type);
         }
     }
 }

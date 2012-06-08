@@ -65,6 +65,7 @@ namespace SPKTOnline.Controllers
         public ActionResult LecturerViewTryResult(int? ProblemID)
         {
             var student_submit = db.Student_Submit.Where(p => p.ProblemID == ProblemID);
+            ViewBag.Problem = db.Problems.FirstOrDefault(p => p.ID == ProblemID);
             List<Student_Submit> list = new List<Student_Submit>();
             foreach (var i in student_submit)
             {

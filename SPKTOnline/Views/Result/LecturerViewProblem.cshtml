@@ -30,7 +30,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ID)
+                    @Html.ActionLink(item.ID.ToString(), "EditProblem", "Problem", new { ID = item.ID }, null)   
                 </td>
                  <td>
                     <b>@Html.DisplayFor(modelItem => item.Name)</b>                    
@@ -40,7 +40,8 @@
                        { 
                             <br />
                              @Html.ActionLink("Download", "Download","File", new { ID= item.FileID},null)
-                        }
+                             <span id="i">(SLDownload:  @item.File.DownloadCount)</span>
+                       }
                 </td>                
                 <td>
                     @Html.DisplayFor(modelItem => item.Difficulty.Name)

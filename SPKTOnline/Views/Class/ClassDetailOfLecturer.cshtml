@@ -45,10 +45,10 @@
     {
         @Html.ActionLink("Upload câu hỏi cho lớp", "Upload", "UploadProblem", new { ContestID=0, ClassID = Model.ID }, null)
     }
-</fieldset>
 
+</fieldset>
 <fieldset>
-    <legend>Kỳ thi</legend>
+    <legend>Kỳ Thi</legend>
      @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
      {       
         @Html.ActionLink("Tạo kỳ thi mới", "CreateContest", "Contest", new { ClassID = Model.ID }, null)
@@ -58,5 +58,6 @@
     @if (User.IsInRole("Lecturer") && Model.LecturerID == User.Identity.Name)
     {       
         @Html.ActionLink("Tạo kỳ thi mới", "CreateContest", "Contest", new { ClassID = Model.ID }, null)
+    
     }
-</fieldset>
+ </fieldset>

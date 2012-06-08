@@ -93,6 +93,7 @@
     <Compile Include="BussinessLayer\CommentBL.cs" />
     <Compile Include="BussinessLayer\ContestBL.cs" />
     <Compile Include="BussinessLayer\Email.cs" />
+    <Compile Include="BussinessLayer\FileBL.cs" />
     <Compile Include="BussinessLayer\NotificationBL.cs" />
     <Compile Include="BussinessLayer\ParametersBL.cs">
       <SubType>Code</SubType>
@@ -142,6 +143,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClassModels.cs" />
     <Compile Include="Models\ContestModels.cs" />
+    <Compile Include="Models\EnumCommentType.cs" />
     <Compile Include="Models\ExamModels.cs" />
     <Compile Include="Models\NotificationModels.cs" />
     <Compile Include="Models\OnlineSPKT.Designer.cs">
@@ -837,6 +839,8 @@
     <Content Include="Views\Notification\CreateNotification.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\ManageUser.cshtml" />
+    <Content Include="Views\Shared\ListMyContestPartialStudent.cshtml" />
+    <Content Include="Views\Contest\LecturerViewAllContestResult.cshtml" />
     <None Include="XML\Cauhinh.dtd" />
     <None Include="XML\Language.dtd" />
     <None Include="XML\Memberships.dtd" />
