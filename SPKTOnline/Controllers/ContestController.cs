@@ -168,6 +168,17 @@ namespace SPKTOnline.Controllers
             comment2.Body = "không có gì";
             return PartialView("CommentContestPartial", comment2);
         }
+        [Authorize(Roles="Lecturer")]
+        public ActionResult LecturerViewAllContestResult()
+        {
+            return View(contestBL.LayDanhSachKyThiCuaGiaoVien(User.Identity.Name));
+        }
+        
+        public ActionResult AllContestResultPartial(string Page, IEnumerable<Contest> contests)
+        {
+            ViewBag.Page = Page;
+            return PartialView("ListContestPartialLecturer",contests);
+        }
         
     }
 }

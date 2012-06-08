@@ -11,8 +11,18 @@
              Thời gian  
             </th>
             <th>
-                Sĩ số
+                @if(ViewBag.Page=="Result")
+                {
+            
+                <span>Xem kết quả</span>
+            
+                }
+                else
+                {
+                    <span>Sĩ số</span>
+                }
             </th>
+            
            
              <th>
               
@@ -38,8 +48,19 @@
                     <br />
                     Kết thúc: <i> @Html.DisplayFor(modelItem => item.EndTime)</i>
                 </td>
-                <td>                    
-                         <a href="/Contest/ViewAllContestStudent?ContestID=@item.ID">@Html.DisplayFor(modelItem => item.SubmitCoDiemToiDaCount)/@Html.DisplayFor(modelItem => item.RegisterCount)</a>
+                <td class="classColumnMiddle">    
+                @if(ViewBag.Page=="Result")
+                {
+                     <span>SL đăng ký</span>@Html.DisplayFor(modelItem => item.RegisterCount)<br />
+                     <a href="/Contest/ViewAllContestStudent?ContestID=@item.ID">XemKQ</a>
+            
+                }
+                else
+                {
+                    <a href="/Contest/ViewAllContestStudent?ContestID=@item.ID">@Html.DisplayFor(modelItem => item.RegisterCount)</a>
+                }                
+                         
+                        
                 </td>
              
                 <td>

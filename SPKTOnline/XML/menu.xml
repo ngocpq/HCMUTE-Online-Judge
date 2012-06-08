@@ -76,7 +76,9 @@
     <Menu2>
       <Title>Kết quả kỳ thi</Title>
       <TitleEng></TitleEng>
-      <Link>/Result/ContestResult</Link>
+    
+        <Link>/Contest/MyContest</Link>
+      
     </Menu2>
   </Menu1>
   <Menu1>
@@ -92,7 +94,11 @@
       <TitleEng></TitleEng>
       <Link>/Result/LecturerViewProblem</Link>
     </Menu2>
-   
+    <Menu2>
+      <Title>Kết quả kỳ thi</Title>
+      <TitleEng></TitleEng>
+      <Link>/Contest/LecturerViewAllContestResult</Link>
+    </Menu2>
   </Menu1>
   
   <Menu1>

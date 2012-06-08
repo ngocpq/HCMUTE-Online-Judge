@@ -17,6 +17,15 @@ namespace SPKTOnline.Models
         [Required]
         [DisplayName("Lớp học")]
         public String[] ClassID { get; set; }
+        public int CommentTotal
+        {
+            get
+            {
+                db = new OnlineSPKTEntities();
+                commentBL = new CommentBL(db);
+                return commentBL.ProblemCommentTotal(this.ID);
+            }
+        }
         public IEnumerable<Comment> ListComment
         {   
             get

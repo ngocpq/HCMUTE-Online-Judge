@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SPKTOnline.Models;
+using SPKTOnline.BussinessLayer;
 
 namespace SPKTOnline.Controllers
 {
@@ -12,14 +13,19 @@ namespace SPKTOnline.Controllers
         OnlineSPKTEntities db = new OnlineSPKTEntities();
         //
         // GET: /File/
-
+        IFileBL fileBL;
+        public FileController()
+        {
+            fileBL = new FileBL(db);
+        }
        
         public ActionResult Download(int? ID)
         {
-            File f = db.Files.FirstOrDefault(i => i.ID == ID);
+            File f = fileBL.GetFileByID((int)ID);
             if (f == null)
                 Response.Redirect("FileNotFound");
-
+            fileBL.UpdateDownloadCount(f.ID);
+            fileBL.SaveChange();
             Response.Clear();
             Response.ContentType = "application/" + f.Type;
             Response.AddHeader("content-disposition", "attachment; filename=\"" + f.Name + "\"");

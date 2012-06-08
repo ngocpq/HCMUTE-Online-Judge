@@ -194,6 +194,7 @@ namespace SPKTOnline.Controllers
                             file.Content = problemfile;
                             file.Type = Path.GetExtension(sFileName);
                             file.Name = sFileName;
+                            file.DownloadCount = 0;
                             db.Files.AddObject(file);
                             problem.File = file;
 

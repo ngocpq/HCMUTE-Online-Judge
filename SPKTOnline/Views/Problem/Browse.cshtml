@@ -42,7 +42,8 @@
             {
             <tr>
                 <td class="classColumnMiddle">
-                    @Html.ActionLink(item.ID.ToString(), "Details", "Problem", new { ID=item.ID}, null)                                                      
+                    @Html.ActionLink(item.ID.ToString(), "Details", "Problem", new { ID=item.ID}, null) <br /> 
+                    <span id="i">(SLComment:@item.CommentTotal)</span>                                                    
                     @*@Html.ActionLink(item.ID.ToString(), "TryTest", "Student_Submit", new { id = item.ID, ContestID = item.ContestID }, null)                                                      *@
                 </td>
                  <td style="width:40%">
@@ -53,7 +54,7 @@
                     {  <br />
                                                    
                                 @Html.ActionLink("Download đề", "Download", "File", new { ID = item.FileID }, null)
-                       
+                                <span id="i">(SLDownload:  @item.File.DownloadCount)</span>
 
                     }
                 </td>                

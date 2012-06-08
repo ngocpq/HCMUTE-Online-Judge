@@ -13,6 +13,15 @@ namespace SPKTOnline.Models
     {
         ICommentBL commentBL;
         OnlineSPKTEntities db;
+        public int CommentTotal
+        {
+            get
+            {
+                db = new OnlineSPKTEntities();
+                commentBL = new CommentBL(db);
+                return commentBL.SubmitCommentTotal(this.ID);
+            }
+        }
         public IEnumerable<Comment> ListComment
         {
             get

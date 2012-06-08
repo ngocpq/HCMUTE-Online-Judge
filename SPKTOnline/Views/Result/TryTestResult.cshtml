@@ -22,7 +22,7 @@
 <div class="webtitle">
     Môn: @Model.Problem.Subject.Name <br />
     Người làm bài: @Model.User.LastName @Model.User.FirstName <span>&nbsp-&nbsp</span> @Model.User.Username<br />
-    Kết quả bài: @Model.Problem.Name </div>
+    Kết quả bài: @Html.ActionLink(Model.Problem.Name, "Details", "Problem", new { ID=Model.ProblemID}, null)   </div>
 <p>@Html.Raw(@ViewBag.Message)</p>
 
   <p><b>Kết quả biên dịch:</b> @Model.KetQuaBienDich
@@ -60,19 +60,23 @@
                 
                 <tr> 
                     
-                <td>
+                <td class="classColumnMiddle">
                     @*@i.TestCaseID*@
                     @{j = j + 1;}
-                    @j.ToString()
+                    @j.ToString()<br />
+                    @if (Model.Problem.LecturerID == User.Identity.Name)
+                    {
+                        <a href="/TestCase/EditTestCase/@i.TestCaseID">EditTestCase</a>
+                    }
                     
                 </td>                                   
                  <td>
                     @i.TestCas.MoTa
                 </td>                    
-                <td>
+                <td class="classColumnMiddle">
                     @i.Score
                 </td>
-                <td>
+                <td class="classColumnMiddle">
                     @i.ExecutionTime
                 </td>
                 <td>
@@ -93,7 +97,8 @@
     ---NHẬN XÉT---------------------------------------------------------------------------------------------------------</div>
     @Html.Action("CommentSubmitPartial", new { SubmitID = Model.ID })
  <div class="comment" onclick="document.location.href=$('#CommentUrl').attr('href')" style="margin-top:10px;height: 20px;background-color:#ffffff;color:Red">
-    ---XEM NHẬN XÉT---</div>
+    ---XEM NHẬN XÉT(@Model.CommentTotal)---</div>
+    <div class="classMessage">Lưu ý: Chỉ có giảng viên và chủ nhân của bài làm mới xem được nhận xét này! Để thảo luận cùng bạn bè, người dùng nên thảo luận ở trang xem câu hỏi!</div>
     @Html.Partial("ViewCommentPartial", Model.ListComment)    
   
     
