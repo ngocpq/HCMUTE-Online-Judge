@@ -79,7 +79,7 @@
                 if (Model.SubjectID == null)
                 {
                 <div class="editor-label">
-                    Chọn môn học: @Html.DropDownList("SubjectID", "(Môn học)")
+                    Chọn môn học: @Html.DropDownList("SubjectID")
                 </div>
                 }
                
@@ -96,7 +96,7 @@
                 @Html.LabelFor(model => model.DifficultyID, "Độ khó")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("DifficultyID","(Độ khó)")
+                @Html.DropDownList("DifficultyID")
                 @Html.ValidationMessageFor(model => model.DifficultyID)
             </div>
 
@@ -104,20 +104,23 @@
          @Html.Label("File so sánh")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ComparerID", "(Loại file so sánh)")
+            @Html.DropDownList("ComparerID")
             @Html.ValidationMessageFor(model => model.ComparerID)
         </div>
             <div class="editor-label">
                 Số điểm: @Html.TextBoxFor(model => model.Score)
             </div>
-            <div class="editor-label">
-                Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
-            </div>
-            <div class="editor-field">
-                Thời gian hiện:
-                @Html.TextBoxFor(m => m.AvailableTime)
-                @Html.ValidationMessageFor(m => m.AvailableTime)
-            </div>
+            @if (Model.Classes.Count() == 0 || Model.ContestID==0)
+            {
+                <div class="editor-label">
+                    Ẩn: @Html.CheckBoxFor(model => model.IsHiden)
+                </div>
+                <div class="editor-field">
+                    Thời gian hiện:
+                    @Html.TextBoxFor(m => m.AvailableTime)
+                    @Html.ValidationMessageFor(m => m.AvailableTime)
+                </div>
+            }
             <div>
                 <input type="submit" value="Submit" />
             </div>

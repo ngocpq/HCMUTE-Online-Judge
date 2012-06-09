@@ -79,7 +79,16 @@ namespace SPKTOnline.Controllers
                 return RedirectToAction("ContestDetail", "Contest", new { contestID = st.ContestID});//trả ra thông tin ở trang kết quả.
             }
         }
-
+        void ChamLai(int SubmitID)
+        {
+            Student_Submit st = db.Student_Submit.FirstOrDefault(s => s.ID == SubmitID);
+            ChamDiemServise chamThiService = new ChamDiemServise();
+            st.TrangThaiCham = (int)TrangThaiCham.DangCham;
+            db.SaveChanges();
+            KetQuaThiSinh kq = chamThiService.ChamBai(st.ProblemID, st.SourceCode, st.Language.Name);
+            kq.SubmitID = st.ID;
+            chamThiService_ChamLai(null, kq);
+        }
         void chamThiService_ChamThiCompleted(object sender, KetQuaThiSinh kq)
         {
 
@@ -111,6 +120,36 @@ namespace SPKTOnline.Controllers
             LogUtility.WriteDebug("Luu ket qua");
             db.SaveChanges();
            
+        }
+        void chamThiService_ChamLai(object sender, KetQuaThiSinh kq)
+        {
+
+            Student_Submit st = db.Student_Submit.FirstOrDefault(t => t.ID == kq.SubmitID);
+            st.TrangThaiCham = (int)TrangThaiCham.DaCham;
+            st.TrangThaiBienDich = kq.KetQuaBienDich.BienDichThanhCong ? 1 : 0;
+            if (kq.KetQuaBienDich.BienDichThanhCong)
+            {
+                LogUtility.WriteDebug("Bien dich thanh cong");
+                foreach (var rs in kq.KetQuaCham.KetQuaTestCases)
+                {
+                    TestCas tc = ((TestCas)rs.TestCase);
+                    TestCaseResult tcResult = db.TestCaseResults.FirstOrDefault(tcs => tcs.TestCaseID == tc.MaTestCase && tcs.StudentSubmitID == st.ID);
+                    tcResult.Score = rs.KetQua == KetQuaTestCase.LoaiKetQua.Dung ? (tc.Diem * tc.Problem.Score) / 100 : 0;
+                    tcResult.Comment = rs.ThongDiep;
+                    tcResult.ExecutionTime = (int)rs.ThoiGianChay;
+                    //TODO: Them Error
+                    //tcResult.Error = rs.Error;
+                    db.TestCaseResults.AddObject(tcResult);
+                }
+            }
+            else
+            {
+                LogUtility.WriteDebug("Bien dich that bai");
+                st.CompilerError = kq.KetQuaBienDich.Message;
+            }
+            LogUtility.WriteDebug("Luu ket qua");
+            db.SaveChanges();
+
         }
         public ActionResult Htmlpartial()
         {

@@ -28,7 +28,7 @@ namespace SPKTOnline.Controllers
             //khi tạo problem từ Class thì contestID =0, ClassID !=0
             //Khi tạo problem từ Bên ngoài. thì ContestID=null, ClassID=0
             Problem pro = new Problem();
-            ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name");
+            
             if (ClassID != 0)
             {
                 if (ContestID == 0)
@@ -48,10 +48,11 @@ namespace SPKTOnline.Controllers
             else
             {
                 ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "Name");
+                ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(User.Identity.Name), "ID", "Name", ProblemRep.GetListSubjectByLecturerID(User.Identity.Name).First());
             }
-            ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
-            
-            ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name");
+            ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name",db.Difficulties.First());
+
+            ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name", db.Comparers.First());
             pro.AvailableTime = DateTime.Now;
             pro.Score = 10;
 
