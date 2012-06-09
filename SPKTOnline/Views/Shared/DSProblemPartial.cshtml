@@ -24,7 +24,7 @@
             {
             <tr>
                 <td class="classColumnMiddle">
-                    @Html.DisplayFor(modelItem => item.ID)<br />
+                   @Html.ActionLink(item.ID.ToString(), "Details", "Problem", new { ID = item.ID }, null)<br />
                     <span id="i">(SLComment:@item.CommentTotal)</span>
                 </td>
                  <td style="width:40%">

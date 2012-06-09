@@ -8,7 +8,7 @@
 @{
     SPKTOnline.Models.Problem Problem = ViewBag.Problem;
 <div class="webtitle">
-    Danh sách sinh viên làm bài @Html.ActionLink(Problem.Name, "Details", "Problem", new { ID =Problem.ID }, null)
+    Danh sách sinh viên làm bài @Html.ActionLink(Problem.ID.ToString()+"-"+ Problem.Name, "Details", "Problem", new { ID =Problem.ID }, null)
 </div>
 <p>@ViewBag.Message</p>
 
@@ -73,7 +73,8 @@
                 </td>
                 @if (User.IsInRole("Lecturer") && item.Problem.LecturerID == User.Identity.Name)
                 {
-                <td>
+                <td class="classColumnMiddle">
+                    <span id="i">(SLComment:@item.CommentTotal)</span><br />
                     @Html.ActionLink("Xem", "TryTestResult", new { ID = (int?)item.ID, Message = "" })
                 </td>
                 }

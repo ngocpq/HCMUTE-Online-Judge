@@ -125,7 +125,6 @@ namespace SPKTOnline.Controllers
         public ActionResult CreateProblem(int ContestID = 0, int ClassID=0)
         {
                     string name = HttpContext.User.Identity.Name;
-           
                     ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
                     ViewBag.SubjectID = new SelectList(ProblemRep.GetListSubjectByLecturerID(name), "ID", "Name");
                     ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name");

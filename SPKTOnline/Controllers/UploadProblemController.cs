@@ -33,7 +33,8 @@ namespace SPKTOnline.Controllers
             {
                 if (ContestID == 0)
                 {
-                    ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { ClassID.ToString() });
+                    Class cl = db.Classes.FirstOrDefault(c => c.ID == ClassID);
+                    ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "ID", new String[] { "Mã lớp: " + ClassID.ToString()+" Môn: "+cl.Subject.Name+" Nhóm: "+cl.Group+" "+cl.Term});
                     pro.Classes.Add(db.Classes.FirstOrDefault(c => c.ID == ClassID));
                     pro.SubjectID = db.Classes.FirstOrDefault(c => c.ID == ClassID).SubjectID;
                 }
@@ -48,6 +49,9 @@ namespace SPKTOnline.Controllers
             {
                 ViewBag.ClassID = new MultiSelectList(db.Classes.Where(c => c.LecturerID == User.Identity.Name), "ID", "Name");
             }
+            ViewBag.DifficultyID = new SelectList(db.Difficulties, "DifficultyID", "Name");
+            
+            ViewBag.ComparerID = new SelectList(db.Comparers, "ID", "Name");
             pro.AvailableTime = DateTime.Now;
             pro.Score = 10;
 
@@ -66,10 +70,10 @@ namespace SPKTOnline.Controllers
                     //TODO: đọc từ file cấu hình
                     problem.LecturerID = User.Identity.Name;
                     problem.Name = Path.GetFileNameWithoutExtension(filebase.FileName);
-                    problem.DifficultyID = 1;
+                    
                     problem.MemoryLimit = 1000;
                     problem.TimeLimit = 1000;
-                    problem.ComparerID = 1;
+                    
                     if (problem.ContestID == 0)
                     {
                         problem.ContestID = null;
