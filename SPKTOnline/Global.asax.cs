@@ -186,9 +186,9 @@ namespace SPKTOnline
                 else
                     Application[NgayBatDau_AppName] = value;
                 if (Application[NgayBatDau_Display_AppName] == null)
-                    Application.Add(NgayBatDau_Display_AppName, value.ToString("dd/MM/yyyy HH:mm"));
+                    Application.Add(NgayBatDau_Display_AppName, value.ToString("HH:mm, dd/MM/yyyy"));
                 else
-                    Application[NgayBatDau_Display_AppName] = value.ToString("dd/MM/yyyy HH:mm");
+                    Application[NgayBatDau_Display_AppName] = value.ToString("HH:mm, dd/MM/yyyy");
                 Application.UnLock();
             }
         }

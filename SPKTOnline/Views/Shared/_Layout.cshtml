@@ -360,12 +360,13 @@
                             <%} %>*@
                         </div>
                     </div>
-                     <div id="infoSession">
-                        Số người đang online: @HttpContext.Current.Application["SLOnline"].ToString()                        
+                    <div style="text-align:center; font-style:italic;font-weight:bold;">Thống kê</div>
+                     <div id="infoSession" style="text-align:center;font-weight:lighter">
+                        <i>Đang online: @ApplicationInstance.Application["SLOnline"].ToString()</i>
                         <br />
-                        Số lượt truy cập: @HttpContext.Current.Application["SLTruyCap"].ToString()
+                        <i>Số lượt xem: @ApplicationInstance.Application["SLTruyCap"].ToString()</i>
                         <br />
-                        Từ ngày: @HttpContext.Current.Application["NgayBD_String"].ToString()
+                        <i>Từ @ApplicationInstance.Application["NgayBD_String"].ToString()</i>
                     </div>
                 </div>
             </div>
