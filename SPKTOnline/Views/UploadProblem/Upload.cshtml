@@ -93,6 +93,21 @@
                 </div>
             </div>
             <div class="editor-label">
+                @Html.LabelFor(model => model.DifficultyID, "Độ khó")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("DifficultyID","(Độ khó)")
+                @Html.ValidationMessageFor(model => model.DifficultyID)
+            </div>
+
+        <div class="editor-label">
+         @Html.Label("File so sánh")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ComparerID", "(Loại file so sánh)")
+            @Html.ValidationMessageFor(model => model.ComparerID)
+        </div>
+            <div class="editor-label">
                 Số điểm: @Html.TextBoxFor(model => model.Score)
             </div>
             <div class="editor-label">
